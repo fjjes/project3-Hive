@@ -7,6 +7,12 @@ function Comment() {
   const handleChange = (e) => {
     setComment(e.target.value);
   };
+
+  const handleSubmit=()=>{
+    console.log(comment)
+    setComment('') //inout clears out when clicked on submit
+  }
+
   return (
     <div>
       <p>If you wish to add additional comments, you can enter them below:</p>
@@ -21,7 +27,7 @@ function Comment() {
         type="reset"
       />
       <div>
-        <button onClick={() => console.log(comment)} type="submit">
+        <button onClick={handleSubmit} type="submit">
           submit
         </button>
       </div>
