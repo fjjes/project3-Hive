@@ -4,9 +4,13 @@ import TextField from "@material-ui/core/TextField";
 function Comment() {
   const [comment, setComment] = useState("");
 
+  // const handleChange = (e) => {
+  //   setComment(e.target.value);
+  // };
+
   const handleSubmit=()=>{
     console.log(comment)
-    setComment('') //inout clears out when clicked on submit
+    setComment('') //input clears out when clicked on submit
   }
 
   return (
