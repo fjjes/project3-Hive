@@ -8,10 +8,10 @@ function Comment() {
     setComment(e.target.value);
   };
 
-  const handleSubmit=()=>{
-    console.log(comment)
-    setComment('') //inout clears out when clicked on submit
-  }
+  const handleSubmit = () => {
+    console.log(comment);
+    setComment(""); //inout clears out when clicked on submit
+  };
 
   return (
     <div>
