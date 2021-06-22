@@ -3,6 +3,7 @@ import Narrative from "./questiontypes/Narrative";
 import Comment from "./questiontypes/Comment";
 import SelectInput from "./questiontypes/SelectInput";
 import Slider from "./questiontypes/Slider";
+import RadioButtons from "./questiontypes/RadioButtons";
 
 const Form = () => {
   return (
@@ -11,6 +12,7 @@ const Form = () => {
       <Comment />
       <SelectInput />
       <Slider />
+      <RadioButtons/>
     </div>
   );
 };
