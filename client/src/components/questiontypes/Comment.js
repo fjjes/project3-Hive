@@ -10,7 +10,7 @@ function Comment() {
 
   const handleSubmit=()=>{
     console.log(comment)
-    setComment('') //input clears out when clicked on submit
+    setComment("") //input clears out when clicked on submit
   }
 
   return (
@@ -22,7 +22,7 @@ function Comment() {
         variant="outlined"
         multiline
         value={comment}
-        onChange={(e)=>setComment(e.target.value)}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="Input"
         type="reset"
       />
