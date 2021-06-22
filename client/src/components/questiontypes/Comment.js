@@ -4,10 +4,6 @@ import TextField from "@material-ui/core/TextField";
 function Comment() {
   const [comment, setComment] = useState("");
 
-  const handleChange = (e) => {
-    setComment(e.target.value);
-  };
-
   const handleSubmit = () => {
     console.log(comment);
     setComment(""); //inout clears out when clicked on submit
@@ -22,7 +18,7 @@ function Comment() {
         variant="outlined"
         multiline
         value={comment}
-        onChange={handleChange}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="Input"
         type="reset"
       />
