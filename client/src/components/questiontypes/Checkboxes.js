@@ -81,6 +81,7 @@ function Checkboxes() {
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel
+              key={option.value}
               control={
                 <Checkbox
                   disabled={disabled && !option.checked}
