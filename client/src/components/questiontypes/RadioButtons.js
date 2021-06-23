@@ -4,6 +4,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
  function RadioButtons() {
   const [value, setValue] = React.useState('');
@@ -11,6 +12,9 @@ import FormLabel from '@material-ui/core/FormLabel';
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  const handleSubmit = () => {
+    console.log("value", value);
+  }
 
   return (
     <FormControl component="fieldset">
@@ -69,9 +73,12 @@ import FormLabel from '@material-ui/core/FormLabel';
         control={<Radio/>} 
         label="Other" 
         />
-
-      </RadioGroup>
-      
+        <FormHelperText>Please select one</FormHelperText>
+        <button onClick={handleSubmit} type="submit" variant="outlined">
+          Submit
+        </button>
+    </RadioGroup>
+        
     </FormControl>
   );
 }
