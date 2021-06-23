@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -61,6 +61,11 @@ export default function InputSlider() {
   const [value4, setValue4] = React.useState(0);
   const classes5 = useStyles5();
   const [value5, setValue5] = React.useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+
+  useEffect(() => {
+    setTotalCount(value + value2 + value3 + value4 + value5);
+  }, [value, value2, value3, value4, value5]);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
@@ -140,6 +145,15 @@ export default function InputSlider() {
     } else if (value5 > 100) {
       setValue5(100);
     }
+  };
+
+  const handleSubmit = () => {
+    setValue(0);
+    setValue2(0);
+    setValue3(0);
+    setValue4(0);
+    setValue5(0);
+    console.log(value, value2, value3, value4, value5);
   };
 
   return (
@@ -289,6 +303,13 @@ export default function InputSlider() {
           />
         </Grid>
       </Grid>
+      <button
+        onClick={handleSubmit} //help
+        disabled={totalCount === 100 ? false : true}
+        type="submit"
+      >
+        Submit
+      </button>
     </div>
   );
 }
