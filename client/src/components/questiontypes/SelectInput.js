@@ -12,56 +12,58 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const SelectInput = () => {
-    const classes = useStyles();
-    const [value, setValue]= useState()
-    //const [inputRank, setIntputRank]= useState('')
-    
-    const interests= [
-        'Rethinking workspaces in the company',
-        'Review the organization of meetings Rethinking moments',
-        'Spaces of conviviality',
-        'Do not change anything',
-        'Other'
-      ]
+    const classes = useStyles(); 
+    // const [value, setValue]=useState()
+    const [values, setValues]= useState([
+        {text:'Rethinking workspaces in the company', value:null},
+        {text:'Review the organization of meetings Rethinking moments', value:null},
+        {text:'Spaces of conviviality', value:null},
+        {text:'Do not change anything', value:null},
+        {text:'Other', value:null}
+    ])
+
+    // let text='Rethinking workspaces in the company'
 
     let selectArray = [];
     let num= 1
-    for(let i=0; i<interests.length; i++){
+    for(let i=0; i<values.length; i++){
         selectArray.push(num++)
+        console.log(selectArray)
     }
    
-//    const handleSubmit=()=>{
-//     console.log(comment)
-//     setComment('') //input clears out when clicked on submit
-//   }
+const handleChange = (e,i)=>{
+    let newValues = [...values]
+    newValues[i][e.target.value]=[e.target.value]
+    setValues(newValues) 
+}
+
+   const handleSubmit=()=>{
+    console.log(values)
+  }
 
     return (
         <div className="select">
             <p>In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible. Please rank the following in order of interest:</p>
-            <ul>
-                {interests.map((interest, i)=>{
-                    return(
-                        <li key={i} style={{listStyleType:"none", textAlign:"left"}} >
-                            {interest}:
-                            <span style={{marginLeft:"10px"}}>
-                                <FormControl className={classes.formControl}>
-                                    <Select  value={value} onChange={(e)=>setValue(e.target.value)}>
-                                        {selectArray.map((selection, index)=>{ 
-                                            return <MenuItem key={index} value={selection}>{selection}</MenuItem>
-                                        })}   
-                                    </Select>
-                                    {console.log(interest, value)}
-                                </FormControl>
-                            </span>
-                           
-                        </li>
-                        )
-                })}
-            </ul>
-{/* 
-            <button onClick={handleSubmit} type="submit">
-            submit
-           </button> */}
+                {values.map((row, i)=>{
+                    return(<ul key={i}>
+                            <li style={{listStyleType:"none", textAlign:"left"}} >
+                                {row.text}:
+                                {/* {text}: */}
+                                    <FormControl className={classes.formControl}>
+                                        <Select  value={row.value} onChange={(e)=>handleChange(e,i)}>
+                                        {/* <Select value={value} onChange={(e)=>setValue(e.target.value)}> */}
+                                            {selectArray.map((selection, index)=>{ 
+                                                return <MenuItem key={index} value={selection}>{selection}</MenuItem>
+                                            })}   
+                                        </Select>
+                                    </FormControl>                            
+                            </li>
+                        </ul>
+                         )
+                 })}
+        <div style={{textAlign:"left"}}>
+            <button onClick={handleSubmit} type="submit">submit</button>
+        </div>
         </div>
     );
 }
