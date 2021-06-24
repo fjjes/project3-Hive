@@ -95,12 +95,11 @@ function Checkboxes() {
               />
               ))}
               <TextField
-                // full width
-                // disabled={!options.checked}
-                label="Description"
+                fullWidth
+                disabled={!options[options.length - 1].checked}
+                label={`Description for question ${options.length} - select the checkbox to start typing.`}
                 id="outlined-basic"
                 variant="outlined"
-                // placeholder="Description"
                 name="option"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
