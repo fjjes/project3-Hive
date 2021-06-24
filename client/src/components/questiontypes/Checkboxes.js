@@ -54,6 +54,9 @@ function Checkboxes() {
         numberCount++;
         option.checked && checkedArray.push(option.value)
       }
+      if (!options[options.length - 1].checked) {
+        setComment("")
+      }
     }
     setOptions(newOptions);
     if (numberCount > 2) {
@@ -67,10 +70,6 @@ function Checkboxes() {
   };
 
   const handleSubmit = () => {
-    // Trying to get this to clear the textfield comment if the last checkbox gets unchecked
-    if (!options[options.length - 1].checked) {
-      setComment("")
-    }
     console.log(options, comment)
   };
 
