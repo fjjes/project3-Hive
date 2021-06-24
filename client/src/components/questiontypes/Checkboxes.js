@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,8 +37,11 @@ function Checkboxes() {
   ]);
 
   const [disabled, setDisabled] = useState(false);
-
   const [error, setError] = useState(false);
+  const [comment, setComment] = useState("");
+
+  let checkedArray = []
+
   const handleChange = (event) => {
     console.log(event.target.name, event.target.checked, event.target.value);
     let numberCount = 0;
@@ -49,7 +52,7 @@ function Checkboxes() {
       }
       if (option.checked) {
         numberCount++;
-        console.log("numberCount: ", numberCount);
+        option.checked && checkedArray.push(option.value)
       }
     }
     setOptions(newOptions);
@@ -60,12 +63,15 @@ function Checkboxes() {
       setDisabled(false);
       setError(false);
     }
+    console.log("Array of selected checkboxes: ", checkedArray)
   };
 
-  const [comment, setComment] = useState("");
-
   const handleSubmit = () => {
-    console.log(`Option ${options.length} comment:  ${comment}`);
+    // Trying to get this to clear the textfield comment if the last checkbox gets unchecked
+    if (!options[options.length - 1].checked) {
+      setComment("")
+    }
+    console.log(options, comment)
   };
 
   return (
