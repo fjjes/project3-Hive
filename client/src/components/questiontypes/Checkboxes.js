@@ -65,7 +65,7 @@ function Checkboxes() {
   const [comment, setComment] = useState("");
 
   const handleSubmit = () => {
-    console.log("Option 8 comment: ", comment);
+    console.log(`Option ${options.length} comment:  ${comment}`);
   };
 
   return (
@@ -92,16 +92,19 @@ function Checkboxes() {
                 />
               }
               label={option.value}
-            />
-          ))}
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            placeholder="Description"
-            name="option8"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+              />
+              ))}
+              <TextField
+                // full width
+                // disabled={!options.checked}
+                label="Description"
+                id="outlined-basic"
+                variant="outlined"
+                // placeholder="Description"
+                name="option"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
         </FormGroup>
         <FormHelperText>Please only select a maximum of three options.</FormHelperText>
         <div>
