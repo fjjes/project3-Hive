@@ -13,27 +13,24 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectInput = () => {
     const classes = useStyles(); 
-    // const [value, setValue]=useState()
     const [values, setValues]= useState([
-        {text:'Rethinking workspaces in the company', value:null},
-        {text:'Review the organization of meetings Rethinking moments', value:null},
-        {text:'Spaces of conviviality', value:null},
-        {text:'Do not change anything', value:null},
-        {text:'Other', value:null}
+        {text:'Rethinking workspaces in the company', value:''},
+        {text:'Review the organization of meetings Rethinking moments', value:''},
+        {text:'Spaces of conviviality', value:''},
+        {text:'Do not change anything', value:''},
+        {text:'Other', value:''}
     ])
-
-    // let text='Rethinking workspaces in the company'
 
     let selectArray = [];
     let num= 1
     for(let i=0; i<values.length; i++){
         selectArray.push(num++)
-        console.log(selectArray)
+        //console.log(selectArray)
     }
    
 const handleChange = (e,i)=>{
     let newValues = [...values]
-    newValues[i][e.target.value]=[e.target.value]
+    newValues[i].value= e.target.value
     setValues(newValues) 
 }
 
@@ -48,10 +45,8 @@ const handleChange = (e,i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >
                                 {row.text}:
-                                {/* {text}: */}
                                     <FormControl className={classes.formControl}>
                                         <Select  value={row.value} onChange={(e)=>handleChange(e,i)}>
-                                        {/* <Select value={value} onChange={(e)=>setValue(e.target.value)}> */}
                                             {selectArray.map((selection, index)=>{ 
                                                 return <MenuItem key={index} value={selection}>{selection}</MenuItem>
                                             })}   
