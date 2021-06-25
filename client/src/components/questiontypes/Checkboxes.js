@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,8 +37,11 @@ function Checkboxes() {
   ]);
 
   const [disabled, setDisabled] = useState(false);
-
   const [error, setError] = useState(false);
+  const [comment, setComment] = useState("");
+
+  let checkedArray = []
+
   const handleChange = (event) => {
     console.log(event.target.name, event.target.checked, event.target.value);
     let numberCount = 0;
@@ -49,7 +52,10 @@ function Checkboxes() {
       }
       if (option.checked) {
         numberCount++;
-        console.log("numberCount: ", numberCount);
+        option.checked && checkedArray.push(option.value)
+      }
+      if (!options[options.length - 1].checked) {
+        setComment("")
       }
     }
     setOptions(newOptions);
@@ -60,12 +66,11 @@ function Checkboxes() {
       setDisabled(false);
       setError(false);
     }
+    console.log("Array of selected checkboxes: ", checkedArray)
   };
 
-  const [comment, setComment] = useState("");
-
   const handleSubmit = () => {
-    console.log("Option 8 comment: ", comment);
+    console.log(options, comment)
   };
 
   return (
@@ -92,16 +97,18 @@ function Checkboxes() {
                 />
               }
               label={option.value}
-            />
-          ))}
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            placeholder="Description"
-            name="option8"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+              />
+              ))}
+              <TextField
+                fullWidth
+                disabled={!options[options.length - 1].checked}
+                label={`Description for question ${options.length} - select the checkbox to start typing.`}
+                id="outlined-basic"
+                variant="outlined"
+                name="option"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
         </FormGroup>
         <FormHelperText>Please only select a maximum of three options.</FormHelperText>
         <div>
