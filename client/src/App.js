@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/Start">
+          <Route exact path="/">
             <Start />
           </Route>
           <Route path="/Form">
