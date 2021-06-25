@@ -21,3 +21,4 @@
 .node_repl_history
 .yarn-integrity
 .next
+.env
