@@ -1,10 +1,21 @@
 import "./App.css";
 import Form from "./components/Form";
+import Start from "./components/Landing Page/Start";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <Router>
+        <Switch>
+          <Route path="/Start">
+            <Start />
+          </Route>
+          <Route path="/Form">
+            <Form />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
