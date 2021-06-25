@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
       minWidth: 80,
     },
     
-  }));
+}));
 
 const SelectInput = () => {
     const classes = useStyles(); 
@@ -21,6 +21,8 @@ const SelectInput = () => {
         {text:'Other', value:''}
     ])
 
+    let question = 'In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible. Please rank the following in order of interest:'
+    
     let selectArray = [];
     let num= 1
     for(let i=0; i<values.length; i++){
@@ -36,11 +38,18 @@ const handleChange = (e,i)=>{
 
    const handleSubmit=()=>{
     console.log(values)
+    // setValues([
+    //     {text:'Rethinking workspaces in the company', value:''},
+    //     {text:'Review the organization of meetings Rethinking moments', value:''},
+    //     {text:'Spaces of conviviality', value:''},
+    //     {text:'Do not change anything', value:''},
+    //     {text:'Other', value:''}
+    // ])
   }
 
     return (
         <div className="select">
-            <p>In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible. Please rank the following in order of interest:</p>
+            <p>{question}</p>
                 {values.map((row, i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >
@@ -49,7 +58,7 @@ const handleChange = (e,i)=>{
                                         <Select  value={row.value} onChange={(e)=>handleChange(e,i)}>
                                             {selectArray.map((selection, index)=>{ 
                                                 return <MenuItem key={index} value={selection}>{selection}</MenuItem>
-                                            })}   
+                                            })}  
                                         </Select>
                                     </FormControl>                            
                             </li>

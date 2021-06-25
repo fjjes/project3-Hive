@@ -5,6 +5,7 @@ import SelectInput from "./questiontypes/SelectInput";
 import Slider from "./questiontypes/Slider";
 import RadioButtons from "./questiontypes/RadioButtons";
 import Checkboxes from "./questiontypes/Checkboxes";
+import Matrix from './questiontypes/Matrix'
 
 
 const Form = () => {
@@ -16,6 +17,7 @@ const Form = () => {
       <Slider />
       <RadioButtons/>
       <Checkboxes />
+      <Matrix />
     </div>
   );
 };
