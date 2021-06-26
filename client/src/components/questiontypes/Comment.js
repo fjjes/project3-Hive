@@ -14,13 +14,14 @@ function Comment() {
   }
 
   return (
-    <div>
-      <p>If you wish to add additional comments, you can enter them below:</p>
+    <div className="question-component">
+      <p className="question-intro">If you wish to add additional comments, you can enter them below:</p>
       <TextField
         id="outlined-basic"
         label="comment"
         variant="outlined"
         multiline
+        fullWidth
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         placeholder="Input"
@@ -28,7 +29,7 @@ function Comment() {
       />
       <div>
         <button onClick={handleSubmit} type="submit">
-          submit
+          Submit
         </button>
       </div>
     </div>

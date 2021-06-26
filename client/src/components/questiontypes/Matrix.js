@@ -53,9 +53,9 @@ const Matrix = () => {
   };
 
   return (
-    <div className="matrix">
+    <div className="matrix question-component">
       <FormControl component="fieldset">
-        <p>{question}</p>
+        <p className="question-intro">{question}</p>
         <Grid
           container
           spacing={2}
@@ -100,7 +100,7 @@ const Matrix = () => {
       </FormControl>
       <div style={{ textAlign: "left" }}>
         <button onClick={handleSubmit} type="submit">
-          submit
+          Submit
         </button>
       </div>
     </div>

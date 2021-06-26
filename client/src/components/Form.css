@@ -1,0 +1,62 @@
+/* LOGO COLOURS
+color: #197e9c; MAIN BLUE
+color: #35c0c2; MAIN TEAL
+color: #f59645; MAIN ORANGE
+color: #bce6f8; Light blueish-grey
+color: #575759; Dark grey from logo text */
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.form-page {
+  background-color: #bce6f8;
+  color: hsl(240, 1%, 5%);
+}
+
+.form-container {
+  width: 65%;
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+}
+
+.question-component {
+  border-bottom: 3px solid #bce6f8;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.question-component button {
+  padding: 5px;
+  font-size: 1rem;
+  margin: 10px 0;
+  display: block;
+  background-color: #197e9c;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.question-component button:hover {
+  background-color: #35c0c2;
+}
+
+.question-intro {
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+.narrative-component p {
+  padding-bottom: 15px;
+}
+
+.select li {
+  padding-bottom: 10px;
+}

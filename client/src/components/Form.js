@@ -6,18 +6,21 @@ import Slider from "./questiontypes/Slider";
 import RadioButtons from "./questiontypes/RadioButtons";
 import Checkboxes from "./questiontypes/Checkboxes";
 import Matrix from './questiontypes/Matrix'
+import "./Form.css"
 
 
 const Form = () => {
   return (
-    <div>
-      <Narrative />
-      <Comment />
-      <SelectInput />
-      <Slider />
-      <RadioButtons/>
-      <Checkboxes />
-      <Matrix />
+    <div className="form-page">
+      <div className="form-container">
+        <Narrative />
+        <SelectInput />
+        <Slider />
+        <RadioButtons />
+        <Checkboxes />
+        <Matrix />
+        <Comment />
+      </div>
     </div>
   );
 };

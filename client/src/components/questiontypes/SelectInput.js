@@ -48,12 +48,12 @@ const handleChange = (e,i)=>{
   }
 
     return (
-        <div className="select">
-            <p>{question}</p>
+        <div className="select question-component">
+            <p className="question-intro">{question}</p>
                 {values.map((row, i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >
-                                {row.text}:
+                                {row.text}:&nbsp;
                                     <FormControl className={classes.formControl}>
                                         <Select  value={row.value} onChange={(e)=>handleChange(e,i)}>
                                             {selectArray.map((selection, index)=>{ 
@@ -66,7 +66,7 @@ const handleChange = (e,i)=>{
                          )
                  })}
         <div style={{textAlign:"left"}}>
-            <button onClick={handleSubmit} type="submit">submit</button>
+            <button onClick={handleSubmit} type="submit">Submit</button>
         </div>
         </div>
     );

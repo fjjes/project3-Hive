@@ -17,69 +17,73 @@ import FormHelperText from '@material-ui/core/FormHelperText';
   }
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">
-          Question 1.What is your department or Team? 
-      </FormLabel>
+    <div className="question-component">
+      <FormControl component="fieldset" >
+        {/* <FormLabel component="legend">
+            Question 1.What is your department or Team? 
+        </FormLabel> */}
+        <p className="question-intro">What is your department or team?</p>
 
-      <RadioGroup 
-      aria-label="radio" 
-      name="radio1" 
-      value={value} 
-      onChange={handleChange}
-      >
-        <FormControlLabel 
-        value="Tech" 
-        control={<Radio/>} 
-        label="Technology" 
-        />
-        <FormControlLabel 
-        value="option2" 
-        control={<Radio/>} 
-        label="option2" 
-        />
-        <FormControlLabel 
-        value="option3" 
-        control={<Radio/>} 
-        label="option3" 
-        />
-        <FormControlLabel 
-        value="option4" 
-        control={<Radio/>} 
-        label="option4" 
-        />
-        <FormControlLabel 
-        value="option5" 
-        control={<Radio/>} 
-        label="option5" 
-        />
-        <FormControlLabel 
-        value="option6" 
-        control={<Radio/>} 
-        label="option6" 
-        />
-        <FormControlLabel 
-        value="option7" 
-        control={<Radio/>} 
-        label="option7" 
-        />
-        <FormControlLabel 
-        value="option8" 
-        control={<Radio/>} 
-        label="option8" 
-        />
-        <FormControlLabel 
-        value="other" 
-        control={<Radio/>} 
-        label="Other" 
-        />
-        <FormHelperText>Please select one</FormHelperText>
-        <button onClick={handleSubmit} type="submit" variant="outlined">
-          Submit
-        </button>
-    </RadioGroup>
-        
-    </FormControl>
+        <RadioGroup 
+        aria-label="radio" 
+        name="radio1" 
+        value={value} 
+        onChange={handleChange}
+        >
+          <FormControlLabel 
+          value="Tech" 
+          control={<Radio/>} 
+          label="Technology" 
+          />
+          <FormControlLabel 
+          value="option2" 
+          control={<Radio/>} 
+          label="option2" 
+          />
+          <FormControlLabel 
+          value="option3" 
+          control={<Radio/>} 
+          label="option3" 
+          />
+          <FormControlLabel 
+          value="option4" 
+          control={<Radio/>} 
+          label="option4" 
+          />
+          <FormControlLabel 
+          value="option5" 
+          control={<Radio/>} 
+          label="option5" 
+          />
+          <FormControlLabel 
+          value="option6" 
+          control={<Radio/>} 
+          label="option6" 
+          />
+          <FormControlLabel 
+          value="option7" 
+          control={<Radio/>} 
+          label="option7" 
+          />
+          <FormControlLabel 
+          value="option8" 
+          control={<Radio/>} 
+          label="option8" 
+          />
+          <FormControlLabel 
+          value="other" 
+          control={<Radio/>} 
+          label="Other" 
+          />
+          {/* <FormHelperText>Please select one</FormHelperText> */}
+          <div>
+            <button onClick={handleSubmit} type="submit">
+              Submit
+            </button>
+          </div>
+        </RadioGroup>
+      </FormControl>
+    </div>
   );
 }
 export default RadioButtons;

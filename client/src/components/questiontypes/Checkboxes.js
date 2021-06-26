@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
       color: "#000",
     },
   },
-  formControl: {
-    margin: theme.spacing(3),
-  },
+  // formControl: {
+  //   margin: theme.spacing(3),
+  // },
 }));
 
 function Checkboxes() {
@@ -74,15 +74,17 @@ function Checkboxes() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="question-component">
+    {/* <div className={classes.root}> */}
       <FormControl
         error={error}
         component="fieldset"
         className={classes.formControl}
       >
-        <FormLabel component="legend" classes={{ root: classes.formLabel }}>
+        {/* <FormLabel component="legend" classes={{ root: classes.formLabel }}>
           Pick up to three:
-        </FormLabel>
+        </FormLabel> */}
+        <p className="question-intro">Pick up to three:</p>
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel
@@ -102,7 +104,7 @@ function Checkboxes() {
               <TextField
                 fullWidth
                 disabled={!options[options.length - 1].checked}
-                label={`Description for question ${options.length} - select the checkbox to start typing.`}
+                label={`Add details for option ${options.length}.`}
                 id="outlined-basic"
                 variant="outlined"
                 name="option"
@@ -110,7 +112,7 @@ function Checkboxes() {
                 onChange={(e) => setComment(e.target.value)}
               />
         </FormGroup>
-        <FormHelperText>Please only select a maximum of three options.</FormHelperText>
+        {/* <FormHelperText>Please only select a maximum of three options.</FormHelperText> */}
         <div>
           <button onClick={handleSubmit} type="submit">
             Submit
