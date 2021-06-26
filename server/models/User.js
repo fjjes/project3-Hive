@@ -13,8 +13,6 @@ const userSchema = new Schema({ //need clientID or accesscode?
     required: true,
     unique: true
   },
-  organization: String,
-  userLevel: String,  //Or position?
   // surveyNumber: {
   //   type: Number,
   // }

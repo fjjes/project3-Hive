@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const answerSchema = new Schema({
-personSurveyed:{ //access code, email, or name? Or all of them ? or populate from user model?
+personSurveyed:{ //access code, email, or name? Or all of them ? 
     type:String,
     required:true,
     unique:true
@@ -13,7 +13,13 @@ version: Number, //everyone in various levels in the organization get the same s
 answers:[
     {
         question: String,
-        answer: String
+        // answer: String,       //no textoptions for some of them!!!
+        answer: [
+            {
+                texts:String,
+                userInput:String
+            }
+        ]
     }
 ]
 })
