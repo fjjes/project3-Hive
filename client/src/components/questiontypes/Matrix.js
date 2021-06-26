@@ -20,30 +20,15 @@ const useStyles = makeStyles((theme) => ({
 const Matrix = () => {
   const classes = useStyles();
   const [values, setValues] = useState([
-    { text: "Ability to concentrate", value: "" },
-    { text: "Ability to conduct telephone conversations", value: "" },
-    {
-      text: "Ability to find a meeting room within a reasonable timeframe",
-      value: "",
-    },
-    {
-      text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-      value: "",
-    },
-    { text: "Ability to conduct confidential conversations", value: "" },
-    {
-      text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-      value: "",
-    },
-    { text: "Ability to work in the office with remote contacts", value: "" },
-    {
-      text: "Ability to easily switch between face-to-face work and work at home",
-      value: "",
-    },
-    {
-      text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-      value: "",
-    },
+    {text: "Ability to concentrate", value: "" },
+    {text: "Ability to conduct telephone conversations", value: "" },
+    {text: "Ability to find a meeting room within a reasonable timeframe",value: ""},
+    {text: "Ability to access collaborative spaces for informal exchanges with my colleagues",value: ""},
+    {text: "Ability to conduct confidential conversations", value: "" },
+    {text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",value: ""},
+    {text: "Ability to work in the office with remote contacts", value: "" },
+    {text: "Ability to easily switch between face-to-face work and work at home",value: ""},
+    {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",value: ""},
   ]);
 
   let question =
@@ -100,22 +85,13 @@ const Matrix = () => {
                   value={row.value}
                   onChange={(e) => handleChange(e, i)}
                 >
-                  {columns.map((col, index) => {
-                    return (
-                      <Grid key={index} item xs={2}>
-                        <FormControlLabel value={col} control={<Radio />} />
-                      </Grid>
-                    );
-                    // return(
-                    // <div key={index}>
-                    // {i===0 ?
-                    //     <Grid item xs={3}><FormControlLabel value={col} control={<Radio/>} label={col} labelPlacement="top"/></Grid>
-                    // :
-                    //     <Grid item xs={3}><FormControlLabel value={col} control={<Radio/>}/></Grid>
-
-                    // }
-                    // </div>)
-                  })}
+                {columns.map((col, index) => {
+                  return (
+                    <Grid key={index} item xs={2}>
+                      <FormControlLabel value={col} control={<Radio />} />
+                    </Grid>
+                  );
+                })}
                 </RadioGroup>
               </Grid>
             </Grid>
