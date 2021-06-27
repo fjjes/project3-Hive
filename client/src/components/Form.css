@@ -48,6 +48,17 @@ h1 {
   background-color: #35c0c2;
 }
 
+.question-component button:disabled {
+  background-color: grey;
+}
+
+.question-component p,
+.question-component span,
+.question-component li,
+.question-component label {
+  font-size: 0.8rem;
+}
+
 .question-intro {
   font-weight: bold;
   padding-bottom: 15px;
