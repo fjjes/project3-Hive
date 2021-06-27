@@ -2,7 +2,7 @@ require('./db')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({ //need clientID or accesscode?
+const userSchema = new Schema({ 
   name: {
     type: String,
     required: true,
@@ -13,6 +13,11 @@ const userSchema = new Schema({ //need clientID or accesscode?
     required: true,
     unique: true
   },
+  password:{
+    type: String,
+    required: true,
+    unique: true
+  }
   // surveyNumber: {
   //   type: Number,
   // }
