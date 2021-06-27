@@ -66,7 +66,7 @@ const Matrix = () => {
           <div>
             {columns.map((cl, i) => {
               return (
-                <label style={{ marginRight: "2rem" }} key={i}>
+                <label style={{ marginRight: "2rem", fontSize: "0.65rem" }} key={i}>
                   {cl}
                 </label>
               );
