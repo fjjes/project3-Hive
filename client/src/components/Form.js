@@ -49,7 +49,7 @@ const Form = () => {
           {text: "text 4",value: ""},
           {text: "text 5", value: "" },
         ]}
-        columns={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        columns={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
         space1={2} space2={3} space3={8} space4={1}
         />
         <Comment />
