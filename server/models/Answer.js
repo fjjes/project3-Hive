@@ -8,7 +8,7 @@ department:{ //access code, email, or name? Or all of them ?
     required:true,
 },
 surveyNumber: Number,
-version: Number, //everyone in various levels in the organization get the same survey? are they different?
+version: Number, //everyone in various levels in the organization get the same survey? are they different? different
 answers:[
     {
         question: String,
