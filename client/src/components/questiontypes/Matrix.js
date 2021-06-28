@@ -6,8 +6,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
-import styles from "../../App.css";
-import { display } from "@material-ui/system";
 
 // material-ui grid is 12 col width!!
 const useStyles = makeStyles((theme) => ({
@@ -17,30 +15,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Matrix = () => {
+const Matrix = ({texts, question, columns, space1, space2, space3, space4}) => {
   const classes = useStyles();
-  const [values, setValues] = useState([
-    {text: "Ability to concentrate", value: "" },
-    {text: "Ability to conduct telephone conversations", value: "" },
-    {text: "Ability to find a meeting room within a reasonable timeframe",value: ""},
-    {text: "Ability to access collaborative spaces for informal exchanges with my colleagues",value: ""},
-    {text: "Ability to conduct confidential conversations", value: "" },
-    {text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",value: ""},
-    {text: "Ability to work in the office with remote contacts", value: "" },
-    {text: "Ability to easily switch between face-to-face work and work at home",value: ""},
-    {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",value: ""},
-  ]);
+  const [values, setValues]=useState(texts)
+  // const [values, setValues] = useState([
+  //   {text: "Ability to concentrate", value: "" },
+  //   {text: "Ability to conduct telephone conversations", value: "" },
+  //   {text: "Ability to find a meeting room within a reasonable timeframe",value: ""},
+  //   {text: "Ability to access collaborative spaces for informal exchanges with my colleagues",value: ""},
+  //   {text: "Ability to conduct confidential conversations", value: "" },
+  //   {text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",value: ""},
+  //   {text: "Ability to work in the office with remote contacts", value: "" },
+  //   {text: "Ability to easily switch between face-to-face work and work at home",value: ""},
+  //   {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",value: ""},
+  // ]);
 
-  let question =
-    "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
+  // let question =
+  //   "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
 
-  let columns = [
-    "Very Satisfied",
-    "Satisfied",
-    "Neither satisfied nor dissatisfied",
-    "Dissatisfied",
-    "Very dissatisfied",
-  ];
+  // let columns = [
+  //   "Very Satisfied",
+  //   "Satisfied",
+  //   "Neither satisfied nor dissatisfied",
+  //   "Dissatisfied",
+  //   "Very dissatisfied",
+  // ];
 
   const handleChange = (e, i) => {
     let newValues = [...values];
@@ -58,28 +57,26 @@ const Matrix = () => {
         <p className="question-intro">{question}</p>
         <Grid
           container
-          spacing={2}
+          spacing={space1}
           className={classes.grid}
           // style={{ display: "flex" }}
         >
-          <Grid item xs={3}></Grid>
+          <Grid item xs={space2}></Grid>
           <div>
             {columns.map((cl, i) => {
               return (
-                <label style={{ marginRight: "2rem", fontSize: "0.65rem" }} key={i}>
-                  {cl}
-                </label>
+                <label style={{ marginRight: "2rem", fontSize: "0.65rem" }} key={i}>{cl}</label>
               );
             })}
           </div>
         </Grid>
         {values.map((row, i) => {
           return (
-            <Grid key={i} container spacing={2} className={classes.grid}>
-              <Grid item xs={3}>
+            <Grid key={i} container spacing={space1} className={classes.grid}>
+              <Grid item xs={space2}>
                 <FormLabel>{row.text}</FormLabel>
               </Grid>
-              <Grid item xs={9}>
+              <Grid item xs={space3}>
                 <RadioGroup
                   row
                   value={row.value}
@@ -87,7 +84,7 @@ const Matrix = () => {
                 >
                 {columns.map((col, index) => {
                   return (
-                    <Grid key={index} item xs={2}>
+                    <Grid key={index} item xs={space4}>
                       <FormControlLabel value={col} control={<Radio />} />
                     </Grid>
                   );
@@ -99,9 +96,7 @@ const Matrix = () => {
         })}
       </FormControl>
       <div style={{ textAlign: "left" }}>
-        <button onClick={handleSubmit} type="submit">
-          Submit
-        </button>
+        <button onClick={handleSubmit} type="submit">Submit</button>
       </div>
     </div>
   );

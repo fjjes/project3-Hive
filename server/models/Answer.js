@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const answerSchema = new Schema({
-personSurveyed:{ //access code, email, or name? Or all of them ? 
+personSurveyed:{ //email, or name? Or all of them ? (or populate from 'surveyingPeople' collection)
     type:String,
     required:true,
     unique:true
 },
 surveyNumber: Number,
-version: Number, //everyone in various levels in the organization get the same survey? are they different?
+version: Number, //everyone in various levels in the organization get the same survey? are they different? different
 answers:[
     {
         question: String,
