@@ -50,6 +50,7 @@ import FormControl from '@material-ui/core/FormControl';
                   onChange={handleChange}
                   name="option"
                   value={option.value}
+                  color='primary'
                 />
               }
               label={option.label}

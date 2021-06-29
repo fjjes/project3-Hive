@@ -96,6 +96,7 @@ function Checkboxes({questionNumber}) {
                   onChange={handleChange}
                   name="option"
                   value={option.value}
+                  color='primary'
                 />
               }
               label={option.value}

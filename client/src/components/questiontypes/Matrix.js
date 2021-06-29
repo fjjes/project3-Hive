@@ -7,39 +7,19 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Grid from "@material-ui/core/Grid";
 
-// material-ui grid is 12 col width!!
 const useStyles = makeStyles((theme) => ({
   grid: {
     width: "100%",
     margin: "0px",
   },
+  formLabel:{
+    color: 'black' 
+  }
 }));
 
 const Matrix = ({texts, question, questionNumber, columns, space1, space2, space3, space4}) => {
   const classes = useStyles();
   const [values, setValues]=useState(texts)
-  // const [values, setValues] = useState([
-  //   {text: "Ability to concentrate", value: "" },
-  //   {text: "Ability to conduct telephone conversations", value: "" },
-  //   {text: "Ability to find a meeting room within a reasonable timeframe",value: ""},
-  //   {text: "Ability to access collaborative spaces for informal exchanges with my colleagues",value: ""},
-  //   {text: "Ability to conduct confidential conversations", value: "" },
-  //   {text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",value: ""},
-  //   {text: "Ability to work in the office with remote contacts", value: "" },
-  //   {text: "Ability to easily switch between face-to-face work and work at home",value: ""},
-  //   {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",value: ""},
-  // ]);
-
-  // let question =
-  //   "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
-
-  // let columns = [
-  //   "Very Satisfied",
-  //   "Satisfied",
-  //   "Neither satisfied nor dissatisfied",
-  //   "Dissatisfied",
-  //   "Very dissatisfied",
-  // ];
 
   const handleChange = (e, i) => {
     let newValues = [...values];
@@ -74,7 +54,7 @@ const Matrix = ({texts, question, questionNumber, columns, space1, space2, space
           return (
             <Grid key={i} container spacing={space1} className={classes.grid}>
               <Grid item xs={space2}>
-                <FormLabel>{row.text}</FormLabel>
+                <FormLabel className={classes.formLabel}>{row.text}</FormLabel>
               </Grid>
               <Grid item xs={space3}>
                 <RadioGroup
@@ -85,7 +65,7 @@ const Matrix = ({texts, question, questionNumber, columns, space1, space2, space
                 {columns.map((col, index) => {
                   return (
                     <Grid key={index} item xs={space4}>
-                      <FormControlLabel value={col} control={<Radio />} />
+                      <FormControlLabel value={col} control={<Radio color='primary'/>} />
                     </Grid>
                   );
                 })}
