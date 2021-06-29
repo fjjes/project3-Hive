@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Narrative from "./questiontypes/Narrative";
 import Comment from "./questiontypes/Comment";
 import SelectInput from "./questiontypes/SelectInput";

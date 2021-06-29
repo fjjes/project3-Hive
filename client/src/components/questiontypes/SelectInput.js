@@ -38,13 +38,6 @@ const handleChange = (e,i)=>{
 
    const handleSubmit=()=>{
     console.log(values)
-    // setValues([
-    //     {text:'Rethinking workspaces in the company', value:''},
-    //     {text:'Review the organization of meetings Rethinking moments', value:''},
-    //     {text:'Spaces of conviviality', value:''},
-    //     {text:'Do not change anything', value:''},
-    //     {text:'Other', value:''}
-    // ])
   }
 
     return (
