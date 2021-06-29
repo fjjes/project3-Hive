@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
  function RadioButtons({questionNumber}) {
   const [value, setValue] = React.useState('');
+  const [options, setOptions] = useState([
+    {value: "option1", label: "Option 1"},
+    {value: "option2", label: "Option 2"},
+    {value: "option3", label: "Option 3"},
+    {value: "option4", label: "Option 4"},
+    {value: "option5", label: "Option 5"},
+    {value: "option6", label: "Option 6"},
+    {value: "option7", label: "Option 7"},
+    {value: "option8", label: "Option 8"}
+    
+  ])
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -16,13 +25,15 @@ import FormHelperText from '@material-ui/core/FormHelperText';
     console.log("value", value);
   }
 
+  const question = "What is your department or team?"
+
   return (
     <div className="question-component">
       <FormControl component="fieldset" >
         {/* <FormLabel component="legend">
             Question 1.What is your department or Team? 
         </FormLabel> */}
-        <p className="question-intro">Q{questionNumber}) What is your department or team?</p>
+        <p className="question-intro">Q{questionNumber}) {question}</p>
 
         <RadioGroup 
         aria-label="radio" 
@@ -30,52 +41,20 @@ import FormHelperText from '@material-ui/core/FormHelperText';
         value={value} 
         onChange={handleChange}
         >
-          <FormControlLabel 
-          value="Tech" 
-          control={<Radio/>} 
-          label="Technology" 
-          />
-          <FormControlLabel 
-          value="option2" 
-          control={<Radio/>} 
-          label="option2" 
-          />
-          <FormControlLabel 
-          value="option3" 
-          control={<Radio/>} 
-          label="option3" 
-          />
-          <FormControlLabel 
-          value="option4" 
-          control={<Radio/>} 
-          label="option4" 
-          />
-          <FormControlLabel 
-          value="option5" 
-          control={<Radio/>} 
-          label="option5" 
-          />
-          <FormControlLabel 
-          value="option6" 
-          control={<Radio/>} 
-          label="option6" 
-          />
-          <FormControlLabel 
-          value="option7" 
-          control={<Radio/>} 
-          label="option7" 
-          />
-          <FormControlLabel 
-          value="option8" 
-          control={<Radio/>} 
-          label="option8" 
-          />
-          <FormControlLabel 
-          value="other" 
-          control={<Radio/>} 
-          label="Other" 
-          />
-          {/* <FormHelperText>Please select one</FormHelperText> */}
+
+          {options.map((option) => (
+            <FormControlLabel
+              key={option.value}
+              control={
+                <Radio
+                  onChange={handleChange}
+                  name="option"
+                  value={option.value}
+                />
+              }
+              label={option.label}
+              />
+              ))}
           <div>
             <button onClick={handleSubmit} type="submit">
               Submit

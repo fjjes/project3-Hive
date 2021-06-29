@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 
@@ -35,6 +33,8 @@ function Checkboxes({questionNumber}) {
     { checked: false, value: "Option 7" },
     { checked: false, value: "Option 8" },
   ]);
+
+  const question = "Select up to three options:"
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
@@ -84,7 +84,7 @@ function Checkboxes({questionNumber}) {
         {/* <FormLabel component="legend" classes={{ root: classes.formLabel }}>
           Pick up to three:
         </FormLabel> */}
-        <p className="question-intro">Q{questionNumber}) Pick up to three:</p>
+        <p className="question-intro">Q{questionNumber}) {question}</p>
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel
