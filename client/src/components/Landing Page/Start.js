@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../../App.css";
+import  "../../App.css";
 
 export default function Start() {
   return (
@@ -18,7 +18,7 @@ export default function Start() {
             required
           ></input>
           <label class="c-form__buttonLabel" for="checkbox">
-            <Link to="/Form">
+            <Link to="/survey">
               <button class="c-form__button" type="button">
                 Enter
               </button>

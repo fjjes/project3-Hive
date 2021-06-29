@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 
-function Comment() {
+function Comment({questionNumber}) {
   const [comment, setComment] = useState("");
 
   // const handleChange = (e) => {
@@ -15,7 +15,7 @@ function Comment() {
 
   return (
     <div className="question-component">
-      <p className="question-intro">If you wish to add additional comments, you can enter them below:</p>
+      <p className="question-intro">Q{questionNumber}) If you wish to add additional comments, you can enter them below:</p>
       <TextField
         id="outlined-basic"
         label="comment"

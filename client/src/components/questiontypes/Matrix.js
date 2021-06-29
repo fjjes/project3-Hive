@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Matrix = ({texts, question, columns, space1, space2, space3, space4}) => {
+const Matrix = ({texts, question, questionNumber, columns, space1, space2, space3, space4}) => {
   const classes = useStyles();
   const [values, setValues]=useState(texts)
   // const [values, setValues] = useState([
@@ -54,7 +54,7 @@ const Matrix = ({texts, question, columns, space1, space2, space3, space4}) => {
   return (
     <div className="matrix question-component">
       <FormControl component="fieldset">
-        <p className="question-intro">{question}</p>
+        <p className="question-intro">Q{questionNumber}) {question}</p>
         <Grid
           container
           spacing={space1}

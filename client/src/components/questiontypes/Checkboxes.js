@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-function Checkboxes() {
+function Checkboxes({questionNumber}) {
   const classes = useStyles();
   const [options, setOptions] = useState([
     { checked: false, value: "Option 1" },
@@ -84,7 +84,7 @@ function Checkboxes() {
         {/* <FormLabel component="legend" classes={{ root: classes.formLabel }}>
           Pick up to three:
         </FormLabel> */}
-        <p className="question-intro">Pick up to three:</p>
+        <p className="question-intro">Q{questionNumber}) Pick up to three:</p>
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel

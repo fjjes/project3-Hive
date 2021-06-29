@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     
 }));
 
-const SelectInput = () => {
+const SelectInput = ({questionNumber}) => {
     const classes = useStyles(); 
     const [values, setValues]= useState([
         {text:'Rethinking workspaces in the company', value:''},
@@ -49,7 +49,7 @@ const handleChange = (e,i)=>{
 
     return (
         <div className="select question-component">
-            <p className="question-intro">{question}</p>
+            <p className="question-intro">Q{questionNumber}) {question}</p>
                 {values.map((row, i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >

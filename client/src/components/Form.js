@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Narrative from "./questiontypes/Narrative";
 import Comment from "./questiontypes/Comment";
 import SelectInput from "./questiontypes/SelectInput";
@@ -14,12 +14,13 @@ const Form = () => {
     <div className="form-page">
       <div className="form-container">
         <Narrative />
-        <SelectInput />
-        <Slider />
-        <RadioButtons />
-        <Checkboxes />
+        <SelectInput questionNumber={1}/>
+        <Slider questionNumber={2}/>
+        <RadioButtons questionNumber={3}/>
+        <Checkboxes questionNumber={4}/>
         <Matrix 
         question={"Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"}
+        questionNumber={5}
         texts={[
           {text: "Ability to concentrate", value: "" },
           {text: "Ability to conduct telephone conversations", value: "" },
@@ -41,18 +42,19 @@ const Form = () => {
         space1={2} space2={3} space3={9} space4={2}
         />
         <Matrix 
-        question={"Please rate the importance of followings from 1 to 10:"}
-        texts={[
-          {text: "text 1", value: "" },
-          {text: "text 2", value: "" },
-          {text: "text 3",value: ""},
-          {text: "text 4",value: ""},
-          {text: "text 5", value: "" },
-        ]}
-        columns={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
-        space1={2} space2={3} space3={8} space4={1}
+            question={"Please rate the importance of followings from 1 to 10:"}
+            questionNumber={6}
+            texts={[
+                {text: "text 1", value: "" },
+                {text: "text 2", value: "" },
+                {text: "text 3",value: ""},
+                {text: "text 4",value: ""},
+                {text: "text 5", value: "" }
+            ]}
+            columns={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']}
+            space1={2} space2={3} space3={8} space4={1}
         />
-        <Comment />
+        <Comment questionNumber={7}/>
       </div>
     </div>
   );

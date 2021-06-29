@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
- function RadioButtons() {
+ function RadioButtons({questionNumber}) {
   const [value, setValue] = React.useState('');
 
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
         {/* <FormLabel component="legend">
             Question 1.What is your department or Team? 
         </FormLabel> */}
-        <p className="question-intro">What is your department or team?</p>
+        <p className="question-intro">Q{questionNumber}) What is your department or team?</p>
 
         <RadioGroup 
         aria-label="radio" 

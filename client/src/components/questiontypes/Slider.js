@@ -50,7 +50,7 @@ const useStyles5 = makeStyles({
   },
 });
 
-export default function InputSlider() {
+export default function InputSlider({questionNumber}) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const classes2 = useStyles2();
@@ -164,7 +164,7 @@ export default function InputSlider() {
           work in the following locations? The total of the answers must equal to
           the sum of 100%
         </Typography> */}
-        <p className="question-intro">Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.</p>
+        <p className="question-intro">Q{questionNumber}) Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.</p>
         <Grid container spacing={2} alignItems="center">
           <Grid item>
             <p>1</p>
