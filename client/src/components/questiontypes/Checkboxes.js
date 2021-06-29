@@ -36,6 +36,8 @@ function Checkboxes() {
     { checked: false, value: "Option 8" },
   ]);
 
+  const question = "Select up to three options:"
+
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const [comment, setComment] = useState("");
@@ -84,7 +86,7 @@ function Checkboxes() {
         {/* <FormLabel component="legend" classes={{ root: classes.formLabel }}>
           Pick up to three:
         </FormLabel> */}
-        <p className="question-intro">Pick up to three:</p>
+        <p className="question-intro">{question}</p>
         <FormGroup>
           {options.map((option) => (
             <FormControlLabel
