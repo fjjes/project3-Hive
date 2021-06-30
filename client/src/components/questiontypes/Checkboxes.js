@@ -1,28 +1,29 @@
 import React, { useState } from "react";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { makeStyles } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
+// import "../Form.css"
+// import Checkbox from "@material-ui/core/Checkbox";
+// import FormControl from "@material-ui/core/FormControl";
+// import FormGroup from "@material-ui/core/FormGroup";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import { makeStyles } from "@material-ui/core/styles";
+// import { TextField } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formLabel: {
-    color: "#000",
-    "&.Mui-focused": {
-      color: "#000",
-    },
-  },
-  // formControl: {
-  //   margin: theme.spacing(3),
-  // },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//   },
+//   formLabel: {
+//     color: "#000",
+//     "&.Mui-focused": {
+//       color: "#000",
+//     },
+//   },
+//   // formControl: {
+//   //   margin: theme.spacing(3),
+//   // },
+// }));
 
-function Checkboxes({questionNumber}) {
-  const classes = useStyles();
+function Checkboxes({ questionNumber }) {
+  // const classes = useStyles();
   const [options, setOptions] = useState([
     { checked: false, value: "Option 1" },
     { checked: false, value: "Option 2" },
@@ -34,13 +35,13 @@ function Checkboxes({questionNumber}) {
     { checked: false, value: "Option 8" },
   ]);
 
-  const question = "Select up to three options:"
+  const question = "Select up to three options:";
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
   const [comment, setComment] = useState("");
 
-  let checkedArray = []
+  let checkedArray = [];
 
   const handleChange = (event) => {
     console.log(event.target.name, event.target.checked, event.target.value);
@@ -52,10 +53,10 @@ function Checkboxes({questionNumber}) {
       }
       if (option.checked) {
         numberCount++;
-        option.checked && checkedArray.push(option.value)
+        option.checked && checkedArray.push(option.value);
       }
       if (!options[options.length - 1].checked) {
-        setComment("")
+        setComment("");
       }
     }
     setOptions(newOptions);
@@ -66,60 +67,73 @@ function Checkboxes({questionNumber}) {
       setDisabled(false);
       setError(false);
     }
-    console.log("Array of selected checkboxes: ", checkedArray)
+    console.log("Array of selected checkboxes: ", checkedArray);
   };
 
   const handleSubmit = () => {
-    console.log(options, comment)
+    console.log(options, comment);
   };
 
   return (
     <div className="question-component">
-    {/* <div className={classes.root}> */}
-      <FormControl
+      <form className="checkbox-form-control">
+        {/* <FormControl
         error={error}
         component="fieldset"
         className={classes.formControl}
-      >
-        {/* <FormLabel component="legend" classes={{ root: classes.formLabel }}>
-          Pick up to three:
-        </FormLabel> */}
-        <p className="question-intro">Q{questionNumber}) {question}</p>
-        <FormGroup>
+      > */}
+        <p className="question-intro">
+          Q{questionNumber}) {question}
+        </p>
+        <div className="checkbox-form-group">
+          {/* <input type="checkbox" value="test" />
+          <label>Test</label> */}
+          {/* <FormGroup> */}
           {options.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              control={
-                <Checkbox
-                  disabled={disabled && !option.checked}
-                  checked={option.checked}
-                  onChange={handleChange}
-                  name="option"
-                  value={option.value}
-                  color='primary'
-                />
-              }
-              label={option.value}
-              />
-              ))}
-              <TextField
-                fullWidth
-                disabled={!options[options.length - 1].checked}
-                label={`Add details for option ${options.length}.`}
-                id="outlined-basic"
-                variant="outlined"
+            // <div className="checkbox-form-control-label">
+            <div>
+              <input
+                type="checkbox"
+                // <Checkbox
+                disabled={disabled && !option.checked}
+                checked={option.checked}
+                onChange={handleChange}
                 name="option"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
+                id="option"
+                value={option.value}
+                // color='primary'
               />
-        </FormGroup>
-        {/* <FormHelperText>Please only select a maximum of three options.</FormHelperText> */}
+              <label
+                for="option"
+                // <FormControlLabel
+                key={option.value}
+                // control={
+              >
+                {option.value}
+              </label>
+            </div>
+          ))}
+          <input
+            type="text"
+            // <TextField
+            // fullWidth
+            disabled={!options[options.length - 1].checked}
+            label={`Add details for option ${options.length}.`}
+            id="outlined-basic"
+            // variant="outlined"
+            name="option"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          {/* </FormGroup> */}
+        </div>
         <div>
           <button onClick={handleSubmit} type="submit">
             Submit
           </button>
         </div>
-      </FormControl>
+        {/* </FormControl> */}
+      </form>
     </div>
   );
 }
