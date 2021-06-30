@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const answerSchema = new Schema({
-department:{ //access code, email, or name? Or all of them ? 
+department:{ 
     type:String,
     required:true,
 },
