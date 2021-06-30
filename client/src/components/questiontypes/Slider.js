@@ -157,6 +157,17 @@ export default function InputSlider({ questionNumber }) {
     console.log(value, value2, value3, value4, value5);
   };
 
+  const marks = [
+    {
+      value: 0,
+      label: "0",
+    },
+    {
+      value: 100,
+      label: "100",
+    },
+  ];
+
   return (
     <div className="question-component">
       <div className={classes.root}>
@@ -179,6 +190,9 @@ export default function InputSlider({ questionNumber }) {
               value={typeof value === "number" ? value : 0}
               onChange={handleSliderChange}
               aria-labelledby="input-slider"
+              marks={marks}
+              step={20}
+              marks
             />
           </Grid>
           <Grid item>
@@ -207,6 +221,9 @@ export default function InputSlider({ questionNumber }) {
               value={typeof value2 === "number" ? value2 : 0}
               onChange={handleSliderChange2}
               aria-labelledby="input-slider"
+              marks={marks}
+              step={20}
+              marks
             />
           </Grid>
           <Grid item>
@@ -235,6 +252,9 @@ export default function InputSlider({ questionNumber }) {
               value={typeof value3 === "number" ? value3 : 0}
               onChange={handleSliderChange3}
               aria-labelledby="input-slider"
+              marks={marks}
+              step={20}
+              marks
             />
           </Grid>
           <Grid item>
@@ -263,6 +283,9 @@ export default function InputSlider({ questionNumber }) {
               value={typeof value4 === "number" ? value4 : 0}
               onChange={handleSliderChange4}
               aria-labelledby="input-slider"
+              marks={marks}
+              step={20}
+              marks
             />
           </Grid>
           <Grid item>
@@ -291,6 +314,9 @@ export default function InputSlider({ questionNumber }) {
               value={typeof value5 === "number" ? value5 : 0}
               onChange={handleSliderChange5}
               aria-labelledby="input-slider"
+              marks={marks}
+              step={20}
+              marks
             />
           </Grid>
           <Grid item>
