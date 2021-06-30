@@ -73,3 +73,13 @@ h1 {
 .select li {
   padding-bottom: 10px;
 }
+
+.matrix th, td{
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+
+.matrix .label-rows{
+  text-align: start;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Matrix.css'
+import '../Form.css'
 
 const Matrix = (props) => {
   const [values, setValues]=useState(props.texts)
