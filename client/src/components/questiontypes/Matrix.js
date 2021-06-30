@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-
+import './Matrix.css'
 
 const Matrix = (props) => {
   const [values, setValues]=useState(props.texts)
@@ -34,7 +33,7 @@ const Matrix = (props) => {
             {values.map((row, i)=> {
               return(
                 <tr key={i}>
-                  <td>
+                  <td  className='label-rows'>
                     <label>{row.text}</label>
                   </td>
                   {props.columns.map((col, index)=>{
