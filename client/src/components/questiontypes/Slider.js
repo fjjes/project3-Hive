@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
+import "../Form.css";
 
 const useStyles = makeStyles({
   root: {
-    width: 250,
+    width: 400,
+    height: 300,
   },
   input: {
     width: 42,
@@ -50,7 +51,7 @@ const useStyles5 = makeStyles({
   },
 });
 
-export default function InputSlider({questionNumber}) {
+export default function InputSlider({ questionNumber }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const classes2 = useStyles2();
@@ -164,8 +165,12 @@ export default function InputSlider({questionNumber}) {
           work in the following locations? The total of the answers must equal to
           the sum of 100%
         </Typography> */}
-        <p className="question-intro">Q{questionNumber}) Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.</p>
-        <Grid container spacing={2} alignItems="center">
+        <p className="question-intro">
+          Q{questionNumber}) Normally, during a regular workweek, what
+          percentage of your time do you work in the following locations? The
+          total of the answers must equal to the sum of 100%.
+        </p>
+        <Grid container spacing={2}>
           <Grid item>
             <p>1</p>
           </Grid>
@@ -193,7 +198,7 @@ export default function InputSlider({questionNumber}) {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2}>
           <Grid item>
             <p>2</p>
           </Grid>
@@ -221,7 +226,7 @@ export default function InputSlider({questionNumber}) {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2}>
           <Grid item>
             <p>3</p>
           </Grid>
@@ -249,7 +254,7 @@ export default function InputSlider({questionNumber}) {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2}>
           <Grid item>
             <p>4</p>
           </Grid>
@@ -277,7 +282,7 @@ export default function InputSlider({questionNumber}) {
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} alignItems="center">
+        <Grid container spacing={2}>
           <Grid item>
             <p>5</p>
           </Grid>
@@ -305,13 +310,15 @@ export default function InputSlider({questionNumber}) {
             />
           </Grid>
         </Grid>
-        <button
-          onClick={handleSubmit} //help
-          disabled={totalCount === 100 ? false : true}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="button-submit">
+          <button
+            onClick={handleSubmit} //help
+            disabled={totalCount === 100 ? false : true}
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

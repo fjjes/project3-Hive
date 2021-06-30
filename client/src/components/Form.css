@@ -26,17 +26,19 @@ h1 {
   margin: auto;
   padding: 30px;
 }
-
+/* 
 .question-component {
   border-bottom: 3px solid #bce6f8;
   padding: 20px 0;
   width: 100%;
-}
+} */
 
-.question-component button {
+.button-submit button {
+  display: flex;
+  justify-content: center;
   padding: 5px;
   font-size: 1rem;
-  margin: 10px 0;
+  margin: auto;
   display: block;
   background-color: #197e9c;
   color: #fff;
@@ -56,7 +58,7 @@ h1 {
 .question-component span,
 .question-component li,
 .question-component label {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .question-intro {

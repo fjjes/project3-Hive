@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 // import TextField from "@material-ui/core/TextField";
 
+
+
+
 function Comment({questionNumber}) {
   const [comment, setComment] = useState("");
 
+  let question = 'If you wish to add additional comments, you can enter them below:'
+
   const handleSubmit=()=>{
     console.log(comment)
-    setComment("") //input clears out when clicked on submit
+    setComment("") 
+    //props.onChangedValues(comment)
   }
 
   return (
     <div className="question-component">
-      <p className="question-intro">Q{questionNumber}) If you wish to add additional comments, you can enter them below:@@@</p>
+      <p className="question-intro">Q{questionNumber}) {question}</p>
       <textarea
         rows="4"
         cols="50"
