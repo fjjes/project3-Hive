@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      minWidth: 80,
-    },
-    
-}));
+import '../Form.css'
 
 let texts = [
         {text:'Rethinking workspaces in the company', value:''},
@@ -23,19 +13,8 @@ let question = 'In your opinion, what are the necessary and complementary organi
 
 
 const SelectInput = (props) => {
-    const classes = useStyles(); 
     const [values, setValues]=useState(texts)
-    // const [values, setValues]= useState([
-    //     {text:'Rethinking workspaces in the company', value:''},
-    //     {text:'Review the organization of meetings Rethinking moments', value:''},
-    //     {text:'Spaces of conviviality', value:''},
-    //     {text:'Do not change anything', value:''},
-    //     {text:'Other', value:''}
-    // ])
-
-    
-
-
+   
     let selectArray = [];
     let num= 1
     for(let i=0; i<values.length; i++){
@@ -47,12 +26,12 @@ const handleChange = (e,i)=>{
     let newValues = [...values]
     newValues[i].value= e.target.value
     setValues(newValues)
-    props.onChangedValues(newValues)
+    //props.onChangedValues(newValues)
 }
 
-//    const handleSubmit=()=>{
-//     console.log(values)
-//   }
+   const handleSubmit=()=>{
+    console.log(values)
+  }
 
     return (
         <div className="select question-component">
@@ -61,20 +40,20 @@ const handleChange = (e,i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >
                                 {row.text}:&nbsp;
-                                    <FormControl className={classes.formControl}>
-                                        <Select  value={row.value} onChange={(e)=>handleChange(e,i)}>
+                                        <select  value={row.value} onChange={(e)=>handleChange(e,i)}>
+                                            <option>--Select--</option>
                                             {selectArray.map((selection, index)=>{ 
-                                                return <MenuItem key={index} value={selection}>{selection}</MenuItem>
+                                                return <option key={index} value={selection}>{selection}</option>
                                             })}  
-                                        </Select>
-                                    </FormControl>                            
+                                        </select>
+                                                               
                             </li>
                         </ul>
                          )
                  })}
-        {/* <div style={{textAlign:"left"}}>
+        <div className="button-submit">
             <button onClick={handleSubmit} type="submit">Submit</button>
-        </div> */}
+        </div>
         </div>
     );
 }

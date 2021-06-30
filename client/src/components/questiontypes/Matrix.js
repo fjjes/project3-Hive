@@ -50,7 +50,7 @@ const Matrix = (props) => {
           </tbody>
         </table>
         
-      <div style={{ textAlign: "left" }}>
+      <div className="button-submit">
         <button onClick={handleSubmit} type="submit">Submit</button>
       </div>
     </div>
