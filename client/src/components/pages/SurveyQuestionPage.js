@@ -13,18 +13,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SurveyQuestionPage = () => {
+const SurveyQuestionPage = (props) => {
   const classes = useStyles();
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [values, setValues] = useState(); //!!!!!!!!!!!!!!!!!!!!!!!
+  const [qValuesArray, setQValuesArray] = useState([]);
 
   const goToNextQuestion = () => {
     let counter = questionNumber + 1;
     setQuestionNumber(counter);
+
+    let newArr = [...qValuesArray];
+    newArr.push(props.matrixOneValues);
+    setQValuesArray(newArr);
   };
 
   const handleSubmit = () => {
-    console.log(values);
+    console.log(qValuesArray);
   };
 
   return (
@@ -33,12 +37,14 @@ const SurveyQuestionPage = () => {
         <SurveyQuestion questionNumber={questionNumber} />
         {questionNumber === 7 ? (
           <div>
+            <button>Back</button>
             <button onClick={handleSubmit} type="submit">
               Submit
             </button>
           </div>
         ) : (
           <div>
+            <button>Back</button>
             <button onClick={goToNextQuestion}>Next</button>
           </div>
         )}
