@@ -32,7 +32,7 @@ function Comment({questionNumber}) {
         placeholder="Input"
         // type="reset"
       />
-      <div>
+      <div className="button-submit">
         <button onClick={handleSubmit} type="submit">
           Submit
         </button>
