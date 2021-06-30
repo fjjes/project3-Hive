@@ -6,6 +6,7 @@ const Survey = require('../models/Survey')
 /* GET survey listing. */
 router.get('/', async (req, res) => {
   let data = await Survey.find({});
+  console.log ("data", data)
   console.info(`records retrieved from mongoose:`, data?.length);
   res.send(data);
 });

@@ -11,12 +11,10 @@ const surveySchema = new Schema({
   narrative: String,
   questions: [
     {
-      type: String,
+      questionType: String,
       questionNumber: Number,
       question: String,
-      answerOptions: [{
-        type: String
-      }]
+      answerOptions: []
     }
   ],
   commentQuestion: String,
