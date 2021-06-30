@@ -6,6 +6,7 @@ import RadioButtons from "./questiontypes/RadioButtons";
 import Checkboxes from "./questiontypes/Checkboxes";
 import MatrixOne from './MatrixOne'
 import MatrixTwo from './MatrixTwo'
+import './Form.css'
 
 const SurveyQuestion = ({questionNumber}) => {
     const [currentQuestion, setCurrentQuestion]= useState()
