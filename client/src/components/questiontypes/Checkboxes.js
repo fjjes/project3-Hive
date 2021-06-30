@@ -58,8 +58,8 @@ function Checkboxes({ questionNumber }) {
           Q{questionNumber}) {question}
         </p>
         <div className="checkbox-form-group">
-          {options.map((option) => (
-            <div>
+          {options.map((option, index) => (
+            <div key={index}>
               <input
                 type="checkbox"
                 disabled={disabled && !option.checked}
@@ -70,7 +70,7 @@ function Checkboxes({ questionNumber }) {
                 value={option.value}
               />
               <label
-                for="option"
+                htmlFor="option"
                 key={option.value}
               >
                 {option.value}
