@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
+// import Radio from '@material-ui/core/Radio';
+// import RadioGroup from '@material-ui/core/RadioGroup';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControl from '@material-ui/core/FormControl';
 
  function RadioButtons({questionNumber}) {
   const [value, setValue] = React.useState('');
@@ -29,40 +29,35 @@ import FormControl from '@material-ui/core/FormControl';
 
   return (
     <div className="question-component">
-      <FormControl component="fieldset" >
-        {/* <FormLabel component="legend">
-            Question 1.What is your department or Team? 
-        </FormLabel> */}
-        <p className="question-intro">Q{questionNumber}) {question}</p>
-
-        <RadioGroup 
+      <form >    
+        <p className="question-intro">Q{questionNumber} {question}</p>
+        <div className ="RadioGroup" 
         aria-label="radio" 
         name="radio1" 
         value={value} 
         onChange={handleChange}
-        >
-
-          {options.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              control={
-                <Radio
+        >        
+          {options.map((option,index) => (
+           <div key={index}> 
+           <label htmlFor ="radio"
+              key={option.value}>
+              {option.label}
+              </label>
+              <input type="radio"
+                  id="radio"
                   onChange={handleChange}
                   name="option"
                   value={option.value}
-                  color='primary'
-                />
-              }
-              label={option.label}
-              />
+                  color='primary'/>
+                  </div>
               ))}
           <div>
             <button onClick={handleSubmit} type="submit">
               Submit
             </button>
           </div>
-        </RadioGroup>
-      </FormControl>
+        </div>
+        </form>
     </div>
   );
 }
