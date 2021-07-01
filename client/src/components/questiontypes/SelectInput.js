@@ -9,7 +9,7 @@ let texts = [
         {text:'Other', value:''}
 ]
 
-let question = 'In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible. Please rank the following in order of interest:'
+let question = 'In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:'
 
 
 const SelectInput = (props) => {
@@ -34,8 +34,8 @@ const handleChange = (e,i)=>{
   }
 
     return (
-        <div className="select question-component">
-            <p className="question-intro">Q{props.questionNumber}) {question}</p>
+        <div className="select question-component">  
+            <p className="question-intro">Q{props.questionNumber}.</p><span><p className="question-intro">{question}</p></span>
                 {values.map((row, i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >
@@ -45,8 +45,7 @@ const handleChange = (e,i)=>{
                                             {selectArray.map((selection, index)=>{ 
                                                 return <option key={index} value={selection}>{selection}</option>
                                             })}  
-                                        </select>
-                                                               
+                                        </select>                         
                             </li>
                         </ul>
                          )
