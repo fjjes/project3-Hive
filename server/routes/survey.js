@@ -10,6 +10,7 @@ router.get('/', async (req, res) => {
   console.info(`records retrieved from mongoose:`, data?.length);
   res.send(data);
 });
+
 router.get('/:id', async function(req, res) {
   try {
       const data = await Survey.findOne({_id: req.params.id});

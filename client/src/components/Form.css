@@ -83,3 +83,7 @@ h1 {
 .matrix .label-rows{
   text-align: start;
 }
+
+.radio label{
+  margin-left: 5px;
+}

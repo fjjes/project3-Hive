@@ -8,16 +8,15 @@ department:{
     required:true,
 },
 surveyNumber: Number,
-version: Number, //everyone in various levels in the organization get the same survey? are they different? different
+version: String, //everyone in various levels in the organization get the same survey? are they different? different
 answers:[
     {
         question: String,
-        // answer: String,       //no textoptions for some of them!!!
-        answer: [
-            {
-                texts:String,
-                userInput:String
-            }
+        answer: [                //answer can be an array or a string !!!!!!!!!!!!!!
+            // {
+            //     texts:String,
+            //     value:String
+            // }
         ]
     }
 ]

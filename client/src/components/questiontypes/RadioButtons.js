@@ -38,8 +38,8 @@ import React, { useState } from 'react';
   const question = "What is your department or team?"
 
   return (
-    <div className="question-component">   
-        <p className="question-intro">Q{questionNumber} {question}</p>
+    <div className="radio question-component">   
+        <p className="question-intro">Q{questionNumber}) {question}</p>
           {options.map((option,index) => {
            return(<div key={index}> 
               <input type="radio"

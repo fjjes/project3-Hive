@@ -4,6 +4,14 @@ import '../Form.css'
 const Matrix = (props) => {
   const [values, setValues]=useState(props.texts)
 
+  // let columns=[
+  //   "Very Satisfied",
+  //   "Satisfied",
+  //   "Neither satisfied nor dissatisfied",
+  //   "Dissatisfied",
+  //   "Very dissatisfied"
+  //   ]
+
   const handleChange = (e, i) => {
     let newValues = [...values];
     newValues[i].value = e.target.value;
@@ -38,15 +46,14 @@ const Matrix = (props) => {
                   </td>
                   {props.columns.map((col, index)=>{
                       return(
-                        <td key={index} onChange={(e) => handleChange(e, i)}>
-                          <input type='radio' value={col}/>
+                        <td key={index}>
+                          <input type='radio' name={row.text} value={col} onChange={(e) => handleChange(e, i)}/>
                         </td>
                       )
                   })}
                 </tr>
               )
-            })
-            }
+            })}
           </tbody>
         </table>
         
