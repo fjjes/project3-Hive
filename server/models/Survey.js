@@ -8,6 +8,7 @@ const surveySchema = new Schema({
     unique: true, 
     required: true
   },
+  version: String, //employee survey or employers one? which organization?
   narrative: String,
   questions: [
     {
