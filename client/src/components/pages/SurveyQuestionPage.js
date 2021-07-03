@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import SurveyQuestion from "../SurveyQuestion";
+import Progress from '../Progress'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +20,14 @@ const SurveyQuestionPage = (props) => {
   const classes = useStyles();
   const [questionNumber, setQuestionNumber] = useState(1);
   const [qValuesArray, setQValuesArray] = useState([]);
+  const [progressBarDone, setProgressBarDone]=useState(0)
 
   const goToNextQuestion = () => {
     let counter = questionNumber + 1;
     setQuestionNumber(counter);
+
+    let fullProgress = Math.round(((counter / 7) * 100)) //7 should be question array length
+    setProgressBarDone(fullProgress)
 
     let newArr = [...qValuesArray];
     newArr.push(props.matrixOneValues);
@@ -39,7 +44,8 @@ const SurveyQuestionPage = (props) => {
   };
 
   return (
-    <div>
+    <div className='survey-page'>
+      <Progress done={progressBarDone}/>
       <Paper className={classes.root} elevation={4}>
         <SurveyQuestion questionNumber={questionNumber} />
         {questionNumber === 7 ? (
