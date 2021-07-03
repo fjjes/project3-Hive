@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing.unit * 3,
     paddingRight: 16,
     paddingLeft: 16,
+    width:'60vw'
   },
+
 }));
 
 const SurveyQuestionPage = (props) => {
@@ -27,6 +29,11 @@ const SurveyQuestionPage = (props) => {
     setQValuesArray(newArr);
   };
 
+  const goBackAQuestion = ()=> {
+    let counter=questionNumber -1
+    setQuestionNumber(counter)
+  }
+
   const handleSubmit = () => {
     console.log(qValuesArray);
   };
@@ -37,17 +44,19 @@ const SurveyQuestionPage = (props) => {
         <SurveyQuestion questionNumber={questionNumber} />
         {questionNumber === 7 ? (
           <div>
-            <button>Back</button>
+            <button onClick={goBackAQuestion}>Back</button>
             <button onClick={handleSubmit} type="submit">
               Submit
             </button>
           </div>
-        ) : (
+        ) : ( questionNumber === 1? (
+            <div><button onClick={goToNextQuestion}>Next</button></div>
+        ):(
           <div>
-            <button>Back</button>
+            <button onClick={goBackAQuestion}>Back</button>
             <button onClick={goToNextQuestion}>Next</button>
           </div>
-        )}
+        ))}
       </Paper>
     </div>
   );

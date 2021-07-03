@@ -12,7 +12,7 @@ const SurveyQuestion = ({questionNumber}) => {
     const [currentQuestion, setCurrentQuestion]= useState()
     const [matrixOneValues, setMatrixOneValues]=useState([])
     const [matrixTwoValues, setMatrixTwoValues]=useState([])
-    // const [questionAnswerArray, setQuestionAnswerArray]=useState([])
+    //const [questionArray, setQuestionArray]=useState([])
 
     useEffect(()=>{
         const pickQuestion =()=>{
@@ -53,6 +53,9 @@ const SurveyQuestion = ({questionNumber}) => {
         pickQuestion()
     },[questionNumber, matrixOneValues, matrixTwoValues])
     
+
+        
+
 
     return (
         <div className="survey-question">
