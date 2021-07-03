@@ -112,7 +112,7 @@ h1 {
 
 .progress-done {
 	background: linear-gradient(to left, #0B5D7B, #37B7A7);
-	box-shadow: 0 3px 3px -5px #37B7A7, 0 2px 5px #D4A466;
+	/* box-shadow: 0 3px 3px -5px #37B7A7, 0 2px 5px #D4A466; */
 	border-radius: 20px;
 	color: #D4A466;
   font-size: larger;
