@@ -87,12 +87,12 @@ function Checkboxes({ questionNumber }) {
             onChange={(e) => setComment(e.target.value)}
           />
         </div>
-        <div className="button-submit">
-          <button onClick={handleSubmit} type="submit">
-            Submit
-          </button>
-        </div>
       </form>
+      <div className="button-submit">
+        <button onClick={handleSubmit} type="submit">
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
