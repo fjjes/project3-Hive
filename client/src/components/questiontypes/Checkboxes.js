@@ -66,11 +66,11 @@ function Checkboxes({ questionNumber }) {
                 checked={option.checked}
                 onChange={handleChange}
                 name="option"
-                id="option"
+                id={option.value}
                 value={option.value}
               />
               <label
-                htmlFor="option"
+                htmlFor={option.value}
                 key={option.value}
               >
                 {option.value}
@@ -87,12 +87,12 @@ function Checkboxes({ questionNumber }) {
             onChange={(e) => setComment(e.target.value)}
           />
         </div>
-        <div className="button-submit">
-          <button onClick={handleSubmit} type="submit">
-            Submit
-          </button>
-        </div>
       </form>
+      <div className="button-submit">
+        <button onClick={handleSubmit} type="submit">
+          Submit
+        </button>
+      </div>
     </div>
   );
 }

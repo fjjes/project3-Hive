@@ -33,12 +33,12 @@ import React, { useState } from 'react';
           {texts.map((option,index) => {
            return(<div key={index}> 
               <input type="radio"
-                  id="radio"
+                  id={option}
                   onChange={handleChange}
                   name="option-group"
                   value={option}
                   color='primary'/>
-                  <label htmlFor ="radio">
+                  <label htmlFor={option}>
               {option}
               </label>
                   </div>)
