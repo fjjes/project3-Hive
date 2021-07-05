@@ -2,13 +2,14 @@ require('./db')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const surveySchema = new Schema({
+const surveySchema = new Schema({ //unique link need to be added?
   surveyNumber: {
     type: Number, 
     unique: true, 
     required: true
   },
-  version: String, //employee survey or employers one? which organization?
+  company:String,
+  version: String, //employee or executive???
   narrative: String,
   questions: [
     {
