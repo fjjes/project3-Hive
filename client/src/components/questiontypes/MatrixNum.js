@@ -11,7 +11,7 @@ const MatrixNum = (props) => {
     let newValues = [...values];
     newValues[i].value = e.target.value;
     setValues(newValues);
-    props.onChangedValues(newValues)
+    // props.onChangedValues(newValues)
   };
 
   const handleSubmit = () => {

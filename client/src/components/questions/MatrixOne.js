@@ -1,6 +1,6 @@
 import Matrix from '../questiontypes/Matrix'
 
-const MatrixOne = ({questionNumber, onChangedValues}) => {
+const MatrixOne = ({questionNumber}) => {
     return (
         <div>
             <Matrix
@@ -17,7 +17,7 @@ const MatrixOne = ({questionNumber, onChangedValues}) => {
                 {text: "Ability to easily switch between face-to-face work and work at home"},
                 {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"}
                 ]}
-                onChangedValues={onChangedValues}   //!!!!!!!!!!!!!!!!!!
+                // onChangedValues={onChangedValues}   //!!!!!!!!!!!!!!!!!!
             />
         </div>
     );

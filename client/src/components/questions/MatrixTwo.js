@@ -1,6 +1,6 @@
 import MatrixNum from '../questiontypes/MatrixNum'
 
-const MatrixTwo = ({questionNumber, onChangedValues}) => {
+const MatrixTwo = ({questionNumber}) => {
     return (
         <div>
             <MatrixNum 
@@ -13,7 +13,7 @@ const MatrixTwo = ({questionNumber, onChangedValues}) => {
                     {text: "text 4"},
                     {text: "text 5"}
                 ]}
-                onChangedValues={onChangedValues}
+                // onChangedValues={onChangedValues}
             />
         </div>
     );
