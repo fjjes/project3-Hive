@@ -19,7 +19,6 @@ const surveySchema = new Schema({ //unique link need to be added?
       answerOptions: []
     }
   ],
-  commentQuestion: String,
 })
 
 module.exports = mongoose.model('Survey', surveySchema, 'survey');
