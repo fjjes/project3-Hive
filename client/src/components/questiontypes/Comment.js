@@ -4,10 +4,10 @@ import React, { useState } from "react";
 
 
 
-function Comment({questionNumber}) {
+function Comment({questionNumber, question}) {
   const [comment, setComment] = useState("");
 
-  let question = 'If you wish to add additional comments, you can enter them below:'
+  // let question = 'If you wish to add additional comments, you can enter them below:'
 
   const handleSubmit=()=>{
     console.log(comment)

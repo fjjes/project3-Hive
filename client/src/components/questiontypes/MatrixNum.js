@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import '../Form.css'
 
-const Matrix = (props) => {
+const MatrixNum = (props) => {
   const [values, setValues]=useState(props.texts)
 
-  let columns=[
-    "Very Satisfied",
-    "Satisfied",
-    "Neither satisfied nor dissatisfied",
-    "Dissatisfied",
-    "Very dissatisfied"
-    ]
+  let columns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
 
   const handleChange = (e, i) => {
     let newValues = [...values];
     newValues[i].value = e.target.value;
     setValues(newValues);
-    //props.onChangedValues(newValues)
+    props.onChangedValues(newValues)
   };
 
   const handleSubmit = () => {
@@ -64,4 +59,4 @@ const Matrix = (props) => {
   );
 };
 
-export default Matrix;
+export default MatrixNum;

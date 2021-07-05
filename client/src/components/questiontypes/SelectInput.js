@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
 import '../Form.css'
 
-let texts = [
-        {text:'Rethinking workspaces in the company', value:''},
-        {text:'Review the organization of meetings Rethinking moments', value:''},
-        {text:'Spaces of conviviality', value:''},
-        {text:'Do not change anything', value:''},
-        {text:'Other', value:''}
-]
-
-let question = 'In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:'
-
-
 const SelectInput = (props) => {
-    const [values, setValues]=useState(texts)
+    const [values, setValues]=useState(props.texts)
    
     let selectArray = [];
     let num= 1
@@ -35,7 +24,7 @@ const handleChange = (e,i)=>{
 
     return (
         <div className="select question-component">  
-            <p className="question-intro">Q{props.questionNumber}.</p><span><p className="question-intro">{question}</p></span>
+            <p className="question-intro">Q{props.questionNumber}.</p><span><p className="question-intro">{props.question}</p></span>
                 {values.map((row, i)=>{
                     return(<ul key={i}>
                             <li style={{listStyleType:"none", textAlign:"left"}} >

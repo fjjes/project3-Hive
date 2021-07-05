@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import SurveyQuestion from "../SurveyQuestion";
@@ -16,22 +16,33 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const SurveyQuestionPage = (props) => {
+const SurveyQuestionPage = () => {
   const classes = useStyles();
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [qValuesArray, setQValuesArray] = useState([]);
+  const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0)
+
+  useEffect(()=>{
+    const getSurveyQuestions = async () =>{   
+      let response = await fetch('/api/survey')  //should be get by id   
+      let data = await response.json();
+      console.log('retrieved data:', data)
+      setQuestionArray(data[0].questions)
+      console.log('Survey questions:', data[0].questions)    
+  }
+  getSurveyQuestions()
+  },[])
 
   const goToNextQuestion = () => {
     let counter = questionNumber + 1;
     setQuestionNumber(counter);
 
-    let fullProgress = Math.round(((counter / 7) * 100)) //7 should be question array length
+    let fullProgress = Math.round(((counter / (7)) * 100)) //7 should be questionArray length
     setProgressBarDone(fullProgress)
 
-    let newArr = [...qValuesArray];
-    newArr.push(props.matrixOneValues);
-    setQValuesArray(newArr);
+    // let newArr = [...qValuesArray];
+    // newArr.push(props.matrixOneValues);
+    // setQValuesArray(newArr);
   };
 
   const goBackAQuestion = ()=> {
@@ -40,14 +51,16 @@ const SurveyQuestionPage = (props) => {
   }
 
   const handleSubmit = () => {
-    console.log(qValuesArray);
+    console.log(questionArray);
   };
+
 
   return (
     <div className='survey-page'>
       <Progress done={progressBarDone}/>
       <Paper className={classes.root} elevation={4}>
-        <SurveyQuestion questionNumber={questionNumber} />
+        {/* <SurveyQuestion questionNumber={questionNumber} /> */}
+        <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
         {questionNumber === 7 ? (
           <div>
             <button onClick={goBackAQuestion}>Back</button>
