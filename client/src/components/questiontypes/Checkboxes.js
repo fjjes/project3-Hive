@@ -21,7 +21,7 @@ function Checkboxes({ questionNumber }) {
   let checkedArray = [];
 
   const handleChange = (event) => {
-    console.log(event.target.name, event.target.checked, event.target.value);
+    // console.log(event.target.name, event.target.checked, event.target.value);
     let numberCount = 0;
     const newOptions = [...options];
     for (let option of newOptions) {
@@ -44,7 +44,7 @@ function Checkboxes({ questionNumber }) {
       setDisabled(false);
       setError(false);
     }
-    console.log("Array of selected checkboxes: ", checkedArray);
+    // console.log("Array of selected checkboxes: ", checkedArray);
   };
 
   const handleSubmit = () => {
