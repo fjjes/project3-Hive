@@ -82,14 +82,46 @@ body {
   height: 100vh;
   place-items: center;
 }
+/* a {
+  width: 180px;
+  height: 70px;
+  color: white;
+  text-transform: uppercase;
+  transition: 0.5s;
+  font-size: 2em;
+  line-height: 60px;
+  text-decoration: none;
+  background-color: #35c0c2;
+  transition: 0.5s;
+}  */
 
 .start-button {
   width: 165px;
-  height: 70px;
+  height: 72px;
   margin-left: 13px;
   font-family: "Poppins", sans-serif;
   font-size: 2.5em;
   background-color: #35c0c2;
   border: solid white;
   color: white;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+
+.start-button:hover {
+  background: #f59645 url(./images/pixel.png);
+  background-color: #f59645;
+  transition-delay: 0.3s;
+  background-size: 190px;
+  animation: animate 0.8s steps(10) forwards;
+  border: none;
+}
+
+@keyframes animate {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: -475px; /* -448 is good */
+  }
 }
