@@ -29,20 +29,21 @@ import React, { useState } from 'react';
 
   return (
     <div className="radio question-component">   
-        <p className="question-intro">Q{questionNumber}) {question}</p>
-          {texts.map((option,index) => {
-           return(<div key={index}> 
-              <input type="radio"
-                  id={option}
-                  onChange={handleChange}
-                  name="option-group"
-                  value={option}
-                  color='primary'/>
-                  <label htmlFor={option}>
-              {option}
-              </label>
-                  </div>)
-             })}
+        <p className="question-intro">Q{questionNumber}.</p><span>
+        <p className="question-intro">{question}</p></span>
+        {texts.map((option,index) => {
+          return(<div key={index}> 
+            <input type="radio"
+              id={option}
+              onChange={handleChange}
+              name="option-group"
+              value={option}
+              color='primary'/>
+              <label htmlFor={option}>
+            {option}
+            </label>
+              </div>)
+            })}
           <div>
             <button onClick={handleSubmit} type="submit">Submit</button>
           </div>

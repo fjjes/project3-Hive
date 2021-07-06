@@ -176,9 +176,8 @@ export default function InputSlider({ questionNumber, question, texts }) {
   return (
     <div className="question-component">
       <div className={classes.root}>
-        <p className="question-intro">
-          Q{questionNumber}){question}
-        </p>
+        <p className="question-intro">Q{questionNumber}.</p><span>
+        <p className="question-intro">{question}</p></span>
         <Grid container spacing={2}>
           <Grid item>
             <p>{texts[0]}</p>

@@ -17,7 +17,8 @@ function Comment({questionNumber, question}) {
 
   return (
     <div className="question-component">
-      <p className="question-intro">Q{questionNumber}) {question}</p>
+      <p className="question-intro">Q{questionNumber}.</p><span>
+      <p className="question-intro">{question}</p></span>
       <textarea
         rows="4"
         cols="50"

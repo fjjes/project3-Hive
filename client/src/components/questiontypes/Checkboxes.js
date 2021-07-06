@@ -54,9 +54,8 @@ function Checkboxes({ questionNumber }) {
   return (
     <div className="question-component">
       <form className="checkbox-form-control">
-        <p className="question-intro">
-          Q{questionNumber} {question}
-        </p>
+        <p className="question-intro">Q{questionNumber}.</p><span>
+        <p className="question-intro">{question}</p></span>
         <div className="checkbox-form-group">
           {options.map((option, index) => (
             <div key={index}>
