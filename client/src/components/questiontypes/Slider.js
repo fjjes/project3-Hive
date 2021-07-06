@@ -51,7 +51,7 @@ const useStyles5 = makeStyles({
   },
 });
 
-export default function InputSlider({ questionNumber }) {
+export default function InputSlider({ questionNumber, question, texts }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const classes2 = useStyles2();
@@ -168,22 +168,20 @@ export default function InputSlider({ questionNumber }) {
     },
   ];
 
+  // let question =
+  //   "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.";
+
+  // let texts = ["1", "2", "3", "4", "5"];
+
   return (
     <div className="question-component">
       <div className={classes.root}>
-        {/* <Typography id="input-slider" gutterBottom>
-          Normally, during a regular workweek, what percentage of your time do you
-          work in the following locations? The total of the answers must equal to
-          the sum of 100%
-        </Typography> */}
         <p className="question-intro">
-          Q{questionNumber}) Normally, during a regular workweek, what
-          percentage of your time do you work in the following locations? The
-          total of the answers must equal to the sum of 100%.
+          Q{questionNumber}){question}
         </p>
         <Grid container spacing={2}>
           <Grid item>
-            <p>1</p>
+            <p>{texts[0]}</p>
           </Grid>
           <Grid item xs>
             <Slider
@@ -214,7 +212,7 @@ export default function InputSlider({ questionNumber }) {
         </Grid>
         <Grid container spacing={2}>
           <Grid item>
-            <p>2</p>
+            <p>{texts[1]}</p>
           </Grid>
           <Grid item xs>
             <Slider
@@ -245,7 +243,7 @@ export default function InputSlider({ questionNumber }) {
         </Grid>
         <Grid container spacing={2}>
           <Grid item>
-            <p>3</p>
+            <p>{texts[2]}</p>
           </Grid>
           <Grid item xs>
             <Slider
@@ -276,7 +274,7 @@ export default function InputSlider({ questionNumber }) {
         </Grid>
         <Grid container spacing={2}>
           <Grid item>
-            <p>4</p>
+            <p>{texts[3]}</p>
           </Grid>
           <Grid item xs>
             <Slider
@@ -307,7 +305,7 @@ export default function InputSlider({ questionNumber }) {
         </Grid>
         <Grid container spacing={2}>
           <Grid item>
-            <p>5</p>
+            <p>{texts[4]}</p>
           </Grid>
           <Grid item xs>
             <Slider
