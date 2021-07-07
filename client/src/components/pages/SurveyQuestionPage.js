@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     paddingRight: 16,
     paddingLeft: 16,
     width:'60vw'
