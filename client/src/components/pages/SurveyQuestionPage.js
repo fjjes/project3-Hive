@@ -57,7 +57,7 @@ const SurveyQuestionPage = () => {
 
   return (
     <div className='survey-page'>
-      <Progress done={progressBarDone}/>
+      
       <Paper className={classes.root} elevation={4}>
         {/* <SurveyQuestion questionNumber={questionNumber} /> */}
         <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
@@ -77,6 +77,7 @@ const SurveyQuestionPage = () => {
           </div>
         ))}
       </Paper>
+      <Progress done={progressBarDone}/>
     </div>
   );
 };
