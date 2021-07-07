@@ -20,7 +20,7 @@ const SurveyQuestionPage = () => {
   const classes = useStyles();
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
-  const [progressBarDone, setProgressBarDone]=useState(0)
+  const [progressBarDone, setProgressBarDone]=useState(0);
 
   useEffect(()=>{
     const getSurveyQuestions = async () =>{   
@@ -28,7 +28,7 @@ const SurveyQuestionPage = () => {
       let data = await response.json();
       console.log('retrieved data:', data)
       setQuestionArray(data[0].questions)
-      console.log('Survey questions:', data[0].questions)    
+      console.log('Survey questions:', data[0].questions)
   }
   getSurveyQuestions()
   },[])

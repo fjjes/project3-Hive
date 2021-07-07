@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function Narrative() {
+
     return (
         <div className="question-component narrative-component">
 
@@ -15,4 +16,4 @@ function Narrative() {
     )
 }
 
-export default Narrative
+export default Narrative;
