@@ -23,7 +23,7 @@ function Checkboxes({ questionNumber, question, texts }) {
   // const question = "Select up to three options:";
 
   const [disabled, setDisabled] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [comment, setComment] = useState("");
 
   let checkedArray = [];
@@ -47,10 +47,10 @@ function Checkboxes({ questionNumber, question, texts }) {
     setOptions(newOptions);
     if (numberCount > 2) {
       setDisabled(true);
-      setError(true);
+      setError("Only select 3!"); // Store and pull the max number in from DB??
     } else {
       setDisabled(false);
-      setError(false);
+      setError("");
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
   };
@@ -79,6 +79,7 @@ function Checkboxes({ questionNumber, question, texts }) {
               <label
                 htmlFor={option.value}
                 key={option.value}
+                style={!option.checked && disabled ? {color: "grey"} : null}
               >
                 {option.value}
               </label>
@@ -92,7 +93,10 @@ function Checkboxes({ questionNumber, question, texts }) {
             name="option"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-          />
+            />
+        </div>
+        <div style={{color: "red"}}>
+          {error}
         </div>
       </form>
       <div className="button-submit">
