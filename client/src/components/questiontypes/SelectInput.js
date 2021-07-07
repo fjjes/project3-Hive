@@ -18,7 +18,6 @@ const handleChange = (e,i)=>{
     newValues[i].value= e.target.value
     setValues(newValues)
 
-    
     let updateAnswerArray = [...answerArray]
     updateAnswerArray.push(values)
     setAnswerArray(updateAnswerArray)
