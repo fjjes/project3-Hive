@@ -4,6 +4,11 @@ import Paper from "@material-ui/core/Paper";
 import SurveyQuestion from "../SurveyQuestion";
 import Progress from '../Progress'
 
+export const AnswerContext = React.createContext({
+  answerArray: [],
+  serAnswerArray: ()=> {}
+})
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 16,
@@ -21,6 +26,8 @@ const SurveyQuestionPage = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
+  const [answerArray, setAnswerArray]=useState([])
+  const value = {answerArray, setAnswerArray}
 
   useEffect(()=>{
     const getSurveyQuestions = async () =>{   
@@ -29,7 +36,7 @@ const SurveyQuestionPage = () => {
       console.log('retrieved data:', data)
       setQuestionArray(data[0].questions)
       console.log('Survey questions:', data[0].questions)
-  }
+    }
   getSurveyQuestions()
   },[])
 
@@ -37,12 +44,8 @@ const SurveyQuestionPage = () => {
     let counter = questionNumber + 1;
     setQuestionNumber(counter);
 
-    let fullProgress = Math.round(((counter / (7)) * 100)) //7 should be questionArray length
+    let fullProgress = Math.round(((counter / (questionArray.length)) * 100)) //7 should be questionArray length
     setProgressBarDone(fullProgress)
-
-    // let newArr = [...qValuesArray];
-    // newArr.push(props.matrixOneValues);
-    // setQValuesArray(newArr);
   };
 
   const goBackAQuestion = ()=> {
@@ -51,7 +54,7 @@ const SurveyQuestionPage = () => {
   }
 
   const handleSubmit = () => {
-    console.log(questionArray);
+    console.log("answerArray at submit:",answerArray);
   };
 
 
@@ -59,23 +62,26 @@ const SurveyQuestionPage = () => {
     <div className='survey-page'>
       
       <Paper className={classes.root} elevation={4}>
-        {/* <SurveyQuestion questionNumber={questionNumber} /> */}
-        <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
-        {questionNumber === 7 ? (
-          <div>
-            <button onClick={goBackAQuestion}>Back</button>
-            <button onClick={handleSubmit} type="submit">
-              Submit
-            </button>
-          </div>
-        ) : ( questionNumber === 1? (
-            <div><button onClick={goToNextQuestion}>Next</button></div>
-        ):(
-          <div>
-            <button onClick={goBackAQuestion}>Back</button>
-            <button onClick={goToNextQuestion}>Next</button>
-          </div>
-        ))}
+        
+        <AnswerContext.Provider value={value}>
+          <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
+        </AnswerContext.Provider>
+        
+        {questionNumber=== 1 && <button onClick={goToNextQuestion}>Next</button>}
+        {questionNumber === questionArray.length && 
+         <div>
+          <button onClick={goBackAQuestion}>Back</button>
+          <button onClick={handleSubmit} type="submit">Submit</button>
+       </div>
+        }
+        {questionNumber!== 1 && questionNumber!== questionArray.length &&
+        <div>
+          <button onClick={goBackAQuestion}>Back</button>
+          <button onClick={goToNextQuestion}>Next</button>
+      </div>
+        }
+
+       
       </Paper>
       <Progress done={progressBarDone}/>
     </div>
