@@ -14,65 +14,6 @@ html {
   text-align: center;
 }
 
-/*
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-button {
-  height: 2.4em;
-  width: 6em;
-  border-radius: 2px;
-  background-color: var(--background-color);
-  color: white;
-  border: 2px solid white;
-  padding: 0.5em 1em;
-  outline: none;
-  position: relative;
-  cursor: pointer;
-
-  --background-color: #f59645;
-  --accent-color: #35c0c2;
-}
-
-button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -1;
-  background-color: var(--accent-color);
-
-  transition: transform 300ms ease-in-out;
-  transform: scaleX(0);
-  transform-origin: left;
-}
-
-button:hover::before,
-button:focus::before {
-  transform: scaleX(1);
-}
-
-button {
-  transition: color 300ms ease-in-out;
-  z-index: 1;
-}
-
-button:hover,
-button:focus {
-  color: white;
-}
-
-input {
-  outline: none;
-  height: 2.56em;
-  width: 16em;
-} */
-
 body {
   font-size: 10px;
   font-family: Roboto, sans-serif;
@@ -82,18 +23,6 @@ body {
   height: 100vh;
   place-items: center;
 }
-/* a {
-  width: 180px;
-  height: 70px;
-  color: white;
-  text-transform: uppercase;
-  transition: 0.5s;
-  font-size: 2em;
-  line-height: 60px;
-  text-decoration: none;
-  background-color: #35c0c2;
-  transition: 0.5s;
-}  */
 
 .start-button {
   width: 165px;

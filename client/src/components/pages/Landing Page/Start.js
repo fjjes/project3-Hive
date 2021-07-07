@@ -10,7 +10,6 @@ export default function Start() {
         <button className="start-button" type="button">
           Enter
         </button>
-        {/* <a href="#">Enter</a> */}
       </Link>
     </div>
   );
