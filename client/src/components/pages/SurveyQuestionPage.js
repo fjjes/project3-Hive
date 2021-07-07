@@ -4,6 +4,11 @@ import Paper from "@material-ui/core/Paper";
 import SurveyQuestion from "../SurveyQuestion";
 import Progress from '../Progress'
 
+export const AnswerContext = React.createContext({
+  answerArray: [],
+  serAnswerArray: ()=> {}
+})
+
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 16,
@@ -21,6 +26,8 @@ const SurveyQuestionPage = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
+  const [answerArray, setAnswerArray]=useState([])
+  const value = {answerArray, setAnswerArray}
 
   useEffect(()=>{
     const getSurveyQuestions = async () =>{   
@@ -39,10 +46,6 @@ const SurveyQuestionPage = () => {
 
     let fullProgress = Math.round(((counter / (7)) * 100)) //7 should be questionArray length
     setProgressBarDone(fullProgress)
-
-    // let newArr = [...qValuesArray];
-    // newArr.push(props.matrixOneValues);
-    // setQValuesArray(newArr);
   };
 
   const goBackAQuestion = ()=> {
@@ -51,7 +54,7 @@ const SurveyQuestionPage = () => {
   }
 
   const handleSubmit = () => {
-    console.log(questionArray);
+    console.log("answerArray at submit:",answerArray);
   };
 
 
@@ -59,8 +62,11 @@ const SurveyQuestionPage = () => {
     <div className='survey-page'>
       <Progress done={progressBarDone}/>
       <Paper className={classes.root} elevation={4}>
-        {/* <SurveyQuestion questionNumber={questionNumber} /> */}
-        <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
+        
+        <AnswerContext.Provider value={value}>
+          <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
+        </AnswerContext.Provider>
+        
         {questionNumber === 7 ? (
           <div>
             <button onClick={goBackAQuestion}>Back</button>
