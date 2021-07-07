@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 
-function Checkboxes({ questionNumber }) {
-  const [options, setOptions] = useState([
-    { checked: false, value: "Option 1" },
-    { checked: false, value: "Option 2" },
-    { checked: false, value: "Option 3" },
-    { checked: false, value: "Option 4" },
-    { checked: false, value: "Option 5" },
-    { checked: false, value: "Option 6" },
-    { checked: false, value: "Option 7" },
-    { checked: false, value: "Option 8" },
-  ]);
+function Checkboxes({ questionNumber, question, texts }) {
 
-  const question = "Select up to three options:";
+  // console.log("typeof texts: ", typeof texts)
+  // console.log("texts: ", texts)
+  
+  // const [options, setOptions] = useState([{texts}]
+  const [options, setOptions] = useState(texts.map(option => ({value: option, checked: false})))
+  // console.log("options: ", options)
+  // [
+    // { checked: false, value: "Option 1" },
+    // { checked: false, value: "Option 2" },
+    // { checked: false, value: "Option 3" },
+    // { checked: false, value: "Option 4" },
+    // { checked: false, value: "Option 5" },
+    // { checked: false, value: "Option 6" },
+    // { checked: false, value: "Option 7" },
+    // { checked: false, value: "Option 8" },
+  // ]
+  // );
+
+  // const question = "Select up to three options:";
 
   const [disabled, setDisabled] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [comment, setComment] = useState("");
 
   let checkedArray = [];
@@ -39,10 +47,10 @@ function Checkboxes({ questionNumber }) {
     setOptions(newOptions);
     if (numberCount > 2) {
       setDisabled(true);
-      setError(true);
+      setError("Only select 3!"); // Store and pull the max number in from DB??
     } else {
       setDisabled(false);
-      setError(false);
+      setError("");
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
   };
@@ -54,9 +62,8 @@ function Checkboxes({ questionNumber }) {
   return (
     <div className="question-component">
       <form className="checkbox-form-control">
-        <p className="question-intro">
-          Q{questionNumber} {question}
-        </p>
+        <p className="question-intro">Q{questionNumber}.</p><span>
+        <p className="question-intro">{question}</p></span>
         <div className="checkbox-form-group">
           {options.map((option, index) => (
             <div key={index}>
@@ -72,6 +79,7 @@ function Checkboxes({ questionNumber }) {
               <label
                 htmlFor={option.value}
                 key={option.value}
+                style={!option.checked && disabled ? {color: "grey"} : null}
               >
                 {option.value}
               </label>
@@ -85,7 +93,10 @@ function Checkboxes({ questionNumber }) {
             name="option"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-          />
+            />
+        </div>
+        <div style={{color: "red"}}>
+          {error}
         </div>
       </form>
       <div className="button-submit">

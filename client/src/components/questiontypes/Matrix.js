@@ -25,37 +25,38 @@ const Matrix = (props) => {
 
   return (
     <div className="matrix question-component">
-        <p className="question-intro">Q{props.questionNumber}) {props.question}</p>
-        <table>
-          <tbody>
-           <tr>
-             <th></th>
-             {columns.map((cl, i)=> {
-               return(
-                 <th key={i}>
-                   <label>{cl}</label>
-                 </th>
-               )
-             })}
-           </tr>
-            {values.map((row, i)=> {
+      <p className="question-intro">Q{props.questionNumber}.</p><span>
+      <p className="question-intro">{props.question}</p></span>
+      <table>
+        <tbody>
+          <tr>
+            <th></th>
+            {columns.map((cl, i)=> {
               return(
-                <tr key={i}>
-                  <td  className='label-rows'>
-                    <label>{row.text}</label>
-                  </td>
-                  {columns.map((col, index)=>{
-                      return(
-                        <td key={index}>
-                          <input type='radio' name={row.text} value={col} onChange={(e) => handleChange(e, i)}/>
-                        </td>
-                      )
-                  })}
-                </tr>
+                <th key={i}>
+                  <label>{cl}</label>
+                </th>
               )
             })}
-          </tbody>
-        </table>
+          </tr>
+          {values.map((row, i)=> {
+            return(
+              <tr key={i}>
+                <td  className='label-rows'>
+                  <label>{row.text}</label>
+                </td>
+                {columns.map((col, index)=>{
+                    return(
+                      <td key={index}>
+                        <input type='radio' name={row.text} value={col} onChange={(e) => handleChange(e, i)}/>
+                      </td>
+                    )
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
         
       <div className="button-submit">
         <button onClick={handleSubmit} type="submit">Submit</button>

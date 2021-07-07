@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: theme.spacing.unit * 3,
+    marginTop: theme.spacing(3),
     paddingRight: 16,
     paddingLeft: 16,
     width:'60vw'
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0)
 
