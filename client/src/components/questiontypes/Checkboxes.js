@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 
-function Checkboxes({ questionNumber }) {
-  const [options, setOptions] = useState([
-    { checked: false, value: "Option 1" },
-    { checked: false, value: "Option 2" },
-    { checked: false, value: "Option 3" },
-    { checked: false, value: "Option 4" },
-    { checked: false, value: "Option 5" },
-    { checked: false, value: "Option 6" },
-    { checked: false, value: "Option 7" },
-    { checked: false, value: "Option 8" },
-  ]);
+function Checkboxes({ questionNumber, question, texts }) {
 
-  const question = "Select up to three options:";
+  // console.log("typeof texts: ", typeof texts)
+  // console.log("texts: ", texts)
+  
+  // const [options, setOptions] = useState([{texts}]
+  const [options, setOptions] = useState(texts.map(option => ({value: option, checked: false})))
+  // console.log("options: ", options)
+  // [
+    // { checked: false, value: "Option 1" },
+    // { checked: false, value: "Option 2" },
+    // { checked: false, value: "Option 3" },
+    // { checked: false, value: "Option 4" },
+    // { checked: false, value: "Option 5" },
+    // { checked: false, value: "Option 6" },
+    // { checked: false, value: "Option 7" },
+    // { checked: false, value: "Option 8" },
+  // ]
+  // );
+
+  // const question = "Select up to three options:";
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
