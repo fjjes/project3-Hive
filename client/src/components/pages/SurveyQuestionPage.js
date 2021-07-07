@@ -36,7 +36,7 @@ const SurveyQuestionPage = () => {
       console.log('retrieved data:', data)
       setQuestionArray(data[0].questions)
       console.log('Survey questions:', data[0].questions)
-  }
+    }
   getSurveyQuestions()
   },[])
 
@@ -44,7 +44,7 @@ const SurveyQuestionPage = () => {
     let counter = questionNumber + 1;
     setQuestionNumber(counter);
 
-    let fullProgress = Math.round(((counter / (7)) * 100)) //7 should be questionArray length
+    let fullProgress = Math.round(((counter / (questionArray.length)) * 100)) //7 should be questionArray length
     setProgressBarDone(fullProgress)
   };
 
@@ -67,7 +67,7 @@ const SurveyQuestionPage = () => {
           <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
         </AnswerContext.Provider>
         
-        {questionNumber === 7 ? (
+        {questionNumber === questionArray.length ? (
           <div>
             <button onClick={goBackAQuestion}>Back</button>
             <button onClick={handleSubmit} type="submit">
