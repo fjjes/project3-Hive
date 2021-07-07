@@ -5,6 +5,7 @@ import "../../../App.css";
 
 export default function Start() {
   const [narrative, setNarrative]=useState("");
+  const [company, setCompany]=useState("");
 
   useEffect(()=>{
     const getSurveyQuestions = async () =>{   
@@ -13,12 +14,14 @@ export default function Start() {
       console.log('retrieved data:', data) 
       console.log('narrative:', data[0].narrative) 
       setNarrative(data[0].narrative)
+      setCompany(data[0].company)
   }
   getSurveyQuestions()
   },[])
   return (
     <div className="start">
-      <p><h1>{narrative}</h1></p>
+      <h2>Hello {company} Team!</h2>
+      <p><h3>{narrative}</h3></p>
       <Link to="/survey">
         <button className="start-button" type="button">
           Enter
