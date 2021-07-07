@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 import '../Form.css'
 
@@ -13,16 +13,17 @@ const SelectInput = (props) => {
         //console.log(selectArray)
     }
    
-const handleChange = (e,i)=>{
-    let newValues = [...values]
-    newValues[i].value= e.target.value
-    setValues(newValues)
-
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray.push(values)
-    setAnswerArray(updateAnswerArray)
-    // console.log('answerArray:', answerArray)  
+    const handleChange = (e,i)=>{
+        let newValues = [...values]
+        newValues[i].value= e.target.value
+        setValues(newValues)
 }
+
+    useEffect(()=>{
+        let updateAnswerArray = [...answerArray]
+        updateAnswerArray.push(values)
+        setAnswerArray(updateAnswerArray)
+    },[props.questionNumber])
 
    const handleSubmit=()=>{
     console.log(values)

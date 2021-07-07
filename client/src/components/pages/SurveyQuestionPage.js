@@ -67,21 +67,21 @@ const SurveyQuestionPage = () => {
           <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
         </AnswerContext.Provider>
         
-        {questionNumber === questionArray.length ? (
-          <div>
-            <button onClick={goBackAQuestion}>Back</button>
-            <button onClick={handleSubmit} type="submit">
-              Submit
-            </button>
-          </div>
-        ) : ( questionNumber === 1? (
-            <div><button onClick={goToNextQuestion}>Next</button></div>
-        ):(
-          <div>
-            <button onClick={goBackAQuestion}>Back</button>
-            <button onClick={goToNextQuestion}>Next</button>
-          </div>
-        ))}
+        {questionNumber=== 1 && <button onClick={goToNextQuestion}>Next</button>}
+        {questionNumber === questionArray.length && 
+         <div>
+          <button onClick={goBackAQuestion}>Back</button>
+          <button onClick={handleSubmit} type="submit">Submit</button>
+       </div>
+        }
+        {questionNumber!== 1 && questionNumber!== questionArray.length &&
+        <div>
+          <button onClick={goBackAQuestion}>Back</button>
+          <button onClick={goToNextQuestion}>Next</button>
+      </div>
+        }
+
+       
       </Paper>
       <Progress done={progressBarDone}/>
     </div>
