@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0)
 
