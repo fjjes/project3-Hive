@@ -90,67 +90,67 @@ export default function InputSlider({ questionNumber, question, texts }) {
 
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue2(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue3(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue4(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue5(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleInputChange2 = (event) => {
     setValue2(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleInputChange3 = (event) => {
     setValue3(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleInputChange4 = (event) => {
     setValue4(event.target.value === "" ? "" : Number(event.target.value));
+  };
+
+  const handleInputChange5 = (event) => {
     setValue5(event.target.value === "" ? "" : Number(event.target.value));
   };
 
-  // const handleInputChange2 = (event) => {
-  //   setValue2(event.target.value === "" ? "" : Number(event.target.value));
+  const handleBlur = () => {
+    if (value < 0) {
+      setValue(0);
+    } else if (value > 100) {
+      setValue(100);
+    }
+    if (value2 < 0) {
+      setValue2(0);
+    } else if (value2 > 100) {
+      setValue2(100);
+    }
+  };
   // };
 
-  // const handleInputChange3 = (event) => {
-  //   setValue3(event.target.value === "" ? "" : Number(event.target.value));
-  // };
+  // const handleBlur2 = () => {
 
-  // const handleInputChange4 = (event) => {
-  //   setValue4(event.target.value === "" ? "" : Number(event.target.value));
-  // };
+  const handleBlur3 = () => {
+    if (value3 < 0) {
+      setValue3(0);
+    } else if (value3 > 100) {
+      setValue3(100);
+    }
+  };
 
-  // const handleInputChange5 = (event) => {
-  //   setValue5(event.target.value === "" ? "" : Number(event.target.value));
-  // };
+  const handleBlur4 = () => {
+    if (value4 < 0) {
+      setValue4(0);
+    } else if (value4 > 100) {
+      setValue4(100);
+    }
+  };
 
-  // const handleBlur = () => {
-  //   if (value < 0) {
-  //     setValue(0);
-  //   } else if (value > 100) {
-  //     setValue(100);
-  //   }
-  //   if (value2 < 0) {
-  //     setValue2(0);
-  //   } else if (value2 > 100) {
-  //     setValue2(100);
-  //   }
-  // };
-  // // };
-
-  // // const handleBlur2 = () => {
-
-  // const handleBlur3 = () => {
-  //   if (value3 < 0) {
-  //     setValue3(0);
-  //   } else if (value3 > 100) {
-  //     setValue3(100);
-  //   }
-  // };
-
-  // const handleBlur4 = () => {
-  //   if (value4 < 0) {
-  //     setValue4(0);
-  //   } else if (value4 > 100) {
-  //     setValue4(100);
-  //   }
-  // };
-
-  // const handleBlur5 = () => {
-  //   if (value5 < 0) {
-  //     setValue5(0);
-  //   } else if (value5 > 100) {
-  //     setValue5(100);
-  //   }
-  // };
+  const handleBlur5 = () => {
+    if (value5 < 0) {
+      setValue5(0);
+    } else if (value5 > 100) {
+      setValue5(100);
+    }
+  };
 
   const handleSubmit = () => {
     setValue(0);
@@ -204,7 +204,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
               value={value}
               margin="dense"
               onChange={handleInputChange}
-              // onBlur={handleBlur}
+              onBlur={handleBlur}
               inputProps={{
                 step: 10,
                 min: 0,
@@ -234,8 +234,8 @@ export default function InputSlider({ questionNumber, question, texts }) {
               className={classes2.input}
               value={value2}
               margin="dense"
-              onChange={handleInputChange}
-              // onBlur={handleBlur}
+              onChange={handleInputChange2}
+              onBlur={handleBlur}
               inputProps={{
                 step: 10,
                 min: 0,
@@ -265,8 +265,8 @@ export default function InputSlider({ questionNumber, question, texts }) {
               className={classes3.input}
               value={value3}
               margin="dense"
-              onChange={handleInputChange}
-              // onBlur={handleBlur3}
+              onChange={handleInputChange3}
+              onBlur={handleBlur3}
               inputProps={{
                 step: 10,
                 min: 0,
@@ -296,8 +296,8 @@ export default function InputSlider({ questionNumber, question, texts }) {
               className={classes4.input}
               value={value4}
               margin="dense"
-              onChange={handleInputChange}
-              // onBlur={handleBlur4}
+              onChange={handleInputChange4}
+              onBlur={handleBlur4}
               inputProps={{
                 step: 10,
                 min: 0,
@@ -327,8 +327,8 @@ export default function InputSlider({ questionNumber, question, texts }) {
               className={classes5.input}
               value={value5}
               margin="dense"
-              onChange={handleInputChange}
-              // onBlur={handleBlur5}
+              onChange={handleInputChange5}
+              onBlur={handleBlur5}
               inputProps={{
                 step: 10,
                 min: 0,
