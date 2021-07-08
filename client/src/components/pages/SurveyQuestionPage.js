@@ -23,11 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
+
+  const [department, setDepartment]=useState() //passed down from a survey question's answer???
+  const [surveyNumber, setSurveyNumber]=useState()
+  const [version, setVersion]=useState()
+  const [answerArray, setAnswerArray]=useState([])
+  const value = {answerArray, setAnswerArray}
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
-  const [answerArray, setAnswerArray]=useState([])
-  const value = {answerArray, setAnswerArray}
+  
 
   useEffect(()=>{
     const getSurveyQuestions = async () =>{   
@@ -36,6 +42,8 @@ const SurveyQuestionPage = () => {
       console.log('retrieved data:', data)
       setQuestionArray(data[0].questions)
       console.log('Survey questions:', data[0].questions)
+      setSurveyNumber(data[0].surveyNumber)
+      setVersion(data[0].version)
     }
   getSurveyQuestions()
   },[])
@@ -53,10 +61,30 @@ const SurveyQuestionPage = () => {
     setQuestionNumber(counter)
   }
 
-  const handleSubmit = () => {
-    console.log("answerArray at submit:",answerArray);
-  };
+  // const handleSubmit = () => {
+  //   console.log("answerArray at submit:",answerArray);
+  // };
 
+  const onCreateSurveyAnswersClicked= async ()=>{
+
+    let answerArrayToCreate ={
+      department,
+      surveyNumber,
+      version,
+      answerArray
+    }
+   
+      let createResponse = await fetch('api/answer',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(answerArrayToCreate)
+      })
+      console.log('creating an answerRecord', answerArrayToCreate)
+
+      if(createResponse.status === 200){
+        console.log('create response is successful')
+      }
+  }
 
   return (
     <div className='survey-page'>
@@ -71,17 +99,17 @@ const SurveyQuestionPage = () => {
         {questionNumber === questionArray.length && 
          <div>
           <button onClick={goBackAQuestion}>Back</button>
-          <button onClick={handleSubmit} type="submit">Submit</button>
-       </div>
+          {/* <button onClick={handleSubmit} type="submit">Submit</button> */}
+          <button onClick={onCreateSurveyAnswersClicked}>Submit</button>
+        </div>
         }
         {questionNumber!== 1 && questionNumber!== questionArray.length &&
         <div>
           <button onClick={goBackAQuestion}>Back</button>
           <button onClick={goToNextQuestion}>Next</button>
-      </div>
+        </div>
         }
 
-       
       </Paper>
       <Progress done={progressBarDone}/>
     </div>

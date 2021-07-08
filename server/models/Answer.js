@@ -1,15 +1,20 @@
 require('./db')
 const mongoose = require('mongoose');
+require('./Survey')
 const Schema = mongoose.Schema;
 
 const answerSchema = new Schema({
 department:{ 
     type:String,
-    required:true,
+    // required:true,
 },
-surveyNumber: Number,
-version: String, //everyone in various levels in the organization get the same survey? are they different? different
-answers:[
+survey:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Survey"
+},
+// surveyNumber: Number,
+// version: String, 
+answerArray:[
     {
         question: String,
         answer: [                //answer can be an array or a string !!!!!!!!!!!!!!
