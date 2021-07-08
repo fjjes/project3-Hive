@@ -93,6 +93,8 @@ const NewSurvey = () => {
 
       {componentList}
 
+      <hr style={{ margin: "20px" }} />
+
       <button type="submit" onClick={handleSubmit}>
         Save survey and receive link for forwarding
       </button>
@@ -100,7 +102,7 @@ const NewSurvey = () => {
         Survey link to send out (will need to make it actually access a
         survey..):
       </h3>
-      <a href={url}>{url}</a>
+      <a href={url} style={{paddingBottom: "20px"}}>{url}</a>
     </div>
   );
 };
