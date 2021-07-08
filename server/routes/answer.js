@@ -4,14 +4,14 @@ var router = express.Router();
 const Answer = require('../models/Answer');
 
 router.get('/', async (req, res) => {
-    let data = await Answer.find({});
+    let data = await Answer.find({}).populate('survey', {questions:1})
     console.info(`records retrieved from mongoose:`, data?.length)
     res.send(data);
   });
 
 router.get('/:id', async function(req, res) {
     try {
-        const data = await Answer.findOne({_id: req.params.id});
+        const data = await Answer.findOne({_id: req.params.id}).populate('survey', {questions:1});
         console.info(`Found one survey answer record:`, data)
         res.send(data);
     } catch (error) {

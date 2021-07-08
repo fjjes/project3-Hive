@@ -1,4 +1,4 @@
-import React,{ useEffect, useState }  from "react"
+import React from "react"
 import SelectInput from './questiontypes/SelectInput'
 import Slider from './questiontypes/Slider'
 import Comment from "./questiontypes/Comment";
@@ -32,41 +32,3 @@ export default SurveyQuestion;
 
 
 
-// useEffect(()=>{
-    //     const pickQuestion =()=>{
-    //         if(questionNumber===1){
-    //             setCurrentQuestion(<SelectOne 
-    //                                 questionNumber={1}
-    //                                 />)
-    //         }else if(questionNumber === 2){
-    //             setCurrentQuestion(<Slider 
-    //                                 questionNumber={2}
-    //                                 />)
-    //         }else if(questionNumber === 3){
-    //             setCurrentQuestion(<RadioButtons 
-    //                                 questionNumber={3}
-    //                                 />)
-    //         }else if(questionNumber === 4){
-    //             setCurrentQuestion(<Checkboxes 
-    //                                 questionNumber={4}
-    //                                 />)
-    //         }else if(questionNumber === 5){
-    //             setCurrentQuestion(<MatrixOne 
-    //                                 questionNumber={5}
-    //                                 onChangedValues={(values)=>setMatrixOneValues(values)}
-    //                                 matrixOneValues={matrixOneValues}
-    //                                 />)
-    //         }else if(questionNumber === 6){
-    //             setCurrentQuestion(<MatrixTwo 
-    //                                 questionNumber={6}
-    //                                 onChangedValues={(values)=>setMatrixTwoValues(values)}
-    //                                 matrixTwoValues={matrixTwoValues}
-    //                                 />)
-    //         }else if(questionNumber === 7){
-    //             setCurrentQuestion(<Comment 
-    //                                 questionNumber={7}
-    //                                 />)
-    //         }
-    //     }
-    //     pickQuestion()
-    // },[questionNumber, matrixOneValues, matrixTwoValues])
