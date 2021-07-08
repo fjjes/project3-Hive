@@ -1,31 +1,27 @@
-import React, { useState } from 'react';
-// import Radio from '@material-ui/core/Radio';
-// import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import FormControl from '@material-ui/core/FormControl';
+import React, { useState, useContext, useEffect } from 'react';
+import { AnswerContext } from '../pages/SurveyQuestionPage';
 
  function RadioButtons({questionNumber, question, texts}) {
+  const {answerArray, setAnswerArray} = useContext(AnswerContext)
   const [value, setValue] = useState('');
-
-  // let options = [
-  //   'Option1',
-  //   'Option2',
-  //   'Option3',
-  //   'Option4',
-  //   'Option5',
-  //   'Option6',
-  //   'Option7',
-  //   'Option8'
-  // ]
 
   const handleChange = (e) => {
     setValue(e.target.value);
+
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray.push(e.target.value)
+    setAnswerArray(updateAnswerArray)
   };
+
+  // useEffect(()=>{
+  //   let updateAnswerArray = [...answerArray]
+  //   updateAnswerArray.push(value)
+  //   setAnswerArray(updateAnswerArray)
+  // },[questionNumber])
+
   const handleSubmit = () => {
     console.log("value", value);
   }
-
-  // const question = "What is your department or team?"
 
   return (
     <div className="radio question-component">   
