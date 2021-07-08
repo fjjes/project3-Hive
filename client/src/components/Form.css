@@ -27,6 +27,14 @@ h1 {
   padding: 30px;
 }
 
+.slider p {
+  font-size: 1rem;
+}
+
+.side-text p {
+  padding-top: 10px;
+}
+
 /* .question-component {
   color: red;
   border-bottom: 3px solid #bce6f8;
@@ -47,11 +55,11 @@ h1 {
   font-weight: bold;
 }
 
-.question-component button:hover {
+.slider button:hover {
   background-color: #35c0c2;
 }
 
-.question-component button:disabled {
+.slider button:disabled {
   background-color: grey;
 }
 
