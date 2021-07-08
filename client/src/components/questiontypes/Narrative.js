@@ -1,10 +1,10 @@
 import React from 'react'
 
 function Narrative() {
+
     return (
         <div className="question-component narrative-component">
 
-            <h1>Hive Survey</h1>
             <p>Hello xxxx Team, </p>
             <p>This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. It has allowed us to observe, experiment and ask key questions about how we want to future proof our organization. Should we implement a hybrid working model, how do we manage this, and what are the potential impacts on working environment and employees. </p>
             <p>To define an efficient work organization that suits the vast majority as best as possible, we have chosen to probe the ground and imagine the rest together. Through this participatory approach, xxx wishes to allow you to express your needs and preferencess as your concerns.</p>
@@ -15,4 +15,4 @@ function Narrative() {
     )
 }
 
-export default Narrative
+export default Narrative;

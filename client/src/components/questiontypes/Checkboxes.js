@@ -1,26 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from 'react';
+import { AnswerContext } from '../pages/SurveyQuestionPage';
 
 function Checkboxes({ questionNumber, question, texts }) {
-
+  const {answerArray, setAnswerArray} = useContext(AnswerContext)
+  const [options, setOptions] = useState(texts.map(option => ({value: option, checked: false})))
   // console.log("typeof texts: ", typeof texts)
   // console.log("texts: ", texts)
   
-  // const [options, setOptions] = useState([{texts}]
-  const [options, setOptions] = useState(texts.map(option => ({value: option, checked: false})))
-  // console.log("options: ", options)
-  // [
-    // { checked: false, value: "Option 1" },
-    // { checked: false, value: "Option 2" },
-    // { checked: false, value: "Option 3" },
-    // { checked: false, value: "Option 4" },
-    // { checked: false, value: "Option 5" },
-    // { checked: false, value: "Option 6" },
-    // { checked: false, value: "Option 7" },
-    // { checked: false, value: "Option 8" },
-  // ]
-  // );
-
-  // const question = "Select up to three options:";
+  // const [options, setOptions] = useState([{texts}] 
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
@@ -54,6 +41,14 @@ function Checkboxes({ questionNumber, question, texts }) {
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
   };
+
+  useEffect(()=>{
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray.push(options)
+    setAnswerArray(updateAnswerArray)
+  },[questionNumber])
+
+ 
 
   const handleSubmit = () => {
     console.log(options, comment);

@@ -90,6 +90,10 @@ export default function InputSlider({ questionNumber, question, texts }) {
 
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue2(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue3(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue4(event.target.value === "" ? "" : Number(event.target.value));
+    // setValue5(event.target.value === "" ? "" : Number(event.target.value));
   };
 
   const handleInputChange2 = (event) => {
@@ -114,15 +118,15 @@ export default function InputSlider({ questionNumber, question, texts }) {
     } else if (value > 100) {
       setValue(100);
     }
-  };
-
-  const handleBlur2 = () => {
     if (value2 < 0) {
       setValue2(0);
     } else if (value2 > 100) {
       setValue2(100);
     }
   };
+  // };
+
+  // const handleBlur2 = () => {
 
   const handleBlur3 = () => {
     if (value3 < 0) {
@@ -174,176 +178,178 @@ export default function InputSlider({ questionNumber, question, texts }) {
   // let texts = ["1", "2", "3", "4", "5"];
 
   return (
-    <div className="question-component">
-      <div className={classes.root}>
-        <p className="question-intro">Q{questionNumber}.</p><span>
-        <p className="question-intro">{question}</p></span>
-        <Grid container spacing={2}>
-          <Grid item>
-            <p>{texts[0]}</p>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              value={typeof value === "number" ? value : 0}
-              onChange={handleSliderChange}
-              aria-labelledby="input-slider"
-              marks={marks}
-              step={20}
-              marks
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes.input}
-              value={value}
-              margin="dense"
-              onChange={handleInputChange}
-              onBlur={handleBlur}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item>
-            <p>{texts[1]}</p>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              value={typeof value2 === "number" ? value2 : 0}
-              onChange={handleSliderChange2}
-              aria-labelledby="input-slider"
-              marks={marks}
-              step={20}
-              marks
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes2.input}
-              value={value2}
-              margin="dense"
-              onChange={handleInputChange2}
-              onBlur={handleBlur2}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item>
-            <p>{texts[2]}</p>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              value={typeof value3 === "number" ? value3 : 0}
-              onChange={handleSliderChange3}
-              aria-labelledby="input-slider"
-              marks={marks}
-              step={20}
-              marks
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes3.input}
-              value={value3}
-              margin="dense"
-              onChange={handleInputChange3}
-              onBlur={handleBlur3}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item>
-            <p>{texts[3]}</p>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              value={typeof value4 === "number" ? value4 : 0}
-              onChange={handleSliderChange4}
-              aria-labelledby="input-slider"
-              marks={marks}
-              step={20}
-              marks
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes4.input}
-              value={value4}
-              margin="dense"
-              onChange={handleInputChange4}
-              onBlur={handleBlur4}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item>
-            <p>{texts[4]}</p>
-          </Grid>
-          <Grid item xs>
-            <Slider
-              value={typeof value5 === "number" ? value5 : 0}
-              onChange={handleSliderChange5}
-              aria-labelledby="input-slider"
-              marks={marks}
-              step={20}
-              marks
-            />
-          </Grid>
-          <Grid item>
-            <Input
-              className={classes5.input}
-              value={value5}
-              margin="dense"
-              onChange={handleInputChange5}
-              onBlur={handleBlur5}
-              inputProps={{
-                step: 10,
-                min: 0,
-                max: 100,
-                type: "number",
-                "aria-labelledby": "input-slider",
-              }}
-            />
-          </Grid>
-        </Grid>
-        <div className="button-submit">
-          <button
-            onClick={handleSubmit} //help
-            disabled={totalCount === 100 ? false : true}
-            type="submit"
-          >
-            Submit
-          </button>
+    <div className="slider">
+      {/* <div className={classes.root}> */}
+      <p className="question-intro">Q{questionNumber}.</p>
+      <span>
+        <p className="question-intro">{question}</p>
+      </span>
+      <Grid container spacing={2}>
+        <div className="side-text">
+          <p>{texts[0]}</p>
         </div>
+        <Grid item xs>
+          <Slider
+            value={typeof value === "number" ? value : 0}
+            onChange={handleSliderChange}
+            aria-labelledby="input-slider"
+            marks={marks}
+            step={20}
+            marks
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes.input}
+            value={value}
+            margin="dense"
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <div className="side-text">
+          <p>{texts[1]}</p>
+        </div>
+        <Grid item xs>
+          <Slider
+            value={typeof value2 === "number" ? value2 : 0}
+            onChange={handleSliderChange2}
+            aria-labelledby="input-slider"
+            marks={marks}
+            step={20}
+            marks
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes2.input}
+            value={value2}
+            margin="dense"
+            onChange={handleInputChange2}
+            onBlur={handleBlur}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <div className="side-text">
+          <p>{texts[2]}</p>
+        </div>
+        <Grid item xs>
+          <Slider
+            value={typeof value3 === "number" ? value3 : 0}
+            onChange={handleSliderChange3}
+            aria-labelledby="input-slider"
+            marks={marks}
+            step={20}
+            marks
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes3.input}
+            value={value3}
+            margin="dense"
+            onChange={handleInputChange3}
+            onBlur={handleBlur3}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <div className="side-text">
+          <p>{texts[3]}</p>
+        </div>
+        <Grid item xs>
+          <Slider
+            value={typeof value4 === "number" ? value4 : 0}
+            onChange={handleSliderChange4}
+            aria-labelledby="input-slider"
+            marks={marks}
+            step={20}
+            marks
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes4.input}
+            value={value4}
+            margin="dense"
+            onChange={handleInputChange4}
+            onBlur={handleBlur4}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <div className="side-text">
+          <p>{texts[4]}</p>
+        </div>
+        <Grid item xs>
+          <Slider
+            value={typeof value5 === "number" ? value5 : 0}
+            onChange={handleSliderChange5}
+            aria-labelledby="input-slider"
+            marks={marks}
+            step={20}
+            marks
+          />
+        </Grid>
+        <Grid item>
+          <Input
+            className={classes5.input}
+            value={value5}
+            margin="dense"
+            onChange={handleInputChange5}
+            onBlur={handleBlur5}
+            inputProps={{
+              step: 10,
+              min: 0,
+              max: 100,
+              type: "number",
+              "aria-labelledby": "input-slider",
+            }}
+          />
+        </Grid>
+      </Grid>
+      <div className="button-submit">
+        <button
+          onClick={handleSubmit}
+          disabled={totalCount === 100 ? false : true}
+          type="submit"
+        >
+          Submit
+        </button>
       </div>
     </div>
+    // </div>
   );
 }
 

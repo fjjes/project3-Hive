@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from 'react';
+import { AnswerContext } from '../pages/SurveyQuestionPage';
 import '../Form.css'
 
 const MatrixNum = (props) => {
+  const {answerArray, setAnswerArray} = useContext(AnswerContext)
   const [values, setValues]=useState(props.texts)
 
   let columns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
@@ -13,6 +15,12 @@ const MatrixNum = (props) => {
     setValues(newValues);
     // props.onChangedValues(newValues)
   };
+
+  useEffect(()=>{
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray.push(values)
+    setAnswerArray(updateAnswerArray)
+  },[props.questionNumber])
 
   const handleSubmit = () => {
     console.log(values);
