@@ -1,19 +1,30 @@
-import React, { useState } from "react";
-// import TextField from "@material-ui/core/TextField";
+import React, { useEffect,useState, useContext } from 'react';
+import { AnswerContext } from '../pages/SurveyQuestionPage';
 
-
-
-
-function Comment({questionNumber, question}) {
+const Comment =({questionNumber, question})=> {
+  const {answerArray, setAnswerArray} = useContext(AnswerContext)
   const [comment, setComment] = useState("");
 
-  // let question = 'If you wish to add additional comments, you can enter them below:'
+  const handleChange = (e)=>{
+      setComment(e.target.value)
+
+      let updateAnswerArray = [...answerArray]
+      updateAnswerArray.push(comment)
+      setAnswerArray(updateAnswerArray)
+  }
+
+  // useEffect(()=>{
+  //   let updateAnswerArray = [...answerArray]
+  //   updateAnswerArray.push(comment)
+  //   setAnswerArray(updateAnswerArray)
+  // },[questionNumber])
+
 
   const handleSubmit=()=>{
     console.log(comment)
-    setComment("") 
-    //props.onChangedValues(comment)
   }
+
+  
 
   return (
     <div className="question-component">
@@ -22,16 +33,10 @@ function Comment({questionNumber, question}) {
       <textarea
         rows="4"
         cols="50"
-      // <TextField
-        // id="outlined-basic"
         label="comment"
-        // variant="outlined"
-        // multiline
-        // fullWidth
         value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        onChange={handleChange}
         placeholder="Input"
-        // type="reset"
       />
       <div className="button-submit">
         <button onClick={handleSubmit} type="submit">
