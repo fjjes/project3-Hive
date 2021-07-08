@@ -15,6 +15,18 @@ h1 {
   text-align: center;
 }
 
+.admin-portal-button {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.admin-portal-button:hover {
+  background-color: #35c0c2;
+}
+
 .form-page {
   background-color: #bce6f8;
   color: hsl(240, 1%, 5%);

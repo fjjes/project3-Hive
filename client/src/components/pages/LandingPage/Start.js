@@ -12,6 +12,9 @@ export default function Start() {
         </button>
         {/* <a href="#">Enter</a> */}
       </Link>
+      <Link to="/admin">
+        <button className="admin-portal-button">Admin Portal</button>
+      </Link>
     </div>
   );
 }

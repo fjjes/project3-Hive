@@ -2,6 +2,7 @@ import "./App.css";
 //import Form from "./components/Form";
 import SurveyQuestionPage from "./components/pages/SurveyQuestionPage";
 import Start from "./components/pages/LandingPage/Start";
+import AdminPortal from "./components/pages/Admin/AdminPortal"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
           </Route> */}
           <Route path='/survey'>
             <SurveyQuestionPage />
+          </Route>
+          <Route path='/admin'>
+            <AdminPortal />
           </Route>
         </Switch>
       </Router>

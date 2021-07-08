@@ -1,0 +1,39 @@
+.admin-container input,
+.admin-container button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  display: flex;
+  width: 200px;
+}
+
+.admin-container {
+  background-color: #fff;
+}
+
+.main-admin-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.main-admin-buttons button {
+  justify-content: center;
+}
+
+.main-admin-buttons button:hover{
+  background-color: #35c0c2;
+}
+
+.search-input {
+  display: inline;
+}
+
+.admin-container-top {
+  background-color: lightgrey;
+  padding: 20px;
+}
+
+.admin-container-bottom {
+  padding: 20px;
+}
