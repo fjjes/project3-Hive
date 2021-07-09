@@ -3,28 +3,28 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
 
 const Comment =({questionNumber, question})=> {
   const {answerArray, setAnswerArray} = useContext(AnswerContext)
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
 
   const handleChange = (e)=>{
-      setComment(e.target.value)
+      setComment((e.target.value))
+      console.log('comment:',comment)
+      console.log('comment e:', e.target.value)
 
       let updateAnswerArray = [...answerArray]
-      updateAnswerArray.push(comment)
+      updateAnswerArray[updateAnswerArray.length-1]=e.target.value
       setAnswerArray(updateAnswerArray)
   }
 
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(comment)
-  //   setAnswerArray(updateAnswerArray)
-  // },[questionNumber])
+  useEffect(()=>{
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray.push(comment)
+    setAnswerArray(updateAnswerArray)
+  },[])
 
 
   const handleSubmit=()=>{
     console.log(comment)
   }
-
-  
 
   return (
     <div className="question-component">
@@ -35,6 +35,7 @@ const Comment =({questionNumber, question})=> {
         cols="50"
         label="comment"
         value={comment}
+        {...answerArray.length >=questionNumber ? comment===answerArray[questionNumber-1]: comment===""}
         onChange={handleChange}
         placeholder="Input"
       />
