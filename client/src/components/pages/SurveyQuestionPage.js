@@ -30,7 +30,7 @@ const SurveyQuestionPage = () => {
   const [answerArray, setAnswerArray]=useState([])
   const value = {answerArray, setAnswerArray}
 
-  const [questionNumber, setQuestionNumber] = useState(0);
+  const [index, setIndex] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
   
@@ -49,16 +49,16 @@ const SurveyQuestionPage = () => {
   },[])
 
   const goToNextQuestion = () => {
-    let counter = questionNumber + 1;
-    setQuestionNumber(counter);
+    let counter = index + 1;
+    setIndex(counter);
 
-    let fullProgress = Math.round(((counter / (questionArray.length)) * 100)) //7 should be questionArray length
+    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) 
     setProgressBarDone(fullProgress)
   };
 
   const goBackAQuestion = ()=> {
-    let counter=questionNumber -1
-    setQuestionNumber(counter)
+    let counter=index -1
+    setIndex(counter)
   }
 
   // const handleSubmit = () => {
@@ -92,18 +92,18 @@ const SurveyQuestionPage = () => {
       <Paper className={classes.root} elevation={4}>
         
         <AnswerContext.Provider value={value}>
-          <SurveyQuestion questionBlock={questionArray[questionNumber]}/>
+          <SurveyQuestion questionBlock={questionArray[index]}/>
         </AnswerContext.Provider>
         
-        {questionNumber=== 1 && <button onClick={goToNextQuestion}>Next</button>}
-        {questionNumber === questionArray.length && 
+        {index=== 0 && <button onClick={goToNextQuestion}>Next</button>}
+        {index === questionArray.length-1 && 
          <div>
           <button onClick={goBackAQuestion}>Back</button>
           {/* <button onClick={handleSubmit} type="submit">Submit</button> */}
           <button onClick={onCreateSurveyAnswersClicked}>Submit</button>
         </div>
         }
-        {questionNumber!== 1 && questionNumber!== questionArray.length &&
+        {index!== 0 && index!== questionArray.length-1 &&
         <div>
           <button onClick={goBackAQuestion}>Back</button>
           <button onClick={goToNextQuestion}>Next</button>
