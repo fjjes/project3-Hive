@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
 import Test from "../../questiontypes/Test";
+import Checkboxes from "../../questiontypes/Checkboxes"
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = () => {
@@ -16,17 +17,14 @@ const NewSurvey = () => {
 
   function addComponent(e) {
     console.log(e.target.id);
-    // setComponentList(componentList.concat(<Checkboxes key={componentList.length}
-    setComponentList(
-      componentList.concat(
-        <Test
-          key={componentList.length}
+    // setComponentList(componentList.concat(<Checkboxes key={componentList.length} /> ))}
+    setComponentList(componentList.concat(<Test key={componentList.length} /> ))}
           //  question={question} texts={texts} questionNumber={questionNumber}
-        />
-      )
-    );
+    //     />
+    //   )
+    // );
     // console.log(componentList)
-  }
+  // }
 
   async function handleSubmit() {
     console.log("DATA TO SAVE:");
