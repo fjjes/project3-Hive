@@ -6,25 +6,36 @@ const MatrixNum = (props) => {
   const {answerArray, setAnswerArray} = useContext(AnswerContext)
   const [values, setValues]=useState(props.texts)
 
-  let columns = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+  let columns = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 
   const handleChange = (e, i) => {
     let newValues = [...values];
     newValues[i].value = e.target.value;
     setValues(newValues);
-    // props.onChangedValues(newValues)
+  
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray[updateAnswerArray.length-1]=newValues
+    setAnswerArray(updateAnswerArray)
   };
 
   useEffect(()=>{
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray.push(values)
-    setAnswerArray(updateAnswerArray)
-  },[props.questionNumber])
+      if(answerArray.length < props.questionNumber){
+          let updateAnswerArray = [...answerArray]
+          updateAnswerArray.push(values)
+          setAnswerArray(updateAnswerArray)
+      }     
+  },[])
+  
+  // useEffect(()=>{
+  //   let updateAnswerArray = [...answerArray]
+  //   updateAnswerArray.push(values)
+  //   setAnswerArray(updateAnswerArray)
+  // },[props.questionNumber])
 
-  const handleSubmit = () => {
-    console.log(values);
-  };
+  // const handleSubmit = () => {
+  //   console.log(values);
+  // };
 
   return (
     <div className="matrix question-component">
@@ -42,7 +53,8 @@ const MatrixNum = (props) => {
               )
             })}
           </tr>
-          {values.map((row, i)=> {
+          {/* {values.map((row, i)=> { */}
+          {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{
             return(
               <tr key={i}>
                 <td  className='label-rows'>
@@ -51,19 +63,26 @@ const MatrixNum = (props) => {
                 {columns.map((col, index)=>{
                     return(
                       <td key={index}>
-                        <input type='radio' name={row.text} value={col} onChange={(e) => handleChange(e, i)}/>
+                        <input 
+                        type='radio' 
+                        name={row.text} 
+                        value={col} 
+                        onChange={(e) => handleChange(e, i)}
+                        checked={answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1][i].value=== col : false} 
+                        />
                       </td>
                     )
                 })}
               </tr>
             )
-          })}
+          }):null
+        }
         </tbody>
       </table>
         
-      <div className="button-submit">
+      {/* <div className="button-submit">
         <button onClick={handleSubmit} type="submit">Submit</button>
-      </div>
+      </div> */}
     </div>
   );
 };
