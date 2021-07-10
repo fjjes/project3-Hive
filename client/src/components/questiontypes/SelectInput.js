@@ -17,23 +17,31 @@ const SelectInput = (props) => {
         let newValues = [...values]
         newValues[i].value= e.target.value
         setValues(newValues)
-}
+
+        let updateAnswerArray = [...answerArray]
+        updateAnswerArray[updateAnswerArray.length-1]=newValues
+        setAnswerArray(updateAnswerArray)
+
+    }       
 
     useEffect(()=>{
-        let updateAnswerArray = [...answerArray]
-        updateAnswerArray.push(values)
-        setAnswerArray(updateAnswerArray)
-    },[props.questionNumber])
+        if(answerArray.length < props.questionNumber){
+            let updateAnswerArray = [...answerArray]
+            updateAnswerArray.push(values)
+            setAnswerArray(updateAnswerArray)
+        }     
+    },[])
 
-   const handleSubmit=()=>{
-    console.log(values)
-  }
+    const handleSubmit=()=>{
+        console.log(values)
+    }
 
     return (
         <div className="select question-component">  
             <p className="question-intro">Q{props.questionNumber}.</p><span>
             <p className="question-intro">{props.question}</p></span>
-            {values.map((row, i)=>{
+            {/* {values.map((row, i)=>{ */}
+            {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{
                 return(<ul key={i}>
                         <li style={{listStyleType:"none", textAlign:"left"}} >
                             {row.text}:&nbsp;
@@ -46,7 +54,8 @@ const SelectInput = (props) => {
                         </li>
                     </ul>
                         )
-                })}
+                }): null
+            }
         <div className="button-submit">
             <button onClick={handleSubmit} type="submit">Submit</button>
         </div>

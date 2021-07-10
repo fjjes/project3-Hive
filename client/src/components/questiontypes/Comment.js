@@ -7,8 +7,6 @@ const Comment =({questionNumber, question})=> {
 
   const handleChange = (e)=>{
       setComment((e.target.value))
-      console.log('comment:',comment)
-      console.log('comment e:', e.target.value)
 
       let updateAnswerArray = [...answerArray]
       updateAnswerArray[updateAnswerArray.length-1]=e.target.value

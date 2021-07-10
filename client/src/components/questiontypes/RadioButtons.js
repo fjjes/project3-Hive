@@ -9,15 +9,18 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
     setValue(e.target.value);
 
     let updateAnswerArray = [...answerArray]
-    updateAnswerArray.push(e.target.value)
+    updateAnswerArray[updateAnswerArray.length-1]=e.target.value
     setAnswerArray(updateAnswerArray)
   };
 
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(value)
-  //   setAnswerArray(updateAnswerArray)
-  // },[questionNumber])
+
+useEffect(()=>{
+  if(answerArray.length < questionNumber){
+      let updateAnswerArray = [...answerArray]
+      updateAnswerArray.push(value)
+      setAnswerArray(updateAnswerArray)
+  }     
+},[])
 
   const handleSubmit = () => {
     console.log("value", value);
@@ -34,6 +37,7 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
               onChange={handleChange}
               name="option-group"
               value={option}
+              checked={answerArray.length >= questionNumber ? answerArray[questionNumber-1]=== option : false} //
               color='primary'/>
               <label htmlFor={option}>
             {option}

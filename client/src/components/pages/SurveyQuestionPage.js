@@ -52,7 +52,7 @@ const SurveyQuestionPage = () => {
     let counter = index + 1;
     setIndex(counter);
 
-    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) 
+    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) //if answerArray's index was increased
     setProgressBarDone(fullProgress)
   };
 
