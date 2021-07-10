@@ -14,24 +14,24 @@ const MatrixNum = (props) => {
     newValues[i].value = e.target.value;
     setValues(newValues);
   
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray[updateAnswerArray.length-1]=newValues
-    setAnswerArray(updateAnswerArray)
+    // let updateAnswerArray = [...answerArray]
+    // updateAnswerArray[updateAnswerArray.length-1]=newValues
+    // setAnswerArray(updateAnswerArray)
   };
 
-  useEffect(()=>{
-      if(answerArray.length < props.questionNumber){
-          let updateAnswerArray = [...answerArray]
-          updateAnswerArray.push(values)
-          setAnswerArray(updateAnswerArray)
-      }     
-  },[])
-  
   // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(values)
-  //   setAnswerArray(updateAnswerArray)
-  // },[props.questionNumber])
+  //     if(answerArray.length < props.questionNumber){
+  //         let updateAnswerArray = [...answerArray]
+  //         updateAnswerArray.push(values)
+  //         setAnswerArray(updateAnswerArray)
+  //     }     
+  // },[])
+  
+  useEffect(()=>{
+    let updateAnswerArray = [...answerArray]
+    updateAnswerArray.push(values)
+    setAnswerArray(updateAnswerArray)
+  },[props.questionNumber])
 
   // const handleSubmit = () => {
   //   console.log(values);
@@ -53,8 +53,8 @@ const MatrixNum = (props) => {
               )
             })}
           </tr>
-          {/* {values.map((row, i)=> { */}
-          {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{
+          {values.map((row, i)=> {
+          {/* {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{ */}
             return(
               <tr key={i}>
                 <td  className='label-rows'>
@@ -68,14 +68,14 @@ const MatrixNum = (props) => {
                         name={row.text} 
                         value={col} 
                         onChange={(e) => handleChange(e, i)}
-                        checked={answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1][i].value=== col : false} 
+                        // checked={answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1][i].value=== col : false} 
                         />
                       </td>
                     )
                 })}
               </tr>
             )
-          }):null
+          })
         }
         </tbody>
       </table>
