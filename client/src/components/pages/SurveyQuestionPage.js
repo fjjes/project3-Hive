@@ -6,10 +6,10 @@ import Progress from '../Progress'
 
 export const AnswerContext = React.createContext({
   answerArray: [],
-  serAnswerArray: ()=> {}
+  setAnswerArray: ()=> {}
 })
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({ 
   root: {
     paddingTop: 16,
     paddingBottom: 16,
@@ -18,6 +18,13 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 16,
     width:'60vw'
   },
+  root2:{
+    paddingTop: 50,
+    paddingBottom: 50,
+    marginTop: theme.spacing(3),
+    paddingRight: 50,
+    paddingLeft: 50,
+  }
 
 }));
 
@@ -33,6 +40,7 @@ const SurveyQuestionPage = () => {
   const [index, setIndex] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
+  const [endSurvey, setEndSurvey]=useState(false)
   
 
   useEffect(()=>{
@@ -52,7 +60,7 @@ const SurveyQuestionPage = () => {
     let counter = index + 1;
     setIndex(counter);
 
-    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) //if answerArray's index was increased
+    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) //if answer selected only!!!!
     setProgressBarDone(fullProgress)
   };
 
@@ -67,7 +75,7 @@ const SurveyQuestionPage = () => {
 
   const onCreateSurveyAnswersClicked= async ()=>{
 
-    let answerArrayToCreate ={
+    let answerToCreate ={
       department,
       surveyNumber,
       version,
@@ -77,41 +85,50 @@ const SurveyQuestionPage = () => {
       let createResponse = await fetch('api/answer',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify(answerArrayToCreate)
+        body: JSON.stringify(answerToCreate)
       })
-      console.log('creating an answerRecord', answerArrayToCreate)
+      console.log('creating an answerRecord', answerToCreate)
 
       if(createResponse.status === 200){
         console.log('create response is successful')
+        
       }
+      setEndSurvey(true)
   }
 
   return (
-    <div className='survey-page'>
-      
-      <Paper className={classes.root} elevation={4}>
-        
-        <AnswerContext.Provider value={value}>
-          <SurveyQuestion questionBlock={questionArray[index]}/>
-        </AnswerContext.Provider>
-        
-        {index=== 0 && <button onClick={goToNextQuestion}>Next</button>}
-        {index === questionArray.length-1 && 
-         <div>
-          <button onClick={goBackAQuestion}>Back</button>
-          {/* <button onClick={handleSubmit} type="submit">Submit</button> */}
-          <button onClick={onCreateSurveyAnswersClicked}>Submit</button>
-        </div>
-        }
-        {index!== 0 && index!== questionArray.length-1 &&
-        <div>
-          <button onClick={goBackAQuestion}>Back</button>
-          <button onClick={goToNextQuestion}>Next</button>
-        </div>
-        }
-
-      </Paper>
-      <Progress done={progressBarDone}/>
+    <div className='survey-page'> 
+      {endSurvey=== false?
+      <div>
+        <Paper className={classes.root} elevation={4}>
+            <AnswerContext.Provider value={value}>
+              <SurveyQuestion questionBlock={questionArray[index]}/>
+            </AnswerContext.Provider>
+            <div className="btns">
+              {index=== 0 && <button className='col2 next-btn' onClick={goToNextQuestion}>Next</button>}
+              {index === questionArray.length-1 && 
+              <div className="row">
+                <button className='col1 back-btn' onClick={goBackAQuestion}>Back</button>
+                {/* <button onClick={handleSubmit} type="submit">Submit</button> */}
+                <button className='col2' onClick={onCreateSurveyAnswersClicked}>Submit</button>
+              </div>
+              }
+              {index!== 0 && index!== questionArray.length-1 &&
+              <div className="row">
+                <button className='col1 back-btn' onClick={goBackAQuestion}>Back</button>
+                <button className='col2 next-btn' onClick={goToNextQuestion}>Next</button>
+              </div>
+              }
+            </div>
+            </Paper>
+            <Progress done={progressBarDone}/>
+          </div>
+        :
+        <Paper className={classes.root2} elevation={4}>
+          <h2>Thank you for your participation!!</h2>
+       </Paper>
+      }
+     
     </div>
   );
 };
