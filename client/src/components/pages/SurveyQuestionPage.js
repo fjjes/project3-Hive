@@ -31,9 +31,10 @@ const useStyles = makeStyles((theme) => ({
 const SurveyQuestionPage = () => {
   const classes = useStyles();
 
-  const [department, setDepartment]=useState() //passed down from a survey question's answer???
-  const [surveyNumber, setSurveyNumber]=useState()
-  const [version, setVersion]=useState()
+  const [department, setDepartment]=useState('marketing') //passed down from a survey question's answer???
+  // const [surveyNumber, setSurveyNumber]=useState()
+  // const [version, setVersion]=useState()
+  const [survey, setSurvey]=useState()
   const [answerArray, setAnswerArray]=useState([])
   const value = {answerArray, setAnswerArray}
 
@@ -48,10 +49,11 @@ const SurveyQuestionPage = () => {
       let response = await fetch('/api/survey')  //should be get by id   
       let data = await response.json();
       console.log('retrieved data:', data)
+      setSurvey(data[0])
       setQuestionArray(data[0].questions)
       console.log('Survey questions:', data[0].questions)
-      setSurveyNumber(data[0].surveyNumber)
-      setVersion(data[0].version)
+      // setSurveyNumber(data[0].surveyNumber)
+      // setVersion(data[0].version)
     }
   getSurveyQuestions()
   },[])
@@ -77,8 +79,9 @@ const SurveyQuestionPage = () => {
 
     let answerToCreate ={
       department,
-      surveyNumber,
-      version,
+      survey,
+      // surveyNumber,
+      // version,
       answerArray
     }
    
@@ -91,7 +94,7 @@ const SurveyQuestionPage = () => {
 
       if(createResponse.status === 200){
         console.log('create response is successful')
-        
+       
       }
       setEndSurvey(true)
   }
