@@ -5,7 +5,7 @@ const Answer = require('../models/Answer');
 
 router.get('/', async (req, res) => {
     // let data = await Answer.find({}).populate('survey', {questions:1})
-    let data = await Answer.find({})
+    let data = await Answer.find({}).populate('survey')
     console.info(`records retrieved from mongoose:`, data?.length)
     res.send(data);
   });
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async function(req, res) {
     try {
         // const data = await Answer.findOne({_id: req.params.id}).populate('survey', {questions:1});
-        const data = await Answer.findOne({_id: req.params.id})
+        const data = await Answer.findOne({_id: req.params.id}).populate('survey')
         console.info(`Found one survey answer record:`, data)
         res.send(data);
     } catch (error) {
@@ -31,7 +31,12 @@ router.post('/', async (req, res) => {
     }
     catch (error) {
         console.log(error)
-        res.sendStatus(500)
+        if(error.code === 11000){
+            res.status(409).send(`Already completed submitted '${req.body.survey.version}' `);
+        }else{
+            res.sendStatus(500);
+        }
+        
     }
 })
 

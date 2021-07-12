@@ -3,13 +3,17 @@ const mongoose = require('mongoose');
 require('./Survey')
 const Schema = mongoose.Schema;
 
-const answerSchema = new Schema({
+const answerSchema = new Schema({ //postal code?
 department:{ 
     type:String,
     // required:true,
 },
-surveyNumber: Number,
-version: String, 
+// surveyNumber: Number,
+// version: String, 
+survey:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Survey"
+        },
 answerArray:[ //id, answerType(flag(), answer(yes), date/time
     // {
     //     question: String,
@@ -33,8 +37,8 @@ answerArray:[ //id, answerType(flag(), answer(yes), date/time
 //                 type: mongoose.Schema.Types.ObjectId,
 //                 ref: "Question"
 //             },
-//             answerType: String,
-//             answer:String
+//          // answerType: String,
+//             answer:String                //array
 //         }
 //     ],
 //     answeredDate: Date 
