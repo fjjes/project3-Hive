@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from 'react';
+// import { AnswerContext } from '../pages/SurveyQuestionPage';
 import { makeStyles } from "@material-ui/core/styles";
-import "../Form.css";
 import NewSlider from "./NewSlider";
+import "../Form.css";
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
+  // const {answerArray, setAnswerArray} = useContext(AnswerContext)
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState([]);
 
@@ -51,6 +53,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
 
       {texts.map((text, index) => (
         <NewSlider
+          key={index}
           getValue={values[index]}
           setValue={setValue(index)}
           title={text}

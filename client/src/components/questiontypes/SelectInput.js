@@ -5,18 +5,26 @@ import '../Form.css'
 const SelectInput = (props) => {
     const {answerArray, setAnswerArray} = useContext(AnswerContext)
     const [values, setValues]=useState(props.texts)
+    //const [selectArray, setSelectArray]=useState([])
    
     let selectArray = [];
+    //let selectArr=[]
     let num= 1
     for(let i=0; i<values.length; i++){
-        selectArray.push(num++)
-        //console.log(selectArray)
+        selectArray.push(num++) 
+        // selectArr.push(num++) 
+        // setSelectArray(selectArr)       
     }
    
     const handleChange = (e,i)=>{
         let newValues = [...values]
         newValues[i].value= e.target.value
         setValues(newValues)
+
+        // let arr = [...selectArray]
+        // const index = arr.indexOf(e.target.value)
+        // arr.splice(index, 1)
+        // setSelectArray(arr)
 
         let updateAnswerArray = [...answerArray]
         updateAnswerArray[updateAnswerArray.length-1]=newValues
@@ -32,9 +40,9 @@ const SelectInput = (props) => {
         }     
     },[])
 
-    const handleSubmit=()=>{
-        console.log(values)
-    }
+    // const handleSubmit=()=>{
+    //     console.log(values)
+    // }
 
     return (
         <div className="select question-component">  
@@ -53,12 +61,12 @@ const SelectInput = (props) => {
                                     </select>                         
                         </li>
                     </ul>
-                        )
+                )
                 }): null
             }
-        <div className="button-submit">
+        {/* <div className="button-submit">
             <button onClick={handleSubmit} type="submit">Submit</button>
-        </div>
+        </div> */}
         </div>
     );
 }

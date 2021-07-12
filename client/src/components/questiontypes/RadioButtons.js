@@ -22,9 +22,9 @@ useEffect(()=>{
   }     
 },[])
 
-  const handleSubmit = () => {
-    console.log("value", value);
-  }
+  // const handleSubmit = () => {
+  //   console.log("value", value);
+  // }
 
   return (
     <div className="radio question-component">   
@@ -44,9 +44,9 @@ useEffect(()=>{
             </label>
               </div>)
             })}
-          <div>
+          {/* <div>
             <button onClick={handleSubmit} type="submit">Submit</button>
-          </div>
+          </div> */}
     </div>
   );
 }

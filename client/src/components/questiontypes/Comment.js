@@ -20,9 +20,9 @@ const Comment =({questionNumber, question})=> {
   },[])
 
 
-  const handleSubmit=()=>{
-    console.log(comment)
-  }
+  // const handleSubmit=()=>{
+  //   console.log(comment)
+  // }
 
   return (
     <div className="question-component">
@@ -37,11 +37,11 @@ const Comment =({questionNumber, question})=> {
         onChange={handleChange}
         placeholder="Input"
       />
-      <div className="button-submit">
+      {/* <div className="button-submit">
         <button onClick={handleSubmit} type="submit">
           Submit
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
