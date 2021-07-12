@@ -99,7 +99,8 @@ h1 {
   padding-bottom: 10px;
 }
 
-.matrix th,td {
+.matrix th,
+td {
   padding-left: 5px;
   padding-right: 5px;
   text-align: center;
@@ -135,7 +136,13 @@ h1 {
   transition: 1s ease 0.3s;
 }
 
-.survey-page button{
+.survey-page {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.survey-page button {
   float: inline-end;
   display: flex;
   justify-content: center;
@@ -145,13 +152,13 @@ h1 {
   color: #fff;
   border-radius: 5px;
   font-weight: bold;
-  border:none;
+  border: none;
 }
 
-.survey-page .btns .row{
-  clear:both;
+.survey-page .btns .row {
+  clear: both;
 }
 
-.survey-page .btns .col2{
-  float:right;
+.survey-page .btns .col2 {
+  float: right;
 }

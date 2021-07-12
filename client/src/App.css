@@ -7,8 +7,40 @@ html {
   justify-content: center;
   align-items: center;
 }
-
 */
+html {
+  height: 0px;
+}
+
+.logo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+}
+
+.logo {
+  height: min-content;
+  width: 100%;
+}
+
+.logo-button {
+  margin: 0px 0px 0px 0px;
+  cursor: pointer;
+  width: 165px;
+  height: 72px;
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5em;
+  background-color: #35c0c2;
+  border: solid white;
+  color: white;
+  transition: 0.5s;
+  border-radius: 5px;
+  animation: fadeInDown;
+  animation-duration: 5s;
+  --animation-delay: 8s;
+}
+
 .start h2 {
   font-size: 4em;
   font-family: Poppins, sans-serif;
@@ -17,18 +49,18 @@ html {
 
 p {
   font-size: 10px;
-  font-family:"Poppins", sans-serif;
-  padding: 2rem ;
+  font-family: "Poppins", sans-serif;
+  padding: 2rem;
   text-align: justify;
 }
 
 body {
   font-size: 15px;
   font-family: Poppins, sans-serif;
-  background-color: rgb(135, 129, 129);
-  margin: 20px, 10px, 10px, 20px;
+  background-color: rgb(255, 255, 255);
+  /* margin: 20px, 10px, 10px, 20px; */
   display: grid;
-  height: 100vh;
+  /* height: 100vh; */
   place-items: center;
 }
 

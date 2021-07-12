@@ -46,13 +46,13 @@ export default function Start() {
       </CardActionArea>
       <Link to="/survey">
         <button className="start-button" type="button">
-          Enter
+          Start
         </button>
       </Link>
       <Link to="/admin">
         <button className="admin-portal-button">Admin Portal</button>
       </Link>
-    {/* </div> */}
+      {/* </div> */}
     </Card>
   );
 }
