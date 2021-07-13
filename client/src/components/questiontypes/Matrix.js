@@ -80,6 +80,7 @@ const Matrix = (props) => {
                 })}
               </tr>
             )
+              // })
           }): null
         }
         </tbody>

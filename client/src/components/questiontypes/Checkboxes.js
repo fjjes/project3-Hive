@@ -7,8 +7,6 @@ function Checkboxes({ questionNumber, question, texts }) {
   // console.log("typeof texts: ", typeof texts)
   // console.log("texts: ", texts)
   
-  // const [options, setOptions] = useState([{texts}] 
-
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
   const [comment, setComment] = useState("");
@@ -16,7 +14,6 @@ function Checkboxes({ questionNumber, question, texts }) {
   let checkedArray = [];
 
   const handleChange = (event) => {
-    // console.log(event.target.name, event.target.checked, event.target.value);
     let numberCount = 0;
     const newOptions = [...options];
     for (let option of newOptions) {
@@ -40,13 +37,24 @@ function Checkboxes({ questionNumber, question, texts }) {
       setError("");
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
+    let updateAnswerArray = [...answerArray]
+        updateAnswerArray[updateAnswerArray.length-1]=newOptions
+        setAnswerArray(updateAnswerArray)
   };
 
   useEffect(()=>{
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray.push(options)
-    setAnswerArray(updateAnswerArray)
-  },[questionNumber])
+    if(answerArray.length < questionNumber){
+        let updateAnswerArray = [...answerArray]
+        updateAnswerArray.push(options)
+        setAnswerArray(updateAnswerArray)
+    }     
+},[])
+
+  // useEffect(()=>{
+  //   let updateAnswerArray = [...answerArray]
+  //   updateAnswerArray.push(options)
+  //   setAnswerArray(updateAnswerArray)
+  // },[questionNumber])
 
  
 
@@ -60,8 +68,9 @@ function Checkboxes({ questionNumber, question, texts }) {
         <p className="question-intro">Q{questionNumber}.</p><span>
         <p className="question-intro">{question}</p></span>
         <div className="checkbox-form-group">
-          {options.map((option, index) => (
-            <div key={index}>
+          {/* {options.map((option, index) => ( */}
+            {answerArray.length >= questionNumber ? answerArray[questionNumber-1].map((option, index)=>{
+            return(<div key={index}>
               <input
                 type="checkbox"
                 disabled={disabled && !option.checked}
@@ -70,6 +79,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                 name="option"
                 id={option.value}
                 value={option.value}
+                {...answerArray.length >= questionNumber ? answerArray[questionNumber-1][index].checked===option.value : false} 
               />
               <label
                 htmlFor={option.value}
@@ -79,7 +89,8 @@ function Checkboxes({ questionNumber, question, texts }) {
                 {option.value}
               </label>
             </div>
-          ))}
+            )}):null
+        }
           <input
             type="text"
             disabled={!options[options.length - 1].checked}
@@ -88,6 +99,7 @@ function Checkboxes({ questionNumber, question, texts }) {
             name="option"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            {...answerArray.length >=questionNumber ? comment===answerArray[questionNumber-1]: comment===""}
             />
         </div>
         <div style={{color: "red"}}>
