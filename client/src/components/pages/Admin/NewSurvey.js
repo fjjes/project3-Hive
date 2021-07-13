@@ -2,10 +2,10 @@ import { useState } from "react";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
 import Test from "../../questiontypes/Test";
-import Checkboxes from "../../questiontypes/Checkboxes"
+import CheckboxesOne from "../../AdminQuestions/CheckboxesOne"
 import { v4 as uuidv4 } from "uuid";
 
-const NewSurvey = () => {
+const NewSurvey = (props) => {
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
@@ -17,14 +17,14 @@ const NewSurvey = () => {
 
   function addComponent(e) {
     console.log(e.target.id);
-    // setComponentList(componentList.concat(<Checkboxes key={componentList.length} /> ))}
-    setComponentList(componentList.concat(<Test key={componentList.length} /> ))}
-          //  question={question} texts={texts} questionNumber={questionNumber}
-    //     />
-    //   )
-    // );
+    // setComponentList(componentList.concat(<Test key={componentList.length} /> ))}
+    setComponentList(componentList.concat(<CheckboxesOne key={componentList.length}
+          question={props.question} texts={props.texts} questionNumber={props.questionNumber}
+        />
+      )
+    );
     // console.log(componentList)
-  // }
+  }
 
   async function handleSubmit() {
     console.log("DATA TO SAVE:");
