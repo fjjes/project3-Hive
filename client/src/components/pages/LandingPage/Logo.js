@@ -15,14 +15,14 @@ export default function Logo() {
             className="logo"
           ></Player>
           <button>Click to Flip</button>
-          {/* <Link to="/start">
-              <button className="logo-button" type="button">
-                ENTER
-              </button>
-            </Link> */}
         </div>
         <div className="theback">
           <p>hello</p>
+          <Link to="/survey">
+            <button className="logo-button" type="button">
+              ENTER
+            </button>
+          </Link>
         </div>
       </div>
     </div>
