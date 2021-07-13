@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import "../../../App.css";
 import { Link } from "react-router-dom";
 
 export default function Logo() {
+  const [narrative, setNarrative] = useState("");
+  const [company, setCompany] = useState("");
+
+  useEffect(() => {
+    const getSurveyQuestions = async () => {
+      let response = await fetch("/api/survey"); //should be get by id
+      let data = await response.json();
+      console.log("retrieved data:", data);
+      console.log("narrative:", data[0].narrative);
+      setNarrative(data[0].narrative);
+      setCompany(data[0].company);
+    };
+    getSurveyQuestions();
+  }, []);
+
   return (
     <div className="card">
       <div className="flip-card">
@@ -17,7 +32,8 @@ export default function Logo() {
           <button>Click to Flip</button>
         </div>
         <div className="theback">
-          <p>hello</p>
+          <h1>Hello {company} Team!</h1>
+          <p>{narrative}</p>
           <Link to="/survey">
             <button className="logo-button" type="button">
               ENTER
