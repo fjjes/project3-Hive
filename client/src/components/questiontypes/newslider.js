@@ -47,7 +47,7 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
             marks={marks}
-            step={20}
+            step={5}
             marks
           />
         </Grid>

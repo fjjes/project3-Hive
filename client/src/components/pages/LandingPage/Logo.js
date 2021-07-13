@@ -5,17 +5,26 @@ import { Link } from "react-router-dom";
 
 export default function Logo() {
   return (
-    <div className="logo-page">
-      <Player
-        autoplay
-        src="https://assets7.lottiefiles.com/packages/lf20_uzb1p5nd.json"
-        className="logo"
-      ></Player>
-      <Link to="/start">
-        <button className="logo-button" type="button">
-          Enter
-        </button>
-      </Link>
+    <div className="card">
+      <div className="flip-card">
+        <div class="thefront">
+          <Player
+            autoplay
+            loop
+            src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
+            className="logo"
+          ></Player>
+          <button>Click to Flip</button>
+          {/* <Link to="/start">
+              <button className="logo-button" type="button">
+                ENTER
+              </button>
+            </Link> */}
+        </div>
+        <div className="theback">
+          <p>hello</p>
+        </div>
+      </div>
     </div>
   );
 }
