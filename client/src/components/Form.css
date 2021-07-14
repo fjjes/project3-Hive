@@ -44,9 +44,19 @@ h1 {
 }
 
 .side-text p {
-  padding-top: 10px;
+  font-size: 1em;
+  padding: 0px 60px 0px 0px;
+  height: 10px;
 }
 
+.slider {
+  width: 800px;
+  padding-right: 20px;
+}
+
+.input {
+  padding-bottom: 40px;
+}
 /* .question-component {
   color: red;
   border-bottom: 3px solid #bce6f8;
