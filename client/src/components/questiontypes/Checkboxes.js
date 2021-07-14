@@ -30,6 +30,7 @@ function Checkboxes({ questionNumber, question, texts }) {
       if (!options[options.length - 1].checked) {
         setComment("");
       }
+      // if (option.value === "Other" && option.checked)
     }
     setOptions(newOptions);
     if (numberCount > 2) {
@@ -41,7 +42,7 @@ function Checkboxes({ questionNumber, question, texts }) {
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
     let updateAnswerArray = {...answerArray}
-    updateAnswerArray[questionNumber]=newOptions
+    updateAnswerArray[questionNumber] = {options: newOptions, other: other}
     setAnswerArray(updateAnswerArray)
   };
 
@@ -51,16 +52,15 @@ function Checkboxes({ questionNumber, question, texts }) {
   const handleOther = (e) => {
     setOther({value: e.target.value});
   };
-  console.log("*** other: ", other);
+  // console.log("*** other: ", other);
 
 
   useEffect(()=>{
-    if(answerArray.length < questionNumber){
-        let updateAnswerArray = {...answerArray}  
-       updateAnswerArray[questionNumber]=options
-        setAnswerArray(updateAnswerArray)
+    if(answerArray[questionNumber]){
+      setOptions(answerArray[questionNumber].options)
+      setOther(answerArray[questionNumber].other)
     }     
-  },[])
+  },[answerArray, questionNumber])
 
   // useEffect(()=>{
   //   let updateAnswerArray = [...answerArray]
@@ -69,9 +69,10 @@ function Checkboxes({ questionNumber, question, texts }) {
   // },[questionNumber])
 
   const handleSubmit = () => {
-    console.log("old options: ", options, other); // push "other" into "options" array
-    options.push(other)
-    console.log("updated options: ", options); // push "other" into "options" array
+    // console.log("old options: ", options, other); // push "other" into "options" array
+    options.push(other) // DO WE STILL WANT THIS LINE??
+    // console.log("updated options: ", options); // push "other" into "options" array
+    console.log("OPTIONS: ", options, "OTHER: ", other)
 
   };
 
@@ -94,7 +95,6 @@ function Checkboxes({ questionNumber, question, texts }) {
                       name="option"
                       id={option.value}
                       value={option.value}
-                      {...(answerArray[questionNumber]? answerArray[questionNumber][index].checked ===option.value: false)}
                     />
                     <label
                       htmlFor={option.value}
@@ -116,7 +116,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                       ) : (
                         option.value
                       )}
-                      {console.log("option.value: ", option.value)}
+                      {/* {console.log("option.value: ", option.value)} */}
                     </label>
                   </div>
                 );
