@@ -7,6 +7,7 @@ import RadioButtons from "./questiontypes/RadioButtons";
 import Checkboxes from "./questiontypes/Checkboxes";
 import Matrix from './questiontypes/Matrix'
 import MatrixNum from "./questiontypes/MatrixNum";
+import PostalCode from "./questiontypes/PostalCode";
 import "./Form.css"
 
 
@@ -21,7 +22,8 @@ const Form = () => {
         <Checkboxes questionNumber={4}/>
         <Matrix/>
         <MatrixNum/>
-        <Comment questionNumber={7}/>
+        <PostalCode questionNumber={7}/>
+        <Comment questionNumber={8}/>
       </div>
     </div>
   );
