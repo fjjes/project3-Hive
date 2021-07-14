@@ -42,9 +42,11 @@ export default function Logo({ flashcard }) {
             ENTER
           </button>
         </Link>
-        <button className="neu-button" type="button">
-          ENTER
-        </button>
+        <Link to="/survey">
+          <button className="neu-button" type="button">
+            ENTER
+          </button>
+        </Link>
       </div>
     </div>
   );
