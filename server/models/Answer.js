@@ -8,7 +8,7 @@ survey:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Survey"
         },
-answerArray:[ ],//id, answerType(flag(), answer(yes), date/time
+answerArray:{},//id, answerType(flag(), answer(yes), date/time
 answeredDate: Date 
 })
 

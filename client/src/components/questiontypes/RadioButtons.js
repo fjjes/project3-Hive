@@ -8,14 +8,10 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
   const handleChange = (e) => {
     setValue(e.target.value);
 
-    // let updateAnswerArray = [...answerArray]
-    // updateAnswerArray[updateAnswerArray.length-1]=e.target.value
-    // setAnswerArray(updateAnswerArray)
     let updateAnswerArray = {...answerArray}
     updateAnswerArray[questionNumber]=e.target.value
     setAnswerArray(updateAnswerArray)
   };
-
 
   useEffect(()=>{
     if(answerArray.length < questionNumber){

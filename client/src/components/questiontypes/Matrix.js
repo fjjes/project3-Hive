@@ -27,17 +27,10 @@ const Matrix = (props) => {
   useEffect(()=>{
       if(answerArray.length < props.questionNumber){
           let updateAnswerArray = {...answerArray}
-          // updateAnswerArray.push(values)
          updateAnswerArray[props.questionNumber]=values
           setAnswerArray(updateAnswerArray)
       }     
   },[])
-
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(values)
-  //   setAnswerArray(updateAnswerArray)
-  // },[props.questionNumber])
   
   // const handleSubmit = () => {
   //   console.log(values);
@@ -51,7 +44,7 @@ const Matrix = (props) => {
         <tbody>
           <tr>
             <th></th>
-            {columns.map((cl, i)=> { //map    very satisfied - satisfied
+            {columns.map((cl, i)=> { 
               return(
                 <th key={i}>
                   <label>{cl}</label>
@@ -60,7 +53,6 @@ const Matrix = (props) => {
             })}
           </tr>
           {values.map((row, i)=> {
-          // {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
             return(
               <tr key={i}>
                 <td  className='label-rows'>
@@ -74,14 +66,13 @@ const Matrix = (props) => {
                         name={row.text} 
                         value={col} 
                         onChange={(e) => handleChange(e, i)}
-                        checked={answerArray[props.questionNumber] ? answerArray[props.questionNumber][i].value=== col : false} //
+                        checked={answerArray[props.questionNumber] ? answerArray[props.questionNumber][i].value=== col : false} 
                         />
                       </td>
                     )
                 })}
               </tr>
             )
-              // })
           })
         }
         </tbody>

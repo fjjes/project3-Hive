@@ -26,12 +26,6 @@ const MatrixNum = (props) => {
         setAnswerArray(updateAnswerArray)
     }     
   },[])
-  
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(values)
-  //   setAnswerArray(updateAnswerArray)
-  // },[props.questionNumber])
 
   // const handleSubmit = () => {
   //   console.log(values);

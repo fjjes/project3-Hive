@@ -48,8 +48,8 @@ const SelectInput = (props) => {
         <div className="select question-component">  
             <p className="question-intro">Q{props.questionNumber}.</p><span>
             <p className="question-intro">{props.question}</p></span>
-            {/* {values.map((row, i)=>{ */}
-            {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
+            {values.map((row, i)=>{
+            // {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
                 return(<ul key={i}>
                         <li style={{listStyleType:"none", textAlign:"left"}} >
                             {row.text}:&nbsp;
@@ -62,7 +62,7 @@ const SelectInput = (props) => {
                         </li>
                     </ul>
                 )
-                }): null
+                })
             }
         {/* <div className="button-submit">
             <button onClick={handleSubmit} type="submit">Submit</button>
