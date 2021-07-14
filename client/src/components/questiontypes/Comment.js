@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 
 const Comment =({questionNumber, question})=> {
-  const {answerArray, setAnswerArray} = useContext(AnswerContext)
+  const {answers, setAnswers} = useContext(AnswerContext)
   // const [comment, setComment] = useState('');
 
   const handleChange = (e)=>{
       // setComment((e.target.value))
-    let updateAnswerArray = {...answerArray}
-    updateAnswerArray[questionNumber]=e.target.value
-    setAnswerArray(updateAnswerArray)
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=e.target.value
+    setAnswers(updateAnswers)
   }
 
 
@@ -21,7 +21,7 @@ const Comment =({questionNumber, question})=> {
         rows="4"
         cols="50"
         label="comment"
-        value={answerArray[questionNumber]}
+        value={answers[questionNumber]}
         onChange={handleChange}
         placeholder="Input"
       />
