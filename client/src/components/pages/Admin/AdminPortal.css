@@ -37,3 +37,16 @@
 .admin-container-bottom {
   padding: 20px;
 }
+
+.admin-question-component {
+  border: 1px solid grey;
+}
+
+.admin-question-component label,
+.admin-question-component input {
+  /* display: inline-block; */
+}
+
+.survey-selection-container {
+  display: flex;
+}
