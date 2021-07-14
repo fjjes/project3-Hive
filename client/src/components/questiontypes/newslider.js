@@ -54,7 +54,6 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
           <Input
             className={classes.input}
             value={getValue}
-            margin="dense"
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{
