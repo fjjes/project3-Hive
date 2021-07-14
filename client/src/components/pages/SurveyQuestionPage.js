@@ -5,8 +5,8 @@ import SurveyQuestion from "../SurveyQuestion";
 import Progress from '../Progress'
 
 export const AnswerContext = React.createContext({
-  answerArray: [],
-  setAnswerArray: ()=> {}
+  answers: {},
+  setAnswers: ()=> {}
 })
 
 const useStyles = makeStyles((theme) => ({ 
@@ -34,8 +34,8 @@ const SurveyQuestionPage = () => {
   // const [surveyNumber, setSurveyNumber]=useState()
   // const [version, setVersion]=useState()
   const [survey, setSurvey]=useState()
-  const [answerArray, setAnswerArray]=useState({})
-  const value = {answerArray, setAnswerArray}
+  const [answers, setAnswers]=useState({})
+  const value = {answers, setAnswers}
 
   const [index, setIndex] = useState(0);
   const [questionArray, setQuestionArray] = useState([]);
@@ -78,7 +78,7 @@ const SurveyQuestionPage = () => {
 let currentDate = new Date()
     let answerToCreate ={
       survey,
-      answerArray,
+      answers,
       answeredDate: currentDate
     }
    

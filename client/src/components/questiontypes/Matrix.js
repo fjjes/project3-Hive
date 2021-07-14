@@ -3,7 +3,7 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
 import '../Form.css'
 
 const Matrix = (props) => {
-  const {answerArray, setAnswerArray} = useContext(AnswerContext)
+  const {answers, setAnswers} = useContext(AnswerContext)
   const [values, setValues]=useState(props.texts)
 
   let columns=[
@@ -19,25 +19,18 @@ const Matrix = (props) => {
     newValues[i].value = e.target.value;
     setValues(newValues);
   
-    let updateAnswerArray = {...answerArray}
-    updateAnswerArray[props.questionNumber]=newValues
-    setAnswerArray(updateAnswerArray)
+    let updateAnswers = {...answers}
+    updateAnswers[props.questionNumber]=newValues
+    setAnswers(updateAnswers)
   };
 
   useEffect(()=>{
-      if(answerArray.length < props.questionNumber){
-          let updateAnswerArray = {...answerArray}
-          // updateAnswerArray.push(values)
-         updateAnswerArray[props.questionNumber]=values
-          setAnswerArray(updateAnswerArray)
+      if(answers.length < props.questionNumber){
+          let updateAnswers = {...answers}
+         updateAnswers[props.questionNumber]=values
+          setAnswers(updateAnswers)
       }     
   },[])
-
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(values)
-  //   setAnswerArray(updateAnswerArray)
-  // },[props.questionNumber])
   
   // const handleSubmit = () => {
   //   console.log(values);
@@ -51,7 +44,7 @@ const Matrix = (props) => {
         <tbody>
           <tr>
             <th></th>
-            {columns.map((cl, i)=> { //map    very satisfied - satisfied
+            {columns.map((cl, i)=> { 
               return(
                 <th key={i}>
                   <label>{cl}</label>
@@ -60,7 +53,6 @@ const Matrix = (props) => {
             })}
           </tr>
           {values.map((row, i)=> {
-          // {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
             return(
               <tr key={i}>
                 <td  className='label-rows'>
@@ -74,14 +66,13 @@ const Matrix = (props) => {
                         name={row.text} 
                         value={col} 
                         onChange={(e) => handleChange(e, i)}
-                        checked={answerArray[props.questionNumber] ? answerArray[props.questionNumber][i].value=== col : false} //
+                        checked={answers[props.questionNumber] ? answers[props.questionNumber][i].value=== col : false} 
                         />
                       </td>
                     )
                 })}
               </tr>
             )
-              // })
           })
         }
         </tbody>

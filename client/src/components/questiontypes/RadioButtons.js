@@ -2,26 +2,22 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 
  function RadioButtons({questionNumber, question, texts}) {
-  const {answerArray, setAnswerArray} = useContext(AnswerContext)
+  const {answers, setAnswers} = useContext(AnswerContext)
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
     setValue(e.target.value);
 
-    // let updateAnswerArray = [...answerArray]
-    // updateAnswerArray[updateAnswerArray.length-1]=e.target.value
-    // setAnswerArray(updateAnswerArray)
-    let updateAnswerArray = {...answerArray}
-    updateAnswerArray[questionNumber]=e.target.value
-    setAnswerArray(updateAnswerArray)
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=e.target.value
+    setAnswers(updateAnswers)
   };
 
-
   useEffect(()=>{
-    if(answerArray.length < questionNumber){
-        let updateAnswerArray = {...answerArray}  
-       updateAnswerArray[questionNumber]=value
-        setAnswerArray(updateAnswerArray)
+    if(answers.length < questionNumber){
+        let updateAnswers = {...answers}  
+       updateAnswers[questionNumber]=value
+        setAnswers(updateAnswers)
     }     
   },[])
 
@@ -40,7 +36,7 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
               onChange={handleChange}
               name="option-group"
               value={option}
-              checked={answerArray[questionNumber] ? answerArray[questionNumber]=== option: false} //
+              checked={answers[questionNumber] ? answers[questionNumber]=== option: false} //
               color='primary'/>
               <label htmlFor={option}>
             {option}
