@@ -9,7 +9,7 @@ function Checkboxes({ questionNumber, question, texts }) {
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
-  const [comment, setComment] = useState("");
+  // const [comment, setComment] = useState("");
   const [other, setOther] = useState({value: ""});
 
   let checkedArray = [];
