@@ -6,8 +6,6 @@ function Checkboxes({ questionNumber, question, texts }) {
   const [options, setOptions] = useState(
     texts.map((option) => ({ value: option, checked: false }))
   );
-  // console.log("typeof texts: ", typeof texts)
-  // console.log("texts: ", texts)
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
@@ -27,10 +25,9 @@ function Checkboxes({ questionNumber, question, texts }) {
         numberCount++;
         option.checked && checkedArray.push(option.value);
       }
-      if (!options[options.length - 1].checked) {
-        setComment("");
-      }
-      // if (option.value === "Other" && option.checked)
+      // if (!options[options.length - 1].checked) {
+      //   setComment("");
+      // }
     }
     setOptions(newOptions);
     if (numberCount > 2) {
@@ -40,20 +37,14 @@ function Checkboxes({ questionNumber, question, texts }) {
       setDisabled(false);
       setError("");
     }
-    // console.log("Array of selected checkboxes: ", checkedArray);
     let updateAnswerArray = {...answerArray}
     updateAnswerArray[questionNumber] = {options: newOptions, other: other}
     setAnswerArray(updateAnswerArray)
   };
 
-  // *** Set value of other:
-
-
   const handleOther = (e) => {
     setOther({value: e.target.value});
   };
-  // console.log("*** other: ", other);
-
 
   useEffect(()=>{
     if(answerArray[questionNumber]){
@@ -62,15 +53,9 @@ function Checkboxes({ questionNumber, question, texts }) {
     }     
   },[answerArray, questionNumber])
 
-  // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(options)
-  //   setAnswerArray(updateAnswerArray)
-  // },[questionNumber])
-
   const handleSubmit = () => {
     // console.log("old options: ", options, other); // push "other" into "options" array
-    options.push(other) // DO WE STILL WANT THIS LINE??
+    options.push(other) // *** DO WE STILL WANT THIS LINE?? ***
     // console.log("updated options: ", options); // push "other" into "options" array
     console.log("OPTIONS: ", options, "OTHER: ", other)
 
@@ -102,12 +87,9 @@ function Checkboxes({ questionNumber, question, texts }) {
                       style={
                         !option.checked && disabled ? { color: "grey" } : null
                       }
-                      // onChange={handleChange}
                     >
-                      {/* {option.value} */}
                       {options[options.length - 1].checked &&
                       index === options.length - 1 ? (
-                        // *** Save value of comment input field to option value:
                         <input
                           value={other.value}
                           onChange={handleOther}
@@ -116,22 +98,11 @@ function Checkboxes({ questionNumber, question, texts }) {
                       ) : (
                         option.value
                       )}
-                      {/* {console.log("option.value: ", option.value)} */}
                     </label>
                   </div>
                 );
               })
             }
-          {/* <input
-            type="text"
-            disabled={!options[options.length - 1].checked}
-            label={`Add details for option ${options.length}.`}
-            id="outlined-basic"
-            name="option"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            {...answerArray.length >=questionNumber ? comment===answerArray[questionNumber-1]: comment===""}
-            /> */}
         </div>
         <div style={{ color: "red" }}>{error}</div>
       </form>
