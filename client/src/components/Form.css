@@ -95,6 +95,10 @@ h1 {
   padding-bottom: 15px;
 }
 
+.checkbox-form-group input {
+  padding-right: 5px;
+}
+
 .select li {
   padding-bottom: 10px;
 }

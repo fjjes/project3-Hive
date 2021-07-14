@@ -12,7 +12,7 @@ function Checkboxes({ questionNumber, question, texts }) {
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
   const [comment, setComment] = useState("");
-  const [other, setOther] = useState("");
+  const [other, setOther] = useState({value: ""});
 
   let checkedArray = [];
 
@@ -46,15 +46,12 @@ function Checkboxes({ questionNumber, question, texts }) {
   };
 
   // *** Set value of other:
-  useEffect(() => {
-    setOther(other);
-    console.log("useEffect other", other);
-  }, [other]);
+
 
   const handleOther = (e) => {
-    setOther(e.target.value);
-    console.log("*** other: ", other);
+    setOther({value: e.target.value});
   };
+  console.log("*** other: ", other);
 
 
   useEffect(() => {
@@ -72,7 +69,10 @@ function Checkboxes({ questionNumber, question, texts }) {
   // },[questionNumber])
 
   const handleSubmit = () => {
-    console.log(options, comment);
+    console.log("old options: ", options, other); // push "other" into "options" array
+    options.push(other)
+    console.log("updated options: ", options); // push "other" into "options" array
+
   };
 
   return (
@@ -114,7 +114,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                       index === options.length - 1 ? (
                         // *** Save value of comment input field to option value:
                         <input
-                          value={other}
+                          value={other.value}
                           onChange={handleOther}
                           placeholder="Enter comment"
                         />
