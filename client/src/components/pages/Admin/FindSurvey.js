@@ -21,7 +21,7 @@ const FindSurvey = () => {
         TO BE COMPLETED LATER: Display all saved surveys, search for an existing
         survey and get its url or edit/copy it
       </p>
-      <button>View all surveys</button>
+      <button className="view-all-button">View all surveys</button>
 
       <input
         id="search-by-company"
