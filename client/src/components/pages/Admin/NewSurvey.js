@@ -2,7 +2,8 @@ import { useState } from "react";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
 import Test from "../../questiontypes/Test";
-import CheckboxesOne from "../../AdminQuestions/CheckboxesOne"
+import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
+import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
@@ -18,11 +19,44 @@ const NewSurvey = (props) => {
   function addComponent(e) {
     console.log(e.target.id);
     // setComponentList(componentList.concat(<Test key={componentList.length} /> ))}
-    setComponentList(componentList.concat(<CheckboxesOne key={componentList.length}
+
+    // setComponentList(
+    //   componentList.concat(
+    //     <NarrativeOne
+    //       key={componentList.length}
+    //       question={props.question}
+    //       texts={props.texts}
+    //       questionNumber={props.questionNumber}
+    //     />
+    //   )
+    // );
+
+    // add state??
+    let InsertedComponent
+    switch(e.target.id) {
+      case "checkboxes":
+        console.log('clicked checkboxes')
+        InsertedComponent = CheckboxesOne
+        break;
+      case "comment":
+        console.log('clicked comment')
+        InsertedComponent = NarrativeOne
+        break;
+      default:
+        // code block
+    }
+    
+
+    setComponentList(componentList.concat(<InsertedComponent key={componentList.length}
           question={props.question} texts={props.texts} questionNumber={props.questionNumber}
         />
       )
     );
+    // setComponentList(componentList.concat(<CheckboxesOne key={componentList.length}
+    //       question={props.question} texts={props.texts} questionNumber={props.questionNumber}
+    //     />
+    //   )
+    // );
     // console.log(componentList)
   }
 
@@ -62,34 +96,46 @@ const NewSurvey = (props) => {
         placeholder="Survey narrative"
         onChange={(event) => onInputChange(event, setSurveyNarrative)}
       />
-      <h3>Choose your own components:</h3>
-      <p>(can change order and number of questions - drag and drop??)</p>
+      <NarrativeOne
+        onChange={(event) => onInputChange(event, setSurveyNarrative)}
+      />
 
-      <button id="checkboxes" onClick={addComponent}>
-        Checkboxes
-      </button>
-      <button id="comment" onClick={addComponent}>
-        Comment
-      </button>
-      <button id="matrix" onClick={addComponent}>
-        Matrix
-      </button>
-      <button id="matrixNum" onClick={addComponent}>
-        MatrixNum
-      </button>
-      <button id="radioButtons" onClick={addComponent}>
-        RadioButtons
-      </button>
-      <button id="selectInput" onClick={addComponent}>
-        SelectInput
-      </button>
-      <button id="slider" onClick={addComponent}>
-        Slider
-      </button>
+<h3>Choose your own components: (can change order and number of questions - drag and drop??)</h3>
+
+<div className="survey-selection-container">
+
+      <div className="survey-selection-sidebar">
+        
+        <button id="checkboxes" onClick={addComponent}>
+          Checkboxes
+        </button>
+        <button id="comment" onClick={addComponent}>
+          Comment
+        </button>
+        <button id="matrix" onClick={addComponent}>
+          Matrix
+        </button>
+        <button id="matrixNum" onClick={addComponent}>
+          MatrixNum
+        </button>
+        <button id="radioButtons" onClick={addComponent}>
+          RadioButtons
+        </button>
+        <button id="selectInput" onClick={addComponent}>
+          SelectInput
+        </button>
+        <button id="slider" onClick={addComponent}>
+          Slider
+        </button>
+      </div>
 
       <hr style={{ margin: "20px" }} />
 
-      {componentList}
+<div className="survey-selection">
+  <div style={{ backgroundColor: "lightGrey" }}>{componentList}</div>
+
+</div>
+</div>
 
       <hr style={{ margin: "20px" }} />
 
@@ -100,7 +146,9 @@ const NewSurvey = (props) => {
         Survey link to send out (will need to make it actually access a
         survey..):
       </h3>
-      <a href={url} style={{paddingBottom: "20px"}}>{url}</a>
+      <a href={url} style={{ paddingBottom: "20px" }}>
+        {url}
+      </a>
     </div>
   );
 };
