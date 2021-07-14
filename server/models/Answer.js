@@ -4,23 +4,15 @@ require('./Survey')
 const Schema = mongoose.Schema;
 
 const answerSchema = new Schema({ //postal code?
-department:{ 
-    type:String,
-    // required:true,
-},
-// surveyNumber: Number,
-// version: String, 
 survey:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Survey"
         },
-answerArray:[ //id, answerType(flag(), answer(yes), date/time
-    // {
-    //     question: String,
-    //     answer: []
-    // }
-]
+answerArray:[ ],//id, answerType(flag(), answer(yes), date/time
+answeredDate: Date 
 })
+
+module.exports = mongoose.model('Answer', answerSchema, 'answer');
 
 // const answerSchema = new Schema({
 //     department:{ 
@@ -44,4 +36,3 @@ answerArray:[ //id, answerType(flag(), answer(yes), date/time
 //     answeredDate: Date 
 // })
 
-module.exports = mongoose.model('Answer', answerSchema, 'answer');

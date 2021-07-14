@@ -12,7 +12,7 @@ const questionSchema = new Schema({
         type: String,
         required:true
     },
-    answerOptions:[] //commenting question with just a textfield has no answerOptions
+    options:[] //could be an array of stings, arrary of objects or none
 })
 
 module.exports = mongoose.model('Question', questionSchema, 'question');
