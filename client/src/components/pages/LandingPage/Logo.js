@@ -3,9 +3,10 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import "../../../App.css";
 import { Link } from "react-router-dom";
 
-export default function Logo() {
+export default function Logo({ flashcard }) {
   const [narrative, setNarrative] = useState("");
   const [company, setCompany] = useState("");
+  const [flip, setFlip] = useState(false);
 
   useEffect(() => {
     const getSurveyQuestions = async () => {
@@ -20,26 +21,30 @@ export default function Logo() {
   }, []);
 
   return (
-    <div className="card">
-      <div className="flip-card">
-        <div class="thefront">
-          <Player
-            autoplay
-            loop
-            src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
-            className="logo"
-          ></Player>
-          <button>Click to Flip</button>
-        </div>
-        <div className="theback">
-          <h1>Hello {company} Team!</h1>
-          <p>{narrative}</p>
-          <Link to="/survey">
-            <button className="logo-button" type="button">
-              ENTER
-            </button>
-          </Link>
-        </div>
+    <div
+      className={`card ${flip ? "flip" : ""}`}
+      onClick={() => setFlip(!flip)}
+    >
+      <div class="thefront">
+        <Player
+          autoplay
+          loop
+          src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
+          className="logo"
+        ></Player>
+        <p>Click to Flip</p>
+      </div>
+      <div className="theback">
+        <h1>Hello {company} Team!</h1>
+        <p>{narrative}</p>
+        <Link to="/survey">
+          <button className="logo-button" type="button">
+            ENTER
+          </button>
+        </Link>
+        <button className="neu-button" type="button">
+          ENTER
+        </button>
       </div>
     </div>
   );

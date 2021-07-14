@@ -26,16 +26,16 @@ const SelectInput = (props) => {
         // arr.splice(index, 1)
         // setSelectArray(arr)
 
-        let updateAnswerArray = [...answerArray]
-        updateAnswerArray[updateAnswerArray.length-1]=newValues
+        let updateAnswerArray = {...answerArray}
+        updateAnswerArray[props.questionNumber]=newValues
         setAnswerArray(updateAnswerArray)
 
     }       
 
     useEffect(()=>{
         if(answerArray.length < props.questionNumber){
-            let updateAnswerArray = [...answerArray]
-            updateAnswerArray.push(values)
+            let updateAnswerArray = {...answerArray}  
+           updateAnswerArray[props.questionNumber]=values
             setAnswerArray(updateAnswerArray)
         }     
     },[])
@@ -49,7 +49,7 @@ const SelectInput = (props) => {
             <p className="question-intro">Q{props.questionNumber}.</p><span>
             <p className="question-intro">{props.question}</p></span>
             {/* {values.map((row, i)=>{ */}
-            {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{
+            {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
                 return(<ul key={i}>
                         <li style={{listStyleType:"none", textAlign:"left"}} >
                             {row.text}:&nbsp;

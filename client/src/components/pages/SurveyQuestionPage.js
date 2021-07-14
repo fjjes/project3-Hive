@@ -31,11 +31,10 @@ const useStyles = makeStyles((theme) => ({
 const SurveyQuestionPage = () => {
   const classes = useStyles();
 
-  const [department, setDepartment]=useState('marketing') //passed down from a survey question's answer???
   // const [surveyNumber, setSurveyNumber]=useState()
   // const [version, setVersion]=useState()
   const [survey, setSurvey]=useState()
-  const [answerArray, setAnswerArray]=useState([])
+  const [answerArray, setAnswerArray]=useState({})
   const value = {answerArray, setAnswerArray}
 
   const [index, setIndex] = useState(0);
@@ -76,13 +75,11 @@ const SurveyQuestionPage = () => {
   // };
 
   const onCreateSurveyAnswersClicked= async ()=>{
-
+let currentDate = new Date()
     let answerToCreate ={
-      department,
       survey,
-      // surveyNumber,
-      // version,
-      answerArray
+      answerArray,
+      answeredDate: currentDate
     }
    
       let createResponse = await fetch('api/answer',{

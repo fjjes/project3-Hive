@@ -40,9 +40,9 @@ function Checkboxes({ questionNumber, question, texts }) {
       setError("");
     }
     // console.log("Array of selected checkboxes: ", checkedArray);
-    let updateAnswerArray = [...answerArray];
-    updateAnswerArray[updateAnswerArray.length - 1] = newOptions;
-    setAnswerArray(updateAnswerArray);
+    let updateAnswerArray = {...answerArray}
+    updateAnswerArray[questionNumber]=newOptions
+    setAnswerArray(updateAnswerArray)
   };
 
   // *** Set value of other:
@@ -54,13 +54,13 @@ function Checkboxes({ questionNumber, question, texts }) {
   console.log("*** other: ", other);
 
 
-  useEffect(() => {
-    if (answerArray.length < questionNumber) {
-      let updateAnswerArray = [...answerArray];
-      updateAnswerArray.push(options);
-      setAnswerArray(updateAnswerArray);
-    }
-  }, []);
+  useEffect(()=>{
+    if(answerArray.length < questionNumber){
+        let updateAnswerArray = {...answerArray}  
+       updateAnswerArray[questionNumber]=options
+        setAnswerArray(updateAnswerArray)
+    }     
+  },[])
 
   // useEffect(()=>{
   //   let updateAnswerArray = [...answerArray]
@@ -83,10 +83,8 @@ function Checkboxes({ questionNumber, question, texts }) {
           <p className="question-intro">{question}</p>
         </span>
         <div className="checkbox-form-group">
-          {/* {options.map((option, index) => ( */}
-          {answerArray.length >= questionNumber
-            ? answerArray[questionNumber - 1].map((option, index) => {
-                return (
+          {options.map((option, index) => {
+          return (
                   <div key={index}>
                     <input
                       type="checkbox"
@@ -96,10 +94,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                       name="option"
                       id={option.value}
                       value={option.value}
-                      {...(answerArray.length >= questionNumber
-                        ? answerArray[questionNumber - 1][index].checked ===
-                          option.value
-                        : false)}
+                      {...(answerArray[questionNumber]? answerArray[questionNumber][index].checked ===option.value: false)}
                     />
                     <label
                       htmlFor={option.value}
@@ -126,7 +121,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                   </div>
                 );
               })
-            : null}
+            }
           {/* <input
             type="text"
             disabled={!options[options.length - 1].checked}

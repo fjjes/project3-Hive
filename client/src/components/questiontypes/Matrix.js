@@ -19,15 +19,16 @@ const Matrix = (props) => {
     newValues[i].value = e.target.value;
     setValues(newValues);
   
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray[updateAnswerArray.length-1]=newValues
+    let updateAnswerArray = {...answerArray}
+    updateAnswerArray[props.questionNumber]=newValues
     setAnswerArray(updateAnswerArray)
   };
 
   useEffect(()=>{
       if(answerArray.length < props.questionNumber){
-          let updateAnswerArray = [...answerArray]
-          updateAnswerArray.push(values)
+          let updateAnswerArray = {...answerArray}
+          // updateAnswerArray.push(values)
+         updateAnswerArray[props.questionNumber]=values
           setAnswerArray(updateAnswerArray)
       }     
   },[])
@@ -58,8 +59,8 @@ const Matrix = (props) => {
               )
             })}
           </tr>
-          {/* {values.map((row, i)=> { */}
-          {answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1].map((row, i)=>{
+          {values.map((row, i)=> {
+          // {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
             return(
               <tr key={i}>
                 <td  className='label-rows'>
@@ -73,7 +74,7 @@ const Matrix = (props) => {
                         name={row.text} 
                         value={col} 
                         onChange={(e) => handleChange(e, i)}
-                        checked={answerArray.length >= props.questionNumber ? answerArray[props.questionNumber-1][i].value=== col : false} //
+                        checked={answerArray[props.questionNumber] ? answerArray[props.questionNumber][i].value=== col : false} //
                         />
                       </td>
                     )
@@ -81,7 +82,7 @@ const Matrix = (props) => {
               </tr>
             )
               // })
-          }): null
+          })
         }
         </tbody>
       </table>

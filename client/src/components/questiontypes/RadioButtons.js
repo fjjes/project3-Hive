@@ -8,19 +8,22 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
   const handleChange = (e) => {
     setValue(e.target.value);
 
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray[updateAnswerArray.length-1]=e.target.value
+    // let updateAnswerArray = [...answerArray]
+    // updateAnswerArray[updateAnswerArray.length-1]=e.target.value
+    // setAnswerArray(updateAnswerArray)
+    let updateAnswerArray = {...answerArray}
+    updateAnswerArray[questionNumber]=e.target.value
     setAnswerArray(updateAnswerArray)
   };
 
 
-useEffect(()=>{
-  if(answerArray.length < questionNumber){
-      let updateAnswerArray = [...answerArray]
-      updateAnswerArray.push(value)
-      setAnswerArray(updateAnswerArray)
-  }     
-},[])
+  useEffect(()=>{
+    if(answerArray.length < questionNumber){
+        let updateAnswerArray = {...answerArray}  
+       updateAnswerArray[questionNumber]=value
+        setAnswerArray(updateAnswerArray)
+    }     
+  },[])
 
   // const handleSubmit = () => {
   //   console.log("value", value);
@@ -37,7 +40,7 @@ useEffect(()=>{
               onChange={handleChange}
               name="option-group"
               value={option}
-              checked={answerArray.length >= questionNumber ? answerArray[questionNumber-1]=== option : false} //
+              checked={answerArray[questionNumber] ? answerArray[questionNumber]=== option: false} //
               color='primary'/>
               <label htmlFor={option}>
             {option}
@@ -51,3 +54,4 @@ useEffect(()=>{
   );
 }
 export default RadioButtons;
+

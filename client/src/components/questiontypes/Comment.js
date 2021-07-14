@@ -8,17 +8,30 @@ const Comment =({questionNumber, question})=> {
   const handleChange = (e)=>{
       setComment((e.target.value))
 
-      let updateAnswerArray = [...answerArray]
-      updateAnswerArray[updateAnswerArray.length-1]=e.target.value
-      setAnswerArray(updateAnswerArray)
+      // let updateAnswerArray = [...answerArray]
+      // updateAnswerArray[updateAnswerArray.length-1]=e.target.value
+      // setAnswerArray(updateAnswerArray)
+
+    let updateAnswerArray = {...answerArray}
+    updateAnswerArray[questionNumber]=e.target.value
+    setAnswerArray(updateAnswerArray)
   }
 
+ 
+
   useEffect(()=>{
-    let updateAnswerArray = [...answerArray]
-    updateAnswerArray.push(comment)
-    setAnswerArray(updateAnswerArray)
+    if(answerArray.length < questionNumber){
+        let updateAnswerArray = {...answerArray}  
+       updateAnswerArray[questionNumber]=comment
+        setAnswerArray(updateAnswerArray)
+    }     
   },[])
 
+   // useEffect(()=>{
+  //   let updateAnswerArray = [...answerArray]
+  //   updateAnswerArray.push(comment)
+  //   setAnswerArray(updateAnswerArray)
+  // },[])
 
   // const handleSubmit=()=>{
   //   console.log(comment)
@@ -33,7 +46,7 @@ const Comment =({questionNumber, question})=> {
         cols="50"
         label="comment"
         value={comment}
-        {...answerArray.length >=questionNumber ? comment===answerArray[questionNumber-1]: comment===""}
+        {...answerArray[questionNumber]? comment===answerArray[questionNumber]: comment===""}
         onChange={handleChange}
         placeholder="Input"
       />
