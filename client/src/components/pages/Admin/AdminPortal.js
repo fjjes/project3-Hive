@@ -24,11 +24,11 @@ const AdminPortal = ({ questionBlock }) => {
         </div>
         <div className="main-admin-buttons" style={{borderBottom: dividerLine}}>
           <button onClick={() => {
-            setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
+            // setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
             setView("find")
             }}>Find existing surveys</button>
           <button onClick={() => {
-            setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
+            // setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
             setView("new")
             }}>Create new survey</button>
         </div>

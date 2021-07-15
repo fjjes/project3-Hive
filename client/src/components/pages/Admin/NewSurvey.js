@@ -94,7 +94,7 @@ const NewSurvey = (props) => {
   return (
     <div>
       {/* TOP PART OF PAGE */}
-      <h2>New Survey Component</h2>
+      <h2>Build a new survey!</h2>
       <div className="company-and-survey-name-inputs">
         <input
           id="company-name"
@@ -111,11 +111,11 @@ const NewSurvey = (props) => {
       </div>
 
       {/* LEFT PART OF PAGE */}
-      <h3>Choose your own components:</h3>
       {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
 
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
+      <h3>Choose your own components:</h3>
           <button id="narrative" onClick={addComponent}>
             Narrative
           </button>
@@ -150,7 +150,11 @@ const NewSurvey = (props) => {
 
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selection">
+        <h3>Your survey:</h3>
+          <div className="survey-selection-background">
+
           <div>{componentList}</div>
+          </div>
         </div>
       </div>
 
@@ -162,7 +166,7 @@ const NewSurvey = (props) => {
           className="save-survey-button"
           onClick={handleSubmit}
         >
-          Save survey and receive link for forwarding
+          <strong>Save survey</strong> (and eventually receive link for forwarding)
         </button>
         <h3>
           Survey link to send out (will need to make it actually access a
