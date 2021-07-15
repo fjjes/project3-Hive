@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-// import { AnswerContext } from '../pages/SurveyQuestionPage';
+import { AnswerContext } from '../pages/SurveyQuestionPage';
 import { makeStyles } from "@material-ui/core/styles";
 import NewSlider from "./NewSlider";
 import "../Form.css";
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
-  // const {answerArray, setAnswerArray} = useContext(AnswerContext)
+  const {answers, setAnswers} = useContext(AnswerContext)
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState([]);
 
@@ -40,6 +40,14 @@ export default function InputSlider({ questionNumber, question, texts }) {
       });
   };
 
+  useEffect(()=>{
+    if(answers.length < questionNumber){
+        let updateAnswers = {...answers}  
+       updateAnswers[questionNumber]=values
+        setAnswers(updateAnswers)
+    }     
+  },[])
+
   const handleSubmit = () => {
     console.log(values);
   };
@@ -58,6 +66,9 @@ export default function InputSlider({ questionNumber, question, texts }) {
           setValue={setValue(index)}
           title={text}
           classes={classes}
+          answers={answers}
+          setAnswers={setAnswers}
+          questionNumber={questionNumber}
         />
       ))}
       <NewSlider />

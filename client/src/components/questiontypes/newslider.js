@@ -3,17 +3,26 @@ import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 
-export default function NewSlider({ getValue, setValue, title, classes }) {
+export default function NewSlider({ getValue, setValue, title, classes, answers, setAnswers, questionNumber }) {
   if (classes == null) {
     return null;
   }
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+
+
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=newValue
+    setAnswers(updateAnswers)
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
+
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=Number(event.target.value)
+    setAnswers(updateAnswers)
   };
 
   const handleBlur = () => {
