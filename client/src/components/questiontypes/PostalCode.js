@@ -1,4 +1,4 @@
-import React, {useState, useContext } from 'react';
+import React, {useEffect,useState, useContext } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 
 const PostalCode =({questionNumber, question})=> {
@@ -8,16 +8,26 @@ const PostalCode =({questionNumber, question})=> {
 
   const handleChange = (e)=>{
       setPostalCode((e.target.value))
-        if (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(e.target.value) || /^[0-9]{5}(?:-[0-9]{4})?$/.test(e.target.value) ) {
-            let updateAnswers = {...answers}
+      let updateAnswers = {...answers}
             updateAnswers[questionNumber]=e.target.value
             setAnswers(updateAnswers) 
+        if (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(e.target.value) || /^[0-9]{5}(?:-[0-9]{4})?$/.test(e.target.value) ) { 
             setError("")
-        }else{
-            setError('Postal Code is Invalid')
         }
-    
+        else
+        {
+            setError('Postal Code is Invalid')
+        }   
   }
+  useEffect(()=>{
+    if(answers.length < questionNumber){
+        let updateAnswers = {...answers}
+       updateAnswers[questionNumber]=postalcode
+        setAnswers(updateAnswers)
+    }     
+  },[])
+
+
 //    /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/ - CA postal code - case sensitive
 // /^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i - CA postal code adding i at the end makes it insensitive
 //   /^[0-9]{5}(?:-[0-9]{4})?$/ USA postal code 
