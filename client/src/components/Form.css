@@ -39,19 +39,44 @@ h1 {
   padding: 30px;
 }
 
+.slider {
+  display: grid;
+  grid-template-columns: 3fr 8fr 1fr;
+  column-gap: 2em;
+  row-gap: 1em;
+  width: 100%;
+  line-height: 1em;
+  /* margin-left: 10px; */
+  height: fit-content;
+}
+
 .slider p {
   font-size: 1rem;
-}
-
-td p {
+  height: auto;
   font-size: 1em;
-  padding: 0px 30px 0px 0px;
-  margin-bottom: 20px;
+  padding: 0px;
+  margin: auto 0;
+  text-align: start;
 }
 
-.slider {
-  width: 800px;
-  margin-left: 10px;
+.slider div {
+  margin: auto;
+}
+
+.slider input {
+  width: 4em;
+  padding: 5px;
+  height: fit-content;
+  margin: auto;
+}
+
+.submit-message {
+  font-size: 1rem;
+  text-align: end;
+}
+
+.rc-slider-handle {
+  top: 0px;
 }
 
 .input {

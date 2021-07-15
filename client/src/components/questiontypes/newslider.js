@@ -1,27 +1,22 @@
 import React from "react";
-import Slider from "@material-ui/core/Slider";
-import Input from "@material-ui/core/Input";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
-export default function NewSlider({ getValue, setValue, title, classes, answers, setAnswers, questionNumber }) {
+export default function NewSlider({ getValue, setValue, title, classes }) {
   if (classes == null) {
     return null;
   }
 
-  const handleSliderChange = (event, newValue) => {
+  const handleSliderChange = (newValue) => {
     setValue(newValue);
-
-
-    let updateAnswers = {...answers}
-    updateAnswers[questionNumber]=newValue
-    setAnswers(updateAnswers)
   };
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? "" : Number(event.target.value));
-
-    let updateAnswers = {...answers}
-    updateAnswers[questionNumber]=Number(event.target.value)
-    setAnswers(updateAnswers)
+    setValue(
+      event.target.value === ""
+        ? ""
+        : Math.max(Math.min(Number(event.target.value), 100), 0)
+    );
   };
 
   const handleBlur = () => {
@@ -44,37 +39,30 @@ export default function NewSlider({ getValue, setValue, title, classes, answers,
   ];
 
   return (
-    <div>
-      <tr>
-        <td className="side-text">
-          <p>{title}</p>
-        </td>
-        <td className="slider">
-          <Slider
-            value={typeof getValue === "number" ? getValue : 0}
-            onChange={handleSliderChange}
-            aria-labelledby="input-slider"
-            marks={marks}
-            step={5}
-            marks
-          />
-        </td>
-        <td className="input">
-          <Input
-            className={classes.input}
-            value={getValue}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
-              type: "number",
-              "aria-labelledby": "input-slider",
-            }}
-          />
-        </td>
-      </tr>
+    <div className="slider">
+      <p>{title}</p>
+      <Slider
+        value={typeof getValue === "number" ? getValue : 0}
+        onChange={handleSliderChange}
+        ariaLabelledbyForHandle="input-slider"
+        marks={marks}
+        step={5}
+        marks
+        min={0}
+        max={100}
+      />
+      <input
+        className="input"
+        type="number"
+        // className={classes.input}
+        value={getValue}
+        onChange={handleInputChange}
+        onBlur={handleBlur}
+        step={5}
+        min={0}
+        max={100}
+        aria-labelledby="input-slider"
+      />
     </div>
   );
 }
