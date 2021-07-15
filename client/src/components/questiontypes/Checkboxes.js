@@ -91,6 +91,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                       {options[options.length - 1].checked &&
                       index === options.length - 1 ? (
                         <input
+                          autoFocus
                           value={other.value}
                           onChange={handleOther}
                           placeholder="Enter comment"
@@ -106,11 +107,11 @@ function Checkboxes({ questionNumber, question, texts }) {
         </div>
         <div style={{ color: "red" }}>{error}</div>
       </form>
-      <div className="button-submit">
+      {/* <div className="button-submit">
         <button onClick={handleSubmit} type="submit">
           Submit
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
