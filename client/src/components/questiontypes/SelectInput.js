@@ -3,7 +3,7 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
 import '../Form.css'
 
 const SelectInput = (props) => {
-    const {answerArray, setAnswerArray} = useContext(AnswerContext)
+    const {answers, setAnswers} = useContext(AnswerContext)
     const [values, setValues]=useState(props.texts)
     //const [selectArray, setSelectArray]=useState([])
    
@@ -26,17 +26,16 @@ const SelectInput = (props) => {
         // arr.splice(index, 1)
         // setSelectArray(arr)
 
-        let updateAnswerArray = {...answerArray}
-        updateAnswerArray[props.questionNumber]=newValues
-        setAnswerArray(updateAnswerArray)
-
+        let updateAnswers = {...answers}
+        updateAnswers[props.questionNumber]=newValues
+        setAnswers(updateAnswers)
     }       
 
     useEffect(()=>{
-        if(answerArray.length < props.questionNumber){
-            let updateAnswerArray = {...answerArray}  
-           updateAnswerArray[props.questionNumber]=values
-            setAnswerArray(updateAnswerArray)
+        if(answers.length < props.questionNumber){
+            let updateAnswers = {...answers}  
+           updateAnswers[props.questionNumber]=values
+            setAnswers(updateAnswers)
         }     
     },[])
 
@@ -48,8 +47,8 @@ const SelectInput = (props) => {
         <div className="select question-component">  
             <p className="question-intro">Q{props.questionNumber}.</p><span>
             <p className="question-intro">{props.question}</p></span>
-            {/* {values.map((row, i)=>{ */}
-            {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
+            {values.map((row, i)=>{
+            // {answerArray[props.questionNumber] ? answerArray[props.questionNumber].map((row, i)=>{
                 return(<ul key={i}>
                         <li style={{listStyleType:"none", textAlign:"left"}} >
                             {row.text}:&nbsp;
@@ -62,7 +61,7 @@ const SelectInput = (props) => {
                         </li>
                     </ul>
                 )
-                }): null
+                })
             }
         {/* <div className="button-submit">
             <button onClick={handleSubmit} type="submit">Submit</button>

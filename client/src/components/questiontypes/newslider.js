@@ -1,19 +1,27 @@
 import React from "react";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
-import Grid from "@material-ui/core/Grid";
 
-export default function NewSlider({ getValue, setValue, title, classes }) {
+export default function NewSlider({ getValue, setValue, title, classes, answers, setAnswers, questionNumber }) {
   if (classes == null) {
     return null;
   }
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
+
+
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=newValue
+    setAnswers(updateAnswers)
   };
 
   const handleInputChange = (event) => {
     setValue(event.target.value === "" ? "" : Number(event.target.value));
+
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=Number(event.target.value)
+    setAnswers(updateAnswers)
   };
 
   const handleBlur = () => {
@@ -37,11 +45,11 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
 
   return (
     <div>
-      <Grid container spacing={2}>
-        <div className="side-text">
+      <tr>
+        <td className="side-text">
           <p>{title}</p>
-        </div>
-        <Grid item xs>
+        </td>
+        <td className="slider">
           <Slider
             value={typeof getValue === "number" ? getValue : 0}
             onChange={handleSliderChange}
@@ -50,12 +58,11 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
             step={5}
             marks
           />
-        </Grid>
-        <Grid item>
+        </td>
+        <td className="input">
           <Input
             className={classes.input}
             value={getValue}
-            margin="dense"
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{
@@ -66,8 +73,8 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
               "aria-labelledby": "input-slider",
             }}
           />
-        </Grid>
-      </Grid>
+        </td>
+      </tr>
     </div>
   );
 }

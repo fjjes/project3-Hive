@@ -8,6 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
+
 export default function Start() {
   const [narrative, setNarrative] = useState("");
   const [company, setCompany] = useState("");
@@ -29,10 +30,10 @@ export default function Start() {
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
-          component="img"
+          component="image"
           alt="Hive"
-          height="140"
-          img="../src/components/images/hiveicon.png"
+          height="200"
+         image="../components/images/hiveicon.png"
           title="Hive"
         />
         <CardContent>

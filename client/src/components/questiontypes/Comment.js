@@ -1,41 +1,17 @@
-import React, { useEffect,useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 
 const Comment =({questionNumber, question})=> {
-  const {answerArray, setAnswerArray} = useContext(AnswerContext)
-  const [comment, setComment] = useState('');
+  const {answers, setAnswers} = useContext(AnswerContext)
+  // const [comment, setComment] = useState('');
 
   const handleChange = (e)=>{
-      setComment((e.target.value))
-
-      // let updateAnswerArray = [...answerArray]
-      // updateAnswerArray[updateAnswerArray.length-1]=e.target.value
-      // setAnswerArray(updateAnswerArray)
-
-    let updateAnswerArray = {...answerArray}
-    updateAnswerArray[questionNumber]=e.target.value
-    setAnswerArray(updateAnswerArray)
+      // setComment((e.target.value))
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber]=e.target.value
+    setAnswers(updateAnswers)
   }
 
- 
-
-  useEffect(()=>{
-    if(answerArray.length < questionNumber){
-        let updateAnswerArray = {...answerArray}  
-       updateAnswerArray[questionNumber]=comment
-        setAnswerArray(updateAnswerArray)
-    }     
-  },[])
-
-   // useEffect(()=>{
-  //   let updateAnswerArray = [...answerArray]
-  //   updateAnswerArray.push(comment)
-  //   setAnswerArray(updateAnswerArray)
-  // },[])
-
-  // const handleSubmit=()=>{
-  //   console.log(comment)
-  // }
 
   return (
     <div className="question-component">
@@ -45,8 +21,7 @@ const Comment =({questionNumber, question})=> {
         rows="4"
         cols="50"
         label="comment"
-        value={comment}
-        {...answerArray[questionNumber]? comment===answerArray[questionNumber]: comment===""}
+        value={answers[questionNumber]}
         onChange={handleChange}
         placeholder="Input"
       />

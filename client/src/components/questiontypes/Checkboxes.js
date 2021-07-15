@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 function Checkboxes({ questionNumber, question, texts }) {
-  const { answerArray, setAnswerArray } = useContext(AnswerContext);
+  const { answers, setAnswers } = useContext(AnswerContext);
   const [options, setOptions] = useState(
     texts.map((option) => ({ value: option, checked: false }))
   );
@@ -37,9 +37,9 @@ function Checkboxes({ questionNumber, question, texts }) {
       setDisabled(false);
       setError("");
     }
-    let updateAnswerArray = {...answerArray}
-    updateAnswerArray[questionNumber] = {options: newOptions, other: other}
-    setAnswerArray(updateAnswerArray)
+    let updateAnswers = {...answers}
+    updateAnswers[questionNumber] = {options: newOptions, other: other}
+    setAnswers(updateAnswers)
   };
 
   const handleOther = (e) => {
@@ -47,11 +47,11 @@ function Checkboxes({ questionNumber, question, texts }) {
   };
 
   useEffect(()=>{
-    if(answerArray[questionNumber]){
-      setOptions(answerArray[questionNumber].options)
-      setOther(answerArray[questionNumber].other)
+    if(answers[questionNumber]){
+      setOptions(answers[questionNumber].options)
+      setOther(answers[questionNumber].other)
     }     
-  },[answerArray, questionNumber])
+  },[answers, questionNumber])
 
   const handleSubmit = () => {
     // console.log("old options: ", options, other); // push "other" into "options" array
