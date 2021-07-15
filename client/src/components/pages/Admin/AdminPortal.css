@@ -1,10 +1,20 @@
+.admin-container  {
+  display: flex;
+  flex-direction: column;
+}
+
 .admin-container input,
 .admin-container button {
   padding: 10px;
   margin: 5px;
   border-radius: 5px;
-  display: flex;
+  /* display: flex; broken? */
   width: 200px;
+}
+
+.survey-selection-sidebar {
+  width: 20%;
+  padding: 10px;
 }
 
 .survey-selection-sidebar button:hover,
@@ -49,12 +59,16 @@
 }
 
 .admin-question-component {
-  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: lightgrey;
+  padding: 5px;
+  margin: 5px;
 }
 
 .admin-question-component label,
 .admin-question-component input {
-  /* display: inline-block; */
+  display: inline-block;
+  margin: 0px;
 }
 
 .survey-selection-container {
@@ -62,8 +76,14 @@
 }
 
 .survey-selection {
-  width: 50%;
+  width: 100%;
   margin: 0px auto;
+  border-left: #f59645 10px solid;
+}
+
+.survey-selection input[type="radio"],
+.survey-selection input[type="checkbox"] {
+  width: 40px;
 }
 
 .admin-logo {

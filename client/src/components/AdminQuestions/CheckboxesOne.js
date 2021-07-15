@@ -27,7 +27,7 @@ function CheckboxesOne() {
               <input
                 type="checkbox"
                 name="option"
-                id={option.value}
+                // id={option.value}
                 value={option.value}
               />
               <label

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../../components/Form.css";
-import "./AdminPortal.css";
+// import "./AdminPortal.css";
 
 const FindSurvey = () => {
   const [searchInputCompany, setSearchInputCompany] = useState("");

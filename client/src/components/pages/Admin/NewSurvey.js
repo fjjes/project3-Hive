@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../../components/Form.css";
-import "./AdminPortal.css";
+// import "./AdminPortal.css";
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
 import CommentOne from "../../AdminQuestions/CommentOne"
 import MatrixOne from "../../AdminQuestions/MatrixOne"
@@ -93,6 +93,7 @@ const NewSurvey = (props) => {
 
   return (
     <div>
+      {/* TOP PART OF PAGE */}
       <h2>New Survey Component</h2>
       <div className="company-and-survey-name-inputs">
         <input
@@ -109,6 +110,7 @@ const NewSurvey = (props) => {
         />
       </div>
 
+      {/* LEFT PART OF PAGE */}
       <h3>Choose your own components:</h3>
       {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
 
@@ -144,13 +146,15 @@ const NewSurvey = (props) => {
           </button>
         </div>
 
-        <hr style={{ margin: "20px" }} />
+        {/* <hr style={{ margin: "20px" }} /> */}
 
+        {/* RIGHT PART OF PAGE */}
         <div className="survey-selection">
-          <div style={{ backgroundColor: "lightGrey" }}>{componentList}</div>
+          <div>{componentList}</div>
         </div>
       </div>
 
+{/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
         <button

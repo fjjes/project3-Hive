@@ -74,7 +74,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                       checked={option.checked}
                       onChange={handleChange}
                       name="option"
-                      id={option.value}
+                      // id={option.value}
                       value={option.value}
                     />
                     <label
