@@ -5,12 +5,8 @@ import NewSlider from "./newslider";
 import "../Form.css";
 
 const useStyles = makeStyles({
-  root: {
-    width: 90,
-    height: 300,
-  },
   input: {
-    width: 42,
+    width: 32,
   },
 });
 
