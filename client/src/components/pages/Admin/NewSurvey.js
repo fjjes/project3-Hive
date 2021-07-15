@@ -14,54 +14,43 @@ import SliderTwo from "../../AdminQuestions/sliderTwo" // Not working
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
-  const [searchInputCompany, setSearchInputCompany] = useState("");
-  const [searchInputNumber, setSearchInputNumber] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [surveyName, setSurveyName] = useState("");
-  const [surveyNarrative, setSurveyNarrative] = useState("");
   const [componentList, setComponentList] = useState([]);
+  const [narrativeTextValue, setNarrativeTextValue] = useState("");
 
   const url = `localhost:4444/${uuidv4()}`;
 
   function addComponent(e) {
-    console.log(e.target.id);
+    // console.log('Clicked:', e.target.id);
 
     let InsertedComponent;
     switch (e.target.id) {
       case "narrative":
-        console.log("clicked comment");
         InsertedComponent = NarrativeOne;
         break;
       case "checkboxes":
-        console.log("clicked checkboxes");
         InsertedComponent = CheckboxesOne;
         break;
       case "comment":
-        console.log("clicked comment");
         InsertedComponent = CommentOne;
         break;
       case "matrix":
-        console.log("clicked matrix");
         InsertedComponent = MatrixOne;
         break;
       case "matrixNum":
-        console.log("clicked matrixNum");
         InsertedComponent = MatrixTwo;
         break;
       case "postalCode":
-        console.log("clicked postalCode");
         InsertedComponent = PostalCodeOne;
         break;
       case "radioButtons":
-        console.log("clicked radioButtons");
         InsertedComponent = RadioOne;
         break;
       case "selectOne":
-        console.log("clicked selectOne");
         InsertedComponent = SelectOne;
         break;
       case "sliderTwo":
-        console.log("clicked sliderTwo");
         InsertedComponent = SliderTwo;
         break;
       default:
@@ -74,22 +63,31 @@ const NewSurvey = (props) => {
           question={props.question}
           texts={props.texts}
           questionNumber={props.questionNumber}
+          value={props.narrativeTextValue} 
+          onChange={handleNarrativeChange}
         />
       )
     );
   }
 
+  function handleNarrativeChange(newValue) {
+    setNarrativeTextValue(newValue)
+  }
+
+  
   async function handleSubmit() {
-    console.log("DATA TO SAVE:");
-    console.log("searchInputCompany: ", searchInputCompany);
-    console.log("searchInputNumber: ", searchInputNumber);
+    console.log("***** DATA TO SAVE *****");
     console.log("companyName: ", companyName);
     console.log("surveyName: ", surveyName);
-    console.log("surveyNarrative: ", surveyNarrative);
+    console.log("narrativeTextValue: ", narrativeTextValue)
+    let componentListNames = []
+    for (let i=0; i<componentList.length; i++) {
+      componentListNames = [...componentListNames, componentList[i].type.name]
+    }
+    console.log("List of selected components: ", componentListNames)
   }
 
   function onInputChange(event, setFunction) {
-    // console.log(`Changing input of "${event.target.id}" to be: ${event.target.value}`);
     setFunction(event.target.value);
   }
 
