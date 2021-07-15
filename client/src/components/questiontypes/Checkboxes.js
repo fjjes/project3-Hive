@@ -9,7 +9,6 @@ function Checkboxes({ questionNumber, question, texts }) {
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
-  // const [comment, setComment] = useState("");
   const [other, setOther] = useState({value: ""});
 
   let checkedArray = [];
@@ -25,10 +24,11 @@ function Checkboxes({ questionNumber, question, texts }) {
         numberCount++;
         option.checked && checkedArray.push(option.value);
       }
-      // if (!options[options.length - 1].checked) {
-      //   setComment("");
-      // }
+      if (!options[options.length - 1].checked) {
+        setOther({value: ""});  // Currently still console.logs the original "other" value (after being unchecked) when using the final Submit button - value of "other" doesn't get updated until we select another checkbox (just hitting "next" doesn't do it)
+      }
     }
+
     setOptions(newOptions);
     if (numberCount > 2) {
       setDisabled(true);
@@ -41,25 +41,21 @@ function Checkboxes({ questionNumber, question, texts }) {
     updateAnswers[questionNumber] = {options: newOptions, other: other}
     setAnswers(updateAnswers)
   };
-
+  
   const handleOther = (e) => {
     setOther({value: e.target.value});
+    console.log('handleOther other47: ', other) // Old value
   };
-
+  console.log('handleOther other49: ', other) // Updated value
+  
   useEffect(()=>{
     if(answers[questionNumber]){
       setOptions(answers[questionNumber].options)
       setOther(answers[questionNumber].other)
     }     
   },[answers, questionNumber])
-
-  const handleSubmit = () => {
-    // console.log("old options: ", options, other); // push "other" into "options" array
-    options.push(other) // *** DO WE STILL WANT THIS LINE?? ***
-    // console.log("updated options: ", options); // push "other" into "options" array
-    console.log("OPTIONS: ", options, "OTHER: ", other)
-
-  };
+  
+  console.log('other line 58: ', other) // Updated value - but doesn't stick around when using back button (unless we select another checkbox after...)
 
   return (
     <div className="question-component">
@@ -107,11 +103,6 @@ function Checkboxes({ questionNumber, question, texts }) {
         </div>
         <div style={{ color: "red" }}>{error}</div>
       </form>
-      {/* <div className="button-submit">
-        <button onClick={handleSubmit} type="submit">
-          Submit
-        </button>
-      </div> */}
     </div>
   );
 }
