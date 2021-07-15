@@ -59,17 +59,15 @@
 
 .survey-selection-container {
   display: flex;
-  /* justify-content: space-around; */
 }
 
 .survey-selection {
   width: 50%;
-  margin: auto;
+  margin: 0px auto;
 }
 
 .admin-logo {
   height: 100px;
-  /* margin-left: 20px; */
   position: relative;
   left: 20px;
 }
@@ -94,8 +92,9 @@
 
 .company-and-survey-name-inputs {
   display: flex;
+  margin: 10px 0px;
 }
 
-.company-and-survey-name-inputs .survey-info {
-  margin: 10px;
+.company-and-survey-name-inputs input {
+  width: 100%;
 }
