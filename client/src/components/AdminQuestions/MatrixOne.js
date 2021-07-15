@@ -2,7 +2,7 @@ import Matrix from '../questiontypes/Matrix'
 
 const MatrixOne = ({questionNumber}) => {
     return (
-        <div>
+        <div className="question-component admin-question-component">
             <Matrix
                 question={"Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"}
                 questionNumber={questionNumber}

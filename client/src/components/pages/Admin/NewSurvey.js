@@ -1,9 +1,16 @@
 import { useState } from "react";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
-import Test from "../../questiontypes/Test";
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
+import CommentOne from "../../AdminQuestions/CommentOne"
+import MatrixOne from "../../AdminQuestions/MatrixOne"
+import MatrixTwo from "../../AdminQuestions/MatrixTwo"
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
+// import NewSliderOne (add when we have it)
+import PostalCodeOne from "../../AdminQuestions/PostalCodeOne"
+import RadioOne from "../../AdminQuestions/RadioOne"
+import SelectOne from "../../AdminQuestions/SelectOne"
+import SliderTwo from "../../AdminQuestions/sliderTwo" // Not working
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
@@ -18,36 +25,46 @@ const NewSurvey = (props) => {
 
   function addComponent(e) {
     console.log(e.target.id);
-    // setComponentList(componentList.concat(<Test key={componentList.length} /> ))}
 
-    // setComponentList(
-    //   componentList.concat(
-    //     <NarrativeOne
-    //       key={componentList.length}
-    //       question={props.question}
-    //       texts={props.texts}
-    //       questionNumber={props.questionNumber}
-    //     />
-    //   )
-    // );
-
-    // add state??
     let InsertedComponent;
     switch (e.target.id) {
+      case "narrative":
+        console.log("clicked comment");
+        InsertedComponent = NarrativeOne;
+        break;
       case "checkboxes":
         console.log("clicked checkboxes");
         InsertedComponent = CheckboxesOne;
         break;
       case "comment":
         console.log("clicked comment");
-        InsertedComponent = NarrativeOne;
+        InsertedComponent = CommentOne;
         break;
-      case "narrative":
-        console.log("clicked comment");
-        InsertedComponent = NarrativeOne;
+      case "matrix":
+        console.log("clicked matrix");
+        InsertedComponent = MatrixOne;
+        break;
+      case "matrixNum":
+        console.log("clicked matrixNum");
+        InsertedComponent = MatrixTwo;
+        break;
+      case "postalCode":
+        console.log("clicked postalCode");
+        InsertedComponent = PostalCodeOne;
+        break;
+      case "radioButtons":
+        console.log("clicked radioButtons");
+        InsertedComponent = RadioOne;
+        break;
+      case "selectOne":
+        console.log("clicked selectOne");
+        InsertedComponent = SelectOne;
+        break;
+      case "sliderTwo":
+        console.log("clicked sliderTwo");
+        InsertedComponent = SliderTwo;
         break;
       default:
-      // code block
     }
 
     setComponentList(
@@ -60,12 +77,6 @@ const NewSurvey = (props) => {
         />
       )
     );
-    // setComponentList(componentList.concat(<CheckboxesOne key={componentList.length}
-    //       question={props.question} texts={props.texts} questionNumber={props.questionNumber}
-    //     />
-    //   )
-    // );
-    // console.log(componentList)
   }
 
   async function handleSubmit() {
@@ -99,15 +110,6 @@ const NewSurvey = (props) => {
           onChange={(event) => onInputChange(event, setSurveyName)}
         />
       </div>
-      {/* <input
-        id="survey-narrative"
-        className="survey-info"
-        placeholder="Survey narrative"
-        onChange={(event) => onInputChange(event, setSurveyNarrative)}
-      />
-      <NarrativeOne
-        onChange={(event) => onInputChange(event, setSurveyNarrative)}
-      /> */}
 
       <h3>Choose your own components:</h3>
       {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
@@ -132,11 +134,15 @@ const NewSurvey = (props) => {
           <button id="radioButtons" onClick={addComponent}>
             RadioButtons
           </button>
-          <button id="selectInput" onClick={addComponent}>
-            SelectInput
+          <button id="postalCode" onClick={addComponent}>
+            PostalCode
           </button>
-          <button id="slider" onClick={addComponent}>
-            Slider
+          <button id="selectOne" onClick={addComponent}>
+            SelectOne
+          </button>
+          <button id="sliderTwo" onClick={addComponent} style={{backgroundColor: "red"}}>
+            SliderTwo - <strong> broken! :(</strong>
+            
           </button>
         </div>
 
@@ -148,7 +154,6 @@ const NewSurvey = (props) => {
       </div>
 
       <div className="dividerLine"></div>
-      {/* <hr style={{ margin: "20px" }} /> */}
       <div className="save-survey-button-and-link">
         <button
           type="submit"

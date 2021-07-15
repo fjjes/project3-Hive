@@ -2,7 +2,7 @@ import PostalCode from "../questiontypes/PostalCode";
 
 const PostalCodeOne = ({ questionNumber}) => {
     return (
-        <div className="postalCodeone">
+        <div className="postalCodeone question-component admin-question-component">
           <PostalCode
             question = {'Please enter your Postal Code'}
             questionNumber={questionNumber}

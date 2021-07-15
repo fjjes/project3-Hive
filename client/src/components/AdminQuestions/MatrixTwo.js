@@ -2,7 +2,7 @@ import MatrixNum from '../questiontypes/MatrixNum'
 
 const MatrixTwo = ({questionNumber}) => {
     return (
-        <div>
+        <div className="question-component admin-question-component">
             <MatrixNum 
                 question={"Please rate the importance of followings from 1 to 10:"}
                 questionNumber={questionNumber}

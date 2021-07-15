@@ -2,7 +2,7 @@ import RadioButtons from "../questiontypes/RadioButtons"
 
 const RadioOne = ({questionNumber}) => {
     return (
-        <div className="radio-one">
+        <div className="radio-one question-component admin-question-component">
             <RadioButtons
             question={"What is your department or team?"}
             questionNumber={questionNumber}
