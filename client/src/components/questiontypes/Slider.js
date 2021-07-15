@@ -1,16 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AnswerContext } from '../pages/SurveyQuestionPage';
 import { makeStyles } from "@material-ui/core/styles";
-import NewSlider from "./NewSlider";
+import NewSlider from "./newslider";
 import "../Form.css";
 
 const useStyles = makeStyles({
-  root: {
-    width: 400,
-    height: 300,
-  },
   input: {
-    width: 42,
+    width: 32,
   },
 });
 

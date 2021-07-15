@@ -6,6 +6,7 @@ import RadioButtons from "./questiontypes/RadioButtons";
 import Checkboxes from "./questiontypes/Checkboxes";
 import Matrix from "./questiontypes/Matrix";
 import MatrixNum from "./questiontypes/MatrixNum";
+import PostalCode from "./questiontypes/PostalCode"
 import './Form.css'
 
 const SurveyQuestion = ({questionBlock}) => {
@@ -23,6 +24,7 @@ const SurveyQuestion = ({questionBlock}) => {
                 {questionType === 'slider' && <Slider question={question} texts={texts} questionNumber={questionNumber}/>}
                 {questionType === 'matrix1' && <Matrix question={question} texts={texts} questionNumber={questionNumber}/>}
                 {questionType === 'matrix2' && <MatrixNum question={question} texts={texts} questionNumber={questionNumber}/>}
+                {questionType === 'postal' && <PostalCode question={question} questionNumber={questionNumber}/>}
                 {questionType === 'comment' && <Comment question={question} questionNumber={questionNumber} />}      
         </div>
     );
