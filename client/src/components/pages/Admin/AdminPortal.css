@@ -1,41 +1,24 @@
+/* *************************** GENERIC STUFF *************************** */
+
+/* Page In General */
+
+h1 {
+  width: 200px;
+}
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  justify-content: end;
+  align-items: end;
+  align-content: end;
+}
+
 .admin-container  {
   display: flex;
   flex-direction: column;
-}
-
-.admin-container input,
-.admin-container button {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  /* display: flex; broken? */
-  width: 200px;
-}
-
-.survey-selection-sidebar {
-  width: 20%;
-  padding: 10px 20px;
-  /* background-color: #f59645; */
-  margin-left: -20px;
-}
-
-.survey-selection-sidebar button {
-  margin: 0;
-  margin-left: -20px;
-  border-radius: 0 10px 10px 0px;
-  border: 1px #f59645 solid;
-  border-left: 0;
-  padding: 10px 0;
-  font-size: 1rem;
-  background-color: #fff;
-}
-
-.survey-selection-sidebar button:hover,
-.view-all-button:hover {
-  transform: translate(1px, 1px);
-}
-
-.admin-container {
   background-color: #fff;
   box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -43,94 +26,7 @@
   height: 100%;
 }
 
-.main-admin-buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.main-admin-buttons button {
-  justify-content: center;
-  margin: 10px 10px 20px 10px;
-}
-
-.main-admin-buttons button:hover,
-.save-survey-button:hover {
-  background-color: #35c0c2;
-}
-
-.search-input {
-  display: inline;
-}
-
-.admin-container-top {
-  padding: 20px 20px 0px 20px;
-}
-
-.admin-container-bottom {
-  padding: 20px;
-  background-color: #f59645;
-  margin: 0px -20px -20px -20px;
-  border-radius: 0 0 5px 5px;
-}
-
-.admin-question-component {
-  border-radius: 10px;
-  /* background-color: lightgrey; */
-  background-color: white;
-  padding: 5px;
-  margin: 15px;
-}
-
-.admin-question-component label,
-.admin-question-component input {
-  display: inline-block;
-  margin: 0px;
-}
-
-.survey-selection h3,
-.survey-selection-sidebar h3 {
-  /* font-weight: bold; */
-  text-align: center;
-  justify-content: end;
-  align-items: end;
-  align-content: end;
-  /* height: 50px; */
-}
-
-.survey-selection-container {
-  display: flex;
-  background-color: #f59645;
-/* margin-left: -20px; */
-/* margin-right: -40px; */
-}
-
-.survey-selection {
-
-
-  padding: 10px 0 0 0;
-  width: 100%;
-  /* margin: 0px auto; */
-  /* border-left: #f59645 10px solid; */
-  height: 100%;
-  
-}
-
-.survey-selection-background {
-  /* margin-top: 20px; */
-  /* background-color: lightgrey; */
-  padding: 10px;
-  /* width: 100%; */
-  /* margin: 10px; */
-  /* margin: 10px auto; */
-  /* border-left: #f59645 10px solid; */
-  height: 100%;
-}
-
-.survey-selection input[type="radio"],
-.survey-selection input[type="checkbox"] {
-  width: 40px;
-}
+/* Page Top */
 
 .admin-logo {
   height: 100px;
@@ -144,23 +40,154 @@
   align-items: center;
 }
 
-.save-survey-button-and-link {
-  align-items: center;
+.admin-container-top {
   display: flex;
-  flex-direction: column;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 20px 20px 0px 20px;
+  align-items: flex-end;
 }
 
+/* Page Bottom */
+.admin-container-bottom {
+  padding: 20px;
+  background-color: #bce6f8;
+  margin: 0px -20px -20px -20px;
+  border-radius: 0 0 5px 5px;
+}
+
+/* Buttons and Input */
+.admin-container input,
+.admin-container button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.admin-container button {
+  border: 0;
+  background-color: #197e9c;
+  color:white;
+  font-size: 1rem;
+}
+
+.main-admin-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.main-admin-buttons button {
+  margin: 10px 10px 0px 10px;
+  padding: 20px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.main-admin-buttons button:hover,
+.save-survey-button:hover {
+  background-color: #35c0c2;
+}
+
+/* Misc */
 .dividerLine {
   border-bottom: rgba(0, 0, 0, 0.2) solid;
   padding: 20px 0;
 }
 
+.note-to-self {
+  color: red;
+  font-size: .9rem;
+  padding: 0;
+}
+
+
+
+/* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  margin: 10px 0px;
+  margin: 10px auto;
+  width: 50%;
 }
 
 .company-and-survey-name-inputs input {
   width: 100%;
+  font-size: 1rem;
+}
+
+.search-input {
+  display: inline;
+}
+
+
+
+/* *************************** CREATE SURVEY *************************** */
+
+/* Left and Right Parts */
+.survey-selection-container {
+  display: flex;
+  background-color: #bce6f8;
+}
+
+/* Left Sidebar */
+.survey-selection-sidebar {
+  width: 15%;
+  padding: 10px 20px;
+  margin-left: -20px;
+}
+
+.survey-selection-sidebar button {
+  margin: 0;
+  margin-left: -20px;
+  border-radius: 0 10px 10px 0px;
+  border: 1px #bce6f8 solid;
+  border-left: 0;
+  padding: 10px 0;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: inset -3px -3px 10px grey;
+  color: black;
+}
+
+.survey-selection-sidebar button:hover {
+  transform: translate(1px, 1px);
+}
+
+/* Right Custom Part */
+.admin-question-component {
+  border-radius: 10px;
+  background-color: white;
+  padding: 5px;
+  margin: 15px;
+}
+
+.admin-question-component label,
+.admin-question-component input {
+  display: inline-block;
+  margin: 0px;
+}
+
+.survey-selected-components {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.survey-selected-components input[type="radio"],
+.survey-selected-components input[type="checkbox"] {
+  width: 40px;
+}
+
+.survey-selected-components-background {
+  padding: 10px;
+  padding-top: 0;
+  height: 100%;
+}
+
+/* Bottom (save button) */
+.save-survey-button-and-link {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }

@@ -1,19 +1,19 @@
 // import writeJsonFile from "write-json-file"
-import { useEffect, useState } from "react";
-import "../../../components/Form.css";
-import "./AdminPortal.css";
+import { useState } from "react";
+import logo from "../../../images/hiveicon.png"
 import NewSurvey from "./NewSurvey";
 import FindSurvey from "./FindSurvey";
-import logo from "../../../images/hiveicon.png"
+import "../../../components/Form.css";
+import "./AdminPortal.css";
 
-const AdminPortal = ({ questionBlock }) => {
-  const [view, setView] = useState("");
-  const [dividerLine, setDividerLine] = useState("none")
+const AdminPortal = () => {
+  const [view, setView] = useState("new");
+  const [findTabColour, setFindTabColour] = useState("grey")
+  const [newTabColour, setNewTabColour] = useState("grey")
 
-  // const question= questionBlock?.question //if questionBlock is defined, set question to be questionBlock.question, otherwise set it as undefined
-  // const texts = questionBlock?.answerOptions
-  // const questionNumber=questionBlock?.questionNumber
-
+  // *** Not working - trying to get active tab to be a different colour ***
+  const active = "#f59645" // Orange
+  const inactive = "#bce6f8" // Dark blue
 
   return (
     <div className="admin-container">
@@ -22,15 +22,17 @@ const AdminPortal = ({ questionBlock }) => {
           <h1>Admin Portal</h1>
           <img src={logo} alt="Hive logo" className="admin-logo"/>
         </div>
-        <div className="main-admin-buttons" style={{borderBottom: dividerLine}}>
-          <button onClick={() => {
-            // setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
-            setView("find")
-            }}>Find existing surveys</button>
-          <button onClick={() => {
-            // setDividerLine("3px rgba(0, 0, 0, 0.2) solid")
+        <div className="main-admin-buttons">
+          <button style={{backgroundColour: newTabColour}} onClick={() => {
             setView("new")
-            }}>Create new survey</button>
+            setFindTabColour(inactive)
+            setNewTabColour(active)
+            }}>Create New Survey</button>
+          <button style={{backgroundColour: findTabColour}} onClick={() => {
+            setView("find")
+            setFindTabColour(active)
+            setNewTabColour(inactive)
+            }}>Find Existing Surveys</button>
         </div>
       </div>
       <div className="admin-container-bottom" style={view === "" ? {padding: "0"} : null}>

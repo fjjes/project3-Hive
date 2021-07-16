@@ -1,6 +1,4 @@
 import { useState } from "react";
-import "../../../components/Form.css";
-// import "./AdminPortal.css";
 
 const FindSurvey = () => {
   const [searchInputCompany, setSearchInputCompany] = useState("");
@@ -15,9 +13,9 @@ const FindSurvey = () => {
 
   return (
     <div>
-      <h2>Find Survey Component</h2>
+      <h2>Find an Existing Survey</h2>
 
-      <p>
+      <p className="note-to-self">
         TO BE COMPLETED LATER: Display all saved surveys, search for an existing
         survey and get its url or edit/copy it
       </p>
