@@ -12,7 +12,7 @@ const questionSchema = new Schema({
         type: String,
         required:true
     },
-    options:[] //could be an array of stings, arrary of objects or none
+    options:[] 
 })
 
 module.exports = mongoose.model('Question', questionSchema, 'question');
