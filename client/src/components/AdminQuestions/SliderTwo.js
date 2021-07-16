@@ -29,7 +29,7 @@ const SliderTwo = () => {
         <span><p className="question-intro">{question}</p></span>
         {texts.map((row, index)=>{
           return(
-            <div className="slider">
+            <div key={index} className="slider">
               <p>{row}</p>
               <Slider
                 //value={typeof getValue === "number" ? getValue : 0}
