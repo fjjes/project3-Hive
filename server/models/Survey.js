@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const surveySchema = new Schema({ 
   surveyNumber: { //every 6 months surveys are sent
-    type: Number,  
+    type: String,  
     required: true
   },
   company:{
