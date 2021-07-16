@@ -9,13 +9,6 @@ h2 {
   text-align: center;
 }
 
-h3 {
-  text-align: center;
-  justify-content: end;
-  align-items: end;
-  align-content: end;
-}
-
 .admin-container  {
   display: flex;
   flex-direction: column;
