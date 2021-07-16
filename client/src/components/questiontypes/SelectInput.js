@@ -18,7 +18,7 @@ const SelectInput = (props) => {
    
     const handleChange = (e,i)=>{
         let newValues = [...values]
-        newValues[i].value= e.target.value
+        newValues[i].value= parseInt(e.target.value)
         setValues(newValues)
 
         // let arr = [...selectArray]
@@ -32,7 +32,7 @@ const SelectInput = (props) => {
     }       
 
     useEffect(()=>{
-        if(answers.length < props.questionNumber){
+        if(!answers[props.questionNumber]){
             let updateAnswers = {...answers}  
            updateAnswers[props.questionNumber]=values
             setAnswers(updateAnswers)
@@ -51,7 +51,13 @@ const SelectInput = (props) => {
                                     <select  value={row.value} onChange={(e)=>handleChange(e,i)}>
                                         <option>--Select--</option>
                                         {selectArray.map((selection, index)=>{ 
-                                            return <option key={index} value={selection}>{selection}</option>
+                                            const isAnswerAlreadyChosen = answers[props.questionNumber]?.find(answer => answer.value === selection);
+                                            const isAnswerForThisQuestion = answers[props.questionNumber]? answers[props.questionNumber][i].value === selection: false;
+                                            let disabled = false;
+                                            if (isAnswerAlreadyChosen && !isAnswerForThisQuestion) {
+                                                disabled = true;
+                                            }
+                                            return <option key={index} disabled={disabled} value={selection}>{selection}</option>
                                         })}  
                                     </select>                         
                         </li>
