@@ -37,6 +37,7 @@ const SurveyQuestionPage = () => {
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
   const [endSurvey, setEndSurvey]=useState(false)
+  const [plus, setPlus]=useState(0)
   
   let id="60dca10c89301e61da23c478"
 
@@ -55,15 +56,21 @@ const SurveyQuestionPage = () => {
   const goToNextQuestion = () => {
     let counter = index + 1;
     setIndex(counter);
-
-    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) //if answer selected only!!!!
-    setProgressBarDone(fullProgress)
+    setPlus(counter)
   };
 
   const goBackAQuestion = ()=> {
     let counter=index -1
     setIndex(counter)
+    
   }
+
+  useEffect(()=>{
+    //let fullProgress = Math.round(((plus / Object.keys(answers).length-1) * 100)) 
+    let fullProgress = Math.round(((plus/ (questionArray.length-1)) * 100)) //should be if answer selected only!!!!
+    setProgressBarDone(fullProgress)
+  },[answers])
+
 
   const onCreateSurveyAnswersClicked= async ()=>{
   let currentDate = new Date()
