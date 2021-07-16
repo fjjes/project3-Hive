@@ -25,14 +25,10 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 50,
     paddingLeft: 50,
   }
-
 }));
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
-
-  // const [surveyNumber, setSurveyNumber]=useState()
-  // const [version, setVersion]=useState()
   const [survey, setSurvey]=useState()
   const [answers, setAnswers]=useState({})
   const value = {answers, setAnswers}
@@ -42,19 +38,18 @@ const SurveyQuestionPage = () => {
   const [progressBarDone, setProgressBarDone]=useState(0);
   const [endSurvey, setEndSurvey]=useState(false)
   
+  let id="60dca10c89301e61da23c478"
 
   useEffect(()=>{
-    const getSurveyQuestions = async () =>{   
-      let response = await fetch('/api/survey')  //should be get by id   
+    const getSurveyQuestions = async (id) =>{   
+      let response = await fetch(`/api/survey/${id}`)   
       let data = await response.json();
       console.log('retrieved data:', data)
-      setSurvey(data[0])
-      setQuestionArray(data[0].questions)
-      console.log('Survey questions:', data[0].questions)
-      // setSurveyNumber(data[0].surveyNumber)
-      // setVersion(data[0].version)
+      setSurvey(data)
+      setQuestionArray(data.questions)
+      console.log('Survey questions:', data.questions)
     }
-  getSurveyQuestions()
+  getSurveyQuestions(id)
   },[])
 
   const goToNextQuestion = () => {
@@ -70,19 +65,15 @@ const SurveyQuestionPage = () => {
     setIndex(counter)
   }
 
-  // const handleSubmit = () => {
-  //   console.log("answerArray at submit:",answerArray);
-  // };
-
   const onCreateSurveyAnswersClicked= async ()=>{
-let currentDate = new Date()
+  let currentDate = new Date()
     let answerToCreate ={
       survey,
       answers,
       answeredDate: currentDate
     }
    
-      let createResponse = await fetch('api/answer',{
+      let createResponse = await fetch('/api/answer',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(answerToCreate)
@@ -109,7 +100,6 @@ let currentDate = new Date()
               {index === questionArray.length-1 && 
               <div className="row">
                 <button className='col1 back-btn' onClick={goBackAQuestion}>Back</button>
-                {/* <button onClick={handleSubmit} type="submit">Submit</button> */}
                 <button className='col2' onClick={onCreateSurveyAnswersClicked}>Submit</button>
               </div>
               }
