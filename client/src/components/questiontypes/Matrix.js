@@ -31,10 +31,6 @@ const Matrix = (props) => {
           setAnswers(updateAnswers)
       }     
   },[])
-  
-  // const handleSubmit = () => {
-  //   console.log(values);
-  // };
 
   return (
     <div className="matrix question-component">
@@ -77,10 +73,6 @@ const Matrix = (props) => {
         }
         </tbody>
       </table>
-        
-      {/* <div className="button-submit">
-        <button onClick={handleSubmit} type="submit">Submit</button>
-      </div> */}
     </div>
   );
 };

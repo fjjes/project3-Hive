@@ -13,4 +13,3 @@ answeredDate: Date
 })
 
 module.exports = mongoose.model('Answer', answerSchema, 'answer');
-

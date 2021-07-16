@@ -21,10 +21,6 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
     }     
   },[])
 
-  // const handleSubmit = () => {
-  //   console.log("value", value);
-  // }
-
   return (
     <div className="radio question-component">   
         <p className="question-intro">Q{questionNumber}.</p><span>
@@ -43,9 +39,6 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
             </label>
               </div>)
             })}
-          {/* <div>
-            <button onClick={handleSubmit} type="submit">Submit</button>
-          </div> */}
     </div>
   );
 }
