@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 require('./Survey')
 const Schema = mongoose.Schema;
 
-const answerSchema = new Schema({ //postal code?
+const answerSchema = new Schema({ 
 survey:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Survey"
         },
-answers:{},//id, answerType(flag(), answer(yes), date/time
+answers:{},
 answeredDate: Date 
 })
 
@@ -29,8 +29,8 @@ module.exports = mongoose.model('Answer', answerSchema, 'answer');
 //                 type: mongoose.Schema.Types.ObjectId,
 //                 ref: "Question"
 //             },
-//          // answerType: String,
-//             answer:String                //array
+//             answers:{}
+//                   
 //         }
 //     ],
 //     answeredDate: Date 

@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { AnswerContext } from '../pages/SurveyQuestionPage';
+import React, { useState, useContext, useEffect } from "react";
+import { AnswerContext } from "../pages/SurveyQuestionPage";
 import { makeStyles } from "@material-ui/core/styles";
 import NewSlider from "./newslider";
 import "../Form.css";
@@ -13,20 +13,27 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
-  const {answers, setAnswers} = useContext(AnswerContext)
+  const { answers, setAnswers } = useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState([]);
 
   useEffect(() => {
     if (values.length === 0) {
-      return;
+      if (answers[questionNumber]) {
+        setValues(answers[questionNumber]);
+      } else {
+        setValues(Array(texts.length).fill(0));
+      }
+    } else {
+      setAnswers((answers) => {
+        let updateAnswers = { ...answers };
+        updateAnswers[questionNumber] = values;
+        return updateAnswers;
+      });
+      setTotalCount(values.reduce((a, b) => a + Number(b)));
+      console.log(totalCount);
     }
-    setTotalCount(values.reduce((a, b) => a + b));
   }, [values]);
-
-  useEffect(() => {
-    setValues(Array(texts.length).fill(0));
-  }, [texts]);
 
   const setValue = (index) => {
     return (newValue) =>
@@ -36,21 +43,9 @@ export default function InputSlider({ questionNumber, question, texts }) {
       });
   };
 
-  useEffect(()=>{
-    if(answers.length < questionNumber){
-        let updateAnswers = {...answers}  
-       updateAnswers[questionNumber]=values
-        setAnswers(updateAnswers)
-    }     
-  },[])
-
-  const handleSubmit = () => {
-    console.log(values);
-  };
-
   return (
-    <div className="slider">
-      <p className="question-number">Q{questionNumber}.</p>
+    <div className="question-component">
+      <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{question}</p>
       </span>
@@ -62,21 +57,13 @@ export default function InputSlider({ questionNumber, question, texts }) {
           setValue={setValue(index)}
           title={text}
           classes={classes}
-          answers={answers}
-          setAnswers={setAnswers}
-          questionNumber={questionNumber}
         />
       ))}
       <NewSlider />
-      <div className="button-submit">
-        <button
-          onClick={handleSubmit}
-          disabled={totalCount === 100 ? false : true}
-          type="submit"
-        >
-          Submit
-        </button>
-      </div>
+      {totalCount == 100 && <p className="submit-message">Success!</p>}
+      {totalCount !== 100 && (
+        <p className="submit-message">Total Needs to be 100!</p>
+      )}
     </div>
   );
 }
