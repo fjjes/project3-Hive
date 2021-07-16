@@ -52,9 +52,9 @@ const SelectInput = (props) => {
                                         <option>--Select--</option>
                                         {selectArray.map((selection, index)=>{ 
                                             const isAnswerAlreadyChosen = answers[props.questionNumber]?.find(answer => answer.value === selection);
-                                            const isAnswerForThisQuestion = answers[props.questionNumber]? answers[props.questionNumber][i].value === selection: false;
+                                            const isAnswerForThisRow = answers[props.questionNumber]? answers[props.questionNumber][i].value === selection: false;
                                             let disabled = false;
-                                            if (isAnswerAlreadyChosen && !isAnswerForThisQuestion) {
+                                            if (isAnswerAlreadyChosen && !isAnswerForThisRow) {
                                                 disabled = true;
                                             }
                                             return <option key={index} disabled={disabled} value={selection}>{selection}</option>

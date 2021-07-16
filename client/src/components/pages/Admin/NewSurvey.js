@@ -8,7 +8,7 @@ import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import PostalCodeOne from "../../AdminQuestions/PostalCodeOne";
 import RadioOne from "../../AdminQuestions/RadioOne";
 import SelectOne from "../../AdminQuestions/SelectOne";
-import SliderTwo from "../../AdminQuestions/sliderTwo"; // Not working
+import SliderTwo from "../../AdminQuestions/SliderTwo"; // Not working
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
@@ -142,12 +142,8 @@ const NewSurvey = (props) => {
           <button id="selectOne" onClick={addComponent}>
             SelectOne
           </button>
-          <button
-            id="sliderTwo"
-            onClick={addComponent}
-            style={{ backgroundColor: "red" }}
-          >
-            SliderTwo - <strong> broken! :(</strong>
+          <button id="sliderTwo" onClick={addComponent}>
+            SliderTwo
           </button>
         </div>
 
