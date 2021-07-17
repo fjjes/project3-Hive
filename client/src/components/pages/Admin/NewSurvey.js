@@ -137,13 +137,15 @@ const NewSurvey = (props) => {
         <input
           id="company-name"
           className="survey-info"
-          placeholder="Company name"
+          placeholder="Company name (required)"
+          required // Fix so that it does validation to check for the required fields, before trying to post
           onChange={(event) => onInputChange(event, setCompany)}
         />
         <input
           id="survey-name"
           className="survey-info"
-          placeholder="Survey name/version"
+          placeholder="Survey version (required)"
+          required
           onChange={(event) => onInputChange(event, setVersion)}
         />
       </div>
