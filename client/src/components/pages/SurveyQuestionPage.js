@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
+  const [createError, setCreateError] = useState()
   const [survey, setSurvey]=useState()
   const [answers, setAnswers]=useState({})
   const value = {answers, setAnswers}
@@ -81,19 +82,29 @@ const SurveyQuestionPage = () => {
       answers,
       answeredDate: currentDate
     }
-   
+    try {
       let createResponse = await fetch('/api/answer',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(answerToCreate)
       })
       console.log('creating an answerRecord', answerToCreate)
-
+      
       if(createResponse.status === 200){
-        console.log('create response is successful')
-       
+          console.log('create response is successful')
+          setEndSurvey(true)
       }
-      setEndSurvey(true)
+      if(createResponse.status !== 200){
+        let errorMessage = await createResponse.text()
+        console.log('We have an error: ', errorMessage)
+        setCreateError(errorMessage)
+      }else{
+        setCreateError(undefined)
+        
+      }
+    }catch(error){
+        console.log('Fetch failed to reach the server:', error)
+    }
   }
 
   return (

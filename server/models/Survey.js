@@ -23,7 +23,8 @@ const surveySchema = new Schema({
       question:String,
       answerOptions: []
     }
-  ]
+  ],
+  createdDate: Date 
 })
 
 module.exports = mongoose.model('Survey', surveySchema, 'survey');

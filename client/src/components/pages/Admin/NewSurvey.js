@@ -107,10 +107,10 @@ const NewSurvey = (props) => {
       company,
       version,
       narrative: narrativeTextValue,
-      createdDate: currentDate,
       questions: {
         questionType: componentListNamesString,
       },
+      createdDate: currentDate,
     };
 
     // Post the custom survey data to the DB
