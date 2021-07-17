@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FindSurvey = () => {
+  const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
 
@@ -11,8 +12,17 @@ const FindSurvey = () => {
     setFunction(event.target.value);
   }
 
+  useEffect(()=>{
+    const getSurveyList = async ()=>{
+      let response= await fetch('/api/survey')
+      let data = await response.json();
+      setRows(data)
+    }
+    getSurveyList()
+  },[])
+
   return (
-    <div>
+    <div className='list-table'>
       <h2>Find an Existing Survey</h2>
 
       <p className="note-to-self">
@@ -35,6 +45,33 @@ const FindSurvey = () => {
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
       />
+   <table>
+      <tbody>
+        <tr>
+          <th>Company</th>
+          <th>Version</th>
+          <th>Survey No.</th>
+          <th>Survey Link</th>
+          <th>Action</th>
+        </tr>
+        {rows.map((row, index)=>{
+          return(
+            <tr key={index}>
+              <td>{row.company}</td>
+              <td>{row.version}</td>
+              <td>{row.surveyNumber}</td>
+              <td>link</td>
+              <td>
+                <button>Edit</button>
+                <button>delete</button>
+              </td>
+            </tr>
+          )
+        })
+
+        }
+      </tbody>
+   </table>
     </div>
   );
 };
