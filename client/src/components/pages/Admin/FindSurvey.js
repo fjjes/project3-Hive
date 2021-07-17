@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import Logo from '../LandingPage/Logo'
 
 const FindSurvey = () => {
+  const {surveyId}= useParams()
   const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
@@ -60,7 +63,10 @@ const FindSurvey = () => {
               <td>{row.company}</td>
               <td>{row.version}</td>
               <td>{row.surveyNumber}</td>
-              <td>link</td>
+              <td>
+                
+                <Link to={`/survey/${surveyId}`}>{`http://localhost:4444/survey/${surveyId}`}</Link>
+              </td>
               <td>
                 <button>Edit</button>
                 <button>delete</button>
