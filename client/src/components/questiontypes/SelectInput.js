@@ -37,6 +37,7 @@ const SelectInput = (props) => {
            updateAnswers[props.questionNumber]=values
             setAnswers(updateAnswers)
         }     
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
 

@@ -25,6 +25,7 @@ const PostalCode =({questionNumber, question})=> {
        updateAnswers[questionNumber]=postalcode
         setAnswers(updateAnswers)
     }     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
 

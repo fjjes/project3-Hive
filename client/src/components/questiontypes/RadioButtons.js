@@ -19,6 +19,7 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
        updateAnswers[questionNumber]=value
         setAnswers(updateAnswers)
     }     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (

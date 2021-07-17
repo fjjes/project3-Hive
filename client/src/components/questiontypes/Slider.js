@@ -33,6 +33,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
       setTotalCount(values.reduce((a, b) => a + Number(b)));
       console.log(totalCount);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
   const setValue = (index) => {

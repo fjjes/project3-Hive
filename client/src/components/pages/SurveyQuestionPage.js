@@ -50,7 +50,8 @@ const SurveyQuestionPage = () => {
       setQuestionArray(data.questions)
       console.log('Survey questions:', data.questions)
     }
-  getSurveyQuestions(id)
+    getSurveyQuestions(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const goToNextQuestion = () => {
@@ -69,6 +70,7 @@ const SurveyQuestionPage = () => {
     //let fullProgress = Math.round(((plus / Object.keys(answers).length-1) * 100)) 
     let fullProgress = Math.round(((plus/ (questionArray.length-1)) * 100)) //should be if answer selected only!!!!
     setProgressBarDone(fullProgress)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[answers])
 
 
