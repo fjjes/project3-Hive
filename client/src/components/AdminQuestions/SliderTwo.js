@@ -36,7 +36,6 @@ const SliderTwo = () => {
                 ariaLabelledbyForHandle="input-slider"
                 marks={marks}
                 step={5}
-                marks
                 min={0}
                 max={100}
               />

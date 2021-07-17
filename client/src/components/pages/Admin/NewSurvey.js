@@ -8,7 +8,7 @@ import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import PostalCodeOne from "../../AdminQuestions/PostalCodeOne";
 import RadioOne from "../../AdminQuestions/RadioOne";
 import SelectOne from "../../AdminQuestions/SelectOne";
-import SliderTwo from "../../AdminQuestions/SliderTwo"; // Not working
+import SliderTwo from "../../AdminQuestions/SliderTwo"; 
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
