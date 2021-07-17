@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link} from "react-router-dom";
 import Logo from '../LandingPage/Logo'
 
 const FindSurvey = () => {
@@ -65,7 +65,7 @@ const FindSurvey = () => {
               <td>{row.surveyNumber}</td>
               <td>
                 
-                <Link to={`/survey/${surveyId}`}>{`http://localhost:4444/survey/${surveyId}`}</Link>
+                <Link to={`/survey/${surveyId}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
               </td>
               <td>
                 <button>Edit</button>
