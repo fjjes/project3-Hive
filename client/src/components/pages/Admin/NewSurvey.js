@@ -16,6 +16,7 @@ const NewSurvey = (props) => {
   const [version, setVersion] = useState("");
   const [componentList, setComponentList] = useState([]);
   const [narrativeTextValue, setNarrativeTextValue] = useState("");
+  const [error, setError]=useState()
 
   // Create uuid to be used as survey number
   const uuid = uuidv4();
@@ -114,17 +115,28 @@ const NewSurvey = (props) => {
     };
 
     // Post the custom survey data to the DB
-    let createSurvey = await fetch("/api/survey", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(surveyToCreate),
-    });
-    console.log("Creating a custom-built survey, yay!", surveyToCreate);
-
-    if (createSurvey.status === 200) {
-      console.log("create response is successful");
+      try{
+        let createSurvey = await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(surveyToCreate),
+        });
+        console.log("Creating a custom-built survey, yay!", surveyToCreate);
+    
+        if (createSurvey.status === 200) {
+          console.log("create response is successful");
+        }
+        if(createSurvey.status !== 200){
+          let errorMessage = await createSurvey.text()
+          console.log('We have an error: ', errorMessage)
+          setError(errorMessage)
+        }else{
+          setError(undefined)
+        }
+      }catch(error){
+        console.log('Fetch failed to reach the server:', error)
+      }
     }
-  }
 
   return (
     <div>
@@ -195,20 +207,15 @@ const NewSurvey = (props) => {
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
-        <button
-          type="submit"
-          className="save-survey-button"
-          onClick={handleSubmit}
-        >
-          Save Survey
-        </button>
-        <div className="note-to-self">
+        <button type="submit" className="save-survey-button" onClick={handleSubmit}>Save Survey</button>
+        {error && <div>{error}</div>}
+        {/* <div className="note-to-self">
           Survey link to send out (will need to create this upon saving and make
           it actually access a survey): &nbsp;
           <a href={url} style={{ paddingBottom: "10px" }}>
             {url}
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

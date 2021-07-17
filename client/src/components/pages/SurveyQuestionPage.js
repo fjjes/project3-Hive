@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
-  const [createError, setCreateError] = useState()
+  const [error, setError] = useState()
   const [survey, setSurvey]=useState()
   const [answers, setAnswers]=useState({})
   const value = {answers, setAnswers}
@@ -97,9 +97,10 @@ const SurveyQuestionPage = () => {
       if(createResponse.status !== 200){
         let errorMessage = await createResponse.text()
         console.log('We have an error: ', errorMessage)
-        setCreateError(errorMessage)
+        setEndSurvey(false)
+        setError(errorMessage)  
       }else{
-        setCreateError(undefined)
+        setError(undefined)
         
       }
     }catch(error){
@@ -121,6 +122,7 @@ const SurveyQuestionPage = () => {
               <div className="row">
                 <button className='col1 back-btn' onClick={goBackAQuestion}>Back</button>
                 <button className='col2' onClick={onCreateSurveyAnswersClicked}>Submit</button>
+                {error && <div>{error}</div>}
               </div>
               }
               {index!== 0 && index!== questionArray.length-1 &&
