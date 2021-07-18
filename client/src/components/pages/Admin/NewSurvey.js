@@ -198,70 +198,70 @@ const NewSurvey = (props) => {
               {errors.company && touched.company && <div>{errors.company}</div>}
               {errors.version && touched.version && <div>{errors.version}</div>}
             </div>
+          </Form>
+        )}
+      </Formik>
 
-            {/* LEFT PART OF PAGE */}
-            {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
-            <div className="survey-selection-container">
-              <div className="survey-selection-sidebar">
-                <button id="narrative" onClick={addComponent}>
-                  Narrative
-                </button>
-                <button id="checkboxes" onClick={addComponent}>
-                  Checkboxes
-                </button>
-                <button id="comment" onClick={addComponent}>
-                  Comment
-                </button>
-                <button id="matrix" onClick={addComponent}>
-                  Matrix
-                </button>
-                <button id="matrixNum" onClick={addComponent}>
-                  MatrixNum
-                </button>
-                <button id="radioButtons" onClick={addComponent}>
-                  RadioButtons
-                </button>
-                <button id="postalCode" onClick={addComponent}>
-                  PostalCode
-                </button>
-                <button id="selectOne" onClick={addComponent}>
-                  SelectOne
-                </button>
-                <button id="sliderTwo" onClick={addComponent}>
-                  SliderTwo
-                </button>
-              </div>
+      {/* LEFT PART OF PAGE */}
+      {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
+      <div className="survey-selection-container">
+        <div className="survey-selection-sidebar">
+          <button id="narrative" onClick={addComponent}>
+            Narrative
+          </button>
+          <button id="checkboxes" onClick={addComponent}>
+            Checkboxes
+          </button>
+          <button id="comment" onClick={addComponent}>
+            Comment
+          </button>
+          <button id="matrix" onClick={addComponent}>
+            Matrix
+          </button>
+          <button id="matrixNum" onClick={addComponent}>
+            MatrixNum
+          </button>
+          <button id="radioButtons" onClick={addComponent}>
+            RadioButtons
+          </button>
+          <button id="postalCode" onClick={addComponent}>
+            PostalCode
+          </button>
+          <button id="selectOne" onClick={addComponent}>
+            SelectOne
+          </button>
+          <button id="sliderTwo" onClick={addComponent}>
+            SliderTwo
+          </button>
+        </div>
 
-              {/* RIGHT PART OF PAGE */}
-              <div className="survey-selected-components">
-                <div className="survey-selected-components-background">
-                  {/* Displays the question components that have been selected */}
-                  <div>{componentList}</div>
-                </div>
-              </div>
-            </div>
+        {/* RIGHT PART OF PAGE */}
+        <div className="survey-selected-components">
+          <div className="survey-selected-components-background">
+            {/* Displays the question components that have been selected */}
+            <div>{componentList}</div>
+          </div>
+        </div>
+      </div>
 
-            {/* BOTTOM PART OF PAGE */}
-            <div className="dividerLine"></div>
-            <div className="save-survey-button-and-link">
-              <button
-                type="submit"
-                className="save-survey-button"
-                onClick={handleSubmit}
-              >
-                Save Survey
-              </button>
-              {/* <div className="note-to-self">
+      {/* BOTTOM PART OF PAGE */}
+      <div className="dividerLine"></div>
+      <div className="save-survey-button-and-link">
+        <button
+          type="submit"
+          className="save-survey-button"
+          onClick={handleSubmit}
+        >
+          Save Survey
+        </button>
+        {/* <div className="note-to-self">
           Survey link to send out (will need to create this upon saving and make
           it actually access a survey): &nbsp;
           <a href={url} style={{ paddingBottom: "10px" }}>
             {url}
           </a>
         </div> */}
-            </div>
-          </Form>
-        )}
-      </Formik>
+      </div>
     </div>
   );
 };
