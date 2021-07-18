@@ -82,7 +82,7 @@ const FindSurvey = () => {
               </td>
               <td>
                 <button className="clear"><BsIcons.BsPencilSquare /></button>
-                <span className="slash">/</span>
+                <span className="slash" style={{color:"#fff"}}>/</span>
                 <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
               </td>
             </tr>
