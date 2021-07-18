@@ -43,6 +43,7 @@ const FindSurvey = () => {
     })
     .then(res => res.json())
     .then(json => {
+      onCancel()
       getSurveyList()
       console.log('updateResponse:', updateResponse)
     })
@@ -55,6 +56,13 @@ const FindSurvey = () => {
     setSurveyNum(currentSurveyNum)
   }
 
+  const onSave= (id, newCompany, newVersion, newSurveyNumber)=> {
+    updateSurveys(id, newCompany, newVersion, newSurveyNumber )
+  }
+
+  const onCancel=()=>{
+    setInEditMode({status:false, rowKey:null})
+  }
 
   const handleDeleteClick = async (id)=>{
     let deleteResponse = await fetch(`/api/survey/${id}`,{
@@ -124,10 +132,20 @@ const FindSurvey = () => {
               <td>
                 <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
               </td>
-              <td>
-                <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
+              <td>{
+                  inEditMode.status && inEditMode.rowKey===row._id ? 
+                  <div>
+                  <button onClick={()=> onSave(row._id, company, version, surveyNum)}>Save</button>
+                  <button onClick={()=> onCancel()}>Cancel</button>
+                  </div>
+                  :
+                  <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
+                }
                 <span className="slash" style={{color:"#fff"}}>/</span>
                 <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
+                {/* <button className="clear"><BsIcons.BsPencilSquare /></button>
+                <span className="slash" style={{color:"#fff"}}>/</span>
+                <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button> */}
               </td>
             </tr>
           )
