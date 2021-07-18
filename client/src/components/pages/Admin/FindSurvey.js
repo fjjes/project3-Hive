@@ -15,14 +15,27 @@ const FindSurvey = () => {
     setFunction(event.target.value);
   }
 
+  const getSurveyList = async ()=>{
+    let response= await fetch('/api/survey')
+    let data = await response.json();
+    setRows(data)
+  }
+
   useEffect(()=>{
-    const getSurveyList = async ()=>{
-      let response= await fetch('/api/survey')
-      let data = await response.json();
-      setRows(data)
-    }
     getSurveyList()
   },[])
+
+  const handleDeleteClick = async (id)=>{
+    let deleteResponse = await fetch(`/api/survey/${id}`,{
+      method:'DELETE',
+      headers:{'Content-Type': 'application/json'},
+    })
+    if(deleteResponse.status === 200){
+      getSurveyList()
+    }
+    console.log('delete response:', deleteResponse) 
+  }
+
 
   return (
     <div className='list-table'>
@@ -70,7 +83,7 @@ const FindSurvey = () => {
               <td>
                 <button className="clear"><BsIcons.BsPencilSquare /></button>
                 <span className="slash">/</span>
-                <button className="clear"><RiIcons.RiDeleteBinFill/></button>
+                <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
               </td>
             </tr>
           )
