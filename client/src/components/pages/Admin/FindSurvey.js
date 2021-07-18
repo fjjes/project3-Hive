@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, Link} from "react-router-dom";
-import Logo from '../LandingPage/Logo'
+import { Link} from "react-router-dom";
 
 const FindSurvey = () => {
-  const {surveyId}= useParams()
   const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
@@ -28,10 +26,10 @@ const FindSurvey = () => {
     <div className='list-table'>
       <h2>Find an Existing Survey</h2>
 
-      <p className="note-to-self">
+      {/* <p className="note-to-self">
         TO BE COMPLETED LATER: Display all saved surveys, search for an existing
         survey and get its url or edit/copy it
-      </p>
+      </p> */}
       <button className="view-all-button">View all surveys</button>
 
       <input
@@ -65,7 +63,7 @@ const FindSurvey = () => {
               <td>{row.surveyNumber}</td>
               <td>
                 
-                <Link to={`/survey/${surveyId}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
+                <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
               </td>
               <td>
                 <button>Edit</button>
