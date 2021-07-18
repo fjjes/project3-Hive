@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link} from "react-router-dom";
 import * as  BsIcons from 'react-icons/bs';
 import * as  RiIcons from 'react-icons/ri';
+import * as  GiIcons from 'react-icons/gi';
+import * as  MdIcons from 'react-icons/md';
+
 
 const FindSurvey = () => {
   const [rows, setRows]= useState([])
@@ -135,17 +138,15 @@ const FindSurvey = () => {
               <td>{
                   inEditMode.status && inEditMode.rowKey===row._id ? 
                   <div>
-                  <button onClick={()=> onSave(row._id, company, version, surveyNum)}>Save</button>
-                  <button onClick={()=> onCancel()}>Cancel</button>
+                  <button className="clear" onClick={()=> onSave(row._id, company, version, surveyNum)}><GiIcons.GiSaveArrow/></button>
+                  <span className="slash" style={{color:"#fff"}}>/</span>
+                  <button className="clear" onClick={()=> onCancel()}><MdIcons.MdCancel/></button>
                   </div>
                   :
                   <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
                 }
                 <span className="slash" style={{color:"#fff"}}>/</span>
                 <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
-                {/* <button className="clear"><BsIcons.BsPencilSquare /></button>
-                <span className="slash" style={{color:"#fff"}}>/</span>
-                <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button> */}
               </td>
             </tr>
           )
