@@ -223,3 +223,14 @@ h2 {
   margin-bottom:30px;
   text-align: center;
 }
+
+.list-table .clear{
+  background-color: white;
+  font-size: medium;
+  border:none;
+}
+
+.list-table .slash{
+  margin-left: 5px;
+  margin-right: 5px;
+}

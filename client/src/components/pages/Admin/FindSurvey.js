@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link} from "react-router-dom";
+import * as  BsIcons from 'react-icons/bs';
+import * as  RiIcons from 'react-icons/ri';
 
 const FindSurvey = () => {
   const [rows, setRows]= useState([])
@@ -66,8 +68,9 @@ const FindSurvey = () => {
                 <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
               </td>
               <td>
-                <button>Edit</button>
-                <button>Delete</button>
+                <button className="clear"><BsIcons.BsPencilSquare /></button>
+                <span className="slash">/</span>
+                <button className="clear"><RiIcons.RiDeleteBinFill/></button>
               </td>
             </tr>
           )
