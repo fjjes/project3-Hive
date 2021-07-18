@@ -22,7 +22,7 @@ const AdminPortal = () => {
           <h1>Admin Portal</h1>
           <img src={logo} alt="Hive logo" className="admin-logo"/>
         </div>
-        <div className="main-admin-buttons">
+        {/* <div className="main-admin-buttons">
           <button style={{backgroundColour: newTabColour}} onClick={() => {
             setView("new")
             setFindTabColour(inactive)
@@ -33,7 +33,7 @@ const AdminPortal = () => {
             setFindTabColour(active)
             setNewTabColour(inactive)
             }}>Find Existing Surveys</button>
-        </div>
+        </div> */}
       </div>
       <div className="admin-container-bottom" style={view === "" ? {padding: "0"} : null}>
         {view === "find" ? <FindSurvey /> : null}
