@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useHistory } from "react-router"
+import { useHistory } from "react-router";
+import { Formik, Form, Field } from "formik";
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
 import CommentOne from "../../AdminQuestions/CommentOne";
 import MatrixOne from "../../AdminQuestions/MatrixOne";
@@ -9,16 +10,16 @@ import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import PostalCodeOne from "../../AdminQuestions/PostalCodeOne";
 import RadioOne from "../../AdminQuestions/RadioOne";
 import SelectOne from "../../AdminQuestions/SelectOne";
-import SliderTwo from "../../AdminQuestions/SliderTwo"; 
+import SliderTwo from "../../AdminQuestions/SliderTwo";
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
-  let history = useHistory()
+  let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [componentList, setComponentList] = useState([]);
   const [narrativeTextValue, setNarrativeTextValue] = useState("");
-  const [error, setError]=useState()
+  const [error, setError] = useState();
 
   // Create uuid to be used as survey number
   const uuid = uuidv4();
@@ -83,6 +84,23 @@ const NewSurvey = (props) => {
     setFunction(event.target.value);
   }
 
+  // Validation to check that the required fields are filled out
+  function validateCompany(value) {
+    let validationError;
+    if (!value) {
+      validationError = "Company name is required";
+    }
+    return validationError;
+  }
+
+  function validateVersion(value) {
+    let validationError;
+    if (!value) {
+      validationError = "Survey version is required";
+    }
+    return validationError;
+  }
+
   async function handleSubmit() {
     const surveyNumber = uuid;
 
@@ -94,14 +112,14 @@ const NewSurvey = (props) => {
     console.log("List of selected components: ", componentListNames);
     let componentListNamesString = componentListNames.toString();
     console.log("componentListNamesString: ", componentListNamesString);
-    
+
     // Log the info being saved into the DB
     console.log("***** DATA TO SAVE TO DATABASE *****");
-    console.log("surveyNumber: ", surveyNumber)
+    console.log("surveyNumber: ", surveyNumber);
     console.log("company: ", company);
     console.log("version: ", version);
     console.log("narrativeTextValue: ", narrativeTextValue);
-    console.log("componentListNamesString: ", componentListNamesString)
+    console.log("componentListNamesString: ", componentListNamesString);
 
     // "questions" (below) will need to be edited so it saves more than just the question names into the database
     let currentDate = new Date();
@@ -117,30 +135,30 @@ const NewSurvey = (props) => {
     };
 
     // Post the custom survey data to the DB
-      try{
-        let createSurvey = await fetch("/api/survey", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(surveyToCreate),
-        });
-        console.log("Creating a custom-built survey, yay!", surveyToCreate);
-    
-        // if (createSurvey.status === 200) {
-        //   console.log("create response is successful");
-        // }
-        if(createSurvey.status !== 200){
-          let errorMessage = await createSurvey.text()
-          console.log('We have an error: ', errorMessage)
-          setError(errorMessage)
-        }else{
-          setError(undefined)
-          console.log("create response is successful");
-          history.push('/find-list')
-        }
-      }catch(error){
-        console.log('Fetch failed to reach the server:', error)
+    try {
+      let createSurvey = await fetch("/api/survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(surveyToCreate),
+      });
+      console.log("Creating a custom-built survey, yay!", surveyToCreate);
+
+      // if (createSurvey.status === 200) {
+      //   console.log("create response is successful");
+      // }
+      if (createSurvey.status !== 200) {
+        let errorMessage = await createSurvey.text();
+        console.log("We have an error: ", errorMessage);
+        setError(errorMessage);
+      } else {
+        setError(undefined);
+        console.log("create response is successful");
+        history.push("/find-list");
       }
+    } catch (error) {
+      console.log("Fetch failed to reach the server:", error);
     }
+  }
 
   return (
     <div>
@@ -148,79 +166,102 @@ const NewSurvey = (props) => {
       <h2>
         Build your own survey by choosing from the components on the left.
       </h2>
+      <Formik
+        onSubmit={(values) => {
+          console.log(values);
+        }}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <div className="company-and-survey-name-inputs">
+              <Field
+                name="company"
+                validate={validateCompany}
+                id="company-name"
+                className="survey-info"
+                placeholder="Company name (required)"
+                required
+                onChange={(event) => onInputChange(event, setCompany)}
+              />
+              <Field
+                name="version"
+                validate={validateVersion}
+                id="survey-name"
+                className="survey-info"
+                placeholder="Survey version (required)"
+                required
+                onChange={(event) => onInputChange(event, setVersion)}
+              />
+            </div>
+            {/* Add error messages if the company/version fields are left empty */}
+            <div style={{ color: "red", textAlign: "center" }}>
+              {errors.company && touched.company && <div>{errors.company}</div>}
+              {errors.version && touched.version && <div>{errors.version}</div>}
+            </div>
 
-      <div className="company-and-survey-name-inputs">
-        <input
-          id="company-name"
-          className="survey-info"
-          placeholder="Company name (required)"
-          required // Fix so that it does validation to check for the required fields, before trying to post
-          onChange={(event) => onInputChange(event, setCompany)}
-        />
-        <input
-          id="survey-name"
-          className="survey-info"
-          placeholder="Survey version (required)"
-          required
-          onChange={(event) => onInputChange(event, setVersion)}
-        />
-      </div>
+            {/* LEFT PART OF PAGE */}
+            {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
+            <div className="survey-selection-container">
+              <div className="survey-selection-sidebar">
+                <button id="narrative" onClick={addComponent}>
+                  Narrative
+                </button>
+                <button id="checkboxes" onClick={addComponent}>
+                  Checkboxes
+                </button>
+                <button id="comment" onClick={addComponent}>
+                  Comment
+                </button>
+                <button id="matrix" onClick={addComponent}>
+                  Matrix
+                </button>
+                <button id="matrixNum" onClick={addComponent}>
+                  MatrixNum
+                </button>
+                <button id="radioButtons" onClick={addComponent}>
+                  RadioButtons
+                </button>
+                <button id="postalCode" onClick={addComponent}>
+                  PostalCode
+                </button>
+                <button id="selectOne" onClick={addComponent}>
+                  SelectOne
+                </button>
+                <button id="sliderTwo" onClick={addComponent}>
+                  SliderTwo
+                </button>
+              </div>
 
-      {/* LEFT PART OF PAGE */}
-      {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
-      <div className="survey-selection-container">
-        <div className="survey-selection-sidebar">
-          <button id="narrative" onClick={addComponent}>
-            Narrative
-          </button>
-          <button id="checkboxes" onClick={addComponent}>
-            Checkboxes
-          </button>
-          <button id="comment" onClick={addComponent}>
-            Comment
-          </button>
-          <button id="matrix" onClick={addComponent}>
-            Matrix
-          </button>
-          <button id="matrixNum" onClick={addComponent}>
-            MatrixNum
-          </button>
-          <button id="radioButtons" onClick={addComponent}>
-            RadioButtons
-          </button>
-          <button id="postalCode" onClick={addComponent}>
-            PostalCode
-          </button>
-          <button id="selectOne" onClick={addComponent}>
-            SelectOne
-          </button>
-          <button id="sliderTwo" onClick={addComponent}>
-            SliderTwo
-          </button>
-        </div>
+              {/* RIGHT PART OF PAGE */}
+              <div className="survey-selected-components">
+                <div className="survey-selected-components-background">
+                  {/* Displays the question components that have been selected */}
+                  <div>{componentList}</div>
+                </div>
+              </div>
+            </div>
 
-        {/* RIGHT PART OF PAGE */}
-        <div className="survey-selected-components">
-          <div className="survey-selected-components-background">
-            {/* Displays the question components that have been selected */}
-            <div>{componentList}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* BOTTOM PART OF PAGE */}
-      <div className="dividerLine"></div>
-      <div className="save-survey-button-and-link">
-        <button type="submit" className="save-survey-button" onClick={handleSubmit}>Save Survey</button>
-        {error && <div>{error}</div>}
-        {/* <div className="note-to-self">
+            {/* BOTTOM PART OF PAGE */}
+            <div className="dividerLine"></div>
+            <div className="save-survey-button-and-link">
+              <button
+                type="submit"
+                className="save-survey-button"
+                onClick={handleSubmit}
+              >
+                Save Survey
+              </button>
+              {/* <div className="note-to-self">
           Survey link to send out (will need to create this upon saving and make
           it actually access a survey): &nbsp;
           <a href={url} style={{ paddingBottom: "10px" }}>
             {url}
           </a>
         </div> */}
-      </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
