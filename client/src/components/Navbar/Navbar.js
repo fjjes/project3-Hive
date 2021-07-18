@@ -4,7 +4,7 @@ import {Nav, NavLink, Bars, NavMenu, NavBtnLink} from './NavbarElements';
 
 const Navbar = () => {
   return (
-    <>
+    <div className="navbar">
       <Nav>
         {/* <NavLink to='/'>
           <img src={logo} alt="logo"  style={{ width:'50%', alignItems:'flex-start'}}/>
@@ -18,7 +18,7 @@ const Navbar = () => {
           <NavBtnLink to='/sign-out'>Sign out</NavBtnLink>
         </NavMenu>
       </Nav>
-    </>
+    </div>
   );
 };
 

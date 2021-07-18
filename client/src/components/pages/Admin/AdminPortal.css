@@ -1,5 +1,14 @@
 /* *************************** GENERIC STUFF *************************** */
+/*......... Added with Navbar........ */
+ @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
 
+ .admin-container, .navbar, .list-table{
+  font-family: 'Sora', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 
+/* ............................... */
 /* Page In General */
 
 h1 {
