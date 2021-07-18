@@ -19,11 +19,8 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
        updateAnswers[questionNumber]=value
         setAnswers(updateAnswers)
     }     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-
-  // const handleSubmit = () => {
-  //   console.log("value", value);
-  // }
 
   return (
     <div className="radio question-component">   
@@ -43,9 +40,6 @@ import { AnswerContext } from '../pages/SurveyQuestionPage';
             </label>
               </div>)
             })}
-          {/* <div>
-            <button onClick={handleSubmit} type="submit">Submit</button>
-          </div> */}
     </div>
   );
 }

@@ -30,11 +30,8 @@ const Matrix = (props) => {
          updateAnswers[props.questionNumber]=values
           setAnswers(updateAnswers)
       }     
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-  
-  // const handleSubmit = () => {
-  //   console.log(values);
-  // };
 
   return (
     <div className="matrix question-component">
@@ -77,10 +74,6 @@ const Matrix = (props) => {
         }
         </tbody>
       </table>
-        
-      {/* <div className="button-submit">
-        <button onClick={handleSubmit} type="submit">Submit</button>
-      </div> */}
     </div>
   );
 };

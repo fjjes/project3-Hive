@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, Link} from "react-router-dom";
+import Logo from '../LandingPage/Logo'
 
 const FindSurvey = () => {
+  const {surveyId}= useParams()
+  const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
 
@@ -11,8 +15,17 @@ const FindSurvey = () => {
     setFunction(event.target.value);
   }
 
+  useEffect(()=>{
+    const getSurveyList = async ()=>{
+      let response= await fetch('/api/survey')
+      let data = await response.json();
+      setRows(data)
+    }
+    getSurveyList()
+  },[])
+
   return (
-    <div>
+    <div className='list-table'>
       <h2>Find an Existing Survey</h2>
 
       <p className="note-to-self">
@@ -35,6 +48,36 @@ const FindSurvey = () => {
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
       />
+   <table>
+      <tbody>
+        <tr>
+          <th>Company</th>
+          <th>Version</th>
+          <th>Survey No.</th>
+          <th>Survey Link</th>
+          <th>Action</th>
+        </tr>
+        {rows.map((row, index)=>{
+          return(
+            <tr key={index}>
+              <td>{row.company}</td>
+              <td>{row.version}</td>
+              <td>{row.surveyNumber}</td>
+              <td>
+                
+                <Link to={`/survey/${surveyId}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
+              </td>
+              <td>
+                <button>Edit</button>
+                <button>delete</button>
+              </td>
+            </tr>
+          )
+        })
+
+        }
+      </tbody>
+   </table>
     </div>
   );
 };

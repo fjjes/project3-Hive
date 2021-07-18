@@ -13,26 +13,3 @@ answeredDate: Date
 })
 
 module.exports = mongoose.model('Answer', answerSchema, 'answer');
-
-// const answerSchema = new Schema({
-//     department:{ 
-//         type:String,
-//         required:true,
-//     },
-//     survey:{
-//         type: mongoose.Schema.Types.ObjectId,
-//         ref: "Survey"
-//     },
-//     answerArray:[
-//         {
-//             question:{
-//                 type: mongoose.Schema.Types.ObjectId,
-//                 ref: "Question"
-//             },
-//             answers:{}
-//                   
-//         }
-//     ],
-//     answeredDate: Date 
-// })
-

@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SurveyQuestionPage = () => {
   const classes = useStyles();
+  const [error, setError] = useState()
   const [survey, setSurvey]=useState()
   const [answers, setAnswers]=useState({})
   const value = {answers, setAnswers}
@@ -37,6 +38,7 @@ const SurveyQuestionPage = () => {
   const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
   const [endSurvey, setEndSurvey]=useState(false)
+  const [plus, setPlus]=useState(0)
   
   let id="60dca10c89301e61da23c478"
 
@@ -49,21 +51,29 @@ const SurveyQuestionPage = () => {
       setQuestionArray(data.questions)
       console.log('Survey questions:', data.questions)
     }
-  getSurveyQuestions(id)
+    getSurveyQuestions(id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   const goToNextQuestion = () => {
     let counter = index + 1;
     setIndex(counter);
-
-    let fullProgress = Math.round(((counter / (questionArray.length-1)) * 100)) //if answer selected only!!!!
-    setProgressBarDone(fullProgress)
+    setPlus(counter)
   };
 
   const goBackAQuestion = ()=> {
     let counter=index -1
     setIndex(counter)
+    
   }
+
+  useEffect(()=>{
+    //let fullProgress = Math.round(((plus / Object.keys(answers).length-1) * 100)) 
+    let fullProgress = Math.round(((plus/ (questionArray.length-1)) * 100)) //should be if answer selected only!!!!
+    setProgressBarDone(fullProgress)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[answers])
+
 
   const onCreateSurveyAnswersClicked= async ()=>{
   let currentDate = new Date()
@@ -72,19 +82,30 @@ const SurveyQuestionPage = () => {
       answers,
       answeredDate: currentDate
     }
-   
+    try {
       let createResponse = await fetch('/api/answer',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(answerToCreate)
       })
       console.log('creating an answerRecord', answerToCreate)
-
+      
       if(createResponse.status === 200){
-        console.log('create response is successful')
-       
+          console.log('create response is successful')
+          setEndSurvey(true)
       }
-      setEndSurvey(true)
+      if(createResponse.status !== 200){
+        let errorMessage = await createResponse.text()
+        console.log('We have an error: ', errorMessage)
+        setEndSurvey(false)
+        setError(errorMessage)  
+      }else{
+        setError(undefined)
+        
+      }
+    }catch(error){
+        console.log('Fetch failed to reach the server:', error)
+    }
   }
 
   return (
@@ -101,6 +122,7 @@ const SurveyQuestionPage = () => {
               <div className="row">
                 <button className='col1 back-btn' onClick={goBackAQuestion}>Back</button>
                 <button className='col2' onClick={onCreateSurveyAnswersClicked}>Submit</button>
+                {error && <div>{error}</div>}
               </div>
               }
               {index!== 0 && index!== questionArray.length-1 &&

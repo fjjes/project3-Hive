@@ -9,7 +9,7 @@ function Checkboxes({ questionNumber, question, texts }) {
 
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState("");
-  const [other, setOther] = useState({value: ""});
+  const [other, setOther] = useState({ value: "" });
 
   let checkedArray = [];
 
@@ -25,7 +25,7 @@ function Checkboxes({ questionNumber, question, texts }) {
         option.checked && checkedArray.push(option.value);
       }
       if (!options[options.length - 1].checked) {
-        setOther({value: ""});  // Currently still console.logs the original "other" value (after being unchecked) when using the final Submit button - value of "other" doesn't get updated until we select another checkbox (just hitting "next" doesn't do it)
+        setOther({ value: "" }); // Currently still console.logs the original "other" value (after being unchecked) when using the final Submit button or the back button - but the value should be cleared when it's unchecked
       }
     }
 
@@ -37,25 +37,24 @@ function Checkboxes({ questionNumber, question, texts }) {
       setDisabled(false);
       setError("");
     }
+    let updateAnswers = { ...answers };
+    updateAnswers[questionNumber] = { options: newOptions, other: other };
+    setAnswers(updateAnswers);
+  };
+
+  const handleOther = (e) => {
+    setOther({ value: e.target.value });
     let updateAnswers = {...answers}
-    updateAnswers[questionNumber] = {options: newOptions, other: other}
+    updateAnswers[questionNumber].other = {value: e.target.value}
     setAnswers(updateAnswers)
   };
-  
-  const handleOther = (e) => {
-    setOther({value: e.target.value});
-    console.log('handleOther other47: ', other) // Old value
-  };
-  console.log('handleOther other49: ', other) // Updated value
-  
-  useEffect(()=>{
-    if(answers[questionNumber]){
-      setOptions(answers[questionNumber].options)
-      setOther(answers[questionNumber].other)
-    }     
-  },[answers, questionNumber])
-  
-  console.log('other line 58: ', other) // Updated value - but doesn't stick around when using back button (unless we select another checkbox after...)
+
+  useEffect(() => {
+    if (answers[questionNumber]) {
+      setOptions(answers[questionNumber].options);
+      setOther(answers[questionNumber].other);
+    }
+  }, [answers, questionNumber]);
 
   return (
     <div className="question-component">
@@ -66,40 +65,37 @@ function Checkboxes({ questionNumber, question, texts }) {
         </span>
         <div className="checkbox-form-group">
           {options.map((option, index) => {
-          return (
-                  <div key={index}>
+            return (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  disabled={disabled && !option.checked}
+                  checked={option.checked}
+                  onChange={handleChange}
+                  name="option"
+                  id={option.value}
+                  value={option.value}
+                />
+                <label
+                  htmlFor={option.value}
+                  key={option.value}
+                  style={!option.checked && disabled ? { color: "grey" } : null}
+                >
+                  {options[options.length - 1].checked &&
+                  index === options.length - 1 ? (
                     <input
-                      type="checkbox"
-                      disabled={disabled && !option.checked}
-                      checked={option.checked}
-                      onChange={handleChange}
-                      name="option"
-                      // id={option.value}
-                      value={option.value}
+                      autoFocus
+                      value={other.value}
+                      onChange={handleOther}
+                      placeholder="Enter comment"
                     />
-                    <label
-                      htmlFor={option.value}
-                      key={option.value}
-                      style={
-                        !option.checked && disabled ? { color: "grey" } : null
-                      }
-                    >
-                      {options[options.length - 1].checked &&
-                      index === options.length - 1 ? (
-                        <input
-                          autoFocus
-                          value={other.value}
-                          onChange={handleOther}
-                          placeholder="Enter comment"
-                        />
-                      ) : (
-                        option.value
-                      )}
-                    </label>
-                  </div>
-                );
-              })
-            }
+                  ) : (
+                    option.value
+                  )}
+                </label>
+              </div>
+            );
+          })}
         </div>
         <div style={{ color: "red" }}>{error}</div>
       </form>

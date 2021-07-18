@@ -2,9 +2,9 @@ require('./db')
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const surveySchema = new Schema({ //unique link need to be added?
+const surveySchema = new Schema({ 
   surveyNumber: { //every 6 months surveys are sent
-    type: Number,  
+    type: String,  
     required: true
   },
   company:{
@@ -23,22 +23,8 @@ const surveySchema = new Schema({ //unique link need to be added?
       question:String,
       answerOptions: []
     }
-  ]
+  ],
+  createdDate: Date 
 })
-
-// const surveySchema = new Schema({ //unique link need to be added?
-//   surveyNumber: { //every 6 months surveys are sent
-//     type: Number, 
-//     unique: true, 
-//     required: true
-//   },
-//   company:String,
-//   version: String, //employee or executive???
-//   narrative: String,
-//   questions:[{
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "Question"
-//   }],
-// })
 
 module.exports = mongoose.model('Survey', surveySchema, 'survey');
