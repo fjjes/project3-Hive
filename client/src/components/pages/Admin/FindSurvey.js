@@ -138,15 +138,17 @@ const FindSurvey = () => {
               <td>{
                   inEditMode.status && inEditMode.rowKey===row._id ? 
                   <div>
-                  <button className="clear" onClick={()=> onSave(row._id, company, version, surveyNum)}><GiIcons.GiSaveArrow/></button>
-                  <span className="slash" style={{color:"#fff"}}>/</span>
-                  <button className="clear" onClick={()=> onCancel()}><MdIcons.MdCancel/></button>
+                    <button className="clear" onClick={()=> onSave(row._id, company, version, surveyNum)}><GiIcons.GiSaveArrow/></button>
+                    <span className="slash" style={{color:"#fff"}}>/</span>
+                    <button className="clear" onClick={()=> onCancel()}><MdIcons.MdCancel/></button>
                   </div>
                   :
-                  <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
+                  <div>
+                    <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
+                    <span className="slash" style={{color:"#fff"}}>/</span>
+                    <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
+                  </div>
                 }
-                <span className="slash" style={{color:"#fff"}}>/</span>
-                <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
               </td>
             </tr>
           )
