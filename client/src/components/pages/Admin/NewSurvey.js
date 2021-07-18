@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router"
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
 import CommentOne from "../../AdminQuestions/CommentOne";
 import MatrixOne from "../../AdminQuestions/MatrixOne";
@@ -12,6 +13,7 @@ import SliderTwo from "../../AdminQuestions/SliderTwo";
 import { v4 as uuidv4 } from "uuid";
 
 const NewSurvey = (props) => {
+  let history = useHistory()
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [componentList, setComponentList] = useState([]);
@@ -20,7 +22,7 @@ const NewSurvey = (props) => {
 
   // Create uuid to be used as survey number
   const uuid = uuidv4();
-  const url = `localhost:4444/${uuid}`;
+  //const url = `localhost:4444/${uuid}`;
 
   // Add question components (from /questiontypes folder) to the custom survey, depending on the id of the clicked button (buttons are in the return statement)
   function addComponent(e) {
@@ -123,15 +125,17 @@ const NewSurvey = (props) => {
         });
         console.log("Creating a custom-built survey, yay!", surveyToCreate);
     
-        if (createSurvey.status === 200) {
-          console.log("create response is successful");
-        }
+        // if (createSurvey.status === 200) {
+        //   console.log("create response is successful");
+        // }
         if(createSurvey.status !== 200){
           let errorMessage = await createSurvey.text()
           console.log('We have an error: ', errorMessage)
           setError(errorMessage)
         }else{
           setError(undefined)
+          console.log("create response is successful");
+          history.push('/find-list')
         }
       }catch(error){
         console.log('Fetch failed to reach the server:', error)
