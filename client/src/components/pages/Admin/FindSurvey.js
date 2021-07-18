@@ -7,6 +7,10 @@ const FindSurvey = () => {
   const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
+  const [company, setCompany] = useState('')
+  const [version, setVersion]= useState('')
+  const [surveyNum, setSurveyNum] =useState()
+  const [inEditMode, setInEditMode]=useState({status:false, rowKey:null})
 
   function onSearchInputChange(event, setFunction) {
     console.log(
@@ -25,6 +29,33 @@ const FindSurvey = () => {
     getSurveyList()
   },[])
 
+  const updateSurveys = (id, newCompany, newVersion, newSurveyNumber)=>{
+    let surveyToUpdate ={
+      company: newCompany,
+      version: newVersion,
+      surveyNumber: newSurveyNumber
+    }
+
+    let updateResponse = fetch(`/api/survey/${id}`, {
+      method:'PUT',
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify(surveyToUpdate)
+    })
+    .then(res => res.json())
+    .then(json => {
+      getSurveyList()
+      console.log('updateResponse:', updateResponse)
+    })
+  }
+
+  const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum)=>{
+    setInEditMode({status: true, rowKey:id})
+    setCompany(currentCompany)
+    setVersion(currentVersion)
+    setSurveyNum(currentSurveyNum)
+  }
+
+
   const handleDeleteClick = async (id)=>{
     let deleteResponse = await fetch(`/api/survey/${id}`,{
       method:'DELETE',
@@ -40,11 +71,6 @@ const FindSurvey = () => {
   return (
     <div className='list-table'>
       <h2>Find an Existing Survey</h2>
-
-      {/* <p className="note-to-self">
-        TO BE COMPLETED LATER: Display all saved surveys, search for an existing
-        survey and get its url or edit/copy it
-      </p> */}
       <button className="view-all-button">View all surveys</button>
 
       <input
@@ -73,15 +99,33 @@ const FindSurvey = () => {
         {rows.map((row, index)=>{
           return(
             <tr key={index}>
-              <td>{row.company}</td>
-              <td>{row.version}</td>
-              <td>{row.surveyNumber}</td>
               <td>
-                
+                {
+                  inEditMode.status && inEditMode.rowKey===row._id ? 
+                  <input value={company}  onChange={(e)=> setCompany(e.target.value)}/>
+                  :
+                  row.company
+                }
+              </td>
+              <td>{
+                    inEditMode.status && inEditMode.rowKey===row._id ? 
+                    <input value={version}  onChange={(e)=> setVersion(e.target.value)}/>
+                    :
+                    row.version
+                  }
+              </td>
+              <td>{
+                    inEditMode.status && inEditMode.rowKey===row._id ? 
+                    <input value={surveyNum}  onChange={(e)=> setSurveyNum(e.target.value)}/>
+                    :
+                    row.surveyNumber
+                  }
+              </td>
+              <td>
                 <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
               </td>
               <td>
-                <button className="clear"><BsIcons.BsPencilSquare /></button>
+                <button className="clear" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
                 <span className="slash" style={{color:"#fff"}}>/</span>
                 <button className="clear" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
               </td>

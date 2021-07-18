@@ -143,9 +143,6 @@ const NewSurvey = (props) => {
       });
       console.log("Creating a custom-built survey, yay!", surveyToCreate);
 
-      // if (createSurvey.status === 200) {
-      //   console.log("create response is successful");
-      // }
       if (createSurvey.status !== 200) {
         let errorMessage = await createSurvey.text();
         console.log("We have an error: ", errorMessage);
@@ -210,7 +207,7 @@ const NewSurvey = (props) => {
             Narrative
           </button>
           <button id="checkboxes" onClick={addComponent}>
-            Checkboxes
+            Checkbox
           </button>
           <button id="comment" onClick={addComponent}>
             Comment
@@ -219,19 +216,19 @@ const NewSurvey = (props) => {
             Matrix
           </button>
           <button id="matrixNum" onClick={addComponent}>
-            MatrixNum
+            Matrix-Num
           </button>
           <button id="radioButtons" onClick={addComponent}>
-            RadioButtons
+            RadioButton
           </button>
           <button id="postalCode" onClick={addComponent}>
             PostalCode
           </button>
           <button id="selectOne" onClick={addComponent}>
-            SelectOne
+            Select
           </button>
           <button id="sliderTwo" onClick={addComponent}>
-            SliderTwo
+            Slider
           </button>
         </div>
 
