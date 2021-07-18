@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link} from "react-router-dom";
-import Logo from '../LandingPage/Logo'
+// import Logo from '../LandingPage/Logo'
 
 const FindSurvey = () => {
   const {surveyId}= useParams()
@@ -69,7 +69,7 @@ const FindSurvey = () => {
               </td>
               <td>
                 <button>Edit</button>
-                <button>delete</button>
+                <button>Delete</button>
               </td>
             </tr>
           )
