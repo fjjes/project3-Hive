@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
-import "../../../App.css";
+import "../LandingPage/Logo.css";
 import { Link } from "react-router-dom";
+import image from "../../../images/website.jpg"
 
 export default function Logo({ flashcard }) {
   const [narrative, setNarrative] = useState("");
@@ -34,9 +35,12 @@ export default function Logo({ flashcard }) {
         ></Player>
         <p>Click to Flip</p>
       </div>
-      <div className="theback">
+      <div className="theback"
+      >
         <h1>Hello {company} Team!</h1>
+        <img src={image} style={{height:100}}/>
         <p>{narrative}</p>
+       
         <Link to="/survey">
           <button className="logo-button" type="button">
             ENTER
@@ -47,6 +51,12 @@ export default function Logo({ flashcard }) {
             ENTER
           </button>
         </Link>
+        <div className="adminportal"
+          >
+        <Link to="/admin">
+        <button className="admin-portal-button">Admin Portal</button>
+        </Link>
+          </div>
       </div>
     </div>
   );
