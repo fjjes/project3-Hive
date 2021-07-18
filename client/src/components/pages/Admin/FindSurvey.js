@@ -67,7 +67,7 @@ const FindSurvey = () => {
               </td>
               <td>
                 <button>Edit</button>
-                <button>delete</button>
+                <button>Delete</button>
               </td>
             </tr>
           )
