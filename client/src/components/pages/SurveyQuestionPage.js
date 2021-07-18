@@ -27,33 +27,33 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const SurveyQuestionPage = () => {
+const SurveyQuestionPage = ({survey, questionArray}) => {
   const classes = useStyles();
   const [error, setError] = useState()
-  const [survey, setSurvey]=useState()
+  //const [survey, setSurvey]=useState()
   const [answers, setAnswers]=useState({})
   const value = {answers, setAnswers}
 
   const [index, setIndex] = useState(0);
-  const [questionArray, setQuestionArray] = useState([]);
+  //const [questionArray, setQuestionArray] = useState([]);
   const [progressBarDone, setProgressBarDone]=useState(0);
   const [endSurvey, setEndSurvey]=useState(false)
   const [plus, setPlus]=useState(0)
   
-  let id="60dca10c89301e61da23c478"
+  //let id="60dca10c89301e61da23c478"
 
-  useEffect(()=>{
-    const getSurveyQuestions = async (id) =>{   
-      let response = await fetch(`/api/survey/${id}`)   
-      let data = await response.json();
-      console.log('retrieved data:', data)
-      setSurvey(data)
-      setQuestionArray(data.questions)
-      console.log('Survey questions:', data.questions)
-    }
-    getSurveyQuestions(id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  // useEffect(()=>{
+  //   const getSurveyQuestions = async (id) =>{   
+  //     let response = await fetch(`/api/survey/${id}`)   
+  //     let data = await response.json();
+  //     console.log('retrieved data:', data)
+  //     setSurvey(data)
+  //     setQuestionArray(data.questions)
+  //     console.log('Survey questions:', data.questions)
+  //   }
+  //   getSurveyQuestions(id)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[])
 
   const goToNextQuestion = () => {
     let counter = index + 1;
@@ -90,10 +90,10 @@ const SurveyQuestionPage = () => {
       })
       console.log('creating an answerRecord', answerToCreate)
       
-      if(createResponse.status === 200){
-          console.log('create response is successful')
-          setEndSurvey(true)
-      }
+      // if(createResponse.status === 200){
+      //     console.log('create response is successful')
+      //     setEndSurvey(true)
+      // }
       if(createResponse.status !== 200){
         let errorMessage = await createResponse.text()
         console.log('We have an error: ', errorMessage)
@@ -101,7 +101,8 @@ const SurveyQuestionPage = () => {
         setError(errorMessage)  
       }else{
         setError(undefined)
-        
+        console.log('create response is successful')
+        setEndSurvey(true)
       }
     }catch(error){
         console.log('Fetch failed to reach the server:', error)
