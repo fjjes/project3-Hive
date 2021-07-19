@@ -12,9 +12,8 @@ const options=[
 ]
 
 const question = "Select up to three options:"
-const questionNumber = 1
 
-function CheckboxesOne() {
+function CheckboxesOne({questionNumber}) {
 
   return (
     <div className="question-component admin-question-component">

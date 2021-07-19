@@ -19,7 +19,10 @@ const NewSurvey = (props) => {
   const [version, setVersion] = useState("");
   const [componentList, setComponentList] = useState([]);
   const [narrativeTextValue, setNarrativeTextValue] = useState("");
+  const [questionNumber, setQuestionNumber]=useState(0)
   const [error, setError] = useState();
+  
+  
 
   // Create uuid to be used as survey number
   const uuid = uuidv4();
@@ -28,6 +31,9 @@ const NewSurvey = (props) => {
   // Add question components (from /questiontypes folder) to the custom survey, depending on the id of the clicked button (buttons are in the return statement)
   function addComponent(e) {
     // console.log('Clicked:', e.target.id);
+    let counter = questionNumber + 1
+    setQuestionNumber(counter)
+
     let InsertedComponent;
     switch (e.target.id) {
       case "narrative":
@@ -68,7 +74,7 @@ const NewSurvey = (props) => {
           key={componentList.length}
           question={props.question}
           texts={props.texts}
-          questionNumber={props.questionNumber}
+          questionNumber={counter}
           value={props.narrativeTextValue}
           onChange={handleNarrativeChange}
         />

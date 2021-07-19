@@ -1,9 +1,9 @@
 import React from 'react';
 
 const question = "Enter a comment:"
-const questionNumber = 2
 
-const CommentOne =()=> {
+
+const CommentOne =({questionNumber})=> {
   return (
     <div className="question-component admin-question-component">
       <p className="question-intro">Q{questionNumber}.</p><span>

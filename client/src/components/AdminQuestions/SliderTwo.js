@@ -1,8 +1,7 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-const SliderTwo = () => {
-  let questionNumber= 3
+const SliderTwo = ({questionNumber}) => {
   let question="Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
   let texts=[
     "Home",
@@ -12,16 +11,16 @@ const SliderTwo = () => {
     "Elsewhere"
   ]
 
-  const marks = [
-    {
-      value: 0,
-      label: "0",
-    },
-    {
-      value: 100,
-      label: "100",
-    },
-  ];
+  // const marks = [
+  //   {
+  //     value: 0,
+  //     label: "0",
+  //   },
+  //   {
+  //     value: 100,
+  //     label: "100",
+  //   },
+  // ];
 
   return (
     <div className="question-component admin-question-component">
@@ -34,7 +33,7 @@ const SliderTwo = () => {
               <Slider
                 //value={typeof getValue === "number" ? getValue : 0}
                 ariaLabelledbyForHandle="input-slider"
-                marks={marks}
+                // marks={marks}
                 step={5}
                 min={0}
                 max={100}
