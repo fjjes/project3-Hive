@@ -32,7 +32,7 @@ const SelectInput = (props) => {
     }       
 
     useEffect(()=>{
-        if(!answers[props.questionNumber]){
+        if(answers.length < props.questionNumber){
             let updateAnswers = {...answers}  
            updateAnswers[props.questionNumber]=values
             setAnswers(updateAnswers)

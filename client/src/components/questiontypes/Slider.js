@@ -21,9 +21,10 @@ export default function InputSlider({ questionNumber, question, texts }) {
     if (values.length === 0) {
       if (answers[questionNumber]) {
         setValues(answers[questionNumber]);
-      } else {
-        setValues(Array(texts.length).fill(0));
-      }
+      } 
+      // else {
+      //   setValues(Array(texts.length).fill(0));
+      // }
     } else {
       setAnswers((answers) => {
         let updateAnswers = { ...answers };
