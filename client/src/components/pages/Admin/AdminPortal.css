@@ -234,3 +234,7 @@ h2 {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+.list-table .icn1[title] .icn2[title] .icn3[title] .icn4[title] :hover:after{
+  content:attr(title);
+}
