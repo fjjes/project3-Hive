@@ -73,6 +73,7 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   return (
     <div className="survey-page">
       {endSurvey === false ? (
+        <div>
         <div className="survey-card">
           <div className="the-survey">
             <AnswerContext.Provider value={value}>
@@ -111,11 +112,16 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
             </div>
           </div>
         </div>
-      ) : (
         <Progress done={progressBarDone} />
+        </div>
+      ) : (
+        
         // <Paper className={classes.root2} elevation={4}>
         //   <h2>Thank you for your participation!!</h2>
         // </Paper>
+        <div className="survey-card">
+          <h2>Thank you for your participation!!</h2>
+          </div>
       )}
     </div>
   );
