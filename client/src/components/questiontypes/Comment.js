@@ -16,6 +16,7 @@ const Comment =({questionNumber, question})=> {
       <p className="question-intro">Q{questionNumber}.</p><span>
       <p className="question-intro">{question}</p></span>
       <textarea
+        style={{marginLeft:'40px'}}
         rows="4"
         cols="50"
         label="comment"

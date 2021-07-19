@@ -8,7 +8,7 @@ function NarrativeOne(props) {
 
   return (
     <div className="question-component admin-question-component narrative-component">
-      <input type="text" placeholder="Insert narrative text here..." value={props.value} onChange={handleNarrativeChange}/>
+      <textarea rows="5" cols="100" type="text" placeholder="Insert narrative text here..." value={props.value} onChange={handleNarrativeChange}/>
     </div>
   );
 }
