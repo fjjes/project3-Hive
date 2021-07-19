@@ -68,15 +68,19 @@ const FindSurvey = () => {
   }
 
   const handleDeleteClick = async (id)=>{
-    let deleteResponse = await fetch(`/api/survey/${id}`,{
-      method:'DELETE',
-      headers:{'Content-Type': 'application/json'},
-    })
-    if(deleteResponse.status === 200){
-      getSurveyList()
+    let answer=window.confirm(`Confirm Deleting the survey?`)
+    if(answer){
+      let deleteResponse = await fetch(`/api/survey/${id}`,{
+        method:'DELETE',
+        headers:{'Content-Type': 'application/json'},
+      })
+      if(deleteResponse.status === 200){
+        getSurveyList()
+      }
+      console.log('delete response:', deleteResponse) 
     }
-    console.log('delete response:', deleteResponse) 
   }
+ 
 
 
   return (
