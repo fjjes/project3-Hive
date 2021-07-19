@@ -175,16 +175,12 @@ td {
   transition: 1s ease 0.3s;
 }
 
-.survey-page {
-  height: 100vh;
-  display: grid;
-  place-items: center;
-}
+/* s */
 
 .survey-page button {
-  float: inline-end;
-  display: flex;
-  justify-content: center;
+  /* float: inline-end; */
+  /* display: flex;
+  justify-content: center; */
   padding: 5px;
   font-size: 1rem;
   background-color: #197e9c;
@@ -194,10 +190,33 @@ td {
   border: none;
 }
 
-.survey-page .btns .row {
+/* .survey-page .btns .row {
   clear: both;
+} */
+
+/* Survey Questions */
+
+.survey-card {
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 120px 0px 0px 0px;
+  width: 800px;
+  height: 500px;
+  box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
+  padding: 20px;
 }
 
-.survey-page .btns .col2 {
+.btns {
+  margin-top: 10px;
+}
+
+.col2 {
   float: right;
+}
+
+.row {
+  margin-top: 50px;
 }
