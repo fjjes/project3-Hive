@@ -171,6 +171,19 @@ h2 {
   margin: 0px;
 }
 
+.narrative {
+  display: flex;
+}
+
+.narrative-buttons button {
+  width: 40px;
+  cursor: pointer;
+}
+
+.narrative-text-area {
+  width: 80%;
+}
+
 .survey-selected-components {
   padding: 0;
   width: 100%;
