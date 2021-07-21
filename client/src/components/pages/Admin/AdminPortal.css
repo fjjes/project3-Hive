@@ -171,6 +171,19 @@ h2 {
   margin: 0px;
 }
 
+.narrative {
+  display: flex;
+}
+
+.narrative-buttons button {
+  width: 40px;
+  cursor: pointer;
+}
+
+.narrative-text-area {
+  width: 80%;
+}
+
 .survey-selected-components {
   padding: 0;
   width: 100%;
@@ -224,7 +237,7 @@ h2 {
   text-align: center;
 }
 
-.list-table .clear{
+.list-table .icon1, .icon2, .icon3, .icon4{
   background-color: white;
   font-size: medium;
   border:none;
@@ -235,6 +248,6 @@ h2 {
   margin-right: 5px;
 }
 
-.list-table .icn1[title] .icn2[title] .icn3[title] .icn4[title] :hover:after{
+.list-table .icon1[title] .icon2[title] .icon3[title] .icon4[title] :hover:after{
   content:attr(title);
 }

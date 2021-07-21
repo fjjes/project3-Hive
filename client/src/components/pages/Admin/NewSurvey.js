@@ -36,9 +36,6 @@ const NewSurvey = (props) => {
 
     let InsertedComponent;
     switch (e.target.id) {
-      case "narrative":
-        InsertedComponent = NarrativeOne;
-        break;
       case "checkboxes":
         InsertedComponent = CheckboxesOne;
         break;
@@ -70,14 +67,16 @@ const NewSurvey = (props) => {
     // This creates an array of the components that have been added to the custom survey
     setComponentList(
       componentList.concat(
-        <InsertedComponent
-          key={componentList.length}
-          question={props.question}
-          texts={props.texts}
-          questionNumber={counter}
-          value={props.narrativeTextValue}
-          onChange={handleNarrativeChange}
-        />
+        <div>
+          <InsertedComponent
+            key={componentList.length}
+            question={props.question}
+            texts={props.texts}
+            questionNumber={counter}
+            value={props.narrativeTextValue}
+            // onChange={handleNarrativeChange}
+          />
+        </div>
       )
     );
   }
@@ -209,8 +208,9 @@ const NewSurvey = (props) => {
       {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
-          <button id="narrative" onClick={addComponent}>
-            Narrative
+          {/* Narrative button not needed since this component is now required - delete? */}
+          <button id="narrative" onClick={addComponent} disabled style={{backgroundColor:"darkGrey"}}>
+            Narrative <em>(disabled)</em>
           </button>
           <button id="checkboxes" onClick={addComponent}>
             Checkbox
@@ -242,6 +242,7 @@ const NewSurvey = (props) => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
+            <NarrativeOne onChange={handleNarrativeChange}/>
             <div>{componentList}</div>
           </div>
         </div>
