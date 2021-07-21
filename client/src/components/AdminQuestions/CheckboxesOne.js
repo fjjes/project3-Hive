@@ -1,6 +1,6 @@
 import React from 'react';
 
-const options=[
+const texts=[
   { checked: false, value: "Option 1" },
   { checked: false, value: "Option 2" },
   { checked: false, value: "Option 3" },
@@ -21,7 +21,7 @@ function CheckboxesOne({questionNumber}) {
         <p className="question-intro">Q{questionNumber}.</p><span>
         <p className="question-intro">{question}</p></span>
         <div className="checkbox-form-group">
-          {options.map((option, index) => {
+          {texts.map((option, index) => {
             return(<div key={index}>
               <input
                 type="checkbox"

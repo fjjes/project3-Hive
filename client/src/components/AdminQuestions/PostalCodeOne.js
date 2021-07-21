@@ -6,7 +6,7 @@ const PostalCodeOne = ({ questionNumber}) => {
           <PostalCode
             question = {'Please enter your Postal Code'}
             questionNumber={questionNumber}
-            texts = {[90210]}
+            // texts = {[90210]}
           />
         </div>
     );
