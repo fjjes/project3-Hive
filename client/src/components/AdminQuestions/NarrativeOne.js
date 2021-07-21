@@ -5,10 +5,10 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 
 function NarrativeOne(props) {
+  const narrativePlaceholder = "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
+
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [narrative, setNarrative] = useState(
-    "Insert narrative text here... Lorem ipsum dolor sit amet consectetur, adipisicing elit. In autem laborum natus dicta amet quis quaerat a nobis aspernatur, ex commodi accusantium, assumenda sed optio possimus impedit quam quidem exercitationem neque cum corrupti maiores id."
-  );
+  const [narrative, setNarrative] = useState(narrativePlaceholder);
 
   const handleNarrativeChange = (e) => {
     // console.log('narrative edit...')
@@ -29,6 +29,7 @@ function NarrativeOne(props) {
 
   const onCancel=()=>{
     console.log("clicked cancel")
+    setNarrative(narrativePlaceholder) // Should probably be changed to revert to the last saved version rather than the original placeholder text
     setInEditMode({status:false })
   }
 
