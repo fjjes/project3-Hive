@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
@@ -18,7 +18,7 @@ const NewSurvey = (props) => {
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [componentList, setComponentList] = useState([]);
-  const [narrativeTextValue, setNarrativeTextValue] = useState("");
+  const [narrative, setNarrative] = useState("");
   const [questionNumber, setQuestionNumber]=useState(0)
   const [error, setError] = useState();
   
@@ -73,7 +73,7 @@ const NewSurvey = (props) => {
             question={props.question}
             texts={props.texts}
             questionNumber={counter}
-            value={props.narrativeTextValue}
+            value={props.narrative}
             // onChange={handleNarrativeChange}
           />
         </div>
@@ -81,8 +81,9 @@ const NewSurvey = (props) => {
     );
   }
 
-  function handleNarrativeChange(newValue) {
-    setNarrativeTextValue(newValue);
+    function handleNarrativeChange(newValue) {
+    setNarrative(newValue);
+    console.log("HandleNarrativeChange was run; narrative = ", narrative)
   }
 
   function onInputChange(event, setFunction) {
@@ -123,7 +124,7 @@ const NewSurvey = (props) => {
     console.log("surveyNumber: ", surveyNumber);
     console.log("company: ", company);
     console.log("version: ", version);
-    console.log("narrativeTextValue: ", narrativeTextValue);
+    console.log("narrative: ", narrative);
     console.log("componentListNamesString: ", componentListNamesString);
 
     // "questions" (below) will need to be edited so it saves more than just the question names into the database
@@ -132,7 +133,7 @@ const NewSurvey = (props) => {
       surveyNumber,
       company,
       version,
-      narrative: narrativeTextValue,
+      narrative,
       questions: {
         questionType: componentListNamesString,
       },
@@ -242,7 +243,7 @@ const NewSurvey = (props) => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
-            <NarrativeOne onChange={handleNarrativeChange}/>
+              <NarrativeOne onChange={handleNarrativeChange}/>
             <div>{componentList}</div>
           </div>
         </div>
