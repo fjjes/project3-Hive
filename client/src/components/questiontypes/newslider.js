@@ -28,16 +28,10 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
     }
   };
 
-  const marks = [
-    {
-      value: 0,
-      label: "0",
-    },
-    {
-      value: 100,
-      label: "100",
-    },
-  ];
+  const marks = {
+    0: 0,
+    100: 100,
+  };
 
   return (
     <div className="slider">
@@ -50,7 +44,6 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
         step={5}
         handleStyle={{ backgroundColor: "#f59645", border: "none" }}
         trackStyle={{ backgroundColor: "#f59645" }}
-        marks
         min={0}
         max={100}
       />
