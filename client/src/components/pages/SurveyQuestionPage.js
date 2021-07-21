@@ -3,6 +3,7 @@ import SurveyQuestion from "../SurveyQuestion";
 import Progress from "../Progress";
 
 export const AnswerContext = React.createContext({
+  setDisabled: () => {},
   answers: {},
   setAnswers: () => {},
 });
@@ -11,7 +12,8 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   // const classes = useStyles();
   const [error, setError] = useState();
   const [answers, setAnswers] = useState({});
-  const value = { answers, setAnswers };
+  const [disabled, setDisabled] = useState(false);
+  const value = { answers, setAnswers, setDisabled };
 
   const [index, setIndex] = useState(0);
   const [progressBarDone, setProgressBarDone] = useState(0);
@@ -19,12 +21,14 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   const [plus, setPlus] = useState(0);
 
   const goToNextQuestion = () => {
+    // setDisabled(true);
     let counter = index + 1;
     setIndex(counter);
     setPlus(counter);
   };
 
   const goBackAQuestion = () => {
+    // setDisabled(true);
     let counter = index - 1;
     setIndex(counter);
   };
@@ -74,54 +78,61 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
     <div className="survey-page">
       {endSurvey === false ? (
         <div>
-        <div className="survey-card">
-          <div className="the-survey">
-            <AnswerContext.Provider value={value}>
-              <SurveyQuestion questionBlock={questionArray[index]} />
-            </AnswerContext.Provider>
-            <div className="btns">
-              {index === 0 && (
-                <button className="col2 next-btn" onClick={goToNextQuestion}>
-                  Next
-                </button>
-              )}
-              {index === questionArray.length - 1 && (
-                <div className="row">
-                  <button className="col1 back-btn" onClick={goBackAQuestion}>
-                    Back
-                  </button>
+          <div className="survey-card">
+            <div className="the-survey">
+              <AnswerContext.Provider value={value}>
+                <SurveyQuestion questionBlock={questionArray[index]} />
+              </AnswerContext.Provider>
+              <div className="btns">
+                {index === 0 && (
                   <button
-                    className="col2"
-                    onClick={onCreateSurveyAnswersClicked}
+                    className="col2 next-btn"
+                    disabled={disabled}
+                    onClick={goToNextQuestion}
                   >
-                    Submit
-                  </button>
-                  {error && <div>{error}</div>}
-                </div>
-              )}
-              {index !== 0 && index !== questionArray.length - 1 && (
-                <div className="row">
-                  <button className="col1 back-btn" onClick={goBackAQuestion}>
-                    Back
-                  </button>
-                  <button className="col2 next-btn" onClick={goToNextQuestion}>
                     Next
                   </button>
-                </div>
-              )}
+                )}
+                {index === questionArray.length - 1 && (
+                  <div className="row">
+                    <button className="col1 back-btn" onClick={goBackAQuestion}>
+                      Back
+                    </button>
+                    <button
+                      className="col2"
+                      onClick={onCreateSurveyAnswersClicked}
+                    >
+                      Submit
+                    </button>
+                    {error && <div>{error}</div>}
+                  </div>
+                )}
+                {index !== 0 && index !== questionArray.length - 1 && (
+                  <div className="row">
+                    <button className="col1 back-btn" onClick={goBackAQuestion}>
+                      Back
+                    </button>
+                    <button
+                      disabled={disabled}
+                      className="col2 next-btn"
+                      onClick={goToNextQuestion}
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-        <Progress done={progressBarDone} />
+          <Progress done={progressBarDone} />
         </div>
       ) : (
-        
         // <Paper className={classes.root2} elevation={4}>
         //   <h2>Thank you for your participation!!</h2>
         // </Paper>
         <div className="survey-card">
           <h2>Thank you for your participation!!</h2>
-          </div>
+        </div>
       )}
     </div>
   );
