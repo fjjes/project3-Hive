@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
@@ -22,8 +22,6 @@ const NewSurvey = (props) => {
   const [questionNumber, setQuestionNumber]=useState(0)
   const [error, setError] = useState();
   
-  
-
   // Create uuid to be used as survey number
   const uuid = uuidv4();
   //const url = `localhost:4444/${uuid}`;
@@ -81,16 +79,11 @@ const NewSurvey = (props) => {
     );
   }
 
-    function handleNarrativeChange(newValue) {
-    setNarrative(newValue);
-    console.log("HandleNarrativeChange was run; narrative = ", narrative)
-  }
-
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
   }
 
-  // Validation to check that the required fields are filled out
+  // Validation to check that the required fields are filled out - NEEDS WORK
   function validateCompany(value) {
     let validationError;
     if (!value) {
@@ -115,9 +108,9 @@ const NewSurvey = (props) => {
     for (let i = 0; i < componentList.length; i++) {
       componentListNames = [...componentListNames, componentList[i].type.name];
     }
-    console.log("List of selected components: ", componentListNames);
+    // console.log("List of selected components: ", componentListNames);
     let componentListNamesString = componentListNames.toString();
-    console.log("componentListNamesString: ", componentListNamesString);
+    // console.log("componentListNamesString: ", componentListNamesString);
 
     // Log the info being saved into the DB
     console.log("***** DATA TO SAVE TO DATABASE *****");
@@ -171,7 +164,7 @@ const NewSurvey = (props) => {
       </h2>
       <Formik
         onSubmit={(values) => {
-          console.log(values);
+          console.log("Submitted values: ", values);
         }}
       >
         {({ errors, touched }) => (
@@ -210,9 +203,9 @@ const NewSurvey = (props) => {
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
           {/* Narrative button not needed since this component is now required - delete? */}
-          <button id="narrative" onClick={addComponent} disabled style={{backgroundColor:"darkGrey"}}>
+          {/* <button id="narrative" onClick={addComponent} disabled style={{backgroundColor:"darkGrey"}}>
             Narrative <em>(disabled)</em>
-          </button>
+          </button> */}
           <button id="checkboxes" onClick={addComponent}>
             Checkbox
           </button>
@@ -243,7 +236,10 @@ const NewSurvey = (props) => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
-              <NarrativeOne onChange={handleNarrativeChange}/>
+              {/* <NarrativeOne onChange={handleNarrativeChange}/> */}
+              <NarrativeOne 
+                updateNarrative={narrative => setNarrative(narrative)}
+                />
             <div>{componentList}</div>
           </div>
         </div>
@@ -259,6 +255,7 @@ const NewSurvey = (props) => {
         >
           Save Survey
         </button>
+        {error}
         {/* <div className="note-to-self">
           Survey link to send out (will need to create this upon saving and make
           it actually access a survey): &nbsp;
