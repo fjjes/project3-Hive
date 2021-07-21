@@ -184,6 +184,10 @@ h2 {
   width: 80%;
 }
 
+.narrative-text-area-input {
+  width: 95%;
+}
+
 .survey-selected-components {
   padding: 0;
   width: 100%;
