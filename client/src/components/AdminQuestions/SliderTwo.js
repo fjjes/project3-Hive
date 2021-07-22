@@ -1,39 +1,35 @@
+import React, { useState, useContext, useEffect } from 'react';
+import { QuestionContext } from '../pages/Admin/NewSurvey'
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 const SliderTwo = ({questionNumber}) => {
-  let question="Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
-  let texts=[
+  const {questions, setQuestions} = useContext(QuestionContext)
+  const [question, setQuestion]=useState("Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
+  const [answerOptions, setAnswerOptions]=useState([
     "Home",
     "Traveling",
     "At the office",
     "In the client's office",
     "Elsewhere"
-  ]
+  ])
 
-  // const marks = [
-  //   {
-  //     value: 0,
-  //     label: "0",
-  //   },
-  //   {
-  //     value: 100,
-  //     label: "100",
-  //   },
-  // ];
+  useEffect(()=>{
+    const newQuestionList = [...questions]
+    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions} 
+    setQuestions(newQuestionList)
+  },[])
 
   return (
     <div className="question-component admin-question-component">
       <p className="question-intro">Q{questionNumber}.</p>
         <span><p className="question-intro">{question}</p></span>
-        {texts.map((row, index)=>{
+        {answerOptions.map((row, index)=>{
           return(
             <div key={index} className="slider">
               <p>{row}</p>
               <Slider
-                //value={typeof getValue === "number" ? getValue : 0}
                 ariaLabelledbyForHandle="input-slider"
-                // marks={marks}
                 step={5}
                 min={0}
                 max={100}
@@ -41,9 +37,6 @@ const SliderTwo = ({questionNumber}) => {
               <input
                 className="input"
                 type="number"
-                // className={classes.input}
-                //value={getValue}
-                //onBlur={handleBlur}
                 step={5}
                 min={0}
                 max={100}

@@ -18,26 +18,15 @@ const NewSurvey = ({question, answerOptions}) => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
-  //const [componentList, setComponentList] = useState([]);
-  //const [questionType, setQuestionType]=useState('');
   const [narrative, setNarrative] = useState("");
-  //const [insertedComponent, setInsertedComponent]=useState()
- // const [questionNumber, setQuestionNumber]=useState(0);
   const [error, setError] = useState();
-  
+
   const [questions, setQuestions]=useState([]);
   const value = { questions, setQuestions};
   
-  
-
   // Create uuid to be used as survey number
   const uuid = uuidv4();
   //const url = `localhost:4444/${uuid}`;
-
-
-  // function handleNarrativeChange(newValue) {
-  //   setNarrativeTextValue(newValue);
-  // }
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -62,12 +51,7 @@ const NewSurvey = ({question, answerOptions}) => {
 
   const addAQuestion  =(e)=>{
     e.preventDefault();
-    console.log('id:', e.target.value)
     setQuestions([...questions, {questionType:e.target.value}])
-  
-    // let newQuestionArray=[...questions]
-    // newQuestionArray.push(<QuestionComponent questionType={id}/>)
-    // setQuestions(newQuestionArray)
   }
  
   async function handleSubmit() {
@@ -189,7 +173,6 @@ const NewSurvey = ({question, answerOptions}) => {
             <NarrativeOne 
                 updateNarrative={narrative => setNarrative(narrative)}
                 />
-            
           </div>
           <QuestionContext.Provider value={value}>
           {
@@ -197,16 +180,12 @@ const NewSurvey = ({question, answerOptions}) => {
               <div key={index}>
                 <QuestionComponent 
                   questionType={questionBlock.questionType}
-                  questionNumber={index}
-                  // question={questionBlock.question}
-                  // answerOptions={questionBlock.answerOptions}
+                  questionNumber={index+1}
                 />
-                 
               </div>
             ))
           }
            </QuestionContext.Provider>
-          {/* {questions} */}
         </div>
       </div>
 
@@ -220,13 +199,6 @@ const NewSurvey = ({question, answerOptions}) => {
         >
           Save Survey
         </button>
-        {/* <div className="note-to-self">
-          Survey link to send out (will need to create this upon saving and make
-          it actually access a survey): &nbsp;
-          <a href={url} style={{ paddingBottom: "10px" }}>
-            {url}
-          </a>
-        </div> */}
       </div>
     </div>
   );

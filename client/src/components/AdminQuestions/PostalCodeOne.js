@@ -1,10 +1,11 @@
-// import PostalCode from "../questiontypes/PostalCode";
-import { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from 'react';
+import { QuestionContext } from '../pages/Admin/NewSurvey'
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 
-function PostalCodeOne(props) {
+function PostalCodeOne({questionNumber}) {
+  const {questions, setQuestions} = useContext(QuestionContext)
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [question, setQuestion] = useState("Enter your postal code?"  
   );
@@ -26,6 +27,13 @@ function PostalCodeOne(props) {
     console.log("clicked cancel")
     setInEditMode({status:false })
   }
+
+  useEffect(()=>{
+    const newQuestionList = [...questions]
+    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions:""} 
+    setQuestions(newQuestionList)
+},[])
+
     return (
         <div className="question-component admin-question-component">
           <div className= "postalCodeone">
@@ -33,7 +41,7 @@ function PostalCodeOne(props) {
             <input
             type="text"
             value = {question} 
-            questionNumber={props.questionNumber}
+            questionNumber={questionNumber}
             onChange={(e)=>setQuestion (e.target.value)}
             />
             ) : (
