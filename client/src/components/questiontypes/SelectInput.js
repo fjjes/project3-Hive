@@ -6,7 +6,6 @@ const SelectInput = (props) => {
   const { answers, setAnswers, setIsNextButtonDisabled } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);
-  
 
   let selectArray = [];
   let num = 1;

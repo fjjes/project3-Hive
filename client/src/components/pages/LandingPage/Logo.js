@@ -67,13 +67,13 @@ export default function Logo({ flashcard }) {
         <button className="admin-portal-button">Admin Portal</button>
         </Link>
           </div> */}
-            <button
+            {/* <button
               className="logo-button"
               type="button"
               onClick={() => setShowQuestions(true)}
             >
               ENTER
-            </button>
+            </button> */}
             <button
               className="neu-button"
               type="button"

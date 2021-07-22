@@ -181,16 +181,33 @@ td {
   /* float: inline-end; */
   /* display: flex;
   justify-content: center; */
-  padding: 5px;
-  font-size: 1rem;
-  background-color: #197e9c;
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  height: 42px;
+  width: 75px;
+  background-color: #35c0c2;
+  border-radius: 15px;
+  box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgb(255, 255, 255);
+  font-size: 1.3rem;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: bold;
   border: none;
 }
 
+.survey-page button:hover {
+  box-shadow: inset -3px -3px 7px #ffffff72,
+    inset 5px 5px 6px rgba(94, 104, 121, 0.288);
+}
+
 .survey-page button:disabled {
+  cursor: default;
+  box-shadow: none;
   background-color: grey;
 }
 
@@ -209,7 +226,9 @@ td {
   margin: 120px 0px 0px 0px;
   width: 800px;
   height: 500px;
-  box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2); */
+  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+    -8px -8px 12px 0 rgb(255, 255, 255);
   padding: 20px;
 }
 
@@ -219,6 +238,10 @@ td {
 
 .col2 {
   float: right;
+}
+
+.col2:disabled {
+  background-color: grey;
 }
 
 .row {
