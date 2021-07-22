@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { red } from "@material-ui/core/colors";
 
 export default function NewSlider({ getValue, setValue, title, classes }) {
   if (classes == null) {
