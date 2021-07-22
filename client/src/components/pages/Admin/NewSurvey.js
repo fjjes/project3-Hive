@@ -14,7 +14,7 @@ export const QuestionContext = React.createContext({
   setQuestions: () => {},
 });
 
-const NewSurvey = ({question, answerOptions}) => {
+const NewSurvey = () => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
@@ -176,11 +176,11 @@ const NewSurvey = ({question, answerOptions}) => {
           </div>
           <QuestionContext.Provider value={value}>
           {
-            questions.map((questionBlock, index)=>(
+            questions.map((questionBlock, index)=>(    
               <div key={index}>
                 <QuestionComponent 
                   questionType={questionBlock.questionType}
-                  questionNumber={index+1}
+                  questionNumber={index}
                 />
               </div>
             ))
