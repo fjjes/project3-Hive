@@ -43,6 +43,8 @@ export default function NewSlider({ getValue, setValue, title, classes }) {
         step={5}
         handleStyle={{ backgroundColor: "#f59645", border: "none" }}
         trackStyle={{ backgroundColor: "#f59645" }}
+        activeDotStyle={{ borderColor: "#f59645" }}
+        dotStyle={{ borderColor: "#f59645" }}
         min={0}
         max={100}
       />
