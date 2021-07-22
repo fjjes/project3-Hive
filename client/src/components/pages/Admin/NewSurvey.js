@@ -19,6 +19,7 @@ const NewSurvey = () => {
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
+  const [questionNumber, setQuestionNumber]=useState(0)
   const [error, setError] = useState();
 
   const [questions, setQuestions]=useState([]);
@@ -51,7 +52,9 @@ const NewSurvey = () => {
 
   const addAQuestion  =(e)=>{
     e.preventDefault();
-    setQuestions([...questions, {questionType:e.target.value}])
+    let counter=questionNumber+1
+    setQuestionNumber(counter)
+    setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   }
  
   async function handleSubmit() {
@@ -180,7 +183,7 @@ const NewSurvey = () => {
               <div key={index}>
                 <QuestionComponent 
                   questionType={questionBlock.questionType}
-                  questionNumber={index}
+                  questionNumber={questionBlock.questionNumber}
                 />
               </div>
             ))

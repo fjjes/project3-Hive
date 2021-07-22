@@ -29,6 +29,7 @@ const MatrixTwo = ({questionNumber}) => {
         <table>
             <tbody>
             <tr>
+                {/* removing this empty <th></th> will mess up the layout of matrix labels */}
                 <th></th>
                 {columns.map((cl, i) => {
                 return (

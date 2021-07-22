@@ -38,7 +38,8 @@ const MatrixOne = ({questionNumber}) => {
         <table>
             <tbody>
             <tr>
-                <th></th>
+                {/* removing this empty <th></th> will mess up the layout of matrix labels */}
+                <th></th>  
                 {columns.map((cl, i) => {
                 return (
                     <th key={i}>
