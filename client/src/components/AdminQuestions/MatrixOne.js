@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect} from 'react';
-import Matrix from '../questiontypes/Matrix'
 import { QuestionContext } from '../pages/Admin/NewSurvey'
 
 const MatrixOne = ({questionNumber}) => {
@@ -16,6 +15,13 @@ const MatrixOne = ({questionNumber}) => {
         {text: "Ability to easily switch between face-to-face work and work at home"},
         {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"}
     ])
+    const [columns, setColumns]=useState([
+            "Very Satisfied",
+            "Satisfied",
+            "Neither satisfied nor dissatisfied",
+            "Dissatisfied",
+            "Very dissatisfied"
+    ])
 
     useEffect(()=>{
         const newQuestionList = [...questions]
@@ -25,12 +31,46 @@ const MatrixOne = ({questionNumber}) => {
 
     return (
         <div className="question-component admin-question-component">
-            <Matrix
-                question={question}
-                questionNumber={questionNumber}
-                texts={answerOptions}  
-            />
-        </div>
+        <p className="question-intro">Q{questionNumber}.</p>
+        <span>
+            <p className="question-intro">{question}</p>
+        </span>
+        <table>
+            <tbody>
+            <tr>
+                {/* removing this empty <th></th> will mess up the layout of matrix labels */}
+                <th></th>  
+                {columns.map((cl, i) => {
+                return (
+                    <th key={i}>
+                    <label>{cl}</label>
+                    </th>
+                );
+                })}
+            </tr>
+            {answerOptions.map((row, i) => {
+                return (
+                <tr key={i}>
+                    <td className="label-rows">
+                    <label>{row.text}</label>
+                    </td>
+                    {columns.map((col, index) => {
+                    return (
+                        <td key={index}>
+                        <input
+                            type="radio"
+                            name={row.text}
+                            value={col}
+                        />
+                        </td>
+                    );
+                    })}
+                </tr>
+                );
+            })}
+            </tbody>
+        </table>
+    </div>
     );
 }
  

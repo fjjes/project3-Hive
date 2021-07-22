@@ -100,6 +100,7 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
                     </button>
                     <button
                       className="col2"
+                      disabled={isNextButtonDisabled}
                       onClick={onCreateSurveyAnswersClicked}
                     >
                       Submit

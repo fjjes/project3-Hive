@@ -21,7 +21,7 @@ const MatrixNum = (props) => {
 
   useEffect(() => {
     //disables after one answer
-    if (values !== props.texts) {
+    if (values !== props.texts || props.texts.length > 4) {
       setIsNextButtonDisabled(false);
       console.log("setDisabled");
     } else {

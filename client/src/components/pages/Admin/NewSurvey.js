@@ -14,11 +14,12 @@ export const QuestionContext = React.createContext({
   setQuestions: () => {},
 });
 
-const NewSurvey = ({question, answerOptions}) => {
+const NewSurvey = () => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
+  const [questionNumber, setQuestionNumber]=useState(0)
   const [error, setError] = useState();
 
   const [questions, setQuestions]=useState([]);
@@ -51,7 +52,9 @@ const NewSurvey = ({question, answerOptions}) => {
 
   const addAQuestion  =(e)=>{
     e.preventDefault();
-    setQuestions([...questions, {questionType:e.target.value}])
+    let counter=questionNumber+1
+    setQuestionNumber(counter)
+    setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   }
  
   async function handleSubmit() {
@@ -176,11 +179,11 @@ const NewSurvey = ({question, answerOptions}) => {
           </div>
           <QuestionContext.Provider value={value}>
           {
-            questions.map((questionBlock, index)=>(
+            questions.map((questionBlock, index)=>(    
               <div key={index}>
                 <QuestionComponent 
                   questionType={questionBlock.questionType}
-                  questionNumber={index+1}
+                  questionNumber={questionBlock.questionNumber}
                 />
               </div>
             ))
