@@ -36,6 +36,7 @@ function PostalCodeOne({questionNumber}) {
 
     return (
         <div className="question-component admin-question-component">
+          <h3 style={{textAlign: "left"}}> Postal Code Section </h3>
           <div className= "postalCodeone">
             {inEditMode.status ? (
             <input
