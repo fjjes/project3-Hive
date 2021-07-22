@@ -14,15 +14,17 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
-  const { answers, setAnswers, setDisabled } = useContext(AnswerContext);
+  const { answers, setAnswers, setIsNextButtonDisabled } =
+    useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState([]);
+
   useEffect(() => {
     if (totalCount === 100) {
-      setDisabled(false);
+      setIsNextButtonDisabled(false);
       console.log("setDisabled");
     } else {
-      setDisabled(true);
+      setIsNextButtonDisabled(true);
     }
   }, [totalCount]);
 

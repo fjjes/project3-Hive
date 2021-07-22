@@ -12,8 +12,8 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   // const classes = useStyles();
   const [error, setError] = useState();
   const [answers, setAnswers] = useState({});
-  const [disabled, setDisabled] = useState(false);
-  const value = { answers, setAnswers, setDisabled };
+  const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
+  const value = { answers, setAnswers, setIsNextButtonDisabled };
 
   const [index, setIndex] = useState(0);
   const [progressBarDone, setProgressBarDone] = useState(0);
@@ -87,7 +87,7 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
                 {index === 0 && (
                   <button
                     className="col2 next-btn"
-                    disabled={disabled}
+                    // disabled={isNextButtonDisabled}
                     onClick={goToNextQuestion}
                   >
                     Next
@@ -113,7 +113,7 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
                       Back
                     </button>
                     <button
-                      disabled={disabled}
+                      disabled={isNextButtonDisabled}
                       className="col2 next-btn"
                       onClick={goToNextQuestion}
                     >

@@ -47,7 +47,7 @@ h1 {
   width: 100%;
   line-height: 1em;
   /* margin-left: 10px; */
-  height: fit-content;
+  height: 40px;
 }
 
 .slider p {
@@ -188,6 +188,10 @@ td {
   border-radius: 5px;
   font-weight: bold;
   border: none;
+}
+
+.survey-page button:disabled {
+  background-color: grey;
 }
 
 /* .survey-page .btns .row {
