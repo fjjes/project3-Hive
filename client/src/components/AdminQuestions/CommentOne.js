@@ -1,10 +1,18 @@
-import React from 'react';
-
-const question = "Enter a comment:"
-
+import React, { useState, useContext, useEffect } from 'react';
+import { QuestionContext } from '../pages/Admin/NewSurvey'
 
 const CommentOne =({questionNumber})=> {
-  return (
+  const {questions, setQuestions} = useContext(QuestionContext)
+  const [question, setQuestion]=useState("Enter a comment:")
+
+  useEffect(()=>{
+    const newQuestionList = [...questions]
+    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber} 
+    setQuestions(newQuestionList)
+    console.log('newQuestionlist:', questions)
+  },[])
+ 
+  return(
     <div className="question-component admin-question-component">
       <p className="question-intro">Q{questionNumber}.</p><span>
       <p className="question-intro">{question}</p></span>

@@ -1,102 +1,49 @@
+
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
-import CheckboxesOne from "../../AdminQuestions/CheckboxesOne";
-import CommentOne from "../../AdminQuestions/CommentOne";
-import MatrixOne from "../../AdminQuestions/MatrixOne";
-import MatrixTwo from "../../AdminQuestions/MatrixTwo";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 // import NewSliderOne (add when we have it)
-import PostalCodeOne from "../../AdminQuestions/PostalCodeOne";
-import RadioOne from "../../AdminQuestions/RadioOne";
-import SelectOne from "../../AdminQuestions/SelectOne";
-import SliderTwo from "../../AdminQuestions/SliderTwo";
+import QuestionComponent from './QuestionComponent'
 import { v4 as uuidv4 } from "uuid";
+import id from "date-fns/locale/id";
 
-let InsertedComponent 
-const NewSurvey = (props) => {
+
+export const QuestionContext = React.createContext({
+  questions: [],
+  setQuestions: () => {},
+});
+
+const NewSurvey = ({question, answerOptions}) => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
-  const [componentList, setComponentList] = useState([]);
+  //const [componentList, setComponentList] = useState([]);
+  //const [questionType, setQuestionType]=useState('');
   const [narrative, setNarrative] = useState("");
-  const [questions, setQuestions]=useState([]);
-  const [questionType, setQuestionType]=useState('');
-  // const [insertedComponent, setInsertedComponent]=useState()
-  const [questionNumber, setQuestionNumber]=useState(0);
+  //const [insertedComponent, setInsertedComponent]=useState()
+ // const [questionNumber, setQuestionNumber]=useState(0);
   const [error, setError] = useState();
   
+  const [questions, setQuestions]=useState([]);
+  const value = { questions, setQuestions};
+  
+  
+
   // Create uuid to be used as survey number
   const uuid = uuidv4();
   //const url = `localhost:4444/${uuid}`;
 
-  // Add question components (from /questiontypes folder) to the custom survey, depending on the id of the clicked button (buttons are in the return statement)
-  function addComponent(e) {
-    // console.log('Clicked:', e.target.id);
-    let counter = questionNumber + 1
-    setQuestionNumber(counter)
 
-    // let InsertedComponent;
-    switch (e.target.id) {
-      case "checkboxes":
-        InsertedComponent = CheckboxesOne;
-        setQuestionType("checkboxes")
-        break;
-      case "comment":
-        InsertedComponent = CommentOne;
-        setQuestionType("comment")
-        break;
-      case "matrix":
-        InsertedComponent = MatrixOne;
-        setQuestionType("matrix")
-        break;
-      case "matrixNum":
-        InsertedComponent = MatrixTwo;
-        setQuestionType("matrixNum")
-        break;
-      case "postalCode":
-        InsertedComponent = PostalCodeOne;
-        setQuestionType("postalCode")
-        break;
-      case "radioButtons":
-        InsertedComponent = RadioOne;
-        setQuestionType("radioButtons")
-        break;
-      case "selectOne":
-        InsertedComponent = SelectOne;
-        setQuestionType("selectOne")
-        break;
-      case "sliderTwo":
-        InsertedComponent = SliderTwo; 
-        setQuestionType("sliderTwo")    
-        break;
-      default:
-    }
-
-    // Will need to update handleNarrativeChange in the onChange below to be generic, so it works for the other question components
-    // This creates an array of the components that have been added to the custom survey
-     setComponentList(
-      componentList.concat(
-        <div>
-          {/* <InsertedComponent
-            key={componentList.length}
-            question={props.question}
-            texts={props.texts}
-            questionNumber={counter}
-            value={props.narrative}
-            // onChange={handleNarrativeChange}
-          /> */}
-      
-        </div>
-      )
-    );
-  }
+  // function handleNarrativeChange(newValue) {
+  //   setNarrativeTextValue(newValue);
+  // }
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
   }
 
-  // Validation to check that the required fields are filled out - NEEDS WORK
+  // Validation to check that the required fields are filled out
   function validateCompany(value) {
     let validationError;
     if (!value) {
@@ -113,27 +60,19 @@ const NewSurvey = (props) => {
     return validationError;
   }
 
+  const addAQuestion  =(e)=>{
+    e.preventDefault();
+    console.log('id:', e.target.value)
+    setQuestions([...questions, {questionType:e.target.value}])
+  
+    // let newQuestionArray=[...questions]
+    // newQuestionArray.push(<QuestionComponent questionType={id}/>)
+    // setQuestions(newQuestionArray)
+  }
+ 
   async function handleSubmit() {
     const surveyNumber = uuid;
 
-    // This just creates a list of the names of the components that have been added to the custom survey - to be updated to include more than just the names...
-    let componentListNames = [];
-    for (let i = 0; i < componentList.length; i++) {
-      componentListNames = [...componentListNames, componentList[i].type.name];
-    }
-    // console.log("List of selected components: ", componentListNames);
-    let componentListNamesString = componentListNames.toString();
-    // console.log("componentListNamesString: ", componentListNamesString);
-
-    // Log the info being saved into the DB
-    console.log("***** DATA TO SAVE TO DATABASE *****");
-    console.log("surveyNumber: ", surveyNumber);
-    console.log("company: ", company);
-    console.log("version: ", version);
-    console.log("narrative: ", narrative);
-    console.log("componentListNamesString: ", componentListNamesString);
-
-    // "questions" (below) will need to be edited so it saves more than just the question names into the database
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -141,9 +80,6 @@ const NewSurvey = (props) => {
       version,
       narrative,
       questions,
-      // questions: {
-      //   questionType: componentListNamesString,
-      // },
       createdDate: currentDate,
     };
 
@@ -178,7 +114,7 @@ const NewSurvey = (props) => {
       </h2>
       <Formik
         onSubmit={(values) => {
-          console.log("Submitted values: ", values);
+          console.log(values);
         }}
       >
         {({ errors, touched }) => (
@@ -217,31 +153,31 @@ const NewSurvey = (props) => {
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
           {/* Narrative button not needed since this component is now required - delete? */}
-          {/* <button id="narrative" onClick={addComponent} disabled style={{backgroundColor:"darkGrey"}}>
+          <button value="narrative" onClick={addAQuestion} disabled style={{backgroundColor:"darkGrey"}}>
             Narrative <em>(disabled)</em>
-          </button> */}
-          <button id="checkboxes" onClick={addComponent}>
+          </button>
+          <button value="checkbox" onClick={addAQuestion}>
             Checkbox
           </button>
-          <button id="comment" onClick={addComponent}>
+          <button value="comment" onClick={addAQuestion}>
             Comment
           </button>
-          <button id="matrix" onClick={addComponent}>
+          <button value="matrix1" onClick={addAQuestion}>
             Matrix
           </button>
-          <button id="matrixNum" onClick={addComponent}>
+          <button value="matrix2" onClick={addAQuestion}>
             Matrix-Num
           </button>
-          <button id="radioButtons" onClick={addComponent}>
+          <button value="radio" onClick={addAQuestion}>
             RadioButton
           </button>
-          <button id="postalCode" onClick={addComponent}>
+          <button value="postal" onClick={addAQuestion}>
             PostalCode
           </button>
-          <button id="selectOne" onClick={addComponent}>
+          <button value="select" onClick={addAQuestion}>
             Select
           </button>
-          <button id="sliderTwo" onClick={addComponent}>
+          <button value="slider" onClick={addAQuestion}>
             Slider
           </button>
         </div>
@@ -253,23 +189,24 @@ const NewSurvey = (props) => {
             <NarrativeOne 
                 updateNarrative={narrative => setNarrative(narrative)}
                 />
-            {/* <div>{componentList}</div> */}
-            {
-              componentList.map((component, index)=>{
-                return(
-                    <InsertedComponent
-                      key={index}
-                      questionType={questionType}
-                      question={component.question}
-                      answerOptions={component.texts}
-                      questionNumber={questionNumber}
-                      // updatePostalCode={postalCode=>setPostalCode(postalCode)}
-                    />
-                  
-                )
-              })
-            }
+            
           </div>
+          <QuestionContext.Provider value={value}>
+          {
+            questions.map((questionBlock, index)=>(
+              <div key={index}>
+                <QuestionComponent 
+                  questionType={questionBlock.questionType}
+                  questionNumber={index}
+                  // question={questionBlock.question}
+                  // answerOptions={questionBlock.answerOptions}
+                />
+                 
+              </div>
+            ))
+          }
+           </QuestionContext.Provider>
+          {/* {questions} */}
         </div>
       </div>
 
@@ -283,7 +220,6 @@ const NewSurvey = (props) => {
         >
           Save Survey
         </button>
-        {error}
         {/* <div className="note-to-self">
           Survey link to send out (will need to create this upon saving and make
           it actually access a survey): &nbsp;
