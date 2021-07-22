@@ -19,7 +19,7 @@ const MatrixOne = ({questionNumber}) => {
 
     useEffect(()=>{
         const newQuestionList = [...questions]
-        newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions} //!!!!!!!!!!!!!!
+        newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions}
         setQuestions(newQuestionList)
     },[])
 

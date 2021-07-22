@@ -1,18 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { QuestionContext } from '../pages/Admin/NewSurvey'
 
-// const texts=[
-//   { checked: false, value: "Option 1" },
-//   { checked: false, value: "Option 2" },
-//   { checked: false, value: "Option 3" },
-//   { checked: false, value: "Option 4" },
-//   { checked: false, value: "Option 5" },
-//   { checked: false, value: "Option 6" },
-//   { checked: false, value: "Option 7" },
-//   { checked: false, value: "Option 8" },
-// ]
-
-//const question = "Select up to three options:"
 
 function CheckboxesOne({questionNumber}) {
   const {questions, setQuestions} = useContext(QuestionContext)
@@ -28,9 +16,11 @@ function CheckboxesOne({questionNumber}) {
     { checked: false, value: "Option 8" },
   ])
 
-  const newQuestionList = [...questions]
-  newQuestionList[questionNumber]= {question:question, answerOptions:answerOptions}  //!!!!!!!!!!!!!!!!!!
-  setQuestions(newQuestionList)
+  useEffect(()=>{
+    const newQuestionList = [...questions]
+    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions} 
+    setQuestions(newQuestionList)
+},[])
   
   return (
     <div className="question-component admin-question-component">
@@ -43,7 +33,6 @@ function CheckboxesOne({questionNumber}) {
               <input
                 type="checkbox"
                 name="option"
-                // id={option.value}
                 value={option.value}
               />
               <label
