@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { QuestionContext } from '../pages/Admin/NewSurvey'
-import RadioButtons from "../questiontypes/RadioButtons"
 
 const RadioOne = ({questionNumber}) => {
     const {questions, setQuestions} = useContext(QuestionContext)
@@ -23,13 +22,24 @@ const RadioOne = ({questionNumber}) => {
     },[])
 
     return (
-        <div className="radio-one question-component admin-question-component">
-            <RadioButtons
-            question={question}
-            questionNumber={questionNumber}
-            texts={answerOptions}
+    <div className="radio-one question-component admin-question-component">
+      <p className="question-intro">Q{questionNumber}.</p>
+      <span><p className="question-intro">{question}</p></span>
+      {answerOptions.map((option, index) => {
+        return (
+          <div key={index}>
+            <input
+              type="radio"
+              id={option}
+              name="option-group"
+            //   value={option}
+              color="primary"
             />
-        </div>
+            <label htmlFor={option}>{option}</label>
+          </div>
+        );
+    })}
+    </div>
     );
 }
  
