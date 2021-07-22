@@ -1,74 +1,94 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import * as BsIcons from "react-icons/bs";
-import * as RiIcons from "react-icons/ri";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 
 function NarrativeOne(props) {
-  const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
+  const narrativePlaceholder = "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
 
-  const narrativeTextDefault =
-    "Insert narrative text here... Lorem ipsum dolor sit amet consectetur, adipisicing elit. In autem laborum natus dicta amet quis quaerat a nobis aspernatur, ex commodi accusantium, assumenda sed optio possimus impedit quam quidem exercitationem neque cum corrupti maiores id. Modi, cum, similique temporibus dignissimos vero odit fuga, repellat obcaecati doloribus ullam cupiditate quaerat libero! Ea cum libero, nostrum iure ipsam praesentium itaque consequuntur nisi ipsum assumenda id enim magni reprehenderit fuga iste aliquam quas. Error libero consequuntur alias laboriosam.";
+  const [inEditMode, setInEditMode] = useState({ status: false });
+  const [narrative, setNarrative] = useState(narrativePlaceholder);
 
-  const onEditClicked = (id, currentNarrative) => {
-    setInEditMode({ status: true, key: id });
-    // setNarrative(currentNarrative)
+  const handleNarrativeChange = (e) => {
+    // console.log('narrative edit...')
+    setNarrative(e.target.value)
+  }
+
+  const onEditClicked = () => {
     console.log("clicked edit");
+    setInEditMode({ status: true });
+  };
+  
+  const onSave = () => {
+    props.updateNarrative(narrative)
+    console.log("clicked save");
+    setNarrative(narrative)
+    setInEditMode({ status: false });
   };
 
-  const handleDeleteClick = () => {
-    console.log("clicked delete");
-  };
-
-  function handleNarrativeChange(event) {
-    props.onChange(event.target.value);
+  const onCancel=()=>{
+    console.log("clicked cancel")
+    setNarrative(narrativePlaceholder) // Should probably be changed to revert to the last saved version rather than the original placeholder text
+    setInEditMode({status:false })
   }
 
   return (
     <div className="question-component admin-question-component narrative-component">
-      <h2 style={{textAlign: "left"}}>Narrative</h2>
+      <h2 style={{ textAlign: "left" }}>Narrative</h2>
       <div className="narrative">
         <div className="narrative-text-area">
           {inEditMode.status ? (
             <textarea
+              className="narrative-text-area-input"
               rows="10"
-              cols="100"
               type="text"
-              // value={props.value}
-              defaultValue={narrativeTextDefault}
+              value={narrative}
               onChange={handleNarrativeChange}
-            >
-            </textarea>
+            />
           ) : (
-            <p>{narrativeTextDefault}</p>
+            <p>{narrative}</p>
           )}
         </div>
         <div className="narrative-buttons">
-          <button
-            className="clear icn3"
-            title="Edit"
-            onClick={() =>
-              onEditClicked()
-              // narrative
-            }
-          >
-            <BsIcons.BsPencilSquare />
-          </button>
-          <span className="slash" style={{ color: "#fff" }}>
-            /
-          </span>
-          <button
-            className="clear icn4"
-            title="Delete"
-            onClick={() => {
-              handleDeleteClick();
-              // row._id
-            }}
-          >
-            <RiIcons.RiDeleteBinFill />
-          </button>
+          {inEditMode.status ? (
+            <div>
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() =>
+                  onSave()
+                }
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+                >
+                <MdIcons.MdCancel />
+              </button>
+                </div>
+              ) : (
+            <div>
+              <button
+                className="clear icn3"
+                title="Edit"
+                onClick={
+                  () => onEditClicked()
+                }
+              >
+                <BsIcons.BsPencilSquare />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>
