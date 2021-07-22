@@ -8,15 +8,18 @@ const PostalCode = ({ questionNumber, question }) => {
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setPostalCode(e.target.value);
+    const possibleCode = e.target.value;
+    console.log(possibleCode);
+    setPostalCode(possibleCode);
     let updateAnswers = { ...answers };
-    updateAnswers[questionNumber] = e.target.value;
+    updateAnswers[questionNumber] = possibleCode;
     setAnswers(updateAnswers);
     if (
-      /^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(
-        e.target.value
+      (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(
+        possibleCode
       ) ||
-      /^[0-9]{5}(?:-[0-9]{4})?$/.test(e.target.value)
+        /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCode)) &&
+      possibleCode.trim().length > 0
     ) {
       // setError("");
       setIsNextButtonDisabled(false);
@@ -25,6 +28,10 @@ const PostalCode = ({ questionNumber, question }) => {
       setIsNextButtonDisabled(true);
     }
   };
+
+  useEffect(() => {
+    setIsNextButtonDisabled(true);
+  }, []);
 
   useEffect(() => {
     if (answers.length < questionNumber) {
