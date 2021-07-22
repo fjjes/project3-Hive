@@ -64,8 +64,14 @@ h1 {
 }
 
 .slider input {
+  outline: none;
+  background-color: rgb(244, 241, 241);
+  color: rgb(126, 126, 126);
   width: 4em;
   padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff;
   height: fit-content;
   margin: auto;
 }
@@ -117,8 +123,36 @@ h1 {
   font-size: 1rem;
 }
 
+.question-component textarea {
+  /* comments */
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  padding: 7px;
+  width: 400px;
+  color: rgb(107, 106, 106);
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(238, 237, 237);
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
+.postal-code-question-component input {
+  text-align: center;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1em;
+  color: rgb(107, 106, 106);
+  padding: 6px;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(238, 237, 237);
+  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
 .question-intro {
   padding-top: 0px;
+  font-size: 1.1em;
 }
 
 .question-number {
@@ -178,9 +212,6 @@ td {
 /* s */
 
 .survey-page button {
-  /* float: inline-end; */
-  /* display: flex;
-  justify-content: center; */
   font-family: "Poppins", sans-serif;
   font-weight: bolder;
   color: white;
@@ -210,10 +241,6 @@ td {
   box-shadow: none;
   background-color: grey;
 }
-
-/* .survey-page .btns .row {
-  clear: both;
-} */
 
 /* Survey Questions */
 
