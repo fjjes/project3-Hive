@@ -137,9 +137,9 @@ const NewSurvey = ({question, answerOptions}) => {
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
           {/* Narrative button not needed since this component is now required - delete? */}
-          <button value="narrative" onClick={addAQuestion} disabled style={{backgroundColor:"darkGrey"}}>
+          {/* <button value="narrative" onClick={addAQuestion} disabled style={{backgroundColor:"darkGrey"}}>
             Narrative <em>(disabled)</em>
-          </button>
+          </button> */}
           <button value="checkbox" onClick={addAQuestion}>
             Checkbox
           </button>
