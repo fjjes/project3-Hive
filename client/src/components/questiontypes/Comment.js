@@ -1,14 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 const Comment = ({ questionNumber, question }) => {
-  const { answers, setAnswers } = useContext(AnswerContext);
+  const { answers, setAnswers, setIsNextButtonDisabled } =
+    useContext(AnswerContext);
 
   const handleChange = (e) => {
     let updateAnswers = { ...answers };
     updateAnswers[questionNumber] = e.target.value;
     setAnswers(updateAnswers);
   };
+
+  useEffect(() => {
+    setIsNextButtonDisabled(false);
+  }, []);
 
   return (
     <div className="question-component">

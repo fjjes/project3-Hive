@@ -24,8 +24,16 @@ const SelectInput = (props) => {
   };
 
   useEffect(() => {
-    //disables after one answer
-    if (values !== props.texts) {
+    if (setIsNextButtonDisabled == null) return;
+    console.log(values);
+    var allHaveValues = true;
+    for (var i in values) {
+      var value = values[i];
+      if (value.value == null) {
+        allHaveValues = false;
+      }
+    }
+    if (allHaveValues) {
       setIsNextButtonDisabled(false);
       console.log("setDisabled");
     } else {

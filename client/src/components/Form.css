@@ -222,7 +222,7 @@ td {
   width: 75px;
   background-color: #35c0c2;
   border-radius: 15px;
-  box-shadow: 8px 8px 12px 0 rgba(0, 0, 0, 0.25),
+  box-shadow: 6px 4px 17px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgb(255, 255, 255);
   font-size: 1.3rem;
   color: #fff;

@@ -15,8 +15,12 @@ function RadioButtons({ questionNumber, question, texts }) {
   };
 
   useEffect(() => {
-    //after next, the next button is disabled when you go back.
-    if (!value) {
+    setIsNextButtonDisabled(true);
+  }, []);
+
+  useEffect(() => {
+    console.log(answers[questionNumber]);
+    if (!answers[questionNumber]) {
       setIsNextButtonDisabled(true);
       console.log("setDisabled");
     } else {
