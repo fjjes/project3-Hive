@@ -13,6 +13,7 @@ import SelectOne from "../../AdminQuestions/SelectOne";
 import SliderTwo from "../../AdminQuestions/SliderTwo";
 import { v4 as uuidv4 } from "uuid";
 
+let InsertedComponent 
 const NewSurvey = (props) => {
   let history = useHistory();
   const [company, setCompany] = useState("");
@@ -21,7 +22,7 @@ const NewSurvey = (props) => {
   const [narrative, setNarrative] = useState("");
   const [questions, setQuestions]=useState([]);
   const [questionType, setQuestionType]=useState('');
-  const [insertedComponent, setInsertedComponent]=useState()
+  // const [insertedComponent, setInsertedComponent]=useState()
   const [questionNumber, setQuestionNumber]=useState(0);
   const [error, setError] = useState();
   
@@ -35,7 +36,7 @@ const NewSurvey = (props) => {
     let counter = questionNumber + 1
     setQuestionNumber(counter)
 
-    let InsertedComponent;
+    // let InsertedComponent;
     switch (e.target.id) {
       case "checkboxes":
         InsertedComponent = CheckboxesOne;
@@ -262,6 +263,7 @@ const NewSurvey = (props) => {
                       question={component.question}
                       answerOptions={component.texts}
                       questionNumber={questionNumber}
+                      // updatePostalCode={postalCode=>setPostalCode(postalCode)}
                     />
                   
                 )
