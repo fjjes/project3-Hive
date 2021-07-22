@@ -46,7 +46,7 @@ const PostalCode = ({ questionNumber, question }) => {
   //     console.log(value +":"+ validateCityOrPostalCode(value));
   // }
   return (
-    <div className="postal code question-component">
+    <div className="postal-code-question-component">
       <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{question}</p>
