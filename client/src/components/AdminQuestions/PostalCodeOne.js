@@ -3,6 +3,7 @@ import { QuestionContext } from '../pages/Admin/NewSurvey'
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
+import "../pages/Admin/AdminPortal.css"
 
 function PostalCodeOne({questionNumber}) {
   const {questions, setQuestions} = useContext(QuestionContext)
@@ -16,7 +17,7 @@ function PostalCodeOne({questionNumber}) {
   
   };
  
-  const onSave = (question) => {
+  const onSave = () => {
      setQuestion(question)
     // console.log("clicked save");
     // setPostalCode(postalCode)
@@ -36,7 +37,8 @@ function PostalCodeOne({questionNumber}) {
 
     return (
         <div className="question-component admin-question-component">
-          <h3 style={{textAlign: "left"}}> Postal Code Section </h3>
+          <p className="question-intro">Q{questionNumber}.</p>
+          <div className= "postalCodecontainer">         
           <div className= "postalCodeone">
             {inEditMode.status ? (
             <input
@@ -49,12 +51,11 @@ function PostalCodeOne({questionNumber}) {
               <p>{question}</p>
             )}
             <input
-            style={{marginLeft:'40px'}}
             />
           </div>
           <div className="postalCodeone-buttons">
             {inEditMode.status ? (
-              <div>
+              <div className="editbutton">
                 <button
                   className="clear icn1"
                   title="Save"
@@ -76,7 +77,7 @@ function PostalCodeOne({questionNumber}) {
                 </button>
                   </div>
                 ) : (
-              <div>
+              <div className="editbutton">
                 <button
                   className="clear icn3"
                   title="Edit"
@@ -88,9 +89,11 @@ function PostalCodeOne({questionNumber}) {
                 </button>
                 <span className="slash" style={{ color: "#fff" }}>
                   /
-                </span>
+                </span> 
+                
               </div>
             )}
+            </div>
           </div>
         </div>
         );

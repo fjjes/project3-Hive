@@ -173,6 +173,7 @@ h2 {
 
 .narrative {
   display: flex;
+  justify-content: space-between;
 }
 
 .narrative-buttons button {
@@ -200,7 +201,7 @@ h2 {
 }
 
 .survey-selected-components-background {
-  padding: 10px;
+  /* padding: 10px; */
   padding-top: 0;
   height: 100%;
 }
@@ -254,4 +255,33 @@ h2 {
 
 .list-table .icon1[title] .icon2[title] .icon3[title] .icon4[title] :hover:after{
   content:attr(title);
+}
+
+.postalCodeone {
+  display: flex;
+  flex-direction: column;
+}
+.postalCodecontainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.editbutton button {
+  width: 40px; 
+
+}
+.CommentOne{
+  display: flex;
+  flex-direction: column;
+}
+
+.commentOnecontainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.editCommentbutton button {
+  width: 40px; 
 }

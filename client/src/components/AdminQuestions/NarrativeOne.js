@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
+import "../pages/Admin/AdminPortal.css"
 
 function NarrativeOne(props) {
   const narrativePlaceholder = "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
