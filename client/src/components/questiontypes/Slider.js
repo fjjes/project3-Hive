@@ -74,10 +74,14 @@ export default function InputSlider({ questionNumber, question, texts }) {
         />
       ))}
       <NewSlider />
-      {totalCount === 100 && <p className="submit-message">Success!</p>}
-      {totalCount !== 100 && (
-        <p className="submit-message">Total Needs to be 100!</p>
-      )}
+      <div className="totalcount">
+        <p>Total:</p>
+        <input type="text" value={totalCount}></input>
+        {/* {totalCount === 100 && <p className="submit-message">Success!</p>}
+        {totalCount !== 100 && (
+          <p className="submit-message">Total Needs to be 100!</p>
+        )} */}
+      </div>
     </div>
   );
 }
