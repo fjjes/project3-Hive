@@ -18,7 +18,10 @@ function CheckboxesOne({questionNumber}) {
 
   useEffect(()=>{
     const newQuestionList = [...questions]
-    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions} 
+    console.log('newQuestionList', questions)
+    console.log('questionNumber', questionNumber)
+    newQuestionList[questionNumber-1]= {...newQuestionList[questionNumber-1],question, answerOptions} 
+    console.log('questions line 23:', newQuestionList )
     setQuestions(newQuestionList)
 },[])
   

@@ -54,7 +54,11 @@ const NewSurvey = () => {
     e.preventDefault();
     let counter=questionNumber+1
     setQuestionNumber(counter)
-    setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
+
+    const newQuestions=[...questions]
+    newQuestions.push({questionType:e.target.value, questionNumber:counter})
+    setQuestions(newQuestions)
+    //setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   }
  
   async function handleSubmit() {
@@ -70,6 +74,7 @@ const NewSurvey = () => {
       createdDate: currentDate,
     };
 
+    console.log('survey:',surveyToCreate)
     // Post the custom survey data to the DB
     try {
       let createSurvey = await fetch("/api/survey", {
