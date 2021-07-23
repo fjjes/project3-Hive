@@ -11,14 +11,14 @@ const QuestionComponent = ({questionType, questionNumber})=>{
 
     return(
         <div>
-            {questionType === 'checkbox' && <CheckboxesOne questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'comment' && <CommentOne questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'matrix1' && <MatrixOne questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'matrix2' && <MatrixTwo questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'radio' && <RadioOne questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'select' && <SelectOne questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'slider' && <SliderTwo questionNumber={questionNumber} questionType={questionType}/>}
-            {questionType === 'postal' && <PostalCodeOne questionNumber={questionNumber} questionType={questionType}/>}
+            {questionType === 'checkbox' && <CheckboxesOne questionNumber={questionNumber}/>}
+            {questionType === 'comment' && <CommentOne questionNumber={questionNumber} />}
+            {questionType === 'matrix1' && <MatrixOne questionNumber={questionNumber} />}
+            {questionType === 'matrix2' && <MatrixTwo questionNumber={questionNumber} />}
+            {questionType === 'radio' && <RadioOne questionNumber={questionNumber} />}
+            {questionType === 'select' && <SelectOne questionNumber={questionNumber} />}
+            {questionType === 'slider' && <SliderTwo questionNumber={questionNumber} />}
+            {questionType === 'postal' && <PostalCodeOne questionNumber={questionNumber} />}
         </div>
     )
 }

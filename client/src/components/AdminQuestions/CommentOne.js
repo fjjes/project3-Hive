@@ -26,7 +26,7 @@ function CommentOne({questionNumber}) {
 
   useEffect(()=>{
     const newQuestionList = [...questions]
-    newQuestionList[questionNumber]= {...newQuestionList[questionNumber],question, questionNumber, answerOptions:""} 
+    newQuestionList[questionNumber-1]= {...newQuestionList[questionNumber-1],question, questionNumber, answerOptions:""} 
     setQuestions(newQuestionList)
     console.log('newQuestionlist:', questions)
   },[])
