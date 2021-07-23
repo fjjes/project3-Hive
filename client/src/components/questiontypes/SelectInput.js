@@ -59,10 +59,16 @@ const SelectInput = (props) => {
       {values.map((row, i) => {
         return (
           <ul key={i}>
-            <li style={{ listStyleType: "none", textAlign: "left" }}>
+            <li
+              style={{
+                listStyleType: "none",
+                textAlign: "left",
+                marginLeft: "30px",
+              }}
+            >
               {row.text}:&nbsp;
               <select value={row.value} onChange={(e) => handleChange(e, i)}>
-                <option>--Select--</option>
+                <option>Select</option>
                 {selectArray.map((selection, index) => {
                   const isAnswerAlreadyChosen = answers[
                     props.questionNumber

@@ -76,6 +76,33 @@ h1 {
   margin: auto;
 }
 
+.totalcount p {
+  padding: 0px 10px 0px 0px;
+  margin-top: 2px;
+  color: rgb(105, 105, 105);
+}
+
+.totalcount {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.totalcount input {
+  cursor: default;
+  outline: none;
+  text-align: center;
+  /* margin: 20px 0px 10px 0px; */
+  height: 20px;
+  width: 4em;
+  background-color: rgb(244, 241, 241);
+  color: rgb(126, 126, 126);
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff;
+}
+
 .submit-message {
   font-size: 1rem;
   text-align: end;
@@ -121,6 +148,17 @@ h1 {
 .question-component li,
 .question-component label {
   font-size: 1rem;
+}
+
+.question-component select {
+  outline: none;
+  background-color: rgb(244, 241, 241);
+  color: rgb(126, 126, 126);
+  width: 6em;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: inset 2px 2px 4px #cbced1, inset -2px -8px 8px #ffffff;
 }
 
 .question-component textarea {
