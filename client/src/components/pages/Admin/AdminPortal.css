@@ -182,11 +182,11 @@ h2 {
 }
 
 .narrative-text-area {
-  width: 80%;
+  width: 85%;
 }
 
 .narrative-text-area-input {
-  width: 95%;
+  width: 100% !important; 
 }
 
 .survey-selected-components {
