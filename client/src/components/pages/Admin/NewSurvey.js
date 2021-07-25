@@ -184,7 +184,7 @@ const NewSurvey = () => {
           </div>
           <QuestionContext.Provider value={value}>
           {
-            questions.map((questionBlock, index)=>(    
+            questions.map((questionBlock, index)=>(
               <div key={index}>
                 <QuestionComponent 
                   questionType={questionBlock.questionType}
@@ -207,6 +207,10 @@ const NewSurvey = () => {
         >
           Save Survey
         </button>
+        <p style={{color: "red", fontSize: "1rem"}}>
+          {error} <br/>
+          (Make sure the company name and survey version are filled out)
+        </p>
       </div>
     </div>
   );
