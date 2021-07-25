@@ -6,7 +6,7 @@ import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 // import NewSliderOne (add when we have it)
 import QuestionComponent from './QuestionComponent'
 import { v4 as uuidv4 } from "uuid";
-import id from "date-fns/locale/id";
+// import id from "date-fns/locale/id";
 
 
 export const QuestionContext = React.createContext({

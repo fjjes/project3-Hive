@@ -1,19 +1,19 @@
 // import writeJsonFile from "write-json-file"
-import { useState } from "react";
+// import { useState } from "react";
 import logo from "../../../images/hiveicon.png"
 import NewSurvey from "./NewSurvey";
-import FindSurvey from "./FindSurvey";
+// import FindSurvey from "./FindSurvey";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
 
 const AdminPortal = () => {
-  const [view, setView] = useState("new");
-  const [findTabColour, setFindTabColour] = useState("grey")
-  const [newTabColour, setNewTabColour] = useState("grey")
+  // const [view, setView] = useState("new");
+  // const [findTabColour, setFindTabColour] = useState("grey")
+  // const [newTabColour, setNewTabColour] = useState("grey")
 
-  // *** Not working - trying to get active tab to be a different colour ***
-  const active = "#f59645" // Orange
-  const inactive = "#bce6f8" // Dark blue
+  // // *** Not working - trying to get active tab to be a different colour ***
+  // const active = "#f59645" // Orange
+  // const inactive = "#bce6f8" // Dark blue
 
   return (
     <div className="admin-container">
@@ -35,9 +35,13 @@ const AdminPortal = () => {
             }}>Find Existing Surveys</button>
         </div> */}
       </div>
-      <div className="admin-container-bottom" style={view === "" ? {padding: "0"} : null}>
-        {view === "find" ? <FindSurvey /> : null}
-        {view === "new" ? <NewSurvey /> : null}
+      <div 
+      className="admin-container-bottom" 
+      // style={view === "" ? {padding: "0"} : null}
+      >
+        {/* {view === "find" ? <FindSurvey /> : null}
+        {view === "new" ? <NewSurvey /> : null} */}
+        <NewSurvey />
       </div>
     </div>
   );
