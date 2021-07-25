@@ -6,15 +6,23 @@ function CheckboxesOne({questionNumber}) {
   const {questions, setQuestions} = useContext(QuestionContext)
   const [question, setQuestion]=useState("Select up to three options:")
   const [answerOptions, setAnswerOptions]=useState([
-    { checked: false, value: "Option 1" },
-    { checked: false, value: "Option 2" },
-    { checked: false, value: "Option 3" },
-    { checked: false, value: "Option 4" },
-    { checked: false, value: "Option 5" },
-    { checked: false, value: "Option 6" },
-    { checked: false, value: "Option 7" },
-    { checked: false, value: "Option 8" },
-  ])
+  //   { checked: false, value: "Option 1" },
+  //   { checked: false, value: "Option 2" },
+  //   { checked: false, value: "Option 3" },
+  //   { checked: false, value: "Option 4" },
+  //   { checked: false, value: "Option 5" },
+  //   { checked: false, value: "Option 6" },
+  //   { checked: false, value: "Option 7" },
+  //   { checked: false, value: "Option 8" },
+  // ])
+  "Option 1",
+  "Option 2",
+  "Option 3",
+  "Option 4",
+  "Option 5",
+  "Option 6",
+  "Option 7",
+  "Option 8"])
 
   useEffect(()=>{
     const newQuestionList = [...questions]
@@ -36,13 +44,13 @@ function CheckboxesOne({questionNumber}) {
               <input
                 type="checkbox"
                 name="option"
-                value={option.value}
+                value={option}
               />
               <label
-                htmlFor={option.value}
-                key={option.value}
+                htmlFor={option}
+                key={option}
               >
-                {option.value}
+                {option}
               </label>
             </div>
             )})
