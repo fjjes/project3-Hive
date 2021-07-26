@@ -1,18 +1,8 @@
-// import { QuestionContext } from "./NewSurvey";
 import { useHistory } from "react-router";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
-const SaveSurveyButton = ({
-  company,
-  version,
-  narrative,
-  questions,
-  // history,
-  // error,
-  // setError,
-  // uuid,
-}) => {
+const SaveSurveyButton = ({ company, version, narrative, questions }) => {
   async function handleSubmit() {
     const surveyNumber = uuid;
 
@@ -51,10 +41,10 @@ const SaveSurveyButton = ({
   }
 
   let history = useHistory();
-const [error, setError] = useState();
-// Create uuid to be used as survey number
-const uuid = uuidv4();
-//const url = `localhost:4444/${uuid}`;
+  const [error, setError] = useState();
+  // Create uuid to be used as survey number
+  const uuid = uuidv4();
+  //const url = `localhost:4444/${uuid}`;
 
   return (
     <div className="save-survey-button-and-link">
