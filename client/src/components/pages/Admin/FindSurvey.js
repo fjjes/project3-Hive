@@ -26,8 +26,9 @@ const FindSurvey = () => {
     let response= await fetch('/api/survey')
     let data = await response.json();
     setRows(data)
+    
+    console.log("data: ", data)
   }
-
   useEffect(()=>{
     getSurveyList()
   },[])
@@ -81,7 +82,12 @@ const FindSurvey = () => {
     }
   }
  
-
+  const onCopy = () => {
+    console.log("copied")
+    // redirect to another page?
+      // -open up newSurvey view, plus company/version/surveyNumber/SurveyLink
+      // -Kristine's code will make the questions editable, Fathima's code could be copied to make company/version etc. editable?
+  }
 
   return (
     <div className='list-table'>
@@ -153,6 +159,7 @@ const FindSurvey = () => {
                     <button className="icon4" title="Delete" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
                   </div>
                 }
+              <button onClick={() => onCopy()}>Copy Survey</button>
               </td>
             </tr>
           )
