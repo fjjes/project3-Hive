@@ -53,7 +53,7 @@ function NarrativeOne(props) {
         </div>
         <div className="narrative-buttons">
           {inEditMode.status ? (
-            <div>
+            <div className="edit-button">
               <button
                 className="clear icn1"
                 title="Save"
@@ -75,7 +75,7 @@ function NarrativeOne(props) {
               </button>
                 </div>
               ) : (
-            <div>
+            <div className="edit-button">
               <button
                 className="clear icn3"
                 title="Edit"
