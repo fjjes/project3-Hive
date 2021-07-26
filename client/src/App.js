@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Logo from "./components/pages/LandingPage/Logo";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
+import UpdateCopyOfSurvey from "./components/pages/Admin/UpdateCopyOfSurvey";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             <Navbar/>
             <Route exact path='/create-new' >
               <AdminPortal/>
+            </Route>
+            <Route exact path='/update-copy' >
+              <UpdateCopyOfSurvey/>
             </Route>
             <Route path='/find-list'>
               <FindSurvey/>
