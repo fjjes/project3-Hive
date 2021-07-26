@@ -1,13 +1,10 @@
-
 import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { Formik, Form, Field } from "formik";
+// import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 // import NewSliderOne (add when we have it)
 import QuestionComponent from './QuestionComponent'
-import { v4 as uuidv4 } from "uuid";
+import SaveSurveyButton from "./SaveSurveyButton";
 // import id from "date-fns/locale/id";
-
 
 export const QuestionContext = React.createContext({
   questions: [],
@@ -15,40 +12,35 @@ export const QuestionContext = React.createContext({
 });
 
 const NewSurvey = () => {
-  let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
   const [questionNumber, setQuestionNumber]=useState(0)
-  const [error, setError] = useState();
 
   const [questions, setQuestions]=useState([]);
   const value = { questions, setQuestions};
+  // console.log("Stuff", company, version, narrative)
   
-  // Create uuid to be used as survey number
-  const uuid = uuidv4();
-  //const url = `localhost:4444/${uuid}`;
-
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
   }
 
-  // Validation to check that the required fields are filled out
-  function validateCompany(value) {
-    let validationError;
-    if (!value) {
-      validationError = "Company name is required";
-    }
-    return validationError;
-  }
+  // // Validation to check that the required fields are filled out
+  // function validateCompany(value) {
+  //   let validationError;
+  //   if (!value) {
+  //     validationError = "Company name is required";
+  //   }
+  //   return validationError;
+  // }
 
-  function validateVersion(value) {
-    let validationError;
-    if (!value) {
-      validationError = "Survey version is required";
-    }
-    return validationError;
-  }
+  // function validateVersion(value) {
+  //   let validationError;
+  //   if (!value) {
+  //     validationError = "Survey version is required";
+  //   }
+  //   return validationError;
+  // }
 
   const addAQuestion  =(e)=>{
     e.preventDefault();
@@ -61,84 +53,52 @@ const NewSurvey = () => {
     //setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   }
  
-  async function handleSubmit() {
-    const surveyNumber = uuid;
-
-    let currentDate = new Date();
-    let surveyToCreate = {
-      surveyNumber,
-      company,
-      version,
-      narrative,
-      questions,
-      createdDate: currentDate,
-    };
-
-    console.log('survey:',surveyToCreate)
-    // Post the custom survey data to the DB
-    try {
-      let createSurvey = await fetch("/api/survey", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(surveyToCreate),
-      });
-      console.log("Creating a custom-built survey, yay!", surveyToCreate);
-
-      if (createSurvey.status !== 200) {
-        let errorMessage = await createSurvey.text();
-        console.log("We have an error: ", errorMessage);
-        setError(errorMessage);
-      } else {
-        setError(undefined);
-        console.log("create response is successful");
-        history.push("/find-list");
-      }
-    } catch (error) {
-      console.log("Fetch failed to reach the server:", error);
-    }
-  }
-
+  // (history, company, version, narrative, questions, error, setError, uuid) 
   return (
     <div>
       {/* TOP PART OF PAGE */}
       <h2>
         Build your own survey by choosing from the components on the left.
       </h2>
-      <Formik
+      {/* <Formik
         onSubmit={(values) => {
           console.log(values);
         }}
       >
         {({ errors, touched }) => (
-          <Form>
-            <div className="company-and-survey-name-inputs">
-              <Field
+          <Form> */}
+            <form className="company-and-survey-name-inputs">
+              {/* <Field */}
+              <input
                 name="company"
-                validate={validateCompany}
+                // validate={validateCompany}
                 id="company-name"
                 className="survey-info"
                 placeholder="Company name (required)"
-                required
+                value={company}
+                // required
                 onChange={(event) => onInputChange(event, setCompany)}
               />
-              <Field
+              {/* <Field */}
+              <input
                 name="version"
-                validate={validateVersion}
+                // validate={validateVersion}
                 id="survey-name"
                 className="survey-info"
                 placeholder="Survey version (required)"
-                required
+                value={version}
+                // required
                 onChange={(event) => onInputChange(event, setVersion)}
               />
-            </div>
+            </form>
             {/* Add error messages if the company/version fields are left empty */}
-            <div style={{ color: "red", textAlign: "center" }}>
+            {/* <div style={{ color: "red", textAlign: "center" }}>
               {errors.company && touched.company && <div>{errors.company}</div>}
               {errors.version && touched.version && <div>{errors.version}</div>}
-            </div>
-          </Form>
+            </div> */}
+          {/* </Form>
         )}
-      </Formik>
+      </Formik> */}
 
       {/* LEFT PART OF PAGE */}
       {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
@@ -199,7 +159,7 @@ const NewSurvey = () => {
 
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
-      <div className="save-survey-button-and-link">
+      {/* <div className="save-survey-button-and-link">
         <button
           type="submit"
           className="save-survey-button"
@@ -211,7 +171,13 @@ const NewSurvey = () => {
           {error} <br/>
           (Make sure the company name and survey version are filled out)
         </p>
-      </div>
+      </div> */}
+      <SaveSurveyButton 
+        company={company} 
+        version={version}
+        narrative={narrative}
+        questions={questions}
+        />
     </div>
   );
 };
