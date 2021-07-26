@@ -165,6 +165,12 @@ h2 {
   margin: 15px;
 }
 
+.updated-copy-of-survey 
+.admin-question-component {
+  width: 80%;
+  margin: 15px auto;
+}
+
 .admin-question-component label,
 .admin-question-component input {
   display: inline-block;
@@ -176,10 +182,10 @@ h2 {
   justify-content: space-between;
 }
 
-.narrative-buttons button {
+/* .narrative-buttons button {
   width: 40px;
   cursor: pointer;
-}
+} */
 
 .narrative-text-area {
   width: 85%;
@@ -267,9 +273,12 @@ h2 {
   justify-content: space-between;
   
 }
-.editbutton button {
+.edit-button button, 
+.editCommentbutton button {
   width: 40px; 
-
+  cursor: pointer;
+  background-color: #197e9c;
+  
 }
 .CommentOne{
   display: flex;
@@ -282,6 +291,6 @@ h2 {
   justify-content: space-between;
   
 }
-.editCommentbutton button {
+/* .editCommentbutton button {
   width: 40px; 
-}
+} */
