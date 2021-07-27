@@ -55,7 +55,7 @@ function PostalCodeOne({questionNumber}) {
           </div>
           <div className="postalCodeone-buttons">
             {inEditMode.status ? (
-              <div className="editbutton">
+              <div className="edit-button">
                 <button
                   className="clear icn1"
                   title="Save"
@@ -77,7 +77,7 @@ function PostalCodeOne({questionNumber}) {
                 </button>
                   </div>
                 ) : (
-              <div className="editbutton">
+              <div className="edit-button">
                 <button
                   className="clear icn3"
                   title="Edit"

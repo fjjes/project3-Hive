@@ -63,7 +63,7 @@ function CommentOne({ questionNumber }) {
       
       <div className="Commentone-buttons">
         {inEditMode.status ? (
-          <div className="editCommentbutton">
+          <div className="edit-button">
             <button
               className="clear icn1"
               title="Save"
@@ -83,7 +83,7 @@ function CommentOne({ questionNumber }) {
             </button>
           </div>
         ) : (
-          <div className="editCommentbutton">
+          <div className="edit-button">
             <button
               className="clear icn3"
               title="Edit"
