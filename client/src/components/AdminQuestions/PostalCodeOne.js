@@ -38,8 +38,8 @@ function PostalCodeOne({questionNumber}) {
     return (
         <div className="question-component admin-question-component">
           <p className="question-intro">Q{questionNumber}.</p>
-          <div className= "postalCodecontainer">         
-          <div className= "postalCodeone">
+          <div className= "questionAndButtons">         
+          <div className= "questionText">
             {inEditMode.status ? (
             <input
             type="text"
@@ -55,7 +55,7 @@ function PostalCodeOne({questionNumber}) {
           </div>
           <div className="postalCodeone-buttons">
             {inEditMode.status ? (
-              <div className="editbutton">
+              <div className="edit-button">
                 <button
                   className="clear icn1"
                   title="Save"
@@ -77,7 +77,7 @@ function PostalCodeOne({questionNumber}) {
                 </button>
                   </div>
                 ) : (
-              <div className="editbutton">
+              <div className="edit-button">
                 <button
                   className="clear icn3"
                   title="Edit"

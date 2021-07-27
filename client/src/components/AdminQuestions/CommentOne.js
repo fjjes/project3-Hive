@@ -38,8 +38,8 @@ function CommentOne({ questionNumber }) {
   return (
     <div className="question-component admin-question-component">
       <p className="question-intro">Q{questionNumber}.</p>
-      <div className="commentOnecontainer">
-        <div className="CommentOne">
+      <div className="questionAndButtons">
+        <div className="questionText">
           {inEditMode.status ? (
             <input
               type="text"
@@ -63,7 +63,7 @@ function CommentOne({ questionNumber }) {
       
       <div className="Commentone-buttons">
         {inEditMode.status ? (
-          <div className="editCommentbutton">
+          <div className="edit-button">
             <button
               className="clear icn1"
               title="Save"
@@ -83,7 +83,7 @@ function CommentOne({ questionNumber }) {
             </button>
           </div>
         ) : (
-          <div className="editCommentbutton">
+          <div className="edit-button">
             <button
               className="clear icn3"
               title="Edit"
