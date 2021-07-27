@@ -177,16 +177,6 @@ h2 {
   margin: 0px;
 }
 
-.narrative {
-  display: flex;
-  justify-content: space-between;
-}
-
-/* .narrative-buttons button {
-  width: 40px;
-  cursor: pointer;
-} */
-
 .narrative-text-area {
   width: 85%;
 }
@@ -262,29 +252,20 @@ h2 {
 .list-table .icon1[title] .icon2[title] .icon3[title] .icon4[title] :hover:after{
   content:attr(title);
 }
-
-.postalCodeone {
+/* .questionText is for the edit and save button when you are in the edit mode */
+.questionText {
   display: flex;
   flex-direction: column;
 }
-.postalCodecontainer {
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
-}
-.edit-button button, .add-button  {
+
+.edit-button button  {
   width: 40px; 
   cursor: pointer;
   background-color: #197e9c;
   
 }
-.CommentOne{
-  display: flex;
-  flex-direction: column;
-}
 
-.commentOnecontainer {
+.questionAndButtons {
   display:flex;
   flex-direction: row;
   justify-content: space-between;

@@ -38,8 +38,8 @@ function PostalCodeOne({questionNumber}) {
     return (
         <div className="question-component admin-question-component">
           <p className="question-intro">Q{questionNumber}.</p>
-          <div className= "postalCodecontainer">         
-          <div className= "postalCodeone">
+          <div className= "questionAndButtons">         
+          <div className= "questionText">
             {inEditMode.status ? (
             <input
             type="text"

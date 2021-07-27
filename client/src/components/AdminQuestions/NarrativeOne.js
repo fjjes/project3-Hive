@@ -37,7 +37,7 @@ function NarrativeOne(props) {
   return (
     <div className="question-component admin-question-component narrative-component">
       <h2 style={{ textAlign: "left" }}>Narrative</h2>
-      <div className="narrative">
+      <div className="questionAndButtons">
         <div className="narrative-text-area">
           {inEditMode.status ? (
             <textarea

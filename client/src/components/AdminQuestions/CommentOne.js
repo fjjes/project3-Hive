@@ -38,8 +38,8 @@ function CommentOne({ questionNumber }) {
   return (
     <div className="question-component admin-question-component">
       <p className="question-intro">Q{questionNumber}.</p>
-      <div className="commentOnecontainer">
-        <div className="CommentOne">
+      <div className="questionAndButtons">
+        <div className="questionText">
           {inEditMode.status ? (
             <input
               type="text"
