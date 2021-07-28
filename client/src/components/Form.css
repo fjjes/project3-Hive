@@ -148,6 +148,8 @@ h1 {
 .question-component li,
 .question-component label {
   font-size: 1rem;
+  padding: 0px 0px 0px 0px;
+  margin: 0px;
 }
 
 .question-component select {
