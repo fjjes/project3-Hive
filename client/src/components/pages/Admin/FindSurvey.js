@@ -4,8 +4,9 @@ import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
+import * as ImIcons from "react-icons/im";
 
-const FindSurvey = () => {
+const FindSurvey = (props) => {
   const [rows, setRows] = useState([]);
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
@@ -13,6 +14,8 @@ const FindSurvey = () => {
   const [version, setVersion] = useState("");
   const [surveyNum, setSurveyNum] = useState();
   const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
+
+  props.resetRowId();
 
   function onSearchInputChange(event, setFunction) {
     console.log(
@@ -84,13 +87,6 @@ const FindSurvey = () => {
       }
       console.log("delete response:", deleteResponse);
     }
-  };
-
-  const onCopy = () => {
-    console.log("copied");
-    // redirect to another page?
-    // -open up newSurvey view, plus company/version/surveyNumber/SurveyLink
-    // -Kristine's code will make the questions editable, Fathima's code could be copied to make company/version etc. editable?
   };
 
   return (
@@ -212,7 +208,20 @@ const FindSurvey = () => {
                       </button>
                     </div>
                   )}
-                  <button onClick={() => onCopy()}>Copy Survey</button>
+                  <div>
+                    <Link
+                      to="/create-new"
+                      className="icon5"
+                      title="Copy"
+                      style={{ color: "black" }}
+                      onClick={() => {
+                        console.log("clicked on rowId:", row._id);
+                        props.setRowId(row._id);
+                      }}
+                    >
+                      <ImIcons.ImCopy />
+                    </Link>
+                  </div>
                 </td>
               </tr>
             );

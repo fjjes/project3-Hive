@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
-// import NewSliderOne (add when we have it)
 import QuestionComponent from "./QuestionComponent";
 import { v4 as uuidv4 } from "uuid";
 // import id from "date-fns/locale/id";
@@ -12,7 +11,7 @@ export const QuestionContext = React.createContext({
   setQuestions: () => {},
 });
 
-const NewSurvey = () => {
+const NewSurvey = ({ rowId }) => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
@@ -25,7 +24,25 @@ const NewSurvey = () => {
 
   // Create uuid to be used as survey number
   const uuid = uuidv4();
-  //const url = `localhost:4444/${uuid}`;
+
+  useEffect(() => {
+    const getSurvey = async () => {
+      let response = await fetch(`/api/survey/${rowId}`);
+      console.log("Grabbing rowId: ", rowId);
+      let data = await response.json();
+      console.log("data:", data);
+      setQuestions(data.questions);
+      setCompany(data.company);
+      setVersion(data.version);
+    };
+    if (rowId) {
+      getSurvey();
+    }
+  }, [rowId]);
+
+  console.log("questions: ", questions);
+  console.log("company: ", company);
+  console.log("version: ", version);
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -59,7 +76,6 @@ const NewSurvey = () => {
       questionNumber: counter,
     });
     setQuestions(newQuestions);
-    //setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   };
 
   async function handleSubmit() {
@@ -103,7 +119,9 @@ const NewSurvey = () => {
     <div>
       {/* TOP PART OF PAGE */}
       <h2>
-        Build your own survey by choosing from the components on the left.
+        {!rowId
+          ? "Build your own survey by choosing from the components on the left."
+          : "Edit your survey here."}
       </h2>
       <Formik
         onSubmit={(values) => {
@@ -119,6 +137,7 @@ const NewSurvey = () => {
                 id="company-name"
                 className="survey-info"
                 placeholder="Company name (required)"
+                value={company}
                 required
                 onChange={(event) => onInputChange(event, setCompany)}
               />
@@ -128,6 +147,7 @@ const NewSurvey = () => {
                 id="survey-name"
                 className="survey-info"
                 placeholder="Survey version (required)"
+                value={version}
                 required
                 onChange={(event) => onInputChange(event, setVersion)}
               />
@@ -142,13 +162,8 @@ const NewSurvey = () => {
       </Formik>
 
       {/* LEFT PART OF PAGE */}
-      {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
-          {/* Narrative button not needed since this component is now required - delete? */}
-          {/* <button value="narrative" onClick={addAQuestion} disabled style={{backgroundColor:"darkGrey"}}>
-            Narrative <em>(disabled)</em>
-          </button> */}
           <button value="checkbox" onClick={addAQuestion}>
             Checkbox
           </button>
