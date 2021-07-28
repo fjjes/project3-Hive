@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
@@ -23,10 +23,36 @@ const NewSurvey = () => {
 
   const [questions, setQuestions]=useState([]);
   const value = { questions, setQuestions};
+
+  // Toggle to test new survey vs. editing existing survey
+  const isItANewSurvey = true;
   
   // Create uuid to be used as survey number
   const uuid = uuidv4();
   //const url = `localhost:4444/${uuid}`;
+
+  // THIS IS PULLING IN ONE SPECIFIC SURVEY...  TO BE CHANGED!
+  const getSurveyList = async () => {
+    let response = await fetch("/api/survey/61009722f7ce781e8b5d0012");
+    let data = await response.json();
+    console.log("data:", data);
+    setQuestions(data.questions);
+    console.log("questions: ", questions)
+    setCompany(data.company);
+    console.log("company: ", company)
+    setVersion(data.version);
+    console.log("version: ", version)
+  };
+
+  useEffect(() => {
+    !isItANewSurvey && getSurveyList();
+    setCompany(company);
+  }, []);
+
+  console.log("company:", company);
+
+
+
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -57,7 +83,6 @@ const NewSurvey = () => {
     const newQuestions=[...questions]
     newQuestions.push({questionType:e.target.value, questionNumber:counter})
     setQuestions(newQuestions)
-    //setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
   }
  
   async function handleSubmit() {
@@ -101,7 +126,10 @@ const NewSurvey = () => {
     <div>
       {/* TOP PART OF PAGE */}
       <h2>
-        Build your own survey by choosing from the components on the left.
+        {!isItANewSurvey 
+          ? "Build your own survey by choosing from the components on the left."
+          : "Edit your survey here."
+        }
       </h2>
       <Formik
         onSubmit={(values) => {
@@ -117,6 +145,7 @@ const NewSurvey = () => {
                 id="company-name"
                 className="survey-info"
                 placeholder="Company name (required)"
+                value={company}
                 required
                 onChange={(event) => onInputChange(event, setCompany)}
               />
@@ -126,6 +155,7 @@ const NewSurvey = () => {
                 id="survey-name"
                 className="survey-info"
                 placeholder="Survey version (required)"
+                value={version}
                 required
                 onChange={(event) => onInputChange(event, setVersion)}
               />

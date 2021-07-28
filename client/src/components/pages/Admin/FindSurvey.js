@@ -4,9 +4,9 @@ import * as  BsIcons from 'react-icons/bs';
 import * as  RiIcons from 'react-icons/ri';
 import * as  GiIcons from 'react-icons/gi';
 import * as  MdIcons from 'react-icons/md';
+import * as  ImIcons from 'react-icons/im';
 
-
-const FindSurvey = () => {
+const FindSurvey = (props) => {
   const [rows, setRows]= useState([])
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
@@ -159,7 +159,16 @@ const FindSurvey = () => {
                     <button className="icon4" title="Delete" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
                   </div>
                 }
-              <button onClick={() => onCopy()}>Copy Survey</button>
+              <div>
+                  <Link to="/create-new" className="icon5" title="Copy" style={{color: "black"}} onClick={() => {
+                    onCopy()
+                    // props.onCopy(row._id)
+                    // console.log("row._id (working):", row._id);
+                  }}
+                    >
+                    <ImIcons.ImCopy /></Link>
+                </div>
+
               </td>
             </tr>
           )
