@@ -77,6 +77,19 @@ function RadioOne({ questionNumber }) {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
+      <div className="edit-button">
+        <button
+          style={{ float: "right", width: "43px" }}
+          className="clear icn3"
+          title="Edit"
+          onClick={() => onEditClicked()}
+        >
+          <BsIcons.BsPencilSquare />
+        </button>
+        <span className="slash" style={{ color: "#fff" }}>
+          /
+        </span>
+      </div>
       <p className="question-intro">Q{questionNumber}.</p>
       {inEditMode.status ? (
         <input
@@ -153,13 +166,13 @@ function RadioOne({ questionNumber }) {
           ) : (
             // </div>
             <div className="edit-button">
-              <button
+              {/* <button
                 className="clear icn3"
                 title="Edit"
                 onClick={() => onEditClicked()}
               >
                 <BsIcons.BsPencilSquare />
-              </button>
+              </button> */}
               <span className="slash" style={{ color: "#fff" }}>
                 /
               </span>
