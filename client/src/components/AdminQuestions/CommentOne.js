@@ -4,17 +4,17 @@ import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 
-function CommentOne({ questionNumber }) {
+function CommentOne({ question }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [question, setQuestion] = useState("Enter a comment:");
+  const [questionText, setQuestionText] = useState(question.question || "Enter a comment:");
 
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
   };
   const onSave = () => {
-    setQuestion(question);
+    setQuestionText(questionText);
     setInEditMode({ status: false });
   };
 
@@ -25,10 +25,10 @@ function CommentOne({ questionNumber }) {
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      questionNumber,
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
       answerOptions: "",
     };
     setQuestions(newQuestionList);
@@ -37,18 +37,18 @@ function CommentOne({ questionNumber }) {
 
   return (
     <div className="question-component admin-question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Q{question.questionNumber}.</p>
       <div className="questionAndButtons">
         <div className="questionText">
           {inEditMode.status ? (
             <input
               type="text"
-              value={question}
-              questionNumber={questionNumber}
-              onChange={(e) => setQuestion(e.target.value)}
+              value={questionText}
+              questionNumber={question.questionNumber}
+              onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
-            <p> {question}</p>
+            <p> {questionText}</p>
           )}
           <div>
             <input

@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { QuestionContext } from '../pages/Admin/NewSurvey'
 
-const MatrixTwo = ({questionNumber}) => {
+const MatrixTwo = ({question}) => {
     const {questions, setQuestions} = useContext(QuestionContext)
-    const [question, setQuestion]=useState("Please rate the importance of followings from 1 to 10:")
-    const [answerOptions, setAnswerOptions]=useState([
+    const [questionText, setQuestionText]=useState(question.question || "Please rate the importance of followings from 1 to 10:")
+    const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
+        [
         {text: "text 1"},
         {text: "text 2"},
         {text: "text 3"},
@@ -16,15 +17,18 @@ const MatrixTwo = ({questionNumber}) => {
 
     useEffect(()=>{
         const newQuestionList = [...questions]
-        newQuestionList[questionNumber-1]= {...newQuestionList[questionNumber-1],question, questionNumber, answerOptions} 
+        newQuestionList[question.questionNumber-1]= {...newQuestionList[question.questionNumber-1],
+            question:questionText, 
+            // questionNumber, 
+            answerOptions} 
         setQuestions(newQuestionList)
     },[])
 
     return (
         <div className="question-component admin-question-component">
-        <p className="question-intro">Q{questionNumber}.</p>
+        <p className="question-intro">Q{question.questionNumber}.</p>
         <span>
-            <p className="question-intro">{question}</p>
+            <p className="question-intro">{questionText}</p>
         </span>
         <table>
             <tbody>

@@ -3,10 +3,11 @@ import { QuestionContext } from '../pages/Admin/NewSurvey'
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-const SliderTwo = ({questionNumber}) => {
+const SliderTwo = ({question}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
-  const [question, setQuestion]=useState("Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
-  const [answerOptions, setAnswerOptions]=useState([
+  const [questionText, setQuestionText]=useState(question.question || "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
+  const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
+    [
     "Home",
     "Traveling",
     "At the office",
@@ -16,14 +17,17 @@ const SliderTwo = ({questionNumber}) => {
 
   useEffect(()=>{
     const newQuestionList = [...questions]
-    newQuestionList[questionNumber-1]= {...newQuestionList[questionNumber-1],question, questionNumber, answerOptions} 
+    newQuestionList[question.questionNumber-1]= {...newQuestionList[question.questionNumber-1],
+      question:questionText, 
+      // questionNumber, 
+      answerOptions} 
     setQuestions(newQuestionList)
   },[])
 
   return (
     <div className="question-component admin-question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-        <span><p className="question-intro">{question}</p></span>
+      <p className="question-intro">Q{question.questionNumber}.</p>
+        <span><p className="question-intro">{questionText}</p></span>
         {answerOptions.map((row, index)=>{
           return(
             <div key={index} className="slider">

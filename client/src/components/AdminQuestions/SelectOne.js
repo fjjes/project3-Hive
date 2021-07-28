@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { QuestionContext } from '../pages/Admin/NewSurvey'
 
-const SelectOne = ({ questionNumber}) => {
+const SelectOne = ({ question}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
-  const [question, setQuestion]=useState("In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:")
-  const [answerOptions, setAnswerOptions]=useState([
+  const [questionText, setQuestionText]=useState(question.question || "In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:")
+  const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
+    [
     {text:'Rethinking workspaces in the company'},
     {text:'Review the organization of meetings Rethinking moments'},
     {text:'Spaces of conviviality'},
@@ -20,14 +21,17 @@ const SelectOne = ({ questionNumber}) => {
 
   useEffect(()=>{
       const newQuestionList = [...questions]
-      newQuestionList[questionNumber-1]= {...newQuestionList[questionNumber-1],question, questionNumber, answerOptions} 
+      newQuestionList[question.questionNumber-1]= {...newQuestionList[question.questionNumber-1],
+        question:questionText, 
+        // questionNumber, 
+        answerOptions} 
       setQuestions(newQuestionList)
   },[])
 
     return (       
       <div className="selectOne question-component admin-question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span><p className="question-intro">{question}</p></span>
+      <p className="question-intro">Q{question.questionNumber}.</p>
+      <span><p className="question-intro">{questionText}</p></span>
       {answerOptions.map((row, i) => {
         return (
           <ul key={i}>

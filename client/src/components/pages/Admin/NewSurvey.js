@@ -18,6 +18,7 @@ const NewSurvey = ({ rowId }) => {
   const [narrative, setNarrative] = useState("");
   const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
+  const [answerOptions, setAnswerOptions] = useState([])
 
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
@@ -34,6 +35,8 @@ const NewSurvey = ({ rowId }) => {
       setQuestions(data.questions);
       setCompany(data.company);
       setVersion(data.version);
+      setAnswerOptions(data.questions.answerOptions)
+      setQuestionNumber(data.questions.length)
     };
     if (rowId) {
       getSurvey();
@@ -43,6 +46,7 @@ const NewSurvey = ({ rowId }) => {
   console.log("questions: ", questions);
   console.log("company: ", company);
   console.log("version: ", version);
+  console.log("answer options: ", answerOptions)
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -202,8 +206,7 @@ const NewSurvey = ({ rowId }) => {
             {questions.map((questionBlock, index) => (
               <div key={index}>
                 <QuestionComponent
-                  questionType={questionBlock.questionType}
-                  questionNumber={questionBlock.questionNumber}
+                  question={questionBlock}
                 />
               </div>
             ))}
