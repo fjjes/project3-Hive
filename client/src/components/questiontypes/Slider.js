@@ -3,7 +3,6 @@ import { AnswerContext } from "../pages/SurveyQuestionPage";
 import { makeStyles } from "@material-ui/core/styles";
 import NewSlider from "./newslider";
 import "../Form.css";
-import { truncate } from "fs";
 
 const useStyles = makeStyles({
   input: {
@@ -20,14 +19,13 @@ export default function InputSlider({ questionNumber, question, texts }) {
   const [values, setValues] = useState(new Array(texts.length).fill(0));
 
   useEffect(() => {
-    console.log(values);
     if (totalCount === 100) {
       setIsNextButtonDisabled(false);
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
     }
-  }, [totalCount]);
+  }, [totalCount, setIsNextButtonDisabled]);
 
   useEffect(() => {
     if (values.length === 0) {

@@ -21,7 +21,7 @@ color: #bce6f8; Light blueish-grey
 color: #575759; Dark grey from logo text */
 
 html {
-  height: 0px;
+  height: fit-content;
 }
 
 /* .start h2 {

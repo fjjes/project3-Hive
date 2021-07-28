@@ -3,8 +3,8 @@ import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
-// import { BsFillPlusCircleFill } from "react-icons/bs";
 import "../pages/Admin/AdminPortal.css";
+import * as RiIcons from "react-icons/ri";
 
 function RadioOne({ question }) {
   const { questions, setQuestions } = useContext(QuestionContext);
@@ -14,10 +14,10 @@ function RadioOne({ question }) {
   const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||
     [
     "Option1",
-    // "Option2",
-    // "Option3",
-    // "Option4",
-    // "Option5",
+    "Option2",
+    "Option3",
+    "Option4",
+    "Option5",
     // "Option6",
     // "Option7",
     // "Option8",
@@ -30,20 +30,28 @@ function RadioOne({ question }) {
 
   const onSave = () => {
     setQuestions(questions);
-  //   const previousQuestions=questions
-  //   previousQuestions[questionNumber]={}
-  //   setQuestion(previousQuestions)
-  //   console.log("clicked save", questions);
+    //   const previousQuestions=questions
+    //   previousQuestions[questionNumber]={}
+    //   setQuestion(previousQuestions)
+    //   console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
+
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
   };
 
+  const onDelete = (e) => {
+    e.preventDefault();
+    questions.splice(question.questionNumber - 1, 1);
+    const deleteQuestion = [...questions];
+    setQuestions(deleteQuestion);
+  };
+
   const OnAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, radioOption]);
+    setAnswerOptions([...answerOptions,radioOption]);
     console.log("answer", answerOptions);
     setInEditMode({ status: true });
   };
@@ -62,10 +70,26 @@ function RadioOne({ question }) {
       answerOptions,
     };
     setQuestions(newQuestionList);
-  }, [radioOption]);
+  }, [answerOptions]);
 
   return (
     <div className="radio-one question-component admin-question-component">
+      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
+        <RiIcons.RiDeleteBinFill />
+      </button>
+      <div className="edit-button">
+        <button
+          style={{ float: "right", width: "43px" }}
+          className="clear icn3"
+          title="Edit"
+          onClick={() => onEditClicked()}
+        >
+          <BsIcons.BsPencilSquare />
+        </button>
+        <span className="slash" style={{ color: "#fff" }}>
+          /
+        </span>
+      </div>
       <p className="question-intro">Q{question.questionNumber}.</p>
       {inEditMode.status ? (
         <input
@@ -78,7 +102,7 @@ function RadioOne({ question }) {
         <p className="question-intro">{questionText}</p>
       )}
       <div className="questionAndButtons">
-        <div className="radioOne">
+        <div className="questionText">
           {answerOptions.map((option, index) => {
             return inEditMode.status ? (
               <div key={index}>
@@ -86,11 +110,13 @@ function RadioOne({ question }) {
                   type="radio"
                   id={option}
                   name="option-group"
-                  // value={option}
                   color="primary"
                   questionNumber={question.questionNumber}
                 />
-                <input defaultValue={option} onChange={(e) => onInputChange(e, index)} />
+                <input
+                  defaultValue={option}
+                  onChange={(e) => onInputChange(e, index)}
+                />
               </div>
             ) : (
               <div>
@@ -98,7 +124,6 @@ function RadioOne({ question }) {
                   type="radio"
                   id={option}
                   name="option-group"
-                  // value={option}
                   color="primary"
                   questionNumber={question.questionNumber}
                   // onChange={(e) => setQuestion(e.target.value)}
@@ -106,56 +131,54 @@ function RadioOne({ question }) {
                 <label>{option}</label>
               </div>
             );
-            // <input />
           })}
-          <div className="radio-buttons">
-            {inEditMode.status ? (
-              <div className="edit-button">
-                <button
-                  className="clear icn1"
-                  title="Save"
-                  onClick={() => onSave()}
-                >
-                  <GiIcons.GiSaveArrow />
-                </button>
-                <span className="slash" style={{ color: "#fff" }}>
-                  /
-                </span>
-                <button
-                  className="clear icn2"
-                  title="Cancel"
-                  onClick={() => onCancel()}
-                >
-                  <MdIcons.MdCancel />
-                </button>
+        </div>
+        <div className="radio-buttons">
+          {inEditMode.status ? (
+            <div className="edit-button">
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() => onSave()}
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+              >
+                <MdIcons.MdCancel />
+              </button>
 
-                <div className="edit-button">
-                  <button
-                    className="clear icn4"
-                    title="Add"
-                    onClick={() => OnAddInput()}
-                  >
-                    <BsIcons.BsFillPlusCircleFill />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              // </div>
               <div className="edit-button">
                 <button
-                  className="clear icn3"
-                  title="Edit"
-                  onClick={() => onEditClicked()}
+                  className="clear icn4"
+                  title="Add"
+                  onClick={() => OnAddInput()}
                 >
-                  <BsIcons.BsPencilSquare />
+                  <BsIcons.BsFillPlusCircleFill />
                 </button>
-                <span className="slash" style={{ color: "#fff" }}>
-                  /
-                </span>
               </div>
-            )}
-          </div>
-          {/* )};  */}
+            </div>
+          ) : (
+            // </div>
+            <div className="edit-button">
+              {/* <button
+                className="clear icn3"
+                title="Edit"
+                onClick={() => onEditClicked()}
+              >
+                <BsIcons.BsPencilSquare />
+              </button> */}
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

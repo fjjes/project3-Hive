@@ -4,7 +4,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import SurveyQuestionPage from "../SurveyQuestionPage";
 import "./Logo.css";
 //import { Link } from "react-router-dom";
-import image from "../../../images/website.jpg";
+// import image from "../../../images/website.jpg";
 
 export default function Logo({ flashcard }) {
   const { surveyId } = useParams();
@@ -38,13 +38,19 @@ export default function Logo({ flashcard }) {
           onClick={() => setFlip(!flip)}
         >
           <div class="thefront">
-            <Player
-              autoplay
-              loop
-              src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
-              className="logo"
-            ></Player>
-            <p>Click to Flip</p>
+            {!flip ? (
+              <>
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
+                  className="logo"
+                ></Player>
+                <p>Click to Flip</p>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="theback">
             <h1>Hello {company} Team!</h1>

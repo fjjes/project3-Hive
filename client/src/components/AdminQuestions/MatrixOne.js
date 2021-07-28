@@ -1,81 +1,100 @@
-import React, { useState, useContext, useEffect} from 'react';
-import { QuestionContext } from '../pages/Admin/NewSurvey'
+import React, { useState, useContext, useEffect } from "react";
+import { QuestionContext } from "../pages/Admin/NewSurvey";
+import * as RiIcons from "react-icons/ri";
 
-const MatrixOne = ({question}) => {
-    const {questions, setQuestions} = useContext(QuestionContext)
-    const [questionText, setQuestionText]=useState(question.question || 'Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:')
-    const [answerOptions, setAnswerOptions]=useState(question.answerOptions || 
-        [
-        {text: "Ability to concentrate" },
-        {text: "Ability to conduct telephone conversations"},
-        {text: "Ability to find a meeting room within a reasonable timeframe"},
-        {text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
-        {text: "Ability to conduct confidential conversations" },
-        {text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
-        {text: "Ability to work in the office with remote contacts"},
-        {text: "Ability to easily switch between face-to-face work and work at home"},
-        {text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"}
-    ])
-    const [columns, setColumns]=useState([
-            "Very Satisfied",
-            "Satisfied",
-            "Neither satisfied nor dissatisfied",
-            "Dissatisfied",
-            "Very dissatisfied"
-    ])
+const MatrixOne = ({ question }) => {
+  const { questions, setQuestions } = useContext(QuestionContext);
+  const [questionText, setQuestionText] = useState(question.question ||
+    "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
+  );
+  const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||
+    [
+    { text: "Ability to concentrate" },
+    { text: "Ability to conduct telephone conversations" },
+    { text: "Ability to find a meeting room within a reasonable timeframe" },
+    {
+      text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
+    },
+    { text: "Ability to conduct confidential conversations" },
+    {
+      text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
+    },
+    { text: "Ability to work in the office with remote contacts" },
+    {
+      text: "Ability to easily switch between face-to-face work and work at home",
+    },
+    {
+      text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
+    },
+  ]);
+  const [columns, setColumns] = useState([
+    "Very Satisfied",
+    "Satisfied",
+    "Neither satisfied nor dissatisfied",
+    "Dissatisfied",
+    "Very dissatisfied",
+  ]);
 
-    useEffect(()=>{
-        const newQuestionList = [...questions]
-        newQuestionList[question.questionNumber-1]= {...newQuestionList[question.questionNumber-1],
-            question:questionText, 
-            // questionNumber, 
-            answerOptions}
-        setQuestions(newQuestionList)
-    },[])
+  const onDelete = (e) => {
+    e.preventDefault();
+    questions.splice(question.questionNumber - 1, 1);
+    const deleteQuestion = [...questions];
+    setQuestions(deleteQuestion);
+  };
 
-    return (
-        <div className="question-component admin-question-component">
-        <p className="question-intro">Q{question.questionNumber}.</p>
-        <span>
-            <p className="question-intro">{questionText}</p>
-        </span>
-        <table>
-            <tbody>
-            <tr>
-                {/* removing this empty <th></th> will mess up the layout of matrix labels */}
-                <th></th>  
-                {columns.map((cl, i) => {
-                return (
-                    <th key={i}>
-                    <label>{cl}</label>
-                    </th>
-                );
-                })}
-            </tr>
-            {answerOptions.map((row, i) => {
-                return (
-                <tr key={i}>
-                    <td className="label-rows">
-                    <label>{row.text}</label>
-                    </td>
-                    {columns.map((col, index) => {
-                    return (
-                        <td key={index}>
-                        <input
-                            type="radio"
-                            name={row.text}
-                            value={col}
-                        />
-                        </td>
-                    );
-                    })}
-                </tr>
-                );
+  useEffect(() => {
+    const newQuestionList = [...questions];
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
+      answerOptions,
+    };
+    setQuestions(newQuestionList);
+  }, []);
+
+  return (
+    <div className="question-component admin-question-component">
+      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
+        <RiIcons.RiDeleteBinFill />
+      </button>
+      <p className="question-intro">Q{question.questionNumber}.</p>
+      <span>
+        <p className="question-intro">{questionText}</p>
+      </span>
+      <table>
+        <tbody>
+          <tr>
+            {/* removing this empty <th></th> will mess up the layout of matrix labels */}
+            <th></th>
+            {columns.map((cl, i) => {
+              return (
+                <th key={i}>
+                  <label>{cl}</label>
+                </th>
+              );
             })}
-            </tbody>
-        </table>
+          </tr>
+          {answerOptions.map((row, i) => {
+            return (
+              <tr key={i}>
+                <td className="label-rows">
+                  <label>{row.text}</label>
+                </td>
+                {columns.map((col, index) => {
+                  return (
+                    <td key={index}>
+                      <input type="radio" name={row.text} value={col} />
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
-    );
-}
- 
+  );
+};
+
 export default MatrixOne;

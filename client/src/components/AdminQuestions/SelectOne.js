@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { QuestionContext } from '../pages/Admin/NewSurvey'
+import React, { useState, useContext, useEffect } from "react";
+import { QuestionContext } from "../pages/Admin/NewSurvey";
+import * as RiIcons from "react-icons/ri";
 
 const SelectOne = ({ question}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
@@ -19,19 +20,33 @@ const SelectOne = ({ question}) => {
     selectArray.push(num++);
   }
 
-  useEffect(()=>{
-      const newQuestionList = [...questions]
-      newQuestionList[question.questionNumber-1]= {...newQuestionList[question.questionNumber-1],
-        question:questionText, 
-        // questionNumber, 
-        answerOptions} 
-      setQuestions(newQuestionList)
-  },[])
+  const onDelete = (e) => {
+    e.preventDefault();
+    questions.splice(question.questionNumber - 1, 1);
+    const deleteQuestion = [...questions];
+    setQuestions(deleteQuestion);
+  };
 
-    return (       
-      <div className="selectOne question-component admin-question-component">
+  useEffect(() => {
+    const newQuestionList = [...questions];
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
+      answerOptions,
+    };
+    setQuestions(newQuestionList);
+  }, []);
+
+  return (
+    <div className="selectOne question-component admin-question-component">
+      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
+        <RiIcons.RiDeleteBinFill />
+      </button>
       <p className="question-intro">Q{question.questionNumber}.</p>
-      <span><p className="question-intro">{questionText}</p></span>
+      <span>
+        <p className="question-intro">{questionText}</p>
+      </span>
       {answerOptions.map((row, i) => {
         return (
           <ul key={i}>
@@ -41,7 +56,9 @@ const SelectOne = ({ question}) => {
                 <option>--Select--</option>
                 {selectArray.map((selection, index) => {
                   return (
-                    <option key={index} value={selection}>{selection}</option>
+                    <option key={index} value={selection}>
+                      {selection}
+                    </option>
                   );
                 })}
               </select>
@@ -50,8 +67,7 @@ const SelectOne = ({ question}) => {
         );
       })}
     </div>
-    );
-}
- 
-export default SelectOne;
+  );
+};
 
+export default SelectOne;

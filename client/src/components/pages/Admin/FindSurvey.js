@@ -15,8 +15,8 @@ const FindSurvey = (props) => {
   const [surveyNum, setSurveyNum] = useState();
   const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
 
-  props.resetRowId()
-  
+  props.resetRowId();
+
   function onSearchInputChange(event, setFunction) {
     console.log(
       `Changing input of "${event.target.id}" to be: ${event.target.value}`
@@ -55,12 +55,7 @@ const FindSurvey = (props) => {
       });
   };
 
-  const onEditClicked = (
-    id,
-    currentCompany,
-    currentVersion,
-    currentSurveyNum
-  ) => {
+  const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum) => {
     setInEditMode({ status: true, rowKey: id });
     setCompany(currentCompany);
     setVersion(currentVersion);
@@ -158,70 +153,38 @@ const FindSurvey = (props) => {
                 <td>
                   {inEditMode.status && inEditMode.rowKey === row._id ? (
                     <div>
-                      <button
-                        className="icon1"
-                        title="Save"
-                        onClick={() =>
-                          onSave(row._id, company, version, surveyNum)
-                        }
-                      >
+                      <button className="icon1" title="Save"
+                        onClick={() =>onSave(row._id, company, version, surveyNum)}>
                         <GiIcons.GiSaveArrow />
                       </button>
-                      <span className="slash" style={{ color: "#fff" }}>
-                        /
-                      </span>
-                      <button
-                        className="icon2"
-                        title="Cancel"
-                        onClick={() => onCancel()}
-                      >
+                      <span className="slash" style={{ color: "#fff" }}>/</span>
+                      <button className="icon2" title="Cancel"
+                        onClick={() => onCancel()}>
                         <MdIcons.MdCancel />
                       </button>
                     </div>
                   ) : (
                     <div>
-                      <button
-                        className="icon3"
-                        title="Edit"
-                        onClick={() =>
-                          onEditClicked(
-                            row._id,
-                            row.company,
-                            row.version,
-                            row.surveyNumber
-                          )
-                        }
-                      >
+                      <button className="icon3" title="Edit"
+                        onClick={() =>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}>
                         <BsIcons.BsPencilSquare />
                       </button>
-                      <span className="slash" style={{ color: "#fff" }}>
-                        /
-                      </span>
-                      <button
-                        className="icon4"
-                        title="Delete"
-                        onClick={() => {
-                          handleDeleteClick(row._id);
-                        }}
-                      >
+                      <span className="slash" style={{ color: "#fff" }}>/</span> 
+                      <Link
+                        to="/create-new"
+                        className="icon5"
+                        title="Copy"
+                        style={{ color: "black" }}
+                        onClick={() => props.setRowId(row._id)}>
+                        <ImIcons.ImCopy />
+                      </Link>
+                      <span className="slash" style={{ color: "#fff" }}>/</span>
+                      <button className="icon4" title="Delete"
+                        onClick={() => handleDeleteClick(row._id)}>
                         <RiIcons.RiDeleteBinFill />
                       </button>
                     </div>
                   )}
-                  <div>
-                    <Link
-                      to="/create-new"
-                      className="icon5"
-                      title="Copy"
-                      style={{ color: "black" }}
-                      onClick={() => {
-                        console.log("clicked on rowId:", row._id);
-                        props.setRowId(row._id);
-                      }}
-                    >
-                      <ImIcons.ImCopy />
-                    </Link>
-                  </div>
                 </td>
               </tr>
             );
