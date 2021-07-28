@@ -214,17 +214,14 @@ const NewSurvey = ({ rowId }) => {
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
-        <button
-          type="submit"
-          className="save-survey-button"
-          onClick={handleSubmit}
-        >
-          Save Survey
-        </button>
-        <p style={{ color: "red", fontSize: "1rem" }}>
-          {error} <br />
-          (Make sure the company name and survey version are filled out)
-        </p>
+        {error && !(company && version) &&
+          <div>
+            <p style={{ color: "red", fontSize: "1rem" }}>(Make sure the company name and the survey version filled out!) <br />
+              </p>
+          </div>
+        }
+        <button type="submit" className="save-survey-button" onClick={handleSubmit}>Save Survey </button>
+
       </div>
     </div>
   );

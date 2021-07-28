@@ -55,7 +55,7 @@ const FindSurvey = (props) => {
       });
   };
 
-  const onEditClicked = (id,currentCompany,currentVersion,currentSurveyNum) => {
+  const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum) => {
     setInEditMode({ status: true, rowKey: id });
     setCompany(currentCompany);
     setVersion(currentVersion);
