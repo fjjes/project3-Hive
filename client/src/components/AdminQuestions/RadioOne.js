@@ -3,7 +3,6 @@ import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
-// import { BsFillPlusCircleFill } from "react-icons/bs";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
@@ -17,7 +16,7 @@ function RadioOne({ questionNumber }) {
     "Option2",
     "Option3",
     "Option4",
-    // "Option5",
+    "Option5",
     // "Option6",
     // "Option7",
     // "Option8",
@@ -51,7 +50,7 @@ function RadioOne({ questionNumber }) {
 
   const OnAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, radioOption]);
+    setAnswerOptions([...answerOptions,radioOption]);
     console.log("answer", answerOptions);
     setInEditMode({ status: true });
   };
@@ -70,7 +69,7 @@ function RadioOne({ questionNumber }) {
       answerOptions,
     };
     setQuestions(newQuestionList);
-  }, [radioOption]);
+  }, [answerOptions]);
 
   return (
     <div className="radio-one question-component admin-question-component">
