@@ -12,10 +12,10 @@ function RadioOne({ questionNumber }) {
   const [radioOption, setRadioOption] = useState("");
   const [question, setQuestion] = useState("What is your department or team?");
   const [answerOptions, setAnswerOptions] = useState([
-    // "Option1",
-    // "Option2",
-    // "Option3",
-    // "Option4",
+    "Option1",
+    "Option2",
+    "Option3",
+    "Option4",
     // "Option5",
     // "Option6",
     // "Option7",
