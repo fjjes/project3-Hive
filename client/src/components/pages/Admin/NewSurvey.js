@@ -2,57 +2,47 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
-// import NewSliderOne (add when we have it)
-import QuestionComponent from './QuestionComponent'
+import QuestionComponent from "./QuestionComponent";
 import { v4 as uuidv4 } from "uuid";
 // import id from "date-fns/locale/id";
-
 
 export const QuestionContext = React.createContext({
   questions: [],
   setQuestions: () => {},
 });
 
-const NewSurvey = () => {
+const NewSurvey = ({ rowId }) => {
   let history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
-  const [questionNumber, setQuestionNumber]=useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
 
-  const [questions, setQuestions]=useState([]);
-  const value = { questions, setQuestions};
+  const [questions, setQuestions] = useState([]);
+  const value = { questions, setQuestions };
 
-  // Toggle to test new survey vs. editing existing survey
-  const isItANewSurvey = true;
-  
   // Create uuid to be used as survey number
   const uuid = uuidv4();
-  //const url = `localhost:4444/${uuid}`;
-
-  // THIS IS PULLING IN ONE SPECIFIC SURVEY...  TO BE CHANGED!
-  const getSurveyList = async () => {
-    let response = await fetch("/api/survey/61009722f7ce781e8b5d0012");
-    let data = await response.json();
-    console.log("data:", data);
-    setQuestions(data.questions);
-    console.log("questions: ", questions)
-    setCompany(data.company);
-    console.log("company: ", company)
-    setVersion(data.version);
-    console.log("version: ", version)
-  };
 
   useEffect(() => {
-    !isItANewSurvey && getSurveyList();
-    setCompany(company);
-  }, []);
-
-  console.log("company:", company);
-
-
-
+    const getSurvey = async () => {
+      let response = await fetch(`/api/survey/${rowId}`);
+      console.log("Grabbing rowId: ", rowId);
+      let data = await response.json();
+      console.log("data:", data);
+      setQuestions(data.questions);
+      setCompany(data.company);
+      setVersion(data.version);
+    };
+    if (rowId) {
+      getSurvey();
+    }
+  }, [rowId]);
+  
+  console.log("questions: ", questions);
+  console.log("company: ", company);
+  console.log("version: ", version);
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -75,16 +65,19 @@ const NewSurvey = () => {
     return validationError;
   }
 
-  const addAQuestion  =(e)=>{
+  const addAQuestion = (e) => {
     e.preventDefault();
-    let counter=questionNumber+1
-    setQuestionNumber(counter)
+    let counter = questionNumber + 1;
+    setQuestionNumber(counter);
 
-    const newQuestions=[...questions]
-    newQuestions.push({questionType:e.target.value, questionNumber:counter})
-    setQuestions(newQuestions)
-  }
- 
+    const newQuestions = [...questions];
+    newQuestions.push({
+      questionType: e.target.value,
+      questionNumber: counter,
+    });
+    setQuestions(newQuestions);
+  };
+
   async function handleSubmit() {
     const surveyNumber = uuid;
 
@@ -98,7 +91,7 @@ const NewSurvey = () => {
       createdDate: currentDate,
     };
 
-    console.log('survey:',surveyToCreate)
+    console.log("survey:", surveyToCreate);
     // Post the custom survey data to the DB
     try {
       let createSurvey = await fetch("/api/survey", {
@@ -126,10 +119,9 @@ const NewSurvey = () => {
     <div>
       {/* TOP PART OF PAGE */}
       <h2>
-        {!isItANewSurvey 
+        {!rowId
           ? "Build your own survey by choosing from the components on the left."
-          : "Edit your survey here."
-        }
+          : "Edit your survey here."}
       </h2>
       <Formik
         onSubmit={(values) => {
@@ -170,13 +162,8 @@ const NewSurvey = () => {
       </Formik>
 
       {/* LEFT PART OF PAGE */}
-      {/* FOR LATER:  Make it so we can change order and number of questions - drag and drop?? */}
       <div className="survey-selection-container">
         <div className="survey-selection-sidebar">
-          {/* Narrative button not needed since this component is now required - delete? */}
-          {/* <button value="narrative" onClick={addAQuestion} disabled style={{backgroundColor:"darkGrey"}}>
-            Narrative <em>(disabled)</em>
-          </button> */}
           <button value="checkbox" onClick={addAQuestion}>
             Checkbox
           </button>
@@ -207,22 +194,20 @@ const NewSurvey = () => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
-            <NarrativeOne 
-                updateNarrative={narrative => setNarrative(narrative)}
-                />
+            <NarrativeOne
+              updateNarrative={(narrative) => setNarrative(narrative)}
+            />
           </div>
           <QuestionContext.Provider value={value}>
-          {
-            questions.map((questionBlock, index)=>(
+            {questions.map((questionBlock, index) => (
               <div key={index}>
-                <QuestionComponent 
+                <QuestionComponent
                   questionType={questionBlock.questionType}
                   questionNumber={questionBlock.questionNumber}
                 />
               </div>
-            ))
-          }
-           </QuestionContext.Provider>
+            ))}
+          </QuestionContext.Provider>
         </div>
       </div>
 
@@ -236,8 +221,8 @@ const NewSurvey = () => {
         >
           Save Survey
         </button>
-        <p style={{color: "red", fontSize: "1rem"}}>
-          {error} <br/>
+        <p style={{ color: "red", fontSize: "1rem" }}>
+          {error} <br />
           (Make sure the company name and survey version are filled out)
         </p>
       </div>
