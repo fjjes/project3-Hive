@@ -1,11 +1,10 @@
-import "./App.css";
-//import SurveyQuestionPage from "./components/pages/SurveyQuestionPage";
-import AdminPortal from "./components/pages/Admin/AdminPortal";
+import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AdminPortal from "./components/pages/Admin/AdminPortal";
 import Logo from "./components/pages/LandingPage/Logo";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
-import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [rowId, setRowId] = useState();
@@ -20,7 +19,6 @@ function App() {
         <Switch>
           <Route path="/survey/:surveyId">
             <Logo />
-            {/* <SurveyQuestionPage/> */}
           </Route>
           <div>
             <Navbar />
