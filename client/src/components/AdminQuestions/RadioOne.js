@@ -35,6 +35,7 @@ function RadioOne({ questionNumber }) {
   //   console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
+
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
@@ -77,7 +78,7 @@ function RadioOne({ questionNumber }) {
         <p className="question-intro">{question}</p>
       )}
       <div className="questionAndButtons">
-        <div className="radioOne">
+        <div className="questionText">
           {answerOptions.map((option, index) => {
             return inEditMode.status ? (
               <div key={index}>
@@ -85,7 +86,6 @@ function RadioOne({ questionNumber }) {
                   type="radio"
                   id={option}
                   name="option-group"
-                  // value={option}
                   color="primary"
                   questionNumber={questionNumber}
                 />
@@ -97,16 +97,14 @@ function RadioOne({ questionNumber }) {
                   type="radio"
                   id={option}
                   name="option-group"
-                  // value={option}
                   color="primary"
                   questionNumber={questionNumber}
-                  // onChange={(e) => setQuestion(e.target.value)}
                 />
                 <label>{option}</label>
               </div>
-            );
-            // <input />
+            );    
           })}
+          </div>
           <div className="radio-buttons">
             {inEditMode.status ? (
               <div className="edit-button">
@@ -154,10 +152,8 @@ function RadioOne({ questionNumber }) {
               </div>
             )}
           </div>
-          {/* )};  */}
         </div>
       </div>
-    </div>
   );
 }
 
