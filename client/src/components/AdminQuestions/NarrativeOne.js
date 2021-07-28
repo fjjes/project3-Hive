@@ -3,36 +3,37 @@ import { useState } from "react";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
-import "../pages/Admin/AdminPortal.css"
+import "../pages/Admin/AdminPortal.css";
 
 function NarrativeOne(props) {
-  const narrativePlaceholder = "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
+  const narrativePlaceholder =
+    "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)";
 
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [narrative, setNarrative] = useState(narrativePlaceholder);
 
   const handleNarrativeChange = (e) => {
     // console.log('narrative edit...')
-    setNarrative(e.target.value)
-  }
+    setNarrative(e.target.value);
+  };
 
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
   };
-  
+
   const onSave = () => {
-    props.updateNarrative(narrative)
+    props.updateNarrative(narrative);
     console.log("clicked save");
-    setNarrative(narrative)
+    setNarrative(narrative);
     setInEditMode({ status: false });
   };
 
-  const onCancel=()=>{
-    console.log("clicked cancel")
-    setNarrative(narrativePlaceholder) // Should probably be changed to revert to the last saved version rather than the original placeholder text
-    setInEditMode({status:false })
-  }
+  const onCancel = () => {
+    console.log("clicked cancel");
+    setNarrative(narrativePlaceholder); // Should probably be changed to revert to the last saved version rather than the original placeholder text
+    setInEditMode({ status: false });
+  };
 
   return (
     <div className="question-component admin-question-component narrative-component">
@@ -57,9 +58,7 @@ function NarrativeOne(props) {
               <button
                 className="clear icn1"
                 title="Save"
-                onClick={() =>
-                  onSave()
-                }
+                onClick={() => onSave()}
               >
                 <GiIcons.GiSaveArrow />
               </button>
@@ -70,18 +69,16 @@ function NarrativeOne(props) {
                 className="clear icn2"
                 title="Cancel"
                 onClick={() => onCancel()}
-                >
+              >
                 <MdIcons.MdCancel />
               </button>
-                </div>
-              ) : (
+            </div>
+          ) : (
             <div className="edit-button">
               <button
                 className="clear icn3"
                 title="Edit"
-                onClick={
-                  () => onEditClicked()
-                }
+                onClick={() => onEditClicked()}
               >
                 <BsIcons.BsPencilSquare />
               </button>

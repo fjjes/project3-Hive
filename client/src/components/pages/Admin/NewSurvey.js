@@ -1,13 +1,11 @@
-
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 // import NewSliderOne (add when we have it)
-import QuestionComponent from './QuestionComponent'
+import QuestionComponent from "./QuestionComponent";
 import { v4 as uuidv4 } from "uuid";
 // import id from "date-fns/locale/id";
-
 
 export const QuestionContext = React.createContext({
   questions: [],
@@ -19,12 +17,12 @@ const NewSurvey = () => {
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
-  const [questionNumber, setQuestionNumber]=useState(0)
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
 
-  const [questions, setQuestions]=useState([]);
-  const value = { questions, setQuestions};
-  
+  const [questions, setQuestions] = useState([]);
+  const value = { questions, setQuestions };
+
   // Create uuid to be used as survey number
   const uuid = uuidv4();
   //const url = `localhost:4444/${uuid}`;
@@ -50,17 +48,20 @@ const NewSurvey = () => {
     return validationError;
   }
 
-  const addAQuestion  =(e)=>{
+  const addAQuestion = (e) => {
     e.preventDefault();
-    let counter=questionNumber+1
-    setQuestionNumber(counter)
+    let counter = questionNumber + 1;
+    setQuestionNumber(counter);
 
-    const newQuestions=[...questions]
-    newQuestions.push({questionType:e.target.value, questionNumber:counter})
-    setQuestions(newQuestions)
+    const newQuestions = [...questions];
+    newQuestions.push({
+      questionType: e.target.value,
+      questionNumber: counter,
+    });
+    setQuestions(newQuestions);
     //setQuestions([...questions, {questionType:e.target.value, questionNumber:counter}])
-  }
- 
+  };
+
   async function handleSubmit() {
     const surveyNumber = uuid;
 
@@ -74,7 +75,7 @@ const NewSurvey = () => {
       createdDate: currentDate,
     };
 
-    console.log('survey:',surveyToCreate)
+    console.log("survey:", surveyToCreate);
     // Post the custom survey data to the DB
     try {
       let createSurvey = await fetch("/api/survey", {
@@ -178,22 +179,20 @@ const NewSurvey = () => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
-            <NarrativeOne 
-                updateNarrative={narrative => setNarrative(narrative)}
-                />
+            <NarrativeOne
+              updateNarrative={(narrative) => setNarrative(narrative)}
+            />
           </div>
           <QuestionContext.Provider value={value}>
-          {
-            questions.map((questionBlock, index)=>(
+            {questions.map((questionBlock, index) => (
               <div key={index}>
-                <QuestionComponent 
+                <QuestionComponent
                   questionType={questionBlock.questionType}
-                  questionNumber={questionBlock.questionNumber}
+                  questionNumber={index + 1}
                 />
               </div>
-            ))
-          }
-           </QuestionContext.Provider>
+            ))}
+          </QuestionContext.Provider>
         </div>
       </div>
 
@@ -207,8 +206,8 @@ const NewSurvey = () => {
         >
           Save Survey
         </button>
-        <p style={{color: "red", fontSize: "1rem"}}>
-          {error} <br/>
+        <p style={{ color: "red", fontSize: "1rem" }}>
+          {error} <br />
           (Make sure the company name and survey version are filled out)
         </p>
       </div>

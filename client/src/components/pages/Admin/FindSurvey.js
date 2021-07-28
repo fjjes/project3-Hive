@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link} from "react-router-dom";
-import * as  BsIcons from 'react-icons/bs';
-import * as  RiIcons from 'react-icons/ri';
-import * as  GiIcons from 'react-icons/gi';
-import * as  MdIcons from 'react-icons/md';
-
+import { Link } from "react-router-dom";
+import * as BsIcons from "react-icons/bs";
+import * as RiIcons from "react-icons/ri";
+import * as GiIcons from "react-icons/gi";
+import * as MdIcons from "react-icons/md";
 
 const FindSurvey = () => {
-  const [rows, setRows]= useState([])
+  const [rows, setRows] = useState([]);
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
-  const [company, setCompany] = useState('')
-  const [version, setVersion]= useState('')
-  const [surveyNum, setSurveyNum] =useState()
-  const [inEditMode, setInEditMode]=useState({status:false, rowKey:null})
+  const [company, setCompany] = useState("");
+  const [version, setVersion] = useState("");
+  const [surveyNum, setSurveyNum] = useState();
+  const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
 
   function onSearchInputChange(event, setFunction) {
     console.log(
@@ -22,75 +21,80 @@ const FindSurvey = () => {
     setFunction(event.target.value);
   }
 
-  const getSurveyList = async ()=>{
-    let response= await fetch('/api/survey')
+  const getSurveyList = async () => {
+    let response = await fetch("/api/survey");
     let data = await response.json();
-    setRows(data)
-    
-    console.log("data: ", data)
-  }
-  useEffect(()=>{
-    getSurveyList()
-  },[])
+    setRows(data);
 
-  const updateSurveys = (id, newCompany, newVersion, newSurveyNumber)=>{
-    let surveyToUpdate ={
+    console.log("data: ", data);
+  };
+  useEffect(() => {
+    getSurveyList();
+  }, []);
+
+  const updateSurveys = (id, newCompany, newVersion, newSurveyNumber) => {
+    let surveyToUpdate = {
       company: newCompany,
       version: newVersion,
-      surveyNumber: newSurveyNumber
-    }
+      surveyNumber: newSurveyNumber,
+    };
 
     let updateResponse = fetch(`/api/survey/${id}`, {
-      method:'PUT',
-      headers:{'Content-Type': 'application/json'},
-      body: JSON.stringify(surveyToUpdate)
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(surveyToUpdate),
     })
-    .then(res => res.json())
-    .then(json => {
-      onCancel()
-      getSurveyList()
-      console.log('updateResponse:', updateResponse)
-    })
-  }
+      .then((res) => res.json())
+      .then((json) => {
+        onCancel();
+        getSurveyList();
+        console.log("updateResponse:", updateResponse);
+      });
+  };
 
-  const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum)=>{
-    setInEditMode({status: true, rowKey:id})
-    setCompany(currentCompany)
-    setVersion(currentVersion)
-    setSurveyNum(currentSurveyNum)
-  }
+  const onEditClicked = (
+    id,
+    currentCompany,
+    currentVersion,
+    currentSurveyNum
+  ) => {
+    setInEditMode({ status: true, rowKey: id });
+    setCompany(currentCompany);
+    setVersion(currentVersion);
+    setSurveyNum(currentSurveyNum);
+  };
 
-  const onSave= (id, newCompany, newVersion, newSurveyNumber)=> {
-    updateSurveys(id, newCompany, newVersion, newSurveyNumber )
-  }
+  const onSave = (id, newCompany, newVersion, newSurveyNumber) => {
+    updateSurveys(id, newCompany, newVersion, newSurveyNumber);
+  };
 
-  const onCancel=()=>{
-    setInEditMode({status:false, rowKey:null})
-  }
+  const onCancel = () => {
+    setInEditMode({ status: false, rowKey: null });
+  };
 
-  const handleDeleteClick = async (id)=>{
-    let answer=window.confirm(`Confirm Deleting the survey?`)
-    if(answer){
-      let deleteResponse = await fetch(`/api/survey/${id}`,{
-        method:'DELETE',
-        headers:{'Content-Type': 'application/json'},
-      })
-      if(deleteResponse.status === 200){
-        getSurveyList()
+  const handleDeleteClick = async (id) => {
+    let answer = window.confirm(`Confirm Deleting the survey?`);
+    if (answer) {
+      let deleteResponse = await fetch(`/api/survey/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (deleteResponse.status === 200) {
+        getSurveyList();
       }
-      console.log('delete response:', deleteResponse) 
+      console.log("delete response:", deleteResponse);
     }
-  }
- 
+  };
+
   const onCopy = () => {
-    console.log("copied")
+    console.log("copied");
     // redirect to another page?
-      // -open up newSurvey view, plus company/version/surveyNumber/SurveyLink
-      // -Kristine's code will make the questions editable, Fathima's code could be copied to make company/version etc. editable?
-  }
+    // -open up newSurvey view, plus company/version/surveyNumber/SurveyLink
+    // -Kristine's code will make the questions editable, Fathima's code could be copied to make company/version etc. editable?
+  };
 
   return (
-    <div className='list-table'>
+    <div className="list-table">
       <h2>Find an Existing Survey</h2>
       <button className="view-all-button">View all surveys</button>
 
@@ -108,66 +112,113 @@ const FindSurvey = () => {
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
       />
-   <table>
-      <tbody>
-        <tr>
-          <th>Company</th>
-          <th>Version</th>
-          <th>Survey No.</th>
-          <th>Survey Link</th>
-          <th>Action</th>
-        </tr>
-        {rows.map((row, index)=>{
-          return(
-            <tr key={index}>
-              <td>
-                {
-                  inEditMode.status && inEditMode.rowKey===row._id ? 
-                  <input value={company}  onChange={(e)=> setCompany(e.target.value)}/>
-                  :
-                  row.company
-                }
-              </td>
-              <td>{
-                    inEditMode.status && inEditMode.rowKey===row._id ? 
-                    <input value={version}  onChange={(e)=> setVersion(e.target.value)}/>
-                    :
+      <table>
+        <tbody>
+          <tr>
+            <th>Company</th>
+            <th>Version</th>
+            <th>Survey No.</th>
+            <th>Survey Link</th>
+            <th>Action</th>
+          </tr>
+          {rows.map((row, index) => {
+            return (
+              <tr key={index}>
+                <td>
+                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                    <input
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
+                  ) : (
+                    row.company
+                  )}
+                </td>
+                <td>
+                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                    <input
+                      value={version}
+                      onChange={(e) => setVersion(e.target.value)}
+                    />
+                  ) : (
                     row.version
-                  }
-              </td>
-              <td>{
-                    inEditMode.status && inEditMode.rowKey===row._id ? 
-                    <input value={surveyNum}  onChange={(e)=> setSurveyNum(e.target.value)}/>
-                    :
+                  )}
+                </td>
+                <td>
+                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                    <input
+                      value={surveyNum}
+                      onChange={(e) => setSurveyNum(e.target.value)}
+                    />
+                  ) : (
                     row.surveyNumber
-                  }
-              </td>
-              <td>
-                <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
-              </td>
-              <td>{
-                  inEditMode.status && inEditMode.rowKey===row._id ? 
-                  <div>
-                    <button className="icon1" title="Save" onClick={()=> onSave(row._id, company, version, surveyNum)}><GiIcons.GiSaveArrow/></button>
-                    <span className="slash" style={{color:"#fff"}}>/</span>
-                    <button className="icon2" title="Cancel" onClick={()=> onCancel()}><MdIcons.MdCancel/></button>
-                  </div>
-                  :
-                  <div>
-                    <button className="icon3" title="Edit" onClick={()=>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}><BsIcons.BsPencilSquare /></button>
-                    <span className="slash" style={{color:"#fff"}}>/</span>
-                    <button className="icon4" title="Delete" onClick={()=>{handleDeleteClick(row._id)}}><RiIcons.RiDeleteBinFill/></button>
-                  </div>
-                }
-              <button onClick={() => onCopy()}>Copy Survey</button>
-              </td>
-            </tr>
-          )
-        })
-
-        }
-      </tbody>
-   </table>
+                  )}
+                </td>
+                <td>
+                  <Link
+                    to={`/survey/${row._id}`}
+                  >{`http://localhost:4444/survey/${row._id}`}</Link>
+                </td>
+                <td>
+                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                    <div>
+                      <button
+                        className="icon1"
+                        title="Save"
+                        onClick={() =>
+                          onSave(row._id, company, version, surveyNum)
+                        }
+                      >
+                        <GiIcons.GiSaveArrow />
+                      </button>
+                      <span className="slash" style={{ color: "#fff" }}>
+                        /
+                      </span>
+                      <button
+                        className="icon2"
+                        title="Cancel"
+                        onClick={() => onCancel()}
+                      >
+                        <MdIcons.MdCancel />
+                      </button>
+                    </div>
+                  ) : (
+                    <div>
+                      <button
+                        className="icon3"
+                        title="Edit"
+                        onClick={() =>
+                          onEditClicked(
+                            row._id,
+                            row.company,
+                            row.version,
+                            row.surveyNumber
+                          )
+                        }
+                      >
+                        <BsIcons.BsPencilSquare />
+                      </button>
+                      <span className="slash" style={{ color: "#fff" }}>
+                        /
+                      </span>
+                      <button
+                        className="icon4"
+                        title="Delete"
+                        onClick={() => {
+                          handleDeleteClick(row._id);
+                        }}
+                      >
+                        <RiIcons.RiDeleteBinFill />
+                      </button>
+                    </div>
+                  )}
+                  <button onClick={() => onCopy()}>Copy Survey</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
