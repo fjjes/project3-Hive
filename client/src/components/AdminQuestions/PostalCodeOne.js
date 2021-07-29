@@ -9,8 +9,7 @@ import * as RiIcons from "react-icons/ri";
 function PostalCodeOne({question}) {
   const {questions, setQuestions} = useContext(QuestionContext)
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [questionText, setQuestionText] = useState(question.question || "Enter your postal code:"  
-  );
+  const [questionText, setQuestionText] = useState(question.question || "Enter your postal code:" );
 
   const onEditClicked = () => {
     console.log("clicked edit");
