@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
-import * as GiIcons from "react-icons/gi";
-import * as MdIcons from "react-icons/md";
 import * as ImIcons from "react-icons/im";
 
 const FindSurvey = (props) => {
