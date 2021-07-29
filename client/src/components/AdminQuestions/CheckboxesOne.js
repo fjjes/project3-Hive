@@ -10,8 +10,10 @@ function CheckboxesOne({ question }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   // const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
-  const [questionText, setQuestionText] = useState(question.question || "Select up to three options:");
-console.log("help")
+  const [questionText, setQuestionText] = useState(
+    question.question || "Select up to three options:"
+  );
+  console.log("help");
   // const [answerOptions, setAnswerOptions]=useState([
   //   { checked: false, value: "Option 1" },
   //   { checked: false, value: "Option 2" },
@@ -23,16 +25,18 @@ console.log("help")
   //   { checked: false, value: "Option 8" },
   // ])
 
-  const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||[
-    "Option 1",
-    "Option 2",
-    "Option 3",
-    "Option 4",
-    "Option 5",
-    "Option 6",
-    "Option 7",
-    "Option 8",
-  ]);
+  const [answerOptions, setAnswerOptions] = useState(
+    question.answerOptions || [
+      "Option 1",
+      "Option 2",
+      "Option 3",
+      "Option 4",
+      "Option 5",
+      "Option 6",
+      "Option 7",
+      "Option 8",
+    ]
+  );
 
   const onEditClicked = () => {
     console.log("clicked checkbox");
@@ -71,7 +75,7 @@ console.log("help")
     const previousAnswerOptions = answerOptions;
     previousAnswerOptions[index] = event.target.value;
     setAnswerOptions(previousAnswerOptions);
-    console.log("crazy")
+    console.log("crazy");
   };
 
   useEffect(() => {
@@ -80,7 +84,7 @@ console.log("help")
     console.log("questionNumber", question.questionNumber);
     newQuestionList[question.questionNumber - 1] = {
       ...newQuestionList[question.questionNumber - 1],
-      question:questionText,
+      question: questionText,
       // questionNumber,
       answerOptions,
     };
@@ -95,17 +99,51 @@ console.log("help")
         <RiIcons.RiDeleteBinFill />
       </button>
       <div className="edit-button">
-                    <button style={{ float: "right", width: "43px" }} 
-                    className="clear icn3"
-                    title="Edit"onClick={onEditClicked}>
-                      
+        <button
+          style={{ float: "right", width: "43px" }}
+          className="clear icn3"
+          title="Edit"
+          onClick={onEditClicked}
+        >
+          <BsIcons.BsPencilSquare />
+        </button>
+        <div className="checkboxes-buttons">
+          {inEditMode.status ? (
+            <div className="edit-button2">
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() => onSave()}
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+              >
+                <MdIcons.MdCancel />
+              </button>
 
-                      <BsIcons.BsPencilSquare />
-                    </button>
-                    <span className="slash" style={{ color: "#fff" }}>
-                      /
-                    </span>
-                  </div>
+              <div className="edit-button">
+                <button
+                  className="clear icn4"
+                  title="Add"
+                  onClick={() => OnAddInput()}
+                >
+                  <BsIcons.BsFillPlusCircleFill />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div> </div>
+          )}
+        </div>
+
+        <span className="slash" style={{ color: "#fff" }}>
+          /
+        </span>
+      </div>
       <form className="checkbox-form-control">
         <p className="question-intro">Q{question.questionNumber}.</p>
         {inEditMode.status ? (
@@ -149,9 +187,9 @@ console.log("help")
                   </div>
                 );
               })}
-              <div className="checkboxes-buttons">
+              {/* <div className="checkboxes-buttons">
                 {inEditMode.status ? (
-                  <div className="edit-button">
+                  <div className="edit-button2">
                     <button
                       className="clear icn1"
                       title="Save"
@@ -181,13 +219,9 @@ console.log("help")
                     </div>
                   </div>
                 ) : (
-                  
                   <div> </div>
-                    
-    
-                 
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
