@@ -2,12 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-const MatrixOne = ({ questionNumber }) => {
+const MatrixOne = ({ question }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
-  const [question, setQuestion] = useState(
+  const [questionText, setQuestionText] = useState(question.question ||
     "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
   );
-  const [answerOptions, setAnswerOptions] = useState([
+  const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||
+    [
     { text: "Ability to concentrate" },
     { text: "Ability to conduct telephone conversations" },
     { text: "Ability to find a meeting room within a reasonable timeframe" },
@@ -36,17 +37,17 @@ const MatrixOne = ({ questionNumber }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+    questions.splice(question.questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      questionNumber,
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
       answerOptions,
     };
     setQuestions(newQuestionList);
@@ -57,9 +58,9 @@ const MatrixOne = ({ questionNumber }) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Q{question.questionNumber}.</p>
       <span>
-        <p className="question-intro">{question}</p>
+        <p className="question-intro">{questionText}</p>
       </span>
       <table>
         <tbody>

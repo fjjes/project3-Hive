@@ -4,12 +4,11 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import * as RiIcons from "react-icons/ri";
 
-const SliderTwo = ({ questionNumber }) => {
-  const { questions, setQuestions } = useContext(QuestionContext);
-  const [question, setQuestion] = useState(
-    "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
-  );
-  const [answerOptions, setAnswerOptions] = useState([
+const SliderTwo = ({question}) => {
+  const {questions, setQuestions} = useContext(QuestionContext)
+  const [questionText, setQuestionText]=useState(question.question || "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
+  const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
+    [
     "Home",
     "Traveling",
     "At the office",
@@ -19,17 +18,17 @@ const SliderTwo = ({ questionNumber }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+    questions.splice(question.questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      questionNumber,
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
       answerOptions,
     };
     setQuestions(newQuestionList);
@@ -40,9 +39,9 @@ const SliderTwo = ({ questionNumber }) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Q{question.questionNumber}.</p>
       <span>
-        <p className="question-intro">{question}</p>
+        <p className="question-intro">{questionText}</p>
       </span>
       {answerOptions.map((row, index) => {
         return (

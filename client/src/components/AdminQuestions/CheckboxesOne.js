@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-function CheckboxesOne({ questionNumber }) {
-  const { questions, setQuestions } = useContext(QuestionContext);
+
+function CheckboxesOne({question}) {
+  const {questions, setQuestions} = useContext(QuestionContext)
   // const [question, setQuestion]=useState("Select up to three options:")
-  const question = "Select up to three options:";
+  const questionText = question.question || "Select up to three options:"
   // const [answerOptions, setAnswerOptions]=useState([
   // //   { checked: false, value: "Option 1" },
   // //   { checked: false, value: "Option 2" },
@@ -16,7 +17,8 @@ function CheckboxesOne({ questionNumber }) {
   // //   { checked: false, value: "Option 7" },
   // //   { checked: false, value: "Option 8" },
   // // ])
-  const answerOptions = [
+  const answerOptions = question.answerOptions || 
+  [
     "Option 1",
     "Option 2",
     "Option 3",
@@ -29,22 +31,21 @@ function CheckboxesOne({ questionNumber }) {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+    questions.splice(question.questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
-  useEffect(() => {
-    const newQuestionList = [...questions];
-    console.log("newQuestionList", questions);
-    console.log("questionNumber", questionNumber);
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      answerOptions,
-    };
-    console.log("questions line 23:", newQuestionList);
-    setQuestions(newQuestionList);
+  useEffect(()=>{
+    const newQuestionList = [...questions]
+    console.log('newQuestionList', questions)
+    console.log('questionNumber', question.questionNumber)
+    newQuestionList[question.questionNumber-1]= {
+      ...newQuestionList[question.questionNumber-1],
+      question:questionText, 
+      answerOptions} 
+    console.log('questions line 23:', newQuestionList )
+    setQuestions(newQuestionList)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,10 +55,8 @@ function CheckboxesOne({ questionNumber }) {
         <RiIcons.RiDeleteBinFill />
       </button>
       <form className="checkbox-form-control">
-        <p className="question-intro">Q{questionNumber}.</p>
-        <span>
-          <p className="question-intro">{question}</p>
-        </span>
+        <p className="question-intro">Q{question.questionNumber}.</p><span>
+        <p className="question-intro">{questionText}</p></span>
         <div className="checkbox-form-group">
           {answerOptions.map((option, index) => {
             return (

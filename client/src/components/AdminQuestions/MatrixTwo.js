@@ -2,18 +2,17 @@ import React, { useState, useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-const MatrixTwo = ({ questionNumber }) => {
-  const { questions, setQuestions } = useContext(QuestionContext);
-  const [question, setQuestion] = useState(
-    "Please rate the importance of followings from 1 to 10:"
-  );
-  const [answerOptions, setAnswerOptions] = useState([
-    { text: "text 1" },
-    { text: "text 2" },
-    { text: "text 3" },
-    { text: "text 4" },
-    { text: "text 5" },
-  ]);
+const MatrixTwo = ({question}) => {
+    const {questions, setQuestions} = useContext(QuestionContext)
+    const [questionText, setQuestionText]=useState(question.question || "Please rate the importance of the following from 1 to 10:")
+    const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
+        [
+        {text: "text 1"},
+        {text: "text 2"},
+        {text: "text 3"},
+        {text: "text 4"},
+        {text: "text 5"}
+    ])
 
   const [columns, setColumns] = useState([
     "1",
@@ -30,17 +29,17 @@ const MatrixTwo = ({ questionNumber }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+    questions.splice(question.questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      questionNumber,
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
       answerOptions,
     };
     setQuestions(newQuestionList);
@@ -51,9 +50,9 @@ const MatrixTwo = ({ questionNumber }) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Q{question.questionNumber}.</p>
       <span>
-        <p className="question-intro">{question}</p>
+        <p className="question-intro">{questionText}</p>
       </span>
       <table>
         <tbody>

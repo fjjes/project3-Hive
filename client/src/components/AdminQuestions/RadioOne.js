@@ -3,21 +3,21 @@ import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
-// import { BsFillPlusCircleFill } from "react-icons/bs";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
-function RadioOne({ questionNumber }) {
+function RadioOne({ question }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [radioOption, setRadioOption] = useState("");
-  const [question, setQuestion] = useState("What is your department or team?");
-  const [answerOptions, setAnswerOptions] = useState([
+  const [questionText, setQuestionText] = useState(question.question || "What is your department or team?");
+  const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||
+    [
     "Option1",
     "Option2",
     "Option3",
     "Option4",
-    // "Option5",
+    "Option5",
     // "Option6",
     // "Option7",
     // "Option8",
@@ -44,14 +44,14 @@ function RadioOne({ questionNumber }) {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+    questions.splice(question.questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   const OnAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, radioOption]);
+    setAnswerOptions([...answerOptions,radioOption]);
     console.log("answer", answerOptions);
     setInEditMode({ status: true });
   };
@@ -63,14 +63,14 @@ function RadioOne({ questionNumber }) {
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question,
-      questionNumber,
+    newQuestionList[question.questionNumber - 1] = {
+      ...newQuestionList[question.questionNumber - 1],
+      question:questionText,
+      // questionNumber,
       answerOptions,
     };
     setQuestions(newQuestionList);
-  }, [radioOption]);
+  }, [answerOptions]);
 
   return (
     <div className="radio-one question-component admin-question-component">
@@ -89,16 +89,16 @@ function RadioOne({ questionNumber }) {
           /
         </span>
       </div>
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Q{question.questionNumber}.</p>
       {inEditMode.status ? (
         <input
           type="text"
-          value={question}
-          questionNumber={questionNumber}
-          onChange={(e) => setQuestion(e.target.value)}
+          value={questionText}
+          questionNumber={question.questionNumber}
+          onChange={(e) => setQuestionText(e.target.value)}
         />
       ) : (
-        <p className="question-intro">{question}</p>
+        <p className="question-intro">{questionText}</p>
       )}
       <div className="questionAndButtons">
         <div className="questionText">
@@ -110,7 +110,7 @@ function RadioOne({ questionNumber }) {
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={questionNumber}
+                  questionNumber={question.questionNumber}
                 />
                 <input
                   defaultValue={option}
@@ -124,7 +124,8 @@ function RadioOne({ questionNumber }) {
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={questionNumber}
+                  questionNumber={question.questionNumber}
+                  // onChange={(e) => setQuestion(e.target.value)}
                 />
                 <label>{option}</label>
               </div>
