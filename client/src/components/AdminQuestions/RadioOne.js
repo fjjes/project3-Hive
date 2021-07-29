@@ -79,8 +79,7 @@ function RadioOne({ questionNumber }) {
       </button>
       <div className="edit-button">
         <button
-          style={{ float: "right", width: "43px" }}
-          className="clear icn3"
+          className="clear-icn3"
           title="Edit"
           onClick={() => onEditClicked()}
         >

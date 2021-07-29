@@ -102,9 +102,9 @@ function CommentOne({ questionNumber }) {
               <button onClick={onDelete}>
                 <RiIcons.RiDeleteBinFill />
               </button>
-              <span className="slash" style={{ color: "#fff" }}>
+              {/* <span className="slash" style={{ color: "#fff" }}>
                 /
-              </span>
+              </span> */}
             </div>
           )}
         </div>

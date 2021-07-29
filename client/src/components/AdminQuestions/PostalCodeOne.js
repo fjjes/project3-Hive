@@ -48,9 +48,6 @@ function PostalCodeOne({ questionNumber }) {
 
   return (
     <div className="question-component admin-question-component">
-      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
-        <RiIcons.RiDeleteBinFill />
-      </button>
       <p className="question-intro">Q{questionNumber}.</p>
       <div className="questionAndButtons">
         <div className="questionText">
@@ -96,9 +93,12 @@ function PostalCodeOne({ questionNumber }) {
               >
                 <BsIcons.BsPencilSquare />
               </button>
-              <span className="slash" style={{ color: "#fff" }}>
+              <button style={{ float: "right" }} onClick={onDelete}>
+                <RiIcons.RiDeleteBinFill />
+              </button>
+              {/* <span className="slash" style={{ color: "#fff" }}>
                 /
-              </span>
+              </span> */}
             </div>
           )}
         </div>
