@@ -87,35 +87,44 @@ const EditSurvey=({surveyId})=>{
     return(
         <div>
         {/* TOP PART OF PAGE */}
-        <h2>"Edit your survey here"</h2>
+        <h2>Edit your survey</h2>
             <div className="company-and-survey-name-inputs">
-            <input
-                name="company"
-                id="company-name"
-                className="survey-info"
-                placeholder="Company name (required)"
-                value={newCompany}
-                required
-                onChange={(e) => setNewCompany(e.target.value)}
-            />
-            <input
-                name="version"
-                id="survey-name"
-                className="survey-info"
-                placeholder="Survey version (required)"
-                value={newVersion}
-                required
-                onChange={(e) => setNewVersion(e.target.value)}
-            />
-            <input
-                name="surveyNumber"
-                id="survey-name"
-                className="survey-info"
-                placeholder="Enter a Number (required)"
-                value={newSurveyNumber}
-                required
-                onChange={(e) => setNewSurveyNumber(e.target.value)}
-            />
+              <div className='col'>
+                <label>Company Name<span style={{color:"red"}}>*</span>:</label>
+                <input
+                    name="company"
+                    id="company-name"
+                    className="survey-info"
+                    placeholder="Company name (required)"
+                    value={newCompany}
+                    required
+                    onChange={(e) => setNewCompany(e.target.value)}
+                />
+              </div>
+              <div className='col'>
+                <label>Survey Version<span style={{color:"red"}}>*</span>:</label>
+                <input
+                    name="version"
+                    id="survey-name"
+                    className="survey-info"
+                    placeholder="Survey version (required)"
+                    value={newVersion}
+                    required
+                    onChange={(e) => setNewVersion(e.target.value)}
+                />
+              </div>
+              <div className='col'>
+                <label>Survey No:<span style={{color:"red"}}>*</span>:</label>
+                <input
+                    name="surveyNumber"
+                    id="survey-name"
+                    className="survey-info"
+                    placeholder="Enter a Number (required)"
+                    value={newSurveyNumber}
+                    required
+                    onChange={(e) => setNewSurveyNumber(e.target.value)}
+                />
+              </div>
             </div>
          
   

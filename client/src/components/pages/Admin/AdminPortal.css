@@ -114,10 +114,12 @@ h2 {
 }
 
 .company-and-survey-name-inputs input {
-  width: 100%;
+  width: 80%;
   font-size: 1rem;
 }
-
+.company-and-survey-name-inputs .col{
+  margin-left: 5px;
+}
 .search-input {
   display: inline;
 }
