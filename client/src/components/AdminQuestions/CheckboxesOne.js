@@ -9,7 +9,7 @@ import "../pages/Admin/AdminPortal.css";
 function CheckboxesOne({ question }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  // const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
+  const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
   const [questionText, setQuestionText] = useState(
     question.question || "Select up to three options:"
   );
@@ -45,6 +45,7 @@ function CheckboxesOne({ question }) {
 
   const onSave = () => {
     setQuestions(questions);
+    console.log("save me!!!");
     //   const previousQuestions=questions
     //   previousQuestions[questionNumber]={}
     //   setQuestion(previousQuestions)
@@ -66,8 +67,8 @@ function CheckboxesOne({ question }) {
 
   const OnAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions]);
-    console.log("answer", answerOptions);
+    setAnswerOptions([...answerOptions, checkBoxesOneOption]);
+    console.log("give me some love", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -101,12 +102,15 @@ function CheckboxesOne({ question }) {
       <div className="edit-button">
         <button
           style={{ float: "right", width: "43px" }}
-          className="clear icn3"
+          className="clear-icn3"
           title="Edit"
-          onClick={onEditClicked}
+          onClick={() => onEditClicked()}
         >
           <BsIcons.BsPencilSquare />
         </button>
+        <span className="slash" style={{ color: "#fff" }}>
+          /
+        </span>
         <div className="checkboxes-buttons">
           {inEditMode.status ? (
             <div className="edit-button2">
@@ -117,6 +121,9 @@ function CheckboxesOne({ question }) {
               >
                 <GiIcons.GiSaveArrow />
               </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
               <button
                 className="clear icn2"
                 title="Cancel"
@@ -139,10 +146,6 @@ function CheckboxesOne({ question }) {
             <div> </div>
           )}
         </div>
-
-        <span className="slash" style={{ color: "#fff" }}>
-          /
-        </span>
       </div>
       <form className="checkbox-form-control">
         <p className="question-intro">Q{question.questionNumber}.</p>
@@ -165,9 +168,8 @@ function CheckboxesOne({ question }) {
                     <input
                       type="checkbox"
                       id={option}
-                      name="option"
+                      name="option-group"
                       questionNumber={question.questionNumber}
-                      // value={option}
                     />
                     <input
                       defaultValue={option}
@@ -179,49 +181,13 @@ function CheckboxesOne({ question }) {
                     <input
                       type="checkbox"
                       id={option}
-                      name="option"
+                      name="option-group"
                       questionNumber={question.questionNumber}
-                      // value={option}
                     />
                     <label>{option}</label>
                   </div>
                 );
               })}
-              {/* <div className="checkboxes-buttons">
-                {inEditMode.status ? (
-                  <div className="edit-button2">
-                    <button
-                      className="clear icn1"
-                      title="Save"
-                      onClick={() => onSave()}
-                    >
-                      <GiIcons.GiSaveArrow />
-                    </button>
-                    <span className="slash" style={{ color: "#fff" }}>
-                      /
-                    </span>
-                    <button
-                      className="clear icn2"
-                      title="Cancel"
-                      onClick={() => onCancel()}
-                    >
-                      <MdIcons.MdCancel />
-                    </button>
-
-                    <div className="edit-button">
-                      <button
-                        className="clear icn4"
-                        title="Add"
-                        onClick={() => OnAddInput()}
-                      >
-                        <BsIcons.BsFillPlusCircleFill />
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div> </div>
-                )}
-              </div> */}
             </div>
           </div>
         </div>
