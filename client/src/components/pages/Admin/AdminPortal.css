@@ -1,13 +1,15 @@
 /* *************************** GENERIC STUFF *************************** */
 /*......... Added with Navbar........ */
- @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
 
- .admin-container, .navbar, .list-table{
-  font-family: 'Sora', sans-serif;
+.admin-container,
+.navbar,
+.list-table {
+  font-family: "Sora", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-} 
+}
 /* ............................... */
 /* Page In General */
 
@@ -18,7 +20,7 @@ h2 {
   text-align: center;
 }
 
-.admin-container  {
+.admin-container {
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -26,7 +28,7 @@ h2 {
   padding: 20px;
   /* width: 80vw; */
   /* height: 100%; */
-  height:90vh;
+  height: 90vh;
 }
 
 /* Page Top */
@@ -36,7 +38,6 @@ h2 {
   position: relative;
   left: 20px;
 }
-
 
 .admin-container-title-and-logo {
   display: flex;
@@ -71,7 +72,7 @@ h2 {
 .admin-container button {
   border: 0;
   background-color: #197e9c;
-  color:white;
+  color: white;
   font-size: 1rem;
 }
 
@@ -101,11 +102,9 @@ h2 {
 
 .note-to-self {
   color: red;
-  font-size: .9rem;
+  font-size: 0.9rem;
   padding: 0;
 }
-
-
 
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
@@ -122,8 +121,6 @@ h2 {
 .search-input {
   display: inline;
 }
-
-
 
 /* *************************** CREATE SURVEY *************************** */
 
@@ -165,8 +162,7 @@ h2 {
   margin: 15px;
 }
 
-.updated-copy-of-survey 
-.admin-question-component {
+.updated-copy-of-survey .admin-question-component {
   width: 80%;
   margin: 15px auto;
 }
@@ -182,7 +178,7 @@ h2 {
 }
 
 .narrative-text-area-input {
-  width: 100% !important; 
+  width: 100% !important;
 }
 
 .survey-selected-components {
@@ -210,12 +206,12 @@ h2 {
   padding: 20px;
 }
 
-.list-table table{
+.list-table table {
   /* margin: 0 auto; */
   margin-top: 20px;
-  display:flex;
+  display: flex;
   justify-content: center;
-  text-align: center; 
+  text-align: center;
   border-collapse: collapse;
   margin-bottom: 70px;
 }
@@ -223,34 +219,42 @@ h2 {
 .list-table th {
   background-color: grey;
   color: white;
-  font-weight: bolder;  
+  font-weight: bolder;
   padding: 2px 20px 2px 20px;
 }
 
 .list-table td {
-  border: 1px solid #cecfd5;  
+  border: 1px solid #cecfd5;
   padding: 10px 15px;
   /* text-align: center;   */
 }
 
-.list-table h2{
-  margin-bottom:30px;
+.list-table h2 {
+  margin-bottom: 30px;
   text-align: center;
 }
 
-.list-table .icon1, .icon2, .icon3, .icon4{
+.list-table .icon1,
+.icon2,
+.icon3,
+.icon4 {
   background-color: white;
   font-size: medium;
-  border:none;
+  border: none;
 }
 
-.list-table .slash{
+.list-table .slash {
   margin-left: 5px;
   margin-right: 5px;
 }
 
-.list-table .icon1[title] .icon2[title] .icon3[title] .icon4[title] :hover:after{
-  content:attr(title);
+.list-table
+  .icon1[title]
+  .icon2[title]
+  .icon3[title]
+  .icon4[title]
+  :hover:after {
+  content: attr(title);
 }
 /* .questionText is for the edit and save button when you are in the edit mode */
 .questionText {
@@ -258,18 +262,20 @@ h2 {
   flex-direction: column;
 }
 
-.edit-button button  {
-  width: 40px; 
+.edit-button button {
+  width: 40px;
   cursor: pointer;
   background-color: #197e9c;
-  
 }
 
 .questionAndButtons {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
+}
+
+.clear-icn3 {
+  float: right;
 }
 
 /* .radioOne button {

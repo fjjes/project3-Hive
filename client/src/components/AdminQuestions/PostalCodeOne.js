@@ -6,10 +6,11 @@ import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
-function PostalCodeOne({question}) {
-  const {questions, setQuestions} = useContext(QuestionContext)
+function PostalCodeOne({ question }) {
+  const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [questionText, setQuestionText] = useState(question.question || "Enter your postal code:"  
+  const [questionText, setQuestionText] = useState(
+    question.question || "Enter your postal code:"
   );
 
   const onEditClicked = () => {
@@ -18,7 +19,7 @@ function PostalCodeOne({question}) {
   };
 
   const onSave = () => {
-     setQuestionText(questionText)
+    setQuestionText(questionText);
     // console.log("clicked save");
     // setPostalCode(postalCode)
     setInEditMode({ status: false });
@@ -40,7 +41,7 @@ function PostalCodeOne({question}) {
     const newQuestionList = [...questions];
     newQuestionList[question.questionNumber - 1] = {
       ...newQuestionList[question.questionNumber - 1],
-      question:questionText,
+      question: questionText,
       // questionNumber,
       answerOptions: "",
     };
@@ -49,9 +50,6 @@ function PostalCodeOne({question}) {
 
   return (
     <div className="question-component admin-question-component">
-      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
-        <RiIcons.RiDeleteBinFill />
-      </button>
       <p className="question-intro">Q{question.questionNumber}.</p>
       <div className="questionAndButtons">
         <div className="questionText">
@@ -97,9 +95,12 @@ function PostalCodeOne({question}) {
               >
                 <BsIcons.BsPencilSquare />
               </button>
-              <span className="slash" style={{ color: "#fff" }}>
+              <button style={{ float: "right" }} onClick={onDelete}>
+                <RiIcons.RiDeleteBinFill />
+              </button>
+              {/* <span className="slash" style={{ color: "#fff" }}>
                 /
-              </span>
+              </span> */}
             </div>
           )}
         </div>
