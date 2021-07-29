@@ -71,8 +71,8 @@ const EditSurvey=({surveyId})=>{
             let errorMessage = await editResponse.text();
             console.log("We have an error: ", errorMessage);
             setError(errorMessage);
-          } else if(newCompany=== "" || newVersion===""){
-              setError("Make sure the company name and the survey version filled out!")
+          } else if(newCompany=== "" || newVersion==="" || newSurveyNumber===""){
+              setError("Make sure the company name, survey version & survey # filled out!")
           }else{
             setError(undefined);
             console.log("edit response is successful");
@@ -81,6 +81,7 @@ const EditSurvey=({surveyId})=>{
         } catch (error) {
           console.log("Fetch failed to reach the server:", error);
         }
+        console.log("surveyNum:", newSurveyNumber,"", "version:", newVersion)
     }
 
     return(
@@ -105,6 +106,15 @@ const EditSurvey=({surveyId})=>{
                 value={newVersion}
                 required
                 onChange={(e) => setNewVersion(e.target.value)}
+            />
+            <input
+                name="surveyNumber"
+                id="survey-name"
+                className="survey-info"
+                placeholder="Enter a Number (required)"
+                value={newSurveyNumber}
+                required
+                onChange={(e) => setNewSurveyNumber(e.target.value)}
             />
             </div>
          

@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import QuestionComponent from "./QuestionComponent";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 // import id from "date-fns/locale/id";
 
 export const QuestionContext = React.createContext({
@@ -13,6 +13,7 @@ export const QuestionContext = React.createContext({
 
 const NewSurvey = ({ rowId }) => {
   const history = useHistory();
+  const [surveyNumber, setSurveyNumber]=useState()
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
@@ -22,9 +23,6 @@ const NewSurvey = ({ rowId }) => {
 
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
-
-  // Create uuid to be used as survey number
-  const uuid = uuidv4();
 
   useEffect(() => {
     const getSurvey = async () => {
@@ -69,6 +67,14 @@ const NewSurvey = ({ rowId }) => {
     return validationError;
   }
 
+  function validateSurveyNum(value) {
+    let validationError;
+    if (!value) {
+      validationError = "Survey # is required";
+    }
+    return validationError;
+  }
+
   const addAQuestion = (e) => {
     e.preventDefault();
     let counter = questionNumber + 1;
@@ -83,7 +89,7 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
-    const surveyNumber = uuid;
+    // const surveyNumber = uuid;
 
     let currentDate = new Date();
     let surveyToCreate = {
@@ -155,11 +161,22 @@ const NewSurvey = ({ rowId }) => {
                 required
                 onChange={(event) => onInputChange(event, setVersion)}
               />
+              <Field
+                name="surveyNumber"
+                validate={validateSurveyNum}
+                id="survey-name"
+                className="survey-info"
+                placeholder="Enter a Number (required)"
+                value={surveyNumber}
+                required
+                onChange={(event) => onInputChange(event, setSurveyNumber)}
+              />
             </div>
             {/* Add error messages if the company/version fields are left empty */}
             <div style={{ color: "red", textAlign: "center" }}>
               {errors.company && touched.company && <div>{errors.company}</div>}
               {errors.version && touched.version && <div>{errors.version}</div>}
+              {errors.surveyNumber && touched.surveyNumber && <div>{errors.surveyNumber}</div>}
             </div>
           </Form>
         )}
@@ -218,7 +235,7 @@ const NewSurvey = ({ rowId }) => {
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
-        {error && !(company && version) &&
+        {error && !(company || version || surveyNumber) &&
           <div>
             <p style={{ color: "red", fontSize: "1rem" }}>(Make sure the company name and the survey version filled out!) <br />
               </p>
