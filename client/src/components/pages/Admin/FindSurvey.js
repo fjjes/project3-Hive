@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
-import * as GiIcons from "react-icons/gi";
-import * as MdIcons from "react-icons/md";
 import * as ImIcons from "react-icons/im";
 
 const FindSurvey = (props) => {
+  const history=useHistory();
   const [rows, setRows] = useState([]);
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
-  const [company, setCompany] = useState("");
-  const [version, setVersion] = useState("");
-  const [surveyNum, setSurveyNum] = useState();
-  const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
+  // const [company, setCompany] = useState("");
+  // const [version, setVersion] = useState("");
+  // const [surveyNum, setSurveyNum] = useState();
+  // const [inEditMode, setInEditMode] = useState({ status: false, rowKey: null });
 
   props.resetRowId();
 
@@ -35,40 +34,40 @@ const FindSurvey = (props) => {
     getSurveyList();
   }, []);
 
-  const updateSurveys = (id, newCompany, newVersion, newSurveyNumber) => {
-    let surveyToUpdate = {
-      company: newCompany,
-      version: newVersion,
-      surveyNumber: newSurveyNumber,
-    };
+  // const updateSurveys = (id, newCompany, newVersion, newSurveyNumber) => {
+  //   let surveyToUpdate = {
+  //     company: newCompany,
+  //     version: newVersion,
+  //     surveyNumber: newSurveyNumber,
+  //   };
 
-    let updateResponse = fetch(`/api/survey/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(surveyToUpdate),
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        onCancel();
-        getSurveyList();
-        console.log("updateResponse:", updateResponse);
-      });
-  };
+  //   let updateResponse = fetch(`/api/survey/${id}`, {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(surveyToUpdate),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((json) => {
+  //       // onCancel();
+  //       getSurveyList();
+  //       console.log("updateResponse:", updateResponse);
+  //     });
+  // };
 
-  const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum) => {
-    setInEditMode({ status: true, rowKey: id });
-    setCompany(currentCompany);
-    setVersion(currentVersion);
-    setSurveyNum(currentSurveyNum);
-  };
+  // const onEditClicked = (id, currentCompany, currentVersion, currentSurveyNum) => {
+  //   setInEditMode({ status: true, rowKey: id });
+  //   setCompany(currentCompany);
+  //   setVersion(currentVersion);
+  //   setSurveyNum(currentSurveyNum);
+  // };
 
-  const onSave = (id, newCompany, newVersion, newSurveyNumber) => {
-    updateSurveys(id, newCompany, newVersion, newSurveyNumber);
-  };
+  // const onSave = (id, newCompany, newVersion, newSurveyNumber) => {
+  //   updateSurveys(id, newCompany, newVersion, newSurveyNumber);
+  // };
 
-  const onCancel = () => {
-    setInEditMode({ status: false, rowKey: null });
-  };
+  // const onCancel = () => {
+  //   setInEditMode({ status: false, rowKey: null });
+  // };
 
   const handleDeleteClick = async (id) => {
     let answer = window.confirm(`Confirm Deleting the survey?`);
@@ -115,43 +114,41 @@ const FindSurvey = (props) => {
           {rows.map((row, index) => {
             return (
               <tr key={index}>
-                <td>
-                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                <td>{row.company}
+                  {/* {inEditMode.status && inEditMode.rowKey === row._id ? (
                     <input
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                     />
                   ) : (
                     row.company
-                  )}
+                  )} */}
                 </td>
-                <td>
-                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                <td>{row.version}
+                  {/* {inEditMode.status && inEditMode.rowKey === row._id ? (
                     <input
                       value={version}
                       onChange={(e) => setVersion(e.target.value)}
                     />
                   ) : (
                     row.version
-                  )}
+                  )} */}
                 </td>
-                <td>
-                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                <td>{row.surveyNumber}
+                  {/* {inEditMode.status && inEditMode.rowKey === row._id ? (
                     <input
                       value={surveyNum}
                       onChange={(e) => setSurveyNum(e.target.value)}
                     />
                   ) : (
                     row.surveyNumber
-                  )}
+                  )} */}
                 </td>
                 <td>
-                  <Link
-                    to={`/survey/${row._id}`}
-                  >{`http://localhost:4444/survey/${row._id}`}</Link>
+                  <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
                 </td>
                 <td>
-                  {inEditMode.status && inEditMode.rowKey === row._id ? (
+                  {/* {inEditMode.status && inEditMode.rowKey === row._id ? (
                     <div>
                       <button className="icon1" title="Save"
                         onClick={() =>onSave(row._id, company, version, surveyNum)}>
@@ -162,13 +159,14 @@ const FindSurvey = (props) => {
                         onClick={() => onCancel()}>
                         <MdIcons.MdCancel />
                       </button>
-                    </div>
-                  ) : (
+                    </div> */}
+                  {/* ) : ( */}
                     <div>
-                      <button className="icon3" title="Edit"
+                      {/* <button className="icon3" title="Edit"
                         onClick={() =>onEditClicked(row._id, row.company, row.version, row.surveyNumber)}>
                         <BsIcons.BsPencilSquare />
-                      </button>
+                      </button> */}
+                      <button className="icon3" title="Edit" onClick={()=>history.push(`/edit-survey/${row._id}`)}><BsIcons.BsPencilSquare /></button>
                       <span className="slash" style={{ color: "#fff" }}>/</span> 
                       <Link
                         to="/create-new"
@@ -184,7 +182,7 @@ const FindSurvey = (props) => {
                         <RiIcons.RiDeleteBinFill />
                       </button>
                     </div>
-                  )}
+                  {/* )} */}
                 </td>
               </tr>
             );

@@ -12,7 +12,7 @@ export const QuestionContext = React.createContext({
 });
 
 const NewSurvey = ({ rowId }) => {
-  let history = useHistory();
+  const history = useHistory();
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("");
