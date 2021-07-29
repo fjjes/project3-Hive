@@ -29,7 +29,6 @@ const EditSurvey=({surveyId})=>{
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
-            // setAnswerOptions(data.questions.answerOptions)
             setQuestionNumber(data.questions.length)
         };
         getSurvey();
@@ -58,7 +57,6 @@ const EditSurvey=({surveyId})=>{
         };
     
         console.log("survey:", surveyToUpdate);
-        // Post the custom survey data to the DB
         try {
           let editResponse = await fetch(`/api/survey/${surveyId}`, {
             method: "PUT",

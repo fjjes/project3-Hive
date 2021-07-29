@@ -166,7 +166,7 @@ const NewSurvey = ({ rowId }) => {
                 validate={validateSurveyNum}
                 id="survey-name"
                 className="survey-info"
-                placeholder="Enter a Number (required)"
+                placeholder="Survey Number (required)"
                 value={surveyNumber}
                 required
                 onChange={(event) => onInputChange(event, setSurveyNumber)}
