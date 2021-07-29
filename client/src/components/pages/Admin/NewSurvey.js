@@ -77,13 +77,12 @@ const NewSurvey = ({ rowId }) => {
 
   const addAQuestion = (e) => {
     e.preventDefault();
-    let counter = questionNumber + 1;
-    setQuestionNumber(counter);
+    
 
     const newQuestions = [...questions];
     newQuestions.push({
       questionType: e.target.value,
-      questionNumber: counter,
+      
     });
     setQuestions(newQuestions);
   };
@@ -100,7 +99,10 @@ const NewSurvey = ({ rowId }) => {
       questions,
       createdDate: currentDate,
     };
-
+surveyToCreate.questions.forEach((question,index)=>{
+  question.questionNumber= index + 1
+})
+console.log('surveyToCreate',surveyToCreate)
     console.log("survey:", surveyToCreate);
     // Post the custom survey data to the DB
     try {

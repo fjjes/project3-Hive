@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-const MatrixTwo = ({question}) => {
+const MatrixTwo = ({question, questionNumber}) => {
     const {questions, setQuestions} = useContext(QuestionContext)
     const [questionText, setQuestionText]=useState(question.question || "Please rate the importance of the following from 1 to 10:")
     const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
@@ -29,15 +29,15 @@ const MatrixTwo = ({question}) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question:questionText,
       // questionNumber,
       answerOptions,
@@ -50,7 +50,7 @@ const MatrixTwo = ({question}) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{questionText}</p>
       </span>

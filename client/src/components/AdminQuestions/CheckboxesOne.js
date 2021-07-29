@@ -6,7 +6,7 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
-function CheckboxesOne({ question }) {
+function CheckboxesOne({ question,questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
@@ -60,7 +60,7 @@ function CheckboxesOne({ question }) {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
@@ -82,9 +82,9 @@ function CheckboxesOne({ question }) {
   useEffect(() => {
     const newQuestionList = [...questions];
     console.log("newQuestionList", questions);
-    console.log("questionNumber", question.questionNumber);
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    console.log("questionNumber", questionNumber);
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question: questionText,
       // questionNumber,
       answerOptions,
@@ -148,12 +148,12 @@ function CheckboxesOne({ question }) {
         </div>
       </div>
       <form className="checkbox-form-control">
-        <p className="question-intro">Q{question.questionNumber}.</p>
+        <p className="question-intro">Q{questionNumber}.</p>
         {inEditMode.status ? (
           <input
             type="text"
             value={questionText}
-            questionNumber={question.questionNumber}
+            questionNumber={questionNumber}
             onChange={(e) => setQuestionText(e.target.value)}
           />
         ) : (
@@ -169,7 +169,7 @@ function CheckboxesOne({ question }) {
                       type="checkbox"
                       id={option}
                       name="option-group"
-                      questionNumber={question.questionNumber}
+                      questionNumber={questionNumber}
                     />
                     <input
                       defaultValue={option}
@@ -182,7 +182,7 @@ function CheckboxesOne({ question }) {
                       type="checkbox"
                       id={option}
                       name="option-group"
-                      questionNumber={question.questionNumber}
+                      questionNumber={questionNumber}
                     />
                     <label>{option}</label>
                   </div>

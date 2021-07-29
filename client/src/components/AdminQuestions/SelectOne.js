@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-const SelectOne = ({ question}) => {
+const SelectOne = ({ question, questionNumber}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
   const [questionText, setQuestionText]=useState(question.question || "In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:")
   const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
@@ -22,15 +22,15 @@ const SelectOne = ({ question}) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question:questionText,
       // questionNumber,
       answerOptions,
@@ -43,7 +43,7 @@ const SelectOne = ({ question}) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{questionText}</p>
       </span>

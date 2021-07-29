@@ -6,7 +6,7 @@ import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
-function RadioOne({ question }) {
+function RadioOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [radioOption, setRadioOption] = useState("");
@@ -43,8 +43,9 @@ function RadioOne({ question }) {
   };
 
   const onDelete = (e) => {
+    console.log("deleting", e)
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
@@ -63,8 +64,8 @@ function RadioOne({ question }) {
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question:questionText,
       // questionNumber,
       answerOptions,
@@ -89,12 +90,12 @@ function RadioOne({ question }) {
           /
         </span>
       </div>
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       {inEditMode.status ? (
         <input
           type="text"
           value={questionText}
-          questionNumber={question.questionNumber}
+          questionNumber={questionNumber}
           onChange={(e) => setQuestionText(e.target.value)}
         />
       ) : (
@@ -110,7 +111,7 @@ function RadioOne({ question }) {
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={question.questionNumber}
+                  questionNumber={questionNumber}
                 />
                 <input
                   defaultValue={option}
@@ -124,7 +125,7 @@ function RadioOne({ question }) {
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={question.questionNumber}
+                  questionNumber={questionNumber}
                   // onChange={(e) => setQuestion(e.target.value)}
                 />
                 <label>{option}</label>

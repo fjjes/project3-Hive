@@ -6,7 +6,7 @@ import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
-function PostalCodeOne({ question }) {
+function PostalCodeOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(
@@ -32,15 +32,15 @@ function PostalCodeOne({ question }) {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question: questionText,
       // questionNumber,
       answerOptions: "",
@@ -50,14 +50,14 @@ function PostalCodeOne({ question }) {
 
   return (
     <div className="question-component admin-question-component">
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       <div className="questionAndButtons">
         <div className="questionText">
           {inEditMode.status ? (
             <input
               type="text"
               value={questionText}
-              questionNumber={question.questionNumber}
+              questionNumber={questionNumber}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (

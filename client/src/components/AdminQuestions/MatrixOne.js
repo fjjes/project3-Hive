@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { QuestionContext } from "../pages/Admin/NewSurvey";
 import * as RiIcons from "react-icons/ri";
 
-const MatrixOne = ({ question }) => {
+const MatrixOne = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [questionText, setQuestionText] = useState(question.question ||
     "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
@@ -37,15 +37,15 @@ const MatrixOne = ({ question }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question:questionText,
       // questionNumber,
       answerOptions,
@@ -58,7 +58,7 @@ const MatrixOne = ({ question }) => {
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{questionText}</p>
       </span>

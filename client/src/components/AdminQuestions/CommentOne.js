@@ -5,7 +5,7 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 
-function CommentOne({ question }) {
+function CommentOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(question.question || "Enter a comment:");
@@ -26,15 +26,15 @@ function CommentOne({ question }) {
 
   const onDelete = (e) => {
     e.preventDefault();
-    questions.splice(question.questionNumber - 1, 1);
+    questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
 
   useEffect(() => {
     const newQuestionList = [...questions];
-    newQuestionList[question.questionNumber - 1] = {
-      ...newQuestionList[question.questionNumber - 1],
+    newQuestionList[questionNumber - 1] = {
+      ...newQuestionList[questionNumber - 1],
       question:questionText,
       // questionNumber,
       answerOptions: "",
@@ -45,14 +45,14 @@ function CommentOne({ question }) {
 
   return (
     <div className="question-component admin-question-component">
-      <p className="question-intro">Q{question.questionNumber}.</p>
+      <p className="question-intro">Q{questionNumber}.</p>
       <div className="questionAndButtons">
         <div className="questionText">
           {inEditMode.status ? (
             <input
               type="text"
               value={questionText}
-              questionNumber={question.questionNumber}
+              questionNumber={questionNumber}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
