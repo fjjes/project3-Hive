@@ -71,7 +71,9 @@ const EditSurvey=({surveyId})=>{
             let errorMessage = await editResponse.text();
             console.log("We have an error: ", errorMessage);
             setError(errorMessage);
-          } else {
+          } else if(newCompany=== "" || newVersion===""){
+              setError("Make sure the company name and the survey version filled out!")
+          }else{
             setError(undefined);
             console.log("edit response is successful");
             history.push("/find-list");
@@ -160,10 +162,9 @@ const EditSurvey=({surveyId})=>{
         {/* BOTTOM PART OF PAGE */}
         <div className="dividerLine"></div>
         <div className="save-survey-button-and-link">
-          {error && !(newCompany && newVersion) &&
+          {error &&
             <div>
-              <p style={{ color: "red", fontSize: "1rem" }}>(Make sure the company name and the survey version filled out!) <br />
-                </p>
+              <p style={{ color: "red", fontSize: "1rem" }}>{error}</p>
             </div>
           }
           <button type="submit" className="save-survey-button" onClick={onSaveClicked}>Save Survey </button>
