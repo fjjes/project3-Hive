@@ -41,7 +41,7 @@ function NarrativeOne(props) {
               className="narrative-text-area-input"
               rows="10"
               type="text"
-              value={props.narrative || tempNarrative}
+              value={tempNarrative}
               onChange={handleNarrativeChange}
             />
           ) : (
