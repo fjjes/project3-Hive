@@ -16,7 +16,7 @@ const NewSurvey = ({ rowId }) => {
   const [surveyNumber, setSurveyNumber]=useState()
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
-  const [narrative, setNarrative] = useState("");
+  const [narrative, setNarrative] = useState("This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)");
   const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
   const [answerOptions, setAnswerOptions] = useState([])
@@ -31,6 +31,7 @@ const NewSurvey = ({ rowId }) => {
       let data = await response.json();
       console.log("data:", data);
       setQuestions(data.questions);
+      setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
       setAnswerOptions(data.questions.answerOptions)
@@ -40,8 +41,9 @@ const NewSurvey = ({ rowId }) => {
       getSurvey();
     }
   }, [rowId]);
-
+  
   console.log("questions: ", questions);
+  console.log("narrative: ", narrative)
   console.log("company: ", company);
   console.log("version: ", version);
   console.log("answer options: ", answerOptions)
@@ -218,6 +220,7 @@ console.log('surveyToCreate',surveyToCreate)
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
             <NarrativeOne
+              narrative={narrative}
               updateNarrative={(narrative) => setNarrative(narrative)}
             />
           </div>

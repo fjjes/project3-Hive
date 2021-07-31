@@ -6,15 +6,12 @@ import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
 function NarrativeOne(props) {
-  const narrativePlaceholder =
-    "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)";
 
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [narrative, setNarrative] = useState(narrativePlaceholder);
+  const [tempNarrative, setTempNarrative] = useState("This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)")
 
   const handleNarrativeChange = (e) => {
-    // console.log('narrative edit...')
-    setNarrative(e.target.value);
+    setTempNarrative(e.target.value);
   };
 
   const onEditClicked = () => {
@@ -23,15 +20,14 @@ function NarrativeOne(props) {
   };
 
   const onSave = () => {
-    props.updateNarrative(narrative);
+    props.updateNarrative(tempNarrative);
     console.log("clicked save");
-    setNarrative(narrative);
     setInEditMode({ status: false });
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
-    setNarrative(narrativePlaceholder); // Should probably be changed to revert to the last saved version rather than the original placeholder text
+    setTempNarrative(props.narrative)
     setInEditMode({ status: false });
   };
 
@@ -45,11 +41,11 @@ function NarrativeOne(props) {
               className="narrative-text-area-input"
               rows="10"
               type="text"
-              value={narrative}
+              value={props.narrative || tempNarrative}
               onChange={handleNarrativeChange}
             />
           ) : (
-            <p>{narrative}</p>
+            <p>{props.narrative}</p>
           )}
         </div>
         <div className="narrative-buttons">
