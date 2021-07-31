@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
@@ -30,6 +30,10 @@ function NarrativeOne(props) {
     setTempNarrative(props.narrative)
     setInEditMode({ status: false });
   };
+
+  useEffect(() => {
+    setTempNarrative(props.narrative)
+  },[props.narrative])
 
   return (
     <div className="question-component admin-question-component narrative-component">
