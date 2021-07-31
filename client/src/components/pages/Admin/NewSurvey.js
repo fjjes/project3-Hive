@@ -34,6 +34,7 @@ const NewSurvey = ({ rowId }) => {
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
+      setSurveyNumber(data.surveyNumber)
       setAnswerOptions(data.questions.answerOptions)
       setQuestionNumber(data.questions.length)
     };
