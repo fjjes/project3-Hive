@@ -34,7 +34,7 @@ const EditSurvey=({surveyId})=>{
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
-            setNewAnswerOptions(data.questions.map((questionBlock, i)=>({answerOptions:questionBlock.answerOptions})))
+            // setNewAnswerOptions(data.questions.map((questionBlock, i)=>({answerOptions:questionBlock.answerOptions})))
             setQuestionNumber(data.questions.length)
         };
         getSurvey();
@@ -47,7 +47,7 @@ const EditSurvey=({surveyId})=>{
         setQuestionNumber(counter);
     
         const newQuestions = [...questions];
-        newQuestions.push({questionType: e.target.value, questionNumber: counter, answerOptions:newAnswerOptions});
+        newQuestions.push({questionType: e.target.value, questionNumber: counter});
         setQuestions(newQuestions);
     };
 
@@ -136,7 +136,7 @@ const EditSurvey=({surveyId})=>{
         <div className="survey-selection-container">
           <div className="survey-selection-sidebar-edit">
             <button value="checkbox" onClick={addAQuestion}>
-            <div className='btn-text'><span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox</div>
+            <span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox
             </button>
             <button value="comment" onClick={addAQuestion}>
             <span className='icons'><FaIcons.FaRegCommentDots/></span>Comment
