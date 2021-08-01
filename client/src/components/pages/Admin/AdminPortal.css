@@ -145,13 +145,42 @@ h2 {
   border-radius: 0 10px 10px 0px;
   border: 1px #bce6f8 solid;
   border-left: 0;
-  padding: 10px 0;
   font-size: 1rem;
   background-color: #fff;
   box-shadow: inset -3px -3px 10px grey;
   color: black;
+  display: flex;
+}
+.survey-selection-sidebar .icons{
+  padding-right: 20px;
+ 
 }
 
+/* added edit survey changes!!!!!!!!!!!!!!!! */
+.survey-selection-sidebar-edit {
+  width: 15%;
+  padding: 10px 20px;
+  margin-left: -20px;
+}
+
+/* added edit survey changes!!!!!!!!!!!!!!! */
+.survey-selection-sidebar-edit button { 
+  margin: 0;
+  margin-left: -20px;
+  border-radius: 0 10px 10px 0px;
+  border: 1px #bce6f8 solid;
+  border-left: 0;
+  font-size: 1rem;
+  background-color: #393F4B;
+  color: white;
+  display: flex;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+.survey-selection-sidebar-edit .icons{
+  padding-right: 20px;
+ 
+}
 .survey-selection-sidebar button:hover {
   transform: translate(1px, 1px);
 }
