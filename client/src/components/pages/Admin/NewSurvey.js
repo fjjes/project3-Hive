@@ -3,7 +3,10 @@ import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import QuestionComponent from "./QuestionComponent";
-// import { v4 as uuidv4 } from "uuid";
+import * as RiIcons from "react-icons/ri";
+import * as FaIcons from "react-icons/fa";
+import * as MdIcons from "react-icons/md";
+import * as IoIcons from "react-icons/io";
 // import id from "date-fns/locale/id";
 
 export const QuestionContext = React.createContext({
@@ -91,8 +94,6 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
-    // const surveyNumber = uuid;
-
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -189,32 +190,32 @@ console.log('surveyToCreate',surveyToCreate)
 
       {/* LEFT PART OF PAGE */}
       <div className="survey-selection-container">
-        <div className="survey-selection-sidebar">
-          <button value="checkbox" onClick={addAQuestion}>
-            Checkbox
-          </button>
-          <button value="comment" onClick={addAQuestion}>
-            Comment
-          </button>
-          <button value="matrix1" onClick={addAQuestion}>
-            Matrix
-          </button>
-          <button value="matrix2" onClick={addAQuestion}>
-            Matrix-Num
-          </button>
-          <button value="radio" onClick={addAQuestion}>
-            RadioButton
-          </button>
-          <button value="postal" onClick={addAQuestion}>
-            PostalCode
-          </button>
-          <button value="select" onClick={addAQuestion}>
-            Select
-          </button>
-          <button value="slider" onClick={addAQuestion}>
-            Slider
-          </button>
-        </div>
+          <div className="survey-selection-sidebar">
+            <button value="checkbox" onClick={addAQuestion}>
+            <span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox
+            </button>
+            <button value="comment" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaRegCommentDots/></span>Comment
+            </button>
+            <button value="matrix1" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaListUl/></span>Matrix
+            </button>
+            <button value="matrix2" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaListOl/></span>Matrix-Num
+            </button>
+            <button value="radio" onClick={addAQuestion}>
+            <span className='icons'><RiIcons.RiRadioButtonLine/></span>RadioButton
+            </button>
+            <button value="postal" onClick={addAQuestion}>
+            <span className='icons'><MdIcons.MdLocalPostOffice/></span>PostalCode
+            </button>
+            <button value="select" onClick={addAQuestion}>
+            <span className='icons'><IoIcons.IoMdArrowDropdown/></span>Select
+            </button>
+            <button value="slider" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaSlidersH/></span>Slider
+            </button>
+          </div>
 
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
