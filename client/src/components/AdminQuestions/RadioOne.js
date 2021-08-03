@@ -29,13 +29,13 @@ function RadioOne({ question, questionNumber }) {
   };
 
   const onSave = () => {
-    setQuestions(questions);
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={}
-    //   setQuestion(previousQuestions)
-    //   console.log("clicked save", questions);
-    setInEditMode({ status: false });
-  };
+    console.log("save!!!");
+    const previousQuestions=questions
+    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    setQuestions(previousQuestions)
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
+};
 
   const onCancel = () => {
     console.log("clicked cancel");
@@ -49,6 +49,14 @@ function RadioOne({ question, questionNumber }) {
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
+
+	const deleteOptions = () => {  //delete starts on the bottom
+		answerOptions.splice(answerOptions - 1, 1);
+		const deleteTheOptions = [...answerOptions];
+		setAnswerOptions(deleteTheOptions);
+		setInEditMode({ status: true });
+	};
+
 
   const OnAddInput = () => {
     console.log("clicked add");
@@ -80,7 +88,8 @@ function RadioOne({ question, questionNumber }) {
       </button>
       <div className="edit-button">
         <button
-          className="clear-icn3"
+          style={{ float: "right", width: "43px" }}
+          className="clear icn3"
           title="Edit"
           onClick={() => onEditClicked()}
         >
@@ -89,53 +98,9 @@ function RadioOne({ question, questionNumber }) {
         <span className="slash" style={{ color: "#fff" }}>
           /
         </span>
-      </div>
-      <p className="question-intro">Q{questionNumber}.</p>
-      {inEditMode.status ? (
-        <input
-          type="text"
-          value={questionText}
-          questionNumber={questionNumber}
-          onChange={(e) => setQuestionText(e.target.value)}
-        />
-      ) : (
-        <p className="question-intro">{questionText}</p>
-      )}
-      <div className="questionAndButtons">
-        <div className="questionText">
-          {answerOptions.map((option, index) => {
-            return inEditMode.status ? (
-              <div key={index}>
-                <input
-                  type="radio"
-                  id={option}
-                  name="option-group"
-                  color="primary"
-                  questionNumber={questionNumber}
-                />
-                <input
-                  defaultValue={option}
-                  onChange={(e) => onInputChange(e, index)}
-                />
-              </div>
-            ) : (
-              <div>
-                <input
-                  type="radio"
-                  id={option}
-                  name="option-group"
-                  color="primary"
-                  questionNumber={questionNumber}
-                  // onChange={(e) => setQuestion(e.target.value)}
-                />
-                <label>{option}</label>
-              </div>
-            );
-          })}
-        </div>
         <div className="radio-buttons">
           {inEditMode.status ? (
-            <div className="edit-button">
+            <div className="edit-button2">
               <button
                 className="clear icn1"
                 title="Save"
@@ -165,20 +130,54 @@ function RadioOne({ question, questionNumber }) {
               </div>
             </div>
           ) : (
-            // </div>
-            <div className="edit-button">
-              {/* <button
-                className="clear icn3"
-                title="Edit"
-                onClick={() => onEditClicked()}
-              >
-                <BsIcons.BsPencilSquare />
-              </button> */}
-              <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span>
-            </div>
+            <div></div>
           )}
+      </div>
+      <p className="question-intro">Q{questionNumber}.</p>
+      {inEditMode.status ? (
+        <input
+          type="text"
+          value={questionText}
+          questionNumber={questionNumber}
+          onChange={(e) => setQuestionText(e.target.value)}
+        />
+      ) : (
+        <p className="question-intro">{questionText}</p>
+      )}
+      <div className="questionAndButtons">
+        <div className="questionText">
+          {answerOptions.map((option, index) => {
+            return inEditMode.status ? (
+              <div key={index}>
+                <input
+                  type="radio"
+                  id={option}
+                  name="option-group"
+                  color="primary"
+                  questionNumber={questionNumber}
+                />
+                <input
+                  defaultValue={option}
+                  onChange={(e) => onInputChange(e, index)}
+                />
+								<button onClick={deleteOptions}>delete</button>
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="radio"
+                  id={option}
+                  name="option-group"
+                  color="primary"
+                  questionNumber={questionNumber}
+                  // onChange={(e) => setQuestion(e.target.value)}
+                />
+                <label>{option}</label>
+              </div>
+            );
+          })}
+        </div>
+        
         </div>
       </div>
     </div>

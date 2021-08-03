@@ -297,6 +297,7 @@ h2 {
   width: 40px;
   cursor: pointer;
   background-color: #197e9c;
+ 
 }
 
 .questionAndButtons {
@@ -308,7 +309,7 @@ h2 {
 .edit-button2 {
   display: flex;
   /* flex-direction: column; */
-  margin: 0px 0px 0px 30px;
+  margin: -20px 0px 0px 30px;
   float: right;
 }
 

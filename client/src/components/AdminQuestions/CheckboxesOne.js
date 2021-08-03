@@ -6,12 +6,13 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
-function CheckboxesOne({ question,questionNumber }) {
+function CheckboxesOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
   const [questionText, setQuestionText] = useState(
     question.question || "Select up to three options:"
+    
   );
   console.log("help");
   // const [answerOptions, setAnswerOptions]=useState([
@@ -44,12 +45,11 @@ function CheckboxesOne({ question,questionNumber }) {
   };
 
   const onSave = () => {
-    setQuestions(questions);
-    console.log("save me!!!");
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={}
-    //   setQuestion(previousQuestions)
-    //   console.log("clicked save", questions);
+    console.log("save!!!");
+      const previousQuestions=questions
+      previousQuestions[questionNumber]={question:questionText,answerOptions}
+      setQuestions(previousQuestions)
+      console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
 
@@ -58,17 +58,24 @@ function CheckboxesOne({ question,questionNumber }) {
     setInEditMode({ status: false });
   };
 
-  const onDelete = (e) => {
-    e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+  const onDelete = () => {
+		questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
+		console.log("hey")
+  };
+
+  const deleteOptions = () => { 
+    answerOptions.splice(answerOptions - 1, 1);
+		const deleteTheOptions = [...answerOptions];
+    setAnswerOptions(deleteTheOptions);
   };
 
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([...answerOptions, checkBoxesOneOption]);
-    console.log("give me some love", answerOptions);
+    // setQuestionText ([...questionText]);
+    console.log("add input", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -76,7 +83,7 @@ function CheckboxesOne({ question,questionNumber }) {
     const previousAnswerOptions = answerOptions;
     previousAnswerOptions[index] = event.target.value;
     setAnswerOptions(previousAnswerOptions);
-    console.log("crazy");
+    console.log("input changes here");
   };
 
   useEffect(() => {
@@ -175,6 +182,7 @@ function CheckboxesOne({ question,questionNumber }) {
                       defaultValue={option}
                       onChange={(e) => onInputChange(e, index)}
                     />
+                    <button onClick={deleteOptions}>delete</button>
                   </div>
                 ) : (
                   <div>
@@ -185,11 +193,16 @@ function CheckboxesOne({ question,questionNumber }) {
                       questionNumber={questionNumber}
                     />
                     <label>{option}</label>
+
                   </div>
                 );
               })}
             </div>
           </div>
+            {inEditMode.status 
+              ? <p style={{color: "red"}}>Note: the last option will always be a comment field.</p>
+              : null
+            }
         </div>
       </form>
     </div>
