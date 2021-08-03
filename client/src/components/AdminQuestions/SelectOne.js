@@ -43,8 +43,11 @@ const SelectOne = ({ question, questionNumber }) => {
     setInEditMode({ status: false });
   };
 
-  console.log("questions: ", questions);
-  console.log("questionText: ", questionText);
+  console.log("questions: ", questions); 
+  // console.log("questionText: ", questionText);
+  // console.log("answerOptions: ", answerOptions)
+  // console.log("answerOptions[0]: ", answerOptions[0])
+  // console.log("answerOptions[0].text: ", answerOptions[0].text)
 
   const onCancel = () => {
     console.log("clicked cancel");
@@ -73,15 +76,15 @@ const SelectOne = ({ question, questionNumber }) => {
     console.log("clicked add");
     setAnswerOptions([
       ...answerOptions,
-      // radioOption
     ]);
-    console.log("answer", answerOptions);
+    console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
   };
   const onInputChange = (event, index) => {
     const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index] = event.target.value;
+    previousAnswerOptions[index].text = event.target.value;
     setAnswerOptions(previousAnswerOptions);
+    // console.log("answerOptions[index]: ", answerOptions[index])
   };
 
   useEffect(() => {
@@ -158,7 +161,7 @@ const SelectOne = ({ question, questionNumber }) => {
             return (
               <ul key={i}>
                 <li style={{ listStyleType: "none", textAlign: "left" }}>
-                  {row.text}:&nbsp;
+                  {answerOptions[i].text}:&nbsp;
                   <select value={row.value}>
                     <option>--Select--</option>
                     {selectArray.map((selection, index) => {
