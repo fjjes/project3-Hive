@@ -65,10 +65,10 @@ function CheckboxesOne({ question, questionNumber }) {
 		console.log("hey")
   };
 
-  const deleteOptions = () => { //deletes all options
+  const deleteOptions = () => { 
     answerOptions.splice(answerOptions - 1, 1);
-    const deleteOptions = [...answerOptions];
-    setAnswerOptions(deleteOptions);
+		const deleteTheOptions = [...answerOptions];
+    setAnswerOptions(deleteTheOptions);
   };
 
   const OnAddInput = () => {

@@ -72,8 +72,8 @@ const MatrixOne = ({ question, questionNumber }) => {
 
 	const deleteOptions = () => {  //delete starts on the bottom
 		answerOptions.splice(answerOptions - 1, 1);
-		const deleteOptions = [...answerOptions];
-		setAnswerOptions(deleteOptions);
+		const deleteTheOptions = [...answerOptions];
+		setAnswerOptions(deleteTheOptions);
 		setInEditMode({ status: true });
 	};
 
