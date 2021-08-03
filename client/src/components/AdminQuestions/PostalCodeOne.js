@@ -19,11 +19,13 @@ function PostalCodeOne({ question, questionNumber }) {
   };
 
   const onSave = () => {
-    setQuestionText(questionText);
-    // console.log("clicked save");
-    // setPostalCode(postalCode)
-    setInEditMode({ status: false });
-  };
+    console.log("save!!!");
+    const previousQuestions=questions
+    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    setQuestions(previousQuestions)
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
+};
 
   const onCancel = () => {
     console.log("clicked cancel");

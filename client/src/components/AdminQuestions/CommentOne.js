@@ -15,9 +15,13 @@ function CommentOne({ question, questionNumber }) {
     setInEditMode({ status: true });
   };
   const onSave = () => {
-    setQuestionText(questionText);
-    setInEditMode({ status: false });
-  };
+    console.log("save!!!");
+    const previousQuestions=questions
+    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    setQuestions(previousQuestions)
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
+};
 
   const onCancel = () => {
     console.log("clicked cancel");

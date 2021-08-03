@@ -45,7 +45,6 @@ function CheckboxesOne({ question,questionNumber }) {
   };
 
   const onSave = () => {
-    // setQuestions(questions);
     console.log("save!!!");
       const previousQuestions=questions
       previousQuestions[questionNumber]={question:questionText,answerOptions}
