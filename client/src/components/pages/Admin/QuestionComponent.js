@@ -9,16 +9,17 @@ import SliderTwo from "../../AdminQuestions/SliderTwo";
 
 const QuestionComponent = ({ question, questionNumber }) => {
   let questionType = question?.questionType;
-
+  // let answerOptions= question?.answerOptions;
+console.log('question component:', question)
   return (
     <div>
-      {questionType === "checkbox" && <CheckboxesOne questionNumber={questionNumber} question={question} />}
+      {questionType === "checkbox" && <CheckboxesOne questionNumber={questionNumber} question={question}  />}
       {questionType === "comment" && <CommentOne questionNumber={questionNumber} question={question} />}
-      {questionType === "matrix2" && <MatrixTwo questionNumber={questionNumber} question={question} />}
-      {questionType === "matrix1" && <MatrixOne questionNumber={questionNumber} question={question} />}
-      {questionType === "radio" && <RadioOne questionNumber={questionNumber} question={question} />}
-      {questionType === "select" && <SelectOne questionNumber={questionNumber} question={question} />}
-      {questionType === "slider" && <SliderTwo questionNumber={questionNumber} question={question} />}
+      {questionType === "matrix2" && <MatrixTwo questionNumber={questionNumber} question={question}  />}
+      {questionType === "matrix1" && <MatrixOne questionNumber={questionNumber} question={question}  />}
+      {questionType === "radio" && <RadioOne questionNumber={questionNumber} question={question}  />}
+      {questionType === "select" && <SelectOne questionNumber={questionNumber} question={question}   />}
+      {questionType === "slider" && <SliderTwo questionNumber={questionNumber} question={question}  />}
       {questionType === "postal" && <PostalCodeOne questionNumber={questionNumber} question={question} />}
     </div>
   );
