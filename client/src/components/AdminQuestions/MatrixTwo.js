@@ -62,6 +62,13 @@ const MatrixTwo = ({ question, questionNumber }) => {
     setQuestions(deleteQuestion);
   };
 
+	const deleteOptions = () => {  //delete starts on the bottom
+		answerOptions.splice(answerOptions - 1, 1);
+		const deleteOptions = [...answerOptions];
+		setAnswerOptions(deleteOptions);
+		setInEditMode({ status: true });
+	};
+
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([...answerOptions, matrixTwoOption]);
@@ -200,6 +207,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
                     </td>
                   );
                 })}
+								<button onClick={deleteOptions}>delete</button>
               </tr>
             );
           })}

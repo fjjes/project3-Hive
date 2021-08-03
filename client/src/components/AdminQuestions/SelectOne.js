@@ -72,6 +72,14 @@ const SelectOne = ({ question, questionNumber }) => {
     setQuestions(deleteQuestion);
   };
 
+	const deleteOptions = () => {  //delete starts on the bottom
+		answerOptions.splice(answerOptions - 1, 1);
+		const deleteOptions = [...answerOptions];
+		setAnswerOptions(deleteOptions);
+		setInEditMode({ status: true });
+	};
+
+
   useEffect(() => {
     const newQuestionList = [...questions];
     newQuestionList[questionNumber - 1] = {
@@ -165,6 +173,7 @@ const SelectOne = ({ question, questionNumber }) => {
                       );
                     })}
                   </select>
+								<button onClick={deleteOptions}>delete</button>
                 </li>
               </ul>
             );
