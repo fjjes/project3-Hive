@@ -12,12 +12,32 @@ export const QuestionContext = React.createContext({
     setQuestions: () => {},
   });
 
+  // const EditSurvey=({surveyId, survey})=>{
+  //   let questionList= survey?.questions
+  //   let company= survey?.company
+  //   let version= survey?.version
+  //   let surveyNumber= survey?.surveyNumber
+  //   let narrative= survey?.narrative
+  //   let number= survey?.questions?.length
+   
+  //     const history = useHistory();
+  //     const [newCompany, setNewCompany] = useState(company);
+  //     const [newVersion, setNewVersion] = useState(version);
+  //     const [newSurveyNumber, setNewSurveyNumber]=useState(surveyNumber)
+  //     const [newNarrative, setNewNarrative] = useState(narrative);
+  //     const [questionNumber, setQuestionNumber] = useState(number);
+  //     const [newAnswerOptions, setNewAnswerOptions]=useState([])
+  //     const [error, setError] = useState();
+  
+  //     const [questions, setQuestions] = useState(questionList);
+  //     const value = { questions, setQuestions };
+
 const EditSurvey=({surveyId})=>{
     const history = useHistory();
-    const [newCompany, setNewCompany] = useState("");
-    const [newVersion, setNewVersion] = useState("");
+    const [newCompany, setNewCompany] = useState();
+    const [newVersion, setNewVersion] = useState();
     const [newSurveyNumber, setNewSurveyNumber]=useState()
-    const [newNarrative, setNewNarrative] = useState("");
+    const [newNarrative, setNewNarrative] = useState();
     const [questionNumber, setQuestionNumber] = useState(0);
     const [newAnswerOptions, setNewAnswerOptions]=useState([])
     const [error, setError] = useState();
