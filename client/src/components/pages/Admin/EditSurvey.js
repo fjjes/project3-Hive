@@ -115,7 +115,7 @@ const EditSurvey=({surveyId})=>{
                 <label>Survey No:<span style={{color:"red"}}>*</span>:</label>
                 <input
                     name="surveyNumber"
-                    id="survey-name"
+                    id="survey-number"
                     className="survey-info"
                     placeholder="Enter a Number (required)"
                     value={newSurveyNumber}

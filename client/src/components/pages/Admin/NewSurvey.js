@@ -166,7 +166,7 @@ console.log('surveyToCreate',surveyToCreate)
               <Field
                 name="surveyNumber"
                 validate={validateSurveyNum}
-                id="survey-name"
+                id="survey-number"
                 className="survey-info"
                 placeholder="Survey Number (required)"
                 value={surveyNumber}
