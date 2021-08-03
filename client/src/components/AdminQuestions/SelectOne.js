@@ -134,8 +134,43 @@ const SelectOne = ({ question, questionNumber }) => {
         <span className="slash" style={{ color: "#fff" }}>
           /
         </span>
-      </div>
+      {/* </div> */}
 
+      <div>
+          {inEditMode.status ? (
+        <div className="edit-button2">
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() => onSave()}
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+              >
+                <MdIcons.MdCancel />
+              </button>
+
+              <div className="edit-button">
+                <button
+                  className="clear icn4"
+                  title="Add"
+                  onClick={() => OnAddInput()}
+                >
+                  <BsIcons.BsFillPlusCircleFill />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div> </div>
+          )}
+        </div>
       <p className="question-intro">Q{questionNumber}.</p>
       {inEditMode.status ? (
         <textarea
@@ -198,7 +233,7 @@ const SelectOne = ({ question, questionNumber }) => {
             );
           })}
 
-      {inEditMode.status ? (
+      {/* {inEditMode.status ? (
         <div className="edit-button">
           <button className="clear icn1" title="Save" onClick={() => onSave()}>
             <GiIcons.GiSaveArrow />
@@ -234,12 +269,10 @@ const SelectOne = ({ question, questionNumber }) => {
               >
                 <BsIcons.BsPencilSquare />
               </button> */}
-          <span className="slash" style={{ color: "#fff" }}>
+          {/* <span className="slash" style={{ color: "#fff" }}>
             /
-          </span>
+          </span> */}
         </div>
-      )}
-      {/* </div> */}
     </div>
   );
 };

@@ -92,6 +92,45 @@ const SliderTwo = ({question, questionNumber}) => {
         <span className="slash" style={{ color: "#fff" }}>
           /
         </span>
+
+        <div className="checkboxes-buttons">
+          {inEditMode.status ? (
+            <div className="edit-button2">
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() => onSave()}
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+              >
+                <MdIcons.MdCancel />
+              </button>
+
+              <div className="edit-button">
+                <button
+                  className="clear icn4"
+                  title="Add"
+                  onClick={() => OnAddInput()}
+                >
+                  <BsIcons.BsFillPlusCircleFill />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div> </div>
+          )}
+        </div>
+
+
+
       </div>
       <p className="question-intro">Q{questionNumber}.</p>
         {inEditMode.status ? (
@@ -110,6 +149,7 @@ const SliderTwo = ({question, questionNumber}) => {
         return (
           <div key={index} className="slider">
             {inEditMode.status ? (
+              // NEEDS SOME STYLING...
               <input 
               defaultValue={row}
               placeholder={row}
@@ -135,7 +175,7 @@ const SliderTwo = ({question, questionNumber}) => {
           </div>
         );
       })}
-            {inEditMode.status ? (
+            {/* {inEditMode.status ? (
         <div className="edit-button">
           <button className="clear icn1" title="Save" onClick={() => onSave()}>
             <GiIcons.GiSaveArrow />
@@ -163,7 +203,7 @@ const SliderTwo = ({question, questionNumber}) => {
         </div>
       ) : (
         // </div>
-        <div className="edit-button">
+        <div className="edit-button"> */}
           {/* <button
                 className="clear icn3"
                 title="Edit"
@@ -171,11 +211,11 @@ const SliderTwo = ({question, questionNumber}) => {
               >
                 <BsIcons.BsPencilSquare />
               </button> */}
-          <span className="slash" style={{ color: "#fff" }}>
+          {/* <span className="slash" style={{ color: "#fff" }}>
             /
-          </span>
-        </div>
-      )}
+          </span> */}
+        {/* </div> */}
+      
     </div>
   );
 };
