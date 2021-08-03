@@ -21,7 +21,7 @@ function PostalCodeOne({ question, questionNumber }) {
   const onSave = () => {
     console.log("save!!!");
     const previousQuestions=questions
-    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    previousQuestions[questionNumber]={question:questionText}
     setQuestions(previousQuestions)
     console.log("clicked save", questions);
   setInEditMode({ status: false });
