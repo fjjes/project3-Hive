@@ -193,11 +193,16 @@ function CheckboxesOne({ question, questionNumber }) {
                       questionNumber={questionNumber}
                     />
                     <label>{option}</label>
+
                   </div>
                 );
               })}
             </div>
           </div>
+            {inEditMode.status 
+              ? <p style={{color: "red"}}>Note: the last option will always be a comment field.</p>
+              : null
+            }
         </div>
       </form>
     </div>
