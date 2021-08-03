@@ -6,7 +6,7 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
-function CheckboxesOne({ question,questionNumber }) {
+function CheckboxesOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
@@ -63,6 +63,12 @@ function CheckboxesOne({ question,questionNumber }) {
     questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
+  };
+
+  const deleteOptions = () => {
+    answerOptions.splice(answerOptions - 1, 1);
+    const deleteOptions = [...checkBoxesOneOption];
+    setAnswerOptions(deleteOptions);
   };
 
   const OnAddInput = () => {
@@ -175,6 +181,7 @@ function CheckboxesOne({ question,questionNumber }) {
                       defaultValue={option}
                       onChange={(e) => onInputChange(e, index)}
                     />
+                    <button onClick={deleteOptions}>delete</button>
                   </div>
                 ) : (
                   <div>
