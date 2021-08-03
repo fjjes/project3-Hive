@@ -50,6 +50,14 @@ function RadioOne({ question, questionNumber }) {
     setQuestions(deleteQuestion);
   };
 
+	const deleteOptions = () => {  //delete starts on the bottom
+		answerOptions.splice(answerOptions - 1, 1);
+		const deleteOptions = [...answerOptions];
+		setAnswerOptions(deleteOptions);
+		setInEditMode({ status: true });
+	};
+
+
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([...answerOptions,radioOption]);
@@ -152,6 +160,7 @@ function RadioOne({ question, questionNumber }) {
                   defaultValue={option}
                   onChange={(e) => onInputChange(e, index)}
                 />
+								<button onClick={deleteOptions}>delete</button>
               </div>
             ) : (
               <div>

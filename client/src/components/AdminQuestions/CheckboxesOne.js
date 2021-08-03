@@ -58,16 +58,16 @@ function CheckboxesOne({ question, questionNumber }) {
     setInEditMode({ status: false });
   };
 
-  const onDelete = (e) => {
-    e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
+  const onDelete = () => {
+		questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
+		console.log("hey")
   };
 
-  const deleteOptions = () => {
+  const deleteOptions = () => { //deletes all options
     answerOptions.splice(answerOptions - 1, 1);
-    const deleteOptions = [...checkBoxesOneOption];
+    const deleteOptions = [...answerOptions];
     setAnswerOptions(deleteOptions);
   };
 
