@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useHistory} from "react-router-dom"
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import QuestionComponent from "./QuestionComponent";
+import * as RiIcons from "react-icons/ri";
+import * as FaIcons from "react-icons/fa";
+import * as MdIcons from "react-icons/md";
+import * as IoIcons from "react-icons/io";
 
 export const QuestionContext = React.createContext({
     questions: [],
@@ -15,6 +19,7 @@ const EditSurvey=({surveyId})=>{
     const [newSurveyNumber, setNewSurveyNumber]=useState()
     const [newNarrative, setNewNarrative] = useState("");
     const [questionNumber, setQuestionNumber] = useState(0);
+    const [newAnswerOptions, setNewAnswerOptions]=useState([])
     const [error, setError] = useState();
 
     const [questions, setQuestions] = useState([]);
@@ -29,6 +34,7 @@ const EditSurvey=({surveyId})=>{
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
+            // setNewAnswerOptions(data.questions.map((questionBlock, i)=>({answerOptions:questionBlock.answerOptions})))
             setQuestionNumber(data.questions.length)
         };
         getSurvey();
@@ -128,30 +134,30 @@ const EditSurvey=({surveyId})=>{
   
         {/* LEFT PART OF PAGE */}
         <div className="survey-selection-container">
-          <div className="survey-selection-sidebar">
+          <div className="survey-selection-sidebar-edit">
             <button value="checkbox" onClick={addAQuestion}>
-              Checkbox
+            <span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox
             </button>
             <button value="comment" onClick={addAQuestion}>
-              Comment
+            <span className='icons'><FaIcons.FaRegCommentDots/></span>Comment
             </button>
             <button value="matrix1" onClick={addAQuestion}>
-              Matrix
+            <span className='icons'><FaIcons.FaListUl/></span>Matrix
             </button>
             <button value="matrix2" onClick={addAQuestion}>
-              Matrix-Num
+            <span className='icons'><FaIcons.FaListOl/></span>Matrix-Num
             </button>
             <button value="radio" onClick={addAQuestion}>
-              RadioButton
+            <span className='icons'><RiIcons.RiRadioButtonLine/></span>RadioButton
             </button>
             <button value="postal" onClick={addAQuestion}>
-              PostalCode
+            <span className='icons'><MdIcons.MdLocalPostOffice/></span>PostalCode
             </button>
             <button value="select" onClick={addAQuestion}>
-              Select
+            <span className='icons'><IoIcons.IoMdArrowDropdown/></span>Select
             </button>
             <button value="slider" onClick={addAQuestion}>
-              Slider
+            <span className='icons'><FaIcons.FaSlidersH/></span>Slider
             </button>
           </div>
   

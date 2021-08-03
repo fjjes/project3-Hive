@@ -93,7 +93,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
   }, [answerOptions]);
 
   return (
-    <div className="question-component admin-question-component">
+    <div className="question-component admin-question-component matrix">
       <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
         <RiIcons.RiDeleteBinFill />
       </button>
