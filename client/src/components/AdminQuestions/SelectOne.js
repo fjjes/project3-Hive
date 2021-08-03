@@ -21,6 +21,7 @@ const SelectOne = ({ question, questionNumber }) => {
       { text: "Other" },
     ]
   );
+  const selectionOption = {};
 
   let selectArray = [];
   let num = 1;
@@ -33,13 +34,23 @@ const SelectOne = ({ question, questionNumber }) => {
     setInEditMode({ status: true });
   };
 
+  // const onSave = () => {
+  //   setQuestions(questions);
+  //   setQuestionText(questionText);
+  //   //   const previousQuestions=questions
+  //   //   previousQuestions[questionNumber]={}
+  //   //   setQuestion(previousQuestions)
+  //   //   console.log("clicked save", questions);
+  //   setInEditMode({ status: false });
+  // };
+
   const onSave = () => {
-    setQuestions(questions);
-    setQuestionText(questionText);
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={}
-    //   setQuestion(previousQuestions)
-    //   console.log("clicked save", questions);
+    // setQuestions(questions);
+    console.log("save!!!");
+      const previousQuestions=questions
+      previousQuestions[questionNumber]={question:questionText,answerOptions}
+      setQuestions(previousQuestions)
+      console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
 
@@ -75,7 +86,7 @@ const SelectOne = ({ question, questionNumber }) => {
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([
-      ...answerOptions,
+      ...answerOptions,selectionOption
     ]);
     console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
@@ -96,7 +107,7 @@ const SelectOne = ({ question, questionNumber }) => {
       answerOptions,
     };
     setQuestions(newQuestionList);
-  }, []);
+  }, [answerOptions]);
 
   return (
     <div className="selectOne question-component admin-question-component">
@@ -105,6 +116,7 @@ const SelectOne = ({ question, questionNumber }) => {
       </button>
       <div className="edit-button">
         <button
+          style={{ float: "right", width: "43px" }} 
           className="clear-icn3"
           title="Edit"
           onClick={() => onEditClicked()}
