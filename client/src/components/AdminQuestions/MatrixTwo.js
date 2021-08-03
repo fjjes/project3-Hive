@@ -9,7 +9,7 @@ import "../pages/Admin/AdminPortal.css";
 const MatrixTwo = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [MatrixTwoOption, setMatrixTwoOption] = useState("");
+  const matrixTwoOption ={};
   const [questionText, setQuestionText] = useState(
     question.question ||
       "Please rate the importance of the following from 1 to 10:"
@@ -42,17 +42,13 @@ const MatrixTwo = ({ question, questionNumber }) => {
   };
 
   const onSave = () => {
-    // setQuestions(questions);
     console.log("save!!!");
-    const previousQuestions = questions;
-    previousQuestions[questionNumber] = {
-      question: questionText,
-      answerOptions,
-    };
-    setQuestions(previousQuestions);
+    const previousQuestions=questions
+    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    setQuestions(previousQuestions)
     console.log("clicked save", questions);
-    setInEditMode({ status: false });
-  };
+  setInEditMode({ status: false });
+};
 
   const onCancel = () => {
     console.log("clicked cancel");
@@ -75,7 +71,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
 
   const OnAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, MatrixTwoOption]);
+    setAnswerOptions([...answerOptions, matrixTwoOption]);
     // setQuestionText ([...questionText]);
     console.log("add input", answerOptions);
     setInEditMode({ status: true });
@@ -83,7 +79,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
 
   const onInputChange = (event, index) => {
     const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index] = event.target.value;
+    previousAnswerOptions[index].text = event.target.value;
     setAnswerOptions(previousAnswerOptions);
     console.log("input changes here");
   };
@@ -153,9 +149,17 @@ const MatrixTwo = ({ question, questionNumber }) => {
         </div>
       </div>
       <p className="question-intro">Q{questionNumber}.</p>
-      <span>
+      
+      {inEditMode.status ? (
+        <input
+          type="text"
+          value={questionText}
+          questionNumber={questionNumber}
+          onChange={(e) => setQuestionText(e.target.value)}
+        />
+      ) : (
         <p className="question-intro">{questionText}</p>
-      </span>
+      )}  
       <table>
         <tbody>
           <tr>
@@ -169,11 +173,32 @@ const MatrixTwo = ({ question, questionNumber }) => {
               );
             })}
           </tr>
-          {answerOptions.map((row, i) => {
+          {inEditMode.status
+            ? answerOptions.map((row, i) => {
+                return (
+                  <tr key={i}>
+                    <td className="label-rows">
+                      <input
+                        defaultValue={row.text}
+                        placeholder={row.text}
+                        onChange={(e) => onInputChange(e, i)}
+                      />
+                      </td>
+                    {columns.map((col, index) => {
+                      return (
+                        <td key={index}>
+                          <input type="radio" name={row.text} value={col} />
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })
+          :answerOptions.map((row, i) => {
             return (
               <tr key={i}>
                 <td className="label-rows">
-                  <label>{row.text}</label>
+                  <label>{answerOptions[i].text}</label>
                 </td>
                 {columns.map((col, index) => {
                   return (

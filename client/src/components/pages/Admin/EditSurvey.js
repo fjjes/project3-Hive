@@ -31,6 +31,7 @@ const EditSurvey=({surveyId})=>{
             let response = await fetch(`/api/survey/${surveyId}`);
             let data = await response.json();
             setQuestions(data.questions);
+            setNewNarrative(data.narrative);
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
@@ -166,6 +167,7 @@ const EditSurvey=({surveyId})=>{
             <div className="survey-selected-components-background">
               {/* Displays the question components that have been selected */}
               <NarrativeOne
+                narrative={newNarrative}
                 updateNarrative={(narrative) => setNewNarrative(narrative)}
               />
             </div>
