@@ -22,6 +22,8 @@ router.get('/:id', async function(req, res) {
   }
 });
 
+// Add GET/id/map (Prodyut)
+
 router.post('/', async (req, res) => {
   try {
       let newSurvey = new Survey(req.body)

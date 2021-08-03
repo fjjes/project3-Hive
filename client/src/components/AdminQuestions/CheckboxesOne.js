@@ -12,6 +12,7 @@ function CheckboxesOne({ question, questionNumber }) {
   const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
   const [questionText, setQuestionText] = useState(
     question.question || "Select up to three options:"
+    
   );
   console.log("help");
   // const [answerOptions, setAnswerOptions]=useState([
@@ -44,12 +45,11 @@ function CheckboxesOne({ question, questionNumber }) {
   };
 
   const onSave = () => {
-    setQuestions(questions);
-    console.log("save me!!!");
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={}
-    //   setQuestion(previousQuestions)
-    //   console.log("clicked save", questions);
+    console.log("save!!!");
+      const previousQuestions=questions
+      previousQuestions[questionNumber]={question:questionText,answerOptions}
+      setQuestions(previousQuestions)
+      console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
 
@@ -74,7 +74,8 @@ function CheckboxesOne({ question, questionNumber }) {
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([...answerOptions, checkBoxesOneOption]);
-    console.log("give me some love", answerOptions);
+    // setQuestionText ([...questionText]);
+    console.log("add input", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -82,7 +83,7 @@ function CheckboxesOne({ question, questionNumber }) {
     const previousAnswerOptions = answerOptions;
     previousAnswerOptions[index] = event.target.value;
     setAnswerOptions(previousAnswerOptions);
-    console.log("crazy");
+    console.log("input changes here");
   };
 
   useEffect(() => {

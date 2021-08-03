@@ -29,13 +29,13 @@ function RadioOne({ question, questionNumber }) {
   };
 
   const onSave = () => {
-    setQuestions(questions);
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={}
-    //   setQuestion(previousQuestions)
-    //   console.log("clicked save", questions);
-    setInEditMode({ status: false });
-  };
+    console.log("save!!!");
+    const previousQuestions=questions
+    previousQuestions[questionNumber]={question:questionText,answerOptions}
+    setQuestions(previousQuestions)
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
+};
 
   const onCancel = () => {
     console.log("clicked cancel");
@@ -80,7 +80,8 @@ function RadioOne({ question, questionNumber }) {
       </button>
       <div className="edit-button">
         <button
-          className="clear-icn3"
+          style={{ float: "right", width: "43px" }}
+          className="clear icn3"
           title="Edit"
           onClick={() => onEditClicked()}
         >
@@ -89,6 +90,40 @@ function RadioOne({ question, questionNumber }) {
         <span className="slash" style={{ color: "#fff" }}>
           /
         </span>
+        <div className="radio-buttons">
+          {inEditMode.status ? (
+            <div className="edit-button2">
+              <button
+                className="clear icn1"
+                title="Save"
+                onClick={() => onSave()}
+              >
+                <GiIcons.GiSaveArrow />
+              </button>
+              <span className="slash" style={{ color: "#fff" }}>
+                /
+              </span>
+              <button
+                className="clear icn2"
+                title="Cancel"
+                onClick={() => onCancel()}
+              >
+                <MdIcons.MdCancel />
+              </button>
+
+              <div className="edit-button">
+                <button
+                  className="clear icn4"
+                  title="Add"
+                  onClick={() => OnAddInput()}
+                >
+                  <BsIcons.BsFillPlusCircleFill />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
       </div>
       <p className="question-intro">Q{questionNumber}.</p>
       {inEditMode.status ? (
@@ -133,52 +168,7 @@ function RadioOne({ question, questionNumber }) {
             );
           })}
         </div>
-        <div className="radio-buttons">
-          {inEditMode.status ? (
-            <div className="edit-button">
-              <button
-                className="clear icn1"
-                title="Save"
-                onClick={() => onSave()}
-              >
-                <GiIcons.GiSaveArrow />
-              </button>
-              <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span>
-              <button
-                className="clear icn2"
-                title="Cancel"
-                onClick={() => onCancel()}
-              >
-                <MdIcons.MdCancel />
-              </button>
-
-              <div className="edit-button">
-                <button
-                  className="clear icn4"
-                  title="Add"
-                  onClick={() => OnAddInput()}
-                >
-                  <BsIcons.BsFillPlusCircleFill />
-                </button>
-              </div>
-            </div>
-          ) : (
-            // </div>
-            <div className="edit-button">
-              {/* <button
-                className="clear icn3"
-                title="Edit"
-                onClick={() => onEditClicked()}
-              >
-                <BsIcons.BsPencilSquare />
-              </button> */}
-              <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span>
-            </div>
-          )}
+        
         </div>
       </div>
     </div>

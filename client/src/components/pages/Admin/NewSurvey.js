@@ -3,7 +3,10 @@ import { useHistory } from "react-router";
 import { Formik, Form, Field } from "formik";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
 import QuestionComponent from "./QuestionComponent";
-// import { v4 as uuidv4 } from "uuid";
+import * as RiIcons from "react-icons/ri";
+import * as FaIcons from "react-icons/fa";
+import * as MdIcons from "react-icons/md";
+import * as IoIcons from "react-icons/io";
 // import id from "date-fns/locale/id";
 
 export const QuestionContext = React.createContext({
@@ -16,7 +19,7 @@ const NewSurvey = ({ rowId }) => {
   const [surveyNumber, setSurveyNumber]=useState()
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
-  const [narrative, setNarrative] = useState("");
+  const [narrative, setNarrative] = useState("This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)");
   const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
   const [answerOptions, setAnswerOptions] = useState([])
@@ -31,8 +34,10 @@ const NewSurvey = ({ rowId }) => {
       let data = await response.json();
       console.log("data:", data);
       setQuestions(data.questions);
+      setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
+      setSurveyNumber(data.surveyNumber)
       setAnswerOptions(data.questions.answerOptions)
       setQuestionNumber(data.questions.length)
     };
@@ -40,8 +45,9 @@ const NewSurvey = ({ rowId }) => {
       getSurvey();
     }
   }, [rowId]);
-
+  
   console.log("questions: ", questions);
+  console.log("narrative: ", narrative)
   console.log("company: ", company);
   console.log("version: ", version);
   console.log("answer options: ", answerOptions)
@@ -88,8 +94,6 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
-    // const surveyNumber = uuid;
-
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -166,7 +170,7 @@ console.log('surveyToCreate',surveyToCreate)
               <Field
                 name="surveyNumber"
                 validate={validateSurveyNum}
-                id="survey-name"
+                id="survey-number"
                 className="survey-info"
                 placeholder="Survey Number (required)"
                 value={surveyNumber}
@@ -186,38 +190,39 @@ console.log('surveyToCreate',surveyToCreate)
 
       {/* LEFT PART OF PAGE */}
       <div className="survey-selection-container">
-        <div className="survey-selection-sidebar">
-          <button value="checkbox" onClick={addAQuestion}>
-            Checkbox
-          </button>
-          <button value="comment" onClick={addAQuestion}>
-            Comment
-          </button>
-          <button value="matrix1" onClick={addAQuestion}>
-            Matrix
-          </button>
-          <button value="matrix2" onClick={addAQuestion}>
-            Matrix-Num
-          </button>
-          <button value="radio" onClick={addAQuestion}>
-            RadioButton
-          </button>
-          <button value="postal" onClick={addAQuestion}>
-            PostalCode
-          </button>
-          <button value="select" onClick={addAQuestion}>
-            Select
-          </button>
-          <button value="slider" onClick={addAQuestion}>
-            Slider
-          </button>
-        </div>
+          <div className="survey-selection-sidebar">
+            <button value="checkbox" onClick={addAQuestion}>
+            <span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox
+            </button>
+            <button value="comment" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaRegCommentDots/></span>Comment
+            </button>
+            <button value="matrix1" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaListUl/></span>Matrix
+            </button>
+            <button value="matrix2" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaListOl/></span>Matrix-Num
+            </button>
+            <button value="radio" onClick={addAQuestion}>
+            <span className='icons'><RiIcons.RiRadioButtonLine/></span>RadioButton
+            </button>
+            <button value="postal" onClick={addAQuestion}>
+            <span className='icons'><MdIcons.MdLocalPostOffice/></span>PostalCode
+            </button>
+            <button value="select" onClick={addAQuestion}>
+            <span className='icons'><IoIcons.IoMdArrowDropdown/></span>Select
+            </button>
+            <button value="slider" onClick={addAQuestion}>
+            <span className='icons'><FaIcons.FaSlidersH/></span>Slider
+            </button>
+          </div>
 
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             {/* Displays the question components that have been selected */}
             <NarrativeOne
+              narrative={narrative}
               updateNarrative={(narrative) => setNarrative(narrative)}
             />
           </div>
