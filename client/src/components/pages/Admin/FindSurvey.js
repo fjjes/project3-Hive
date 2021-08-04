@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
+import * as GrIcons from "react-icons/gr";
 
 const FindSurvey = (props) => {
   const history=useHistory();
@@ -97,8 +98,15 @@ const FindSurvey = (props) => {
                     onClick={() => props.setRowId(row._id)}>
                     <ImIcons.ImCopy />
                   </Link>
+                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <button 
+                    className="icon4" 
+                    title="toMap"
+                    onClick={()=>history.push(`/data-visualization/${row._id}`)}>
+                    <GrIcons.GrMap/>
+                    </button>
                   <span className="slash" style={{ color: "#fff" }}>/</span>
-                  <button className="icon4" title="Delete"
+                  <button className="icon5" title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
                     <RiIcons.RiDeleteBinFill />
                   </button>
