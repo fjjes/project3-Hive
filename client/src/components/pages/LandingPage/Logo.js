@@ -30,6 +30,13 @@ export default function Logo({ flashcard }) {
     getSurveyQuestions();
   }, [surveyId]);
 
+  useEffect(()=>{
+    const index = localStorage.getItem('index'+ surveyId)
+    if(index){
+      setShowQuestions(true)
+    }
+  },[])
+
   return (
     <div>
       {showQuestions === false ? (
