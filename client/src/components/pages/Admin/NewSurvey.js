@@ -86,6 +86,8 @@ const NewSurvey = ({ rowId }) => {
     const newQuestions = [...questions];
     newQuestions.push({
       questionType: e.target.value,
+			question: "Hello",
+			answerOptions: [{text: "Option 1"}]
       
     });
     setQuestions(newQuestions);

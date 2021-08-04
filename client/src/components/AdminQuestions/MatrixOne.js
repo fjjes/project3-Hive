@@ -6,17 +6,23 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
+const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
+	return {text: option.text}
+})
 const MatrixOne = ({ question, questionNumber }) => {
-  const { questions, setQuestions } = useContext(QuestionContext);
+	const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixOneOption ={};
- 
+	
+	console.log("question", question)
+	console.log("questionNumber", questionNumber)
+	console.log("questions", questions)
   const [questionText, setQuestionText] = useState(
     question.question ||
       "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
   );
   const [answerOptions, setAnswerOptions] = useState(
-		question.answerOptions || [
+		copyOptions(question.answerOptions) || copyOptions( [
       { text: "Ability to concentrate" },
       { text: "Ability to conduct telephone conversations" },
       { text: "Ability to find a meeting room within a reasonable timeframe" },
@@ -34,7 +40,7 @@ const MatrixOne = ({ question, questionNumber }) => {
       // {
       //   text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
       // },
-    ]
+    ])
   );
   const [columns, setColumns] = useState([
     "Very Satisfied",
@@ -56,10 +62,12 @@ const MatrixOne = ({ question, questionNumber }) => {
     // setQuestions(previousQuestions)
 		setQuestions(questions => {
 			const updatedQuestions = [...questions]
-			updatedQuestions[questionNumber] = {
+			updatedQuestions[questionNumber - 1] = {
+				...updatedQuestions[questionNumber - 1],
 				question: questionText,
-				answerOptions: answerOptions
+				answerOptions: copyOptions(answerOptions)
 			}
+			console.log("answerOption", answerOptions)
 			return [...updatedQuestions]
 		})
     console.log("clicked save", questions);
@@ -70,7 +78,8 @@ const MatrixOne = ({ question, questionNumber }) => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
 		console.log(questions, answerOptions)
-		setAnswerOptions([...questions[questionNumber].answerOptions])
+		setQuestionText(questions[questionNumber - 1].question)
+		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
   const onDelete = (e) => {
@@ -100,7 +109,7 @@ const MatrixOne = ({ question, questionNumber }) => {
 			answer[index].text = event.target.value
 			return  answer
 		})
-		console.log(questions[questionNumber].answerOptions[index])
+		console.log(questions[questionNumber - 1].answerOptions[index])
     console.log("input changes here");
   };
 
