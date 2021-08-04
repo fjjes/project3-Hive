@@ -7,19 +7,24 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 
+const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
+	return {text: option.text}
+})
+
 const SliderTwo = ({question, questionNumber}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText]=useState(question.question || "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
-  const [answerOptions, setAnswerOptions]=useState(question.answerOptions ||
-    [
+  const [answerOptions, setAnswerOptions] = useState(
+		copyOptions(question.answerOptions) || copyOptions( [
     "Home",
     "Traveling",
     "At the office",
     "In the client's office",
     "Elsewhere",
-  ]);
-  const selectionOption = [];
+  ]));
+  
+  const selectionOption = "";
 
   const onEditClicked = () => {
     console.log("clicked edit");
@@ -28,17 +33,32 @@ const SliderTwo = ({question, questionNumber}) => {
 
   const onSave = () => {
     // setQuestions(questions);
-    console.log("save!!!");
-      const previousQuestions=questions
-      previousQuestions[questionNumber]={question:questionText,answerOptions}
-      setQuestions(previousQuestions)
-      console.log("clicked save", questions);
-    setInEditMode({ status: false });
+    // console.log("save!!!");
+    //   const previousQuestions=questions
+    //   previousQuestions[questionNumber]={question:questionText,answerOptions}
+    //   setQuestions(previousQuestions)
+    //   console.log("clicked save", questions);
+    // setInEditMode({ status: false });
+    setQuestions(questions => {
+			const updatedQuestions = [...questions]
+			updatedQuestions[questionNumber - 1] = {
+				...updatedQuestions[questionNumber - 1],
+				question: questionText,
+				answerOptions: copyOptions(answerOptions)
+			}
+			console.log("answerOption", answerOptions)
+			return [...updatedQuestions]
+		})
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    console.log(questions, answerOptions)
+		setQuestionText(questions[questionNumber - 1].question)
+		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
   const onDelete = (e) => {
@@ -47,6 +67,13 @@ const SliderTwo = ({question, questionNumber}) => {
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
   };
+
+  // const deleteOptions = (index) => {  
+	// 	console.log(index, "index", answerOptions)
+	// 	let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+	// 	setAnswerOptions(updatedAnswerOptions);
+	// 	console.log(updatedAnswerOptions)
+	// };
 
   const OnAddInput = () => {
     console.log("clicked add");
@@ -58,22 +85,28 @@ const SliderTwo = ({question, questionNumber}) => {
   };
 
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index] = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
-    // console.log("answerOptions[index]: ", answerOptions[index])
+    setAnswerOptions(answer => {
+			answer[index] = event.target.value
+			return  answer
+		})
+		console.log(questions[questionNumber - 1].answerOptions[index])
+    console.log("input changes here");
   };
 
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question: questionText,
+  //     // questionNumber,
+  //     answerOptions,
+  //   };
+  //   setQuestions(newQuestionList);
+  // }, [answerOptions]);
+
   useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    setQuestions(newQuestionList);
-  }, [answerOptions]);
+		onSave()
+	}, [])
 
   return (
     <div className="question-component admin-question-component">
@@ -138,7 +171,6 @@ const SliderTwo = ({question, questionNumber}) => {
           type="text"
           className="question-intro"
           value={questionText}
-          placeholder={questionText}
           style={{ height: "100px", width: "90%" }}
           onChange={(e) => setQuestionText(e.target.value)}
         />
@@ -152,7 +184,6 @@ const SliderTwo = ({question, questionNumber}) => {
               // NEEDS SOME STYLING...
               <input 
               defaultValue={row}
-              placeholder={row}
               onChange={(e) => onInputChange(e, index)}
               />
             ):(

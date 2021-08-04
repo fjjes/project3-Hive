@@ -7,13 +7,13 @@ import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
-	return {text: option.text}
+	return option
 })
 
 function RadioOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [radioOption, setRadioOption] = useState("");
+  const radioOption="";
   const [questionText, setQuestionText] = useState(question.question || "What is your department or team?");
   const [answerOptions, setAnswerOptions] = useState( copyOptions(question.answerOptions) || copyOptions(
     [
@@ -32,7 +32,7 @@ function RadioOne({ question, questionNumber }) {
     console.log("clicked edit");
     setInEditMode({ status: true });
   };
-console.log('questionsn in radio', questions)
+console.log('questions in radio', questions)
 
   const onSave = () => {
     console.log("save!!!");
@@ -81,7 +81,7 @@ console.log('questionsn in radio', questions)
   };
   const onInputChange = (event, index) => {
     setAnswerOptions(answer => {
-			answer[index].text = event.target.value
+			answer[index] = event.target.value
 			return  answer
   })
   console.log(questions[questionNumber - 1].answerOptions[index])
