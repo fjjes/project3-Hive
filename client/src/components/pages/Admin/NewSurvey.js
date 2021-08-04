@@ -7,12 +7,10 @@ import * as RiIcons from "react-icons/ri";
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
+import QuestionContext from './QuestionContext'
 // import id from "date-fns/locale/id";
 
-export const QuestionContext = React.createContext({
-  questions: [],
-  setQuestions: () => {},
-});
+
 
 const NewSurvey = ({ rowId }) => {
   const history = useHistory();
@@ -20,7 +18,7 @@ const NewSurvey = ({ rowId }) => {
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)");
-  const [questionNumber, setQuestionNumber] = useState(0);
+  // const [questionNumber, setQuestionNumber] = useState(0);
   const [error, setError] = useState();
   const [answerOptions, setAnswerOptions] = useState([])
 
@@ -39,7 +37,7 @@ const NewSurvey = ({ rowId }) => {
       setVersion(data.version);
       setSurveyNumber(data.surveyNumber)
       setAnswerOptions(data.questions.answerOptions)
-      setQuestionNumber(data.questions.length)
+      // setQuestionNumber(data.questions.length)
     };
     if (rowId) {
       getSurvey();
@@ -131,6 +129,7 @@ console.log('surveyToCreate',surveyToCreate)
     }
   }
 
+  console.log('questions newSurvey:', questions)
   return (
     <div>
       {/* TOP PART OF PAGE */}

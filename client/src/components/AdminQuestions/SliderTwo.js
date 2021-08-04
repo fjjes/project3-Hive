@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { QuestionContext } from "../pages/Admin/NewSurvey";
+import  QuestionContext from "../pages/Admin/QuestionContext"
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import * as BsIcons from "react-icons/bs";
