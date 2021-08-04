@@ -65,8 +65,8 @@ function CheckboxesOne({ question, questionNumber }) {
 		console.log("hey")
   };
 
-  const deleteOptions = () => { 
-    answerOptions.splice(answerOptions - 1, 1);
+  const deleteOptions = (index) => { 
+    answerOptions.splice(index, 1);
 		const deleteTheOptions = [...answerOptions];
     setAnswerOptions(deleteTheOptions);
   };
@@ -182,7 +182,7 @@ function CheckboxesOne({ question, questionNumber }) {
                       defaultValue={option}
                       onChange={(e) => onInputChange(e, index)}
                     />
-                    <button onClick={deleteOptions}>delete</button>
+                    <button onClick={() => deleteOptions(index)}>delete</button>
                   </div>
                 ) : (
                   <div>

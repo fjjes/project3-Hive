@@ -16,7 +16,7 @@ const MatrixOne = ({ question, questionNumber }) => {
       "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
   );
   const [answerOptions, setAnswerOptions] = useState(
-    question.answerOptions || [
+		question.answerOptions || [
       { text: "Ability to concentrate" },
       { text: "Ability to conduct telephone conversations" },
       { text: "Ability to find a meeting room within a reasonable timeframe" },
@@ -51,9 +51,17 @@ const MatrixOne = ({ question, questionNumber }) => {
 
   const onSave = () => {
     console.log("save!!!");
-    const previousQuestions=questions
-    previousQuestions[questionNumber]={question:questionText,answerOptions}
-    setQuestions(previousQuestions)
+    // const previousQuestions=[...questions]
+    // previousQuestions[questionNumber]={question:questionText,answerOptions:[...answerOptions]}
+    // setQuestions(previousQuestions)
+		setQuestions(questions => {
+			const updatedQuestions = [...questions]
+			updatedQuestions[questionNumber] = {
+				question: questionText,
+				answerOptions: answerOptions
+			}
+			return [...updatedQuestions]
+		})
     console.log("clicked save", questions);
   setInEditMode({ status: false });
 };
@@ -61,6 +69,8 @@ const MatrixOne = ({ question, questionNumber }) => {
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+		console.log(questions, answerOptions)
+		setAnswerOptions([...questions[questionNumber].answerOptions])
   };
 
   const onDelete = (e) => {
@@ -70,11 +80,11 @@ const MatrixOne = ({ question, questionNumber }) => {
     setQuestions(deleteQuestion);
   };
 
-	const deleteOptions = () => {  //delete starts on the bottom
-		answerOptions.splice(answerOptions - 1, 1);
-		const deleteTheOptions = [...answerOptions];
-		setAnswerOptions(deleteTheOptions);
-		setInEditMode({ status: true });
+	const deleteOptions = (index) => {  
+		console.log(index, "index", answerOptions)
+		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+		setAnswerOptions(updatedAnswerOptions);
+		console.log(updatedAnswerOptions)
 	};
 
   const OnAddInput = () => {
@@ -86,23 +96,29 @@ const MatrixOne = ({ question, questionNumber }) => {
   };
 
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index].text = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
+		setAnswerOptions(answer => {
+			answer[index].text = event.target.value
+			return  answer
+		})
+		console.log(questions[questionNumber].answerOptions[index])
     console.log("input changes here");
   };
 
-  useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    console.log("showing up?", newQuestionList);
-    setQuestions(newQuestionList);
-  }, [answerOptions]);
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question: questionText,
+  //     // questionNumber,
+  //     answerOptions,
+  //   };
+  //   console.log("showing up?", newQuestionList);
+  //   setQuestions(newQuestionList);
+  // }, [answerOptions]);
+
+	useEffect(() => {
+		onSave()
+	}, [])
 
   return (
     <div className="question-component admin-question-component matrix">
@@ -163,7 +179,6 @@ const MatrixOne = ({ question, questionNumber }) => {
         <input
           type="text"
           value={questionText}
-          questionNumber={questionNumber}
           onChange={(e) => setQuestionText(e.target.value)}
         />
       ) : (
@@ -184,44 +199,44 @@ const MatrixOne = ({ question, questionNumber }) => {
               );
             })}
           </tr>
-          {inEditMode.status
-            ? answerOptions.map((row, i) => {
-                return (
-                  <tr key={i}>
-                    <td className="label-rows">
-                      <input
-                        defaultValue={row.text}
-                        placeholder={row.text}
-                        onChange={(e) => onInputChange(e, i)}
-                      />
-                    </td>
-                    {columns.map((col, index) => {
-                      return (
+					{answerOptions.map((row, i) => {
+						return (
+							<tr key ={row.text}>
+								{inEditMode.status
+									? <>
+										<td className="label-rows">
+											<input
+												defaultValue={row.text}
+												onChange={(e) => onInputChange(e, i)}
+											/>
+										</td>
+										{columns.map((col, index) => {
+											return (
+												<td key={col}>
+													<input type="radio" name={row.text} value={col} />
+												</td>
+											);
+										})}
+									<td>
+										<button onClick={() => deleteOptions(i)}>delete</button>
+									</td>
+									</>
+									: 
+									<>
+										<td className="label-rows">
+											<label>{answerOptions[i].text}</label>
+										</td>
+										{columns.map((col, index) => {
+											return (
                         <td key={index}>
                           <input type="radio" name={row.text} value={col} />
                         </td>
-                      );
-                    })}
-										<button onClick={deleteOptions}>delete</button>
-                  </tr>
-                );
-              })
-            : answerOptions.map((row, i) => {
-                return (
-                  <tr key={i}>
-                    <td className="label-rows">
-                      <label>{answerOptions[i].text}</label>
-                    </td>
-                    {columns.map((col, index) => {
-                      return (
-                        <td key={index}>
-                          <input type="radio" name={row.text} value={col} />
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
+										)})}
+									</>
+								}
+							</tr>
+						)
+					})}
         </tbody>
       </table>
     </div>
