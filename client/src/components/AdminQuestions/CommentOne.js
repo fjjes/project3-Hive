@@ -16,9 +16,14 @@ function CommentOne({ question, questionNumber }) {
   };
   const onSave = () => {
     console.log("save!!!");
-    const previousQuestions=questions
-    previousQuestions[questionNumber - 1]={...previousQuestions[questionNumber - 1], question:questionText}
-    setQuestions(previousQuestions)
+		setQuestions(questions => {
+    const previousQuestions=[...questions]
+    previousQuestions[questionNumber - 1]={
+			...previousQuestions[questionNumber - 1], 
+			question:questionText
+		}
+		return [...previousQuestions]
+	})
     console.log("clicked save", questions);
   setInEditMode({ status: false });
 };
@@ -26,6 +31,7 @@ function CommentOne({ question, questionNumber }) {
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+		setQuestionText(questions[questionNumber - 1].question)
   };
 
   const onDelete = (e) => {
@@ -35,17 +41,21 @@ function CommentOne({ question, questionNumber }) {
     setQuestions(deleteQuestion);
   };
 
-  useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question:questionText,
-      // questionNumber,
-      answerOptions: "",
-    };
-    setQuestions(newQuestionList);
-    console.log("newQuestionlist:", questions);
-  }, []);
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question:questionText,
+  //     // questionNumber,
+  //     answerOptions: "",
+  //   };
+  //   setQuestions(newQuestionList);
+  //   console.log("newQuestionlist:", questions);
+  // }, []);
+
+	useEffect(() => {
+		onSave()
+	}, [])
 
   return (
     <div className="question-component admin-question-component">

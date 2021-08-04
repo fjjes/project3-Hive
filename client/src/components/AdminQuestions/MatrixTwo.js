@@ -6,6 +6,10 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
+const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
+	return { text: option.text }
+})
+
 const MatrixTwo = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
@@ -15,14 +19,15 @@ const MatrixTwo = ({ question, questionNumber }) => {
       "Please rate the importance of the following from 1 to 10:"
   );
   const [answerOptions, setAnswerOptions] = useState(
-    question.answerOptions || [
+		copyOptions(question.answerOptions) || copyOptions( [
       { text: "text 1" },
       { text: "text 2" },
       { text: "text 3" },
       { text: "text 4" },
       { text: "text 5" },
     ]
-  );
+  )
+	);
 
   const [columns, setColumns] = useState([
     "1",
@@ -43,16 +48,25 @@ const MatrixTwo = ({ question, questionNumber }) => {
 
   const onSave = () => {
     console.log("save!!!");
-    const previousQuestions=questions
-    previousQuestions[questionNumber]={question:questionText,answerOptions}
-    setQuestions(previousQuestions)
-    console.log("clicked save", questions);
-  setInEditMode({ status: false });
+		setQuestions(questions => {
+			const updatedQuestions = [...questions]
+			updatedQuestions[questionNumber - 1] = {
+				...updatedQuestions[questionNumber - 1],
+				question: questionText,
+				answerOptions: copyOptions(answerOptions)
+			}
+			console.log("answerOption", answerOptions)
+			return [...updatedQuestions]
+		})
+		console.log("clicked save", questions);
+		setInEditMode({ status: false });
 };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+		setQuestionText(questions[questionNumber - 1].question)
+		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
   const onDelete = (e) => {
@@ -62,11 +76,10 @@ const MatrixTwo = ({ question, questionNumber }) => {
     setQuestions(deleteQuestion);
   };
 
-	const deleteOptions = () => {  //delete starts on the bottom
-		answerOptions.splice(answerOptions - 1, 1);
-		const deleteTheOptions = [...answerOptions];
-		setAnswerOptions(deleteTheOptions);
-		setInEditMode({ status: true });
+	const deleteOptions = (index) => { 
+		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+		setAnswerOptions(updatedAnswerOptions);
+		console.log(updatedAnswerOptions)
 	};
 
   const OnAddInput = () => {
@@ -78,22 +91,32 @@ const MatrixTwo = ({ question, questionNumber }) => {
   };
 
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index].text = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
-    console.log("input changes here");
+    // const previousAnswerOptions = answerOptions;
+    // previousAnswerOptions[index].text = event.target.value;
+    // setAnswerOptions(previousAnswerOptions);
+    // console.log("input changes here");
+		setAnswerOptions(answer => {
+			answer[index].text = event.target.value
+			return answer
+		})
+		console.log(questions[questionNumber - 1].answerOptions[index])
+		console.log("input changes here");
   };
 
-  useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    setQuestions(newQuestionList);
-  }, [answerOptions]);
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question: questionText,
+  //     // questionNumber,
+  //     answerOptions,
+  //   };
+  //   setQuestions(newQuestionList);
+  // }, [answerOptions]);
+
+	useEffect(() => {
+		onSave()
+	}, [])
 
   return (
     <div className="question-component admin-question-component matrix">
@@ -154,7 +177,6 @@ const MatrixTwo = ({ question, questionNumber }) => {
         <input
           type="text"
           value={questionText}
-          questionNumber={questionNumber}
           onChange={(e) => setQuestionText(e.target.value)}
         />
       ) : (
@@ -207,7 +229,9 @@ const MatrixTwo = ({ question, questionNumber }) => {
                     </td>
                   );
                 })}
-								<button onClick={deleteOptions}>delete</button>
+							<td>
+								<button onClick={() => deleteOptions(i)}>delete</button>
+							</td>
               </tr>
             );
           })}
