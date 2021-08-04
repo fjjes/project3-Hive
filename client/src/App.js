@@ -33,7 +33,7 @@ function App() {
             <Route exact path="/edit-survey/:surveyId">
               <AdminPortalEdit/>
             </Route>
-            <Route path='/data-vis'>
+            <Route path="/data-visualization/:surveyId">
               <DataVisualization/>
             </Route>
             <Route exact path="/">
