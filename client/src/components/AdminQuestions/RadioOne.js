@@ -6,12 +6,16 @@ import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 import * as RiIcons from "react-icons/ri";
 
+const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
+	return {text: option.text}
+})
+
 function RadioOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [radioOption, setRadioOption] = useState("");
   const [questionText, setQuestionText] = useState(question.question || "What is your department or team?");
-  const [answerOptions, setAnswerOptions] = useState(question.answerOptions ||
+  const [answerOptions, setAnswerOptions] = useState( copyOptions(question.answerOptions) || copyOptions(
     [
     "Option1",
     "Option2",
@@ -21,7 +25,8 @@ function RadioOne({ question, questionNumber }) {
     // "Option6",
     // "Option7",
     // "Option8",
-  ]);
+  ])
+  );
 
   const onEditClicked = () => {
     console.log("clicked edit");
@@ -31,9 +36,16 @@ console.log('questionsn in radio', questions)
 
   const onSave = () => {
     console.log("save!!!");
-    const previousQuestions=questions
-    previousQuestions[questionNumber]={question:questionText,answerOptions}
-    setQuestions(previousQuestions)
+    setQuestions(questions => {
+			const updatedQuestions = [...questions]
+			updatedQuestions[questionNumber - 1] = {
+				...updatedQuestions[questionNumber - 1],
+				question: questionText,
+				answerOptions: copyOptions(answerOptions)
+			}
+			console.log("answerOption", answerOptions)
+			return [...updatedQuestions]
+		})
     console.log("clicked save", questions);
   setInEditMode({ status: false });
 };
@@ -41,6 +53,8 @@ console.log('questionsn in radio', questions)
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setQuestionText(questions[questionNumber - 1].question)
+		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
   const onDelete = (e) => {
@@ -51,11 +65,11 @@ console.log('questionsn in radio', questions)
     setQuestions(deleteQuestion);
   };
 
-	const deleteOptions = () => {  //delete starts on the bottom
-		answerOptions.splice(answerOptions - 1, 1);
-		const deleteTheOptions = [...answerOptions];
-		setAnswerOptions(deleteTheOptions);
-		setInEditMode({ status: true });
+	const deleteOptions = (index) => { 
+    console.log(index, "index", answerOptions)
+		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+		setAnswerOptions(updatedAnswerOptions);
+		console.log(updatedAnswerOptions)
 	};
 
 
@@ -66,21 +80,28 @@ console.log('questionsn in radio', questions)
     setInEditMode({ status: true });
   };
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index] = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
-  };
+    setAnswerOptions(answer => {
+			answer[index].text = event.target.value
+			return  answer
+  })
+  console.log(questions[questionNumber - 1].answerOptions[index])
+    console.log("input changes here");
+};
+
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question:questionText,
+  //     // questionNumber,
+  //     answerOptions,
+  //   };
+  //   setQuestions(newQuestionList);
+  // }, [answerOptions]);
 
   useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question:questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    setQuestions(newQuestionList);
-  }, [answerOptions]);
+		onSave()
+	}, [])
 
   return (
     <div className="radio-one question-component admin-question-component">
@@ -139,7 +160,6 @@ console.log('questionsn in radio', questions)
         <input
           type="text"
           value={questionText}
-          questionNumber={questionNumber}
           onChange={(e) => setQuestionText(e.target.value)}
         />
       ) : (
@@ -155,13 +175,12 @@ console.log('questionsn in radio', questions)
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={questionNumber}
                 />
                 <input
                   defaultValue={option}
                   onChange={(e) => onInputChange(e, index)}
                 />
-								<button onClick={deleteOptions}>delete</button>
+								<button onClick={() => deleteOptions(index)}>delete</button>
               </div>
             ) : (
               <div>
@@ -170,7 +189,6 @@ console.log('questionsn in radio', questions)
                   id={option}
                   name="option-group"
                   color="primary"
-                  questionNumber={questionNumber}
                   // onChange={(e) => setQuestion(e.target.value)}
                 />
                 <label>{option}</label>
