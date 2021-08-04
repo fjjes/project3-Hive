@@ -17,7 +17,7 @@ function CommentOne({ question, questionNumber }) {
   const onSave = () => {
     console.log("save!!!");
     const previousQuestions=questions
-    previousQuestions[questionNumber]={question:questionText}
+    previousQuestions[questionNumber - 1]={...previousQuestions[questionNumber - 1], question:questionText}
     setQuestions(previousQuestions)
     console.log("clicked save", questions);
   setInEditMode({ status: false });
@@ -56,7 +56,6 @@ function CommentOne({ question, questionNumber }) {
             <input
               type="text"
               value={questionText}
-              questionNumber={questionNumber}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
