@@ -9,6 +9,7 @@ export const AnswerContext = React.createContext({
 });
 
 const SurveyQuestionPage = ({ survey, questionArray }) => {
+  
   // const classes = useStyles();
   const [error, setError] = useState();
   const [answers, setAnswers] = useState({});
@@ -18,24 +19,45 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   const [index, setIndex] = useState(0);
   const [progressBarDone, setProgressBarDone] = useState(0);
   const [endSurvey, setEndSurvey] = useState(false);
-  const [plus, setPlus] = useState(0);
+  // const [plus, setPlus] = useState(0);
+
+useEffect(()=>{
+  if(survey){
+    const questionNumber = +localStorage.getItem("index"+ survey._id)
+    if(questionNumber){
+      setIndex(questionNumber)
+      // setPlus(questionNumber)
+    }
+    const savedAnswers = localStorage.getItem("answers"+ survey._id)
+    if(savedAnswers){
+      setAnswers(JSON.parse(savedAnswers))
+    }
+  }
+  
+},[survey])
+
 
   const goToNextQuestion = () => {
     // setDisabled(true);
     let counter = index + 1;
     setIndex(counter);
-    setPlus(counter);
+    // setPlus(counter);
+    localStorage.setItem("index"+ survey._id, counter)
+    localStorage.setItem("answers"+ survey._id, JSON.stringify(answers))
+
   };
 
   const goBackAQuestion = () => {
     // setDisabled(true);
     let counter = index - 1;
     setIndex(counter);
+    localStorage.setItem("index"+ survey._id, counter)
+
   };
 
   useEffect(() => {
     //let fullProgress = Math.round(((plus / Object.keys(answers).length-1) * 100))
-    let fullProgress = Math.round((plus / (questionArray.length - 1)) * 100); //should be if answer selected only!!!!
+    let fullProgress = Math.round((index / (questionArray.length - 1)) * 100); //should be if answer selected only!!!!
     setProgressBarDone(fullProgress);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answers]);
@@ -68,6 +90,8 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
         setError(undefined);
         console.log("create response is successful");
         setEndSurvey(true);
+        localStorage.removeItem('index'+ survey._id)
+        localStorage.removeItem('answers'+ survey._id)
       }
     } catch (error) {
       console.log("Fetch failed to reach the server:", error);

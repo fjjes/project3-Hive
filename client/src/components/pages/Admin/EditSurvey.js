@@ -6,19 +6,36 @@ import * as RiIcons from "react-icons/ri";
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
+import QuestionContext from './QuestionContext'
 
-export const QuestionContext = React.createContext({
-    questions: [],
-    setQuestions: () => {},
-  });
+
+  // const EditSurvey=({surveyId, survey})=>{
+  //   let questionList= survey?.questions
+  //   let company= survey?.company
+  //   let version= survey?.version
+  //   let surveyNumber= survey?.surveyNumber
+  //   let narrative= survey?.narrative
+  //   let number= survey?.questions?.length
+   
+  //     const history = useHistory();
+  //     const [newCompany, setNewCompany] = useState(company);
+  //     const [newVersion, setNewVersion] = useState(version);
+  //     const [newSurveyNumber, setNewSurveyNumber]=useState(surveyNumber)
+  //     const [newNarrative, setNewNarrative] = useState(narrative);
+  //     const [questionNumber, setQuestionNumber] = useState(number);
+  //     const [newAnswerOptions, setNewAnswerOptions]=useState([])
+  //     const [error, setError] = useState();
+  
+  //     const [questions, setQuestions] = useState(questionList);
+  //     const value = { questions, setQuestions };
 
 const EditSurvey=({surveyId})=>{
     const history = useHistory();
-    const [newCompany, setNewCompany] = useState("");
-    const [newVersion, setNewVersion] = useState("");
+    const [newCompany, setNewCompany] = useState();
+    const [newVersion, setNewVersion] = useState();
     const [newSurveyNumber, setNewSurveyNumber]=useState()
-    const [newNarrative, setNewNarrative] = useState("");
-    const [questionNumber, setQuestionNumber] = useState(0);
+    const [newNarrative, setNewNarrative] = useState();
+    // const [questionNumber, setQuestionNumber] = useState(0);
     const [newAnswerOptions, setNewAnswerOptions]=useState([])
     const [error, setError] = useState();
 
@@ -30,13 +47,14 @@ const EditSurvey=({surveyId})=>{
         const getSurvey = async () => {
             let response = await fetch(`/api/survey/${surveyId}`);
             let data = await response.json();
+            console.log('data:', data)
             setQuestions(data.questions);
             setNewNarrative(data.narrative);
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
             // setNewAnswerOptions(data.questions.map((questionBlock, i)=>({answerOptions:questionBlock.answerOptions})))
-            setQuestionNumber(data.questions.length)
+            // setQuestionNumber(data.questions.length)
         };
         getSurvey();
     }, [surveyId]);
@@ -44,12 +62,20 @@ const EditSurvey=({surveyId})=>{
 
     const addAQuestion = (e) => {
         e.preventDefault();
-        let counter = questionNumber + 1;
-        setQuestionNumber(counter);
+        // let counter = questionNumber + 1;
+        // setQuestionNumber(counter);
     
-        const newQuestions = [...questions];
-        newQuestions.push({questionType: e.target.value, questionNumber: counter});
-        setQuestions(newQuestions);
+        // const newQuestions = [...questions];
+        // newQuestions.push({questionType: e.target.value, questionNumber: counter});
+        // setQuestions(newQuestions);
+
+
+    const newQuestions = [...questions];
+    newQuestions.push({
+      questionType: e.target.value,
+      
+    });
+    setQuestions(newQuestions);
     };
 
     async function onSaveClicked() {
@@ -62,6 +88,10 @@ const EditSurvey=({surveyId})=>{
           questions:questions,
         //   LastUpdatedDate: currentDate,
         };
+
+        surveyToUpdate.questions.forEach((question,index)=>{
+          question.questionNumber= index + 1
+        })
     
         console.log("survey:", surveyToUpdate);
         try {
@@ -89,6 +119,7 @@ const EditSurvey=({surveyId})=>{
         console.log("surveyNum:", newSurveyNumber,"", "version:", newVersion)
     }
 
+    console.log('question 124;', questions)
     return(
         <div>
         {/* TOP PART OF PAGE */}
@@ -135,7 +166,7 @@ const EditSurvey=({surveyId})=>{
   
         {/* LEFT PART OF PAGE */}
         <div className="survey-selection-container">
-          <div className="survey-selection-sidebar-edit">
+          <div className="survey-selection-sidebar">
             <button value="checkbox" onClick={addAQuestion}>
             <span className='icons'><RiIcons.RiCheckboxMultipleLine/></span>Checkbox
             </button>
@@ -177,6 +208,7 @@ const EditSurvey=({surveyId})=>{
                   <QuestionComponent
                     question={questionBlock}
                     questionNumber={index + 1}
+                    
                   />
                 </div>
               ))}

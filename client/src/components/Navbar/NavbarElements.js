@@ -77,5 +77,5 @@ export const NavBtnLink = styled(Link)`
   }
 `;
 
-const active = "#f59645" // Orange
-  const inactive = "#bce6f8" // Dark blue
+// const active = "#f59645" // Orange
+//   const inactive = "#bce6f8" // Dark blue

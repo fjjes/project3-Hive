@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { QuestionContext } from "../pages/Admin/NewSurvey";
+import  QuestionContext from "../pages/Admin/QuestionContext"
 import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
