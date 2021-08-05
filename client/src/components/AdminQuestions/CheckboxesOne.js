@@ -6,10 +6,14 @@ import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import "../pages/Admin/AdminPortal.css";
 
+const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
+	return option
+})
+
 function CheckboxesOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const [checkBoxesOneOption, setCheckBoxesOneOption] = useState("");
+  const checkBoxesOneOption="";
   const [questionText, setQuestionText] = useState(
     question.question || "Select up to three options:"
     
@@ -26,8 +30,7 @@ function CheckboxesOne({ question, questionNumber }) {
   //   { checked: false, value: "Option 8" },
   // ])
 
-  const [answerOptions, setAnswerOptions] = useState(
-    question.answerOptions || [
+  const [answerOptions, setAnswerOptions] = useState( copyOptions(question.answerOptions) || copyOptions ([
       "Option 1",
       "Option 2",
       "Option 3",
@@ -36,7 +39,7 @@ function CheckboxesOne({ question, questionNumber }) {
       "Option 6",
       "Option 7",
       "Option 8",
-    ]
+    ])
   );
 
   const onEditClicked = () => {
@@ -46,29 +49,38 @@ function CheckboxesOne({ question, questionNumber }) {
 
   const onSave = () => {
     console.log("save!!!");
-      const previousQuestions=questions
-      previousQuestions[questionNumber]={question:questionText,answerOptions}
-      setQuestions(previousQuestions)
-      console.log("clicked save", questions);
-    setInEditMode({ status: false });
+    setQuestions(questions => {
+			const updatedQuestions = [...questions]
+			updatedQuestions[questionNumber - 1] = {
+				...updatedQuestions[questionNumber - 1],
+				question: questionText,
+				answerOptions: copyOptions(answerOptions)
+			}
+			console.log("answerOption", answerOptions)
+			return [...updatedQuestions]
+		})
+    console.log("clicked save", questions);
+  setInEditMode({ status: false });
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setQuestionText(questions[questionNumber - 1].question)
+		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
   const onDelete = () => {
 		questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
-		console.log("hey")
   };
 
   const deleteOptions = (index) => { 
-    answerOptions.splice(index, 1);
-		const deleteTheOptions = [...answerOptions];
-    setAnswerOptions(deleteTheOptions);
+    console.log(index, "index", answerOptions)
+		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+		setAnswerOptions(updatedAnswerOptions);
+		console.log(updatedAnswerOptions)
   };
 
   const OnAddInput = () => {
@@ -80,26 +92,32 @@ function CheckboxesOne({ question, questionNumber }) {
   };
 
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index] = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
+    setAnswerOptions(answer => {
+			answer[index] = event.target.value
+			return  answer
+  })
+  console.log(questions[questionNumber - 1].answerOptions[index])
     console.log("input changes here");
   };
 
+  // useEffect(() => {
+  //   const newQuestionList = [...questions];
+  //   console.log("newQuestionList", questions);
+  //   console.log("questionNumber", questionNumber);
+  //   newQuestionList[questionNumber - 1] = {
+  //     ...newQuestionList[questionNumber - 1],
+  //     question: questionText,
+  //     // questionNumber,
+  //     answerOptions,
+  //   };
+  //   console.log("questions line 23:", newQuestionList);
+  //   setQuestions(newQuestionList);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [answerOptions]);
+
   useEffect(() => {
-    const newQuestionList = [...questions];
-    console.log("newQuestionList", questions);
-    console.log("questionNumber", questionNumber);
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    console.log("questions line 23:", newQuestionList);
-    setQuestions(newQuestionList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerOptions]);
+		onSave()
+	}, [])
 
   return (
     <div className="question-component admin-question-component">
@@ -160,7 +178,6 @@ function CheckboxesOne({ question, questionNumber }) {
           <input
             type="text"
             value={questionText}
-            questionNumber={questionNumber}
             onChange={(e) => setQuestionText(e.target.value)}
           />
         ) : (
@@ -176,7 +193,6 @@ function CheckboxesOne({ question, questionNumber }) {
                       type="checkbox"
                       id={option}
                       name="option-group"
-                      questionNumber={questionNumber}
                     />
                     <input
                       defaultValue={option}
@@ -190,7 +206,6 @@ function CheckboxesOne({ question, questionNumber }) {
                       type="checkbox"
                       id={option}
                       name="option-group"
-                      questionNumber={questionNumber}
                     />
                     <label>{option}</label>
 

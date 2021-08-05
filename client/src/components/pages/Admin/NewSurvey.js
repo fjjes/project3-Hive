@@ -84,10 +84,38 @@ const NewSurvey = ({ rowId }) => {
     
 
     const newQuestions = [...questions];
+    let answerOptions = null 
+    switch (e.target.value) {
+      case "radio":
+        answerOptions = [
+          "Option1",
+          "Option2",
+          "Option3",
+          "Option4",
+          "Option5",
+        ] 
+        break;
+        case "checkbox":
+        answerOptions = [
+          "Option1",
+          "Option2",
+          "Option3",
+          "Option4",
+          "Option5",
+        ] 
+        break;
+        case "matrix1":
+          answerOptions = [{text: "Option 1"}]
+          break;
+          default:
+            answerOptions= ""
+            break;
+
+    }
     newQuestions.push({
       questionType: e.target.value,
 			question: "Hello",
-			answerOptions: [{text: "Option 1"}]
+			answerOptions: answerOptions
       
     });
     setQuestions(newQuestions);

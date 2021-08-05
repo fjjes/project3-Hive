@@ -57,9 +57,7 @@ console.log('questions in radio', questions)
 		setAnswerOptions(questions[questionNumber - 1].answerOptions)
   };
 
-  const onDelete = (e) => {
-    console.log("deleting", e)
-    e.preventDefault();
+  const onDelete = () => {
     questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
@@ -79,6 +77,7 @@ console.log('questions in radio', questions)
     console.log("answer", answerOptions);
     setInEditMode({ status: true });
   };
+  
   const onInputChange = (event, index) => {
     setAnswerOptions(answer => {
 			answer[index] = event.target.value
@@ -168,6 +167,7 @@ console.log('questions in radio', questions)
       <div className="questionAndButtons">
         <div className="questionText">
           {answerOptions.map((option, index) => {
+            console.log ("option", option)
             return inEditMode.status ? (
               <div key={index}>
                 <input
