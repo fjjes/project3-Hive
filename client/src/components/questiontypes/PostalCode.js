@@ -15,13 +15,11 @@ const PostalCode = ({ questionNumber, question }) => {
     updateAnswers[questionNumber] = possibleCode;
     setAnswers(updateAnswers);
     if (
-      (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(
-        possibleCode
-      ) ||
-        /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCode)) &&
-      possibleCode.trim().length > 0
-    ) {
-      // setError("");
+        (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(possibleCode) ||
+          /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCode)) &&
+        possibleCode.trim().length > 0
+      ) {
+      setError(""); //if this line is removed, even when user enters a valid postal code, it will showup as invalid
       setIsNextButtonDisabled(false);
     } else {
       setError("Postal Code is Invalid");
