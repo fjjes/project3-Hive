@@ -2,10 +2,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 const PostalCode = ({ questionNumber, question }) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [postalcode, setPostalCode] = useState("");
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const possibleCode = e.target.value;
@@ -19,11 +18,11 @@ const PostalCode = ({ questionNumber, question }) => {
           /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCode)) &&
         possibleCode.trim().length > 0
       ) {
-      setError(""); //if this line is removed, even when user enters a valid postal code, it will showup as invalid
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
     } else {
-      setError("Postal Code is Invalid");
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("validation error - postal code")
     }
   };
 
@@ -35,10 +34,12 @@ const PostalCode = ({ questionNumber, question }) => {
 
     if(!goodPostalCode) {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("validation error - postal code")
     } else if (
       goodPostalCode
     ) {
       setIsNextButtonDisabled(false)
+      setValidationErrorMessage("")
     }
   }, []);
 
@@ -77,7 +78,6 @@ const PostalCode = ({ questionNumber, question }) => {
         onChange={handleChange}
         option="Postal Code"
       />
-      <p>{error}</p>
     </div>
   );
 };

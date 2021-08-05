@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState(new Array(texts.length).fill(0));
@@ -21,9 +21,11 @@ export default function InputSlider({ questionNumber, question, texts }) {
   useEffect(() => {
     if (totalCount === 100) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("validationErrorMessage - slider");
     }
   }, [totalCount, setIsNextButtonDisabled]);
 

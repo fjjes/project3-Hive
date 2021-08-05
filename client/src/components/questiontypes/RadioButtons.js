@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 function RadioButtons({ questionNumber, question, texts }) {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [value, setValue] = useState("");
 
@@ -16,15 +16,18 @@ function RadioButtons({ questionNumber, question, texts }) {
 
   useEffect(() => {
     setIsNextButtonDisabled(true);
+    setValidationErrorMessage("validation error - radio")
   }, []);
 
   useEffect(() => {
     console.log(answers[questionNumber]);
     if (!answers[questionNumber]) {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("validation error - radio")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
     }
   }, [value]);
 

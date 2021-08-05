@@ -3,7 +3,7 @@ import { AnswerContext } from "../pages/SurveyQuestionPage";
 import "../Form.css";
 
 const MatrixNum = (props) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);
 
@@ -31,9 +31,11 @@ const MatrixNum = (props) => {
     }
     if (allHaveValues) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("validation error - matrixnum")
     }
   }, [values]);
 
