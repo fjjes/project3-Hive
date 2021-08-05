@@ -32,13 +32,6 @@ const SliderTwo = ({question, questionNumber}) => {
   };
 
   const onSave = () => {
-    // setQuestions(questions);
-    // console.log("save!!!");
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={question:questionText,answerOptions}
-    //   setQuestions(previousQuestions)
-    //   console.log("clicked save", questions);
-    // setInEditMode({ status: false });
     setQuestions(questions => {
 			const updatedQuestions = [...questions]
 			updatedQuestions[questionNumber - 1] = {

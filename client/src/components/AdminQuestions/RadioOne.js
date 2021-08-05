@@ -22,9 +22,6 @@ function RadioOne({ question, questionNumber }) {
     "Option3",
     "Option4",
     "Option5",
-    // "Option6",
-    // "Option7",
-    // "Option8",
   ])
   );
 

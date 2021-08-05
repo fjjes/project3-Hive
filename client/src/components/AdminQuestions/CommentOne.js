@@ -41,18 +41,6 @@ function CommentOne({ question, questionNumber }) {
     setQuestions(deleteQuestion);
   };
 
-  // useEffect(() => {
-  //   const newQuestionList = [...questions];
-  //   newQuestionList[questionNumber - 1] = {
-  //     ...newQuestionList[questionNumber - 1],
-  //     question:questionText,
-  //     // questionNumber,
-  //     answerOptions: "",
-  //   };
-  //   setQuestions(newQuestionList);
-  //   console.log("newQuestionlist:", questions);
-  // }, []);
-
 	useEffect(() => {
 		onSave()
 	}, [])

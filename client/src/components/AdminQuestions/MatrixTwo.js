@@ -14,19 +14,15 @@ const MatrixTwo = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixTwoOption ={};
-  const [questionText, setQuestionText] = useState(
-    question.question ||
-      "Please rate the importance of the following from 1 to 10:"
-  );
+  const [questionText, setQuestionText] = useState( question.question || "Please rate the importance of the following from 1 to 10:");
   const [answerOptions, setAnswerOptions] = useState(
-		copyOptions(question.answerOptions) || copyOptions( [
+		copyOptions(question.answerOptions) || copyOptions([
       { text: "text 1" },
       { text: "text 2" },
       { text: "text 3" },
       { text: "text 4" },
       { text: "text 5" },
-    ]
-  )
+    ])
 	);
 
   const [columns, setColumns] = useState([
@@ -185,7 +181,6 @@ const MatrixTwo = ({ question, questionNumber }) => {
       <table>
         <tbody>
           <tr>
-            {/* removing this empty <th></th> will mess up the layout of matrix labels */}
             <th></th>
             {columns.map((cl, i) => {
               return (
