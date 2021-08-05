@@ -74,7 +74,9 @@ function PostalCodeOne({ question, questionNumber }) {
           ) : (
             <p>{questionText}</p>
           )}
-          <input />
+          <input 
+            disabled
+          />
         </div>
         <div className="postalCodeone-buttons">
           {inEditMode.status ? (
