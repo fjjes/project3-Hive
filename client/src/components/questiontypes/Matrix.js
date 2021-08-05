@@ -41,7 +41,7 @@ const Matrix = (props, questionNumber) => {
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validation error - matrix")
+      setValidationErrorMessage("Please select one option from each row.")
     }
   }, [values]);
 

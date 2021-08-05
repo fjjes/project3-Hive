@@ -22,7 +22,7 @@ const PostalCode = ({ questionNumber, question }) => {
       setValidationErrorMessage("")
     } else {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validation error - postal code")
+      setValidationErrorMessage("Please enter a valid postal code.")
     }
   };
 
@@ -34,7 +34,7 @@ const PostalCode = ({ questionNumber, question }) => {
 
     if(!goodPostalCode) {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validation error - postal code")
+      setValidationErrorMessage("Please enter a valid postal code.")
     } else if (
       goodPostalCode
     ) {

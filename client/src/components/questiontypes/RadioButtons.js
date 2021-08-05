@@ -16,14 +16,14 @@ function RadioButtons({ questionNumber, question, texts }) {
 
   useEffect(() => {
     setIsNextButtonDisabled(true);
-    setValidationErrorMessage("validation error - radio")
+    setValidationErrorMessage("Please select an option.")
   }, []);
 
   useEffect(() => {
     console.log(answers[questionNumber]);
     if (!answers[questionNumber]) {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validation error - radio")
+      setValidationErrorMessage("Please select an option.")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(false);

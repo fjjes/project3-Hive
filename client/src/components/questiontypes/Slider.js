@@ -25,7 +25,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validationErrorMessage - slider");
+      setValidationErrorMessage("Please select values that total to 100.");
     }
   }, [totalCount, setIsNextButtonDisabled]);
 

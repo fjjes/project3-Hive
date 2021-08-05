@@ -35,7 +35,7 @@ const MatrixNum = (props) => {
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
-      setValidationErrorMessage("validation error - matrixnum")
+      setValidationErrorMessage("Please select one option from each row.")
     }
   }, [values]);
 
