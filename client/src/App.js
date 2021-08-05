@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminPortal from "./components/pages/Admin/AdminPortal";
 import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
-import Logo from "./components/pages/LandingPage/Logo";
+import SurveyLandingPage from "./components/pages/LandingPage/SurveyLandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
 import Map from "./components/DataVisual/Map";
@@ -21,7 +21,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/survey/:surveyId">
-            <Logo />
+            <SurveyLandingPage />
           </Route>
           <div>
             <Navbar />
