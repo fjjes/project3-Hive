@@ -5,6 +5,7 @@ import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
 import Logo from "./components/pages/LandingPage/Logo";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
+import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
 import "./App.css";
 
@@ -33,7 +34,10 @@ function App() {
             <Route exact path="/edit-survey/:surveyId">
               <AdminPortalEdit/>
             </Route>
-            <Route path="/data-visualization/:surveyId">
+            <Route path="/map/:surveyId">
+              <Map/>
+            </Route>
+            <Route path="/data-visual">
               <DataVisualization/>
             </Route>
             <Route exact path="/">
