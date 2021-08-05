@@ -169,7 +169,7 @@ console.log('questions in radio', questions)
           {answerOptions.map((option, index) => {
             console.log ("option", option)
             return inEditMode.status ? (
-              <div key={index}>
+              <div key={option}>
                 <input
                   type="radio"
                   id={option}

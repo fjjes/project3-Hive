@@ -176,7 +176,7 @@ function CheckboxesOne({ question, questionNumber }) {
             <div className="questionText">
               {answerOptions.map((option, index) => {
                 return inEditMode.status ? (
-                  <div key={index}>
+                  <div key={option}>
                     <input
                       type="checkbox"
                       id={option}

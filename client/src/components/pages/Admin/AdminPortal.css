@@ -289,12 +289,47 @@ h2 {
   float: right;
 }
 
-/* .clear-icn3 {
-  float: right;
-} */
+.slider-admin {
+  display: grid;
+  grid-template-columns: 3fr 9fr 1fr 1fr;
+  column-gap: 2em;
+  row-gap: 1em;
+  width: 100%;
+  line-height: 1em;
+  height: 40px;
+}
 
-/* .radioOne button {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-} */
+.slider-admin-edit {
+	display: grid;
+	grid-template-columns: 1fr 1fr 9fr 1fr;
+}
+
+.slider-admin-edit button {
+	margin-right: 60px;
+}
+
+.slider-admin p {
+  font-size: 1rem;
+  height: auto;
+  font-size: 1em;
+  padding: 0px;
+  margin: auto 0;
+  text-align: start;
+}
+
+.slider-admin div {
+  margin: auto;
+}
+
+.slider-admin input {
+  outline: none;
+  background-color: rgb(244, 241, 241);
+  color: rgb(126, 126, 126);
+  width: 4em;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff;
+  height: fit-content;
+  margin: auto;
+}

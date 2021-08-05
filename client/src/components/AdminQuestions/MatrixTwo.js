@@ -77,6 +77,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
   };
 
 	const deleteOptions = (index) => { 
+		console.log(index, "index", answerOptions)
 		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
 		setAnswerOptions(updatedAnswerOptions);
 		console.log(updatedAnswerOptions)
@@ -198,25 +199,27 @@ const MatrixTwo = ({ question, questionNumber }) => {
           {inEditMode.status
             ? answerOptions.map((row, i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={row.text}>
                     <td className="label-rows">
                       <input
                         defaultValue={row.text}
-                        placeholder={row.text}
                         onChange={(e) => onInputChange(e, i)}
                       />
                       </td>
                     {columns.map((col, index) => {
                       return (
-                        <td key={index}>
+                        <td key={col}>
                           <input type="radio" name={row.text} value={col} />
                         </td>
                       );
                     })}
+							<td>
+								<button onClick={() => deleteOptions(i)}>delete</button>
+							</td>
                   </tr>
                 );
               })
-          :answerOptions.map((row, i) => {
+           :answerOptions.map((row, i) => {
             return (
               <tr key={i}>
                 <td className="label-rows">
@@ -229,9 +232,6 @@ const MatrixTwo = ({ question, questionNumber }) => {
                     </td>
                   );
                 })}
-							<td>
-								<button onClick={() => deleteOptions(i)}>delete</button>
-							</td>
               </tr>
             );
           })}

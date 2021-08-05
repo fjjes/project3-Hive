@@ -6,6 +6,7 @@ import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
+import { DivMode } from "react-particles-js";
 
 const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
 	return option
@@ -68,12 +69,12 @@ const SliderTwo = ({question, questionNumber}) => {
     setQuestions(deleteQuestion);
   };
 
-  // const deleteOptions = (index) => {  
-	// 	console.log(index, "index", answerOptions)
-	// 	let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
-	// 	setAnswerOptions(updatedAnswerOptions);
-	// 	console.log(updatedAnswerOptions)
-	// };
+  const deleteOptions = (index) => {  
+		console.log(index, "index", answerOptions)
+		let updatedAnswerOptions = answerOptions.filter((answer, answerIndex) => index !== answerIndex)
+		setAnswerOptions(updatedAnswerOptions);
+		console.log(updatedAnswerOptions)
+	};
 
   const OnAddInput = () => {
     console.log("clicked add");
@@ -179,73 +180,37 @@ const SliderTwo = ({question, questionNumber}) => {
       )}
       {answerOptions.map((row, index) => {
         return (
-          <div key={index} className="slider">
+          <div key={row} className="slider-admin">
             {inEditMode.status ? (
-              // NEEDS SOME STYLING...
+							// NEEDS SOME STYLING...
+							<div className="slider-admin-edit">
+							<button style={{width: "60px"}}onClick={() => deleteOptions(index)}>delete</button>
               <input 
               defaultValue={row}
               onChange={(e) => onInputChange(e, index)}
               />
-            ):(
-              <p>{row}</p>
-            )}
-            <Slider
-              ariaLabelledbyForHandle="input-slider"
-              step={5}
-              min={0}
-              max={100}
-            />
-            <input
-              className="input"
+							</div>
+							):(
+								<p>{row}</p>
+								)}
+							<Slider
+							ariaLabelledbyForHandle="input-slider"
+							step={5}
+							min={0}
+							max={100}
+							/>
+							<input
+							className="input"
               type="number"
               step={5}
               min={0}
               max={100}
               aria-labelledby="input-slider"
-            />
+							/>
           </div>
         );
-      })}
-            {/* {inEditMode.status ? (
-        <div className="edit-button">
-          <button className="clear icn1" title="Save" onClick={() => onSave()}>
-            <GiIcons.GiSaveArrow />
-          </button>
-          <span className="slash" style={{ color: "#fff" }}>
-            /
-          </span>
-          <button
-            className="clear icn2"
-            title="Cancel"
-            onClick={() => onCancel()}
-          >
-            <MdIcons.MdCancel />
-          </button>
 
-          <div className="edit-button">
-            <button
-              className="clear icn4"
-              title="Add"
-              onClick={() => OnAddInput()}
-            >
-              <BsIcons.BsFillPlusCircleFill />
-            </button>
-          </div>
-        </div>
-      ) : (
-        // </div>
-        <div className="edit-button"> */}
-          {/* <button
-                className="clear icn3"
-                title="Edit"
-                onClick={() => onEditClicked()}
-              >
-                <BsIcons.BsPencilSquare />
-              </button> */}
-          {/* <span className="slash" style={{ color: "#fff" }}>
-            /
-          </span> */}
-        {/* </div> */}
+      })}
       
     </div>
   );

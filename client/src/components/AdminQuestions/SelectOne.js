@@ -207,7 +207,7 @@ const SelectOne = ({ question, questionNumber }) => {
       {inEditMode.status
         ? answerOptions.map((row, i) => {
             return (
-              <ul key={i}>
+              <ul key={row.text}>
                 <li style={{ listStyleType: "none", textAlign: "left" }}>
                   <input
                     id={row.text}
