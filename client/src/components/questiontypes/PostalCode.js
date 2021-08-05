@@ -27,8 +27,19 @@ const PostalCode = ({ questionNumber, question }) => {
     }
   };
 
+  // Check if the postal code is correct and disable next button accordingly, when using back/next buttons
   useEffect(() => {
-    setIsNextButtonDisabled(true);
+    const goodPostalCode = (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(answers[questionNumber]) ||
+    /^[0-9]{5}(?:-[0-9]{4})?$/.test(answers[questionNumber])) &&
+    answers[questionNumber].trim().length > 0
+
+    if(!goodPostalCode) {
+      setIsNextButtonDisabled(true);
+    } else if (
+      goodPostalCode
+    ) {
+      setIsNextButtonDisabled(false)
+    }
   }, []);
 
   useEffect(() => {

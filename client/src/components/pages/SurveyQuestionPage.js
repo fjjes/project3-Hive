@@ -111,7 +111,7 @@ useEffect(()=>{
                 {index === 0 && (
                   <button
                     className="col2 next-btn"
-                    // disabled={isNextButtonDisabled}
+                    disabled={isNextButtonDisabled}
                     onClick={goToNextQuestion}
                   >
                     Next
