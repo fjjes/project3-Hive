@@ -60,9 +60,8 @@ function CommentOne({ question, questionNumber }) {
             <p> {questionText}</p>
           )}
           <div>
-            <input
-              textarea
-              rows="10"
+            <textarea
+              disabled
               cols="50"
               label="comment"
               placeholder="Input"
