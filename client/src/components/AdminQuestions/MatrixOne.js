@@ -33,13 +33,13 @@ const MatrixOne = ({ question, questionNumber }) => {
       {
         text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
       },
-      // { text: "Ability to work in the office with remote contacts" },
-      // {
-      //   text: "Ability to easily switch between face-to-face work and work at home",
-      // },
-      // {
-      //   text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-      // },
+      { text: "Ability to work in the office with remote contacts" },
+      {
+        text: "Ability to easily switch between face-to-face work and work at home",
+      },
+      {
+        text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
+      },
     ])
   );
   const [columns, setColumns] = useState([

@@ -85,6 +85,7 @@ const NewSurvey = ({ rowId }) => {
 
     const newQuestions = [...questions];
     let answerOptions = null 
+    let question=""
     switch (e.target.value) {
       case "radio":
         answerOptions = [
@@ -94,6 +95,7 @@ const NewSurvey = ({ rowId }) => {
           "Option4",
           "Option5",
         ] 
+        question="What is your department or team?"
         break;
         case "checkbox":
         answerOptions = [
@@ -102,19 +104,70 @@ const NewSurvey = ({ rowId }) => {
           "Option3",
           "Option4",
           "Option5",
-        ] 
+        ]
+        question="Select up to three options:" 
         break;
         case "matrix1":
-          answerOptions = [{text: "Option 1"}]
+          answerOptions = [
+            { text: "Ability to concentrate" },
+            { text: "Ability to conduct telephone conversations" },
+            { text: "Ability to find a meeting room within a reasonable timeframe" },
+            { text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
+            { text: "Ability to conduct confidential conversations" },
+            { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
+            { text: "Ability to work in the office with remote contacts" },
+            { text: "Ability to easily switch between face-to-face work and work at home"},
+            { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
+          ]
+          question="Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
           break;
-          default:
-            answerOptions= ""
-            break;
+        case "matrix2":
+          answerOptions = [
+            { text: "text 1" },
+            { text: "text 2" },
+            { text: "text 3" },
+            { text: "text 4" },
+            { text: "text 5" }
+          ]
+          question="Please rate the importance of the following from 1 to 10:"
+          break;
+        case "comment":
+          answerOptions=""
+          question="Enter a comment:"
+          break;
+        case "select":
+          answerOptions=[
+            { text: "Rethinking workspaces in the company" },
+            { text: "Review the organization of meetings Rethinking moments" },
+            { text: "Spaces of conviviality" },
+            { text: "Do not change anything" },
+            { text: "Other" },
+          ]
+          question="In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:"
+          break;
+        case "postal":
+          answerOptions=""
+          question="Enter your postal code:"
+          break;
+        case "slider":
+          answerOptions=[
+            "Home",
+            "Traveling",
+            "At the office",
+            "In the client's office",
+            "Elsewhere",
+          ]
+          question="Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
+          break;
+        default:
+          answerOptions= ""
+          question=""
+          break;
 
     }
     newQuestions.push({
       questionType: e.target.value,
-			question: "Hello",
+			question: question,
 			answerOptions: answerOptions
       
     });

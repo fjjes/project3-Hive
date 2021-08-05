@@ -8,7 +8,7 @@ import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
-	return {text: option.text}
+	return option
 })
 
 const SliderTwo = ({question, questionNumber}) => {

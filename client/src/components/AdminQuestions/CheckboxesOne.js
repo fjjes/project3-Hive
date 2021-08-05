@@ -16,19 +16,7 @@ function CheckboxesOne({ question, questionNumber }) {
   const checkBoxesOneOption="";
   const [questionText, setQuestionText] = useState(
     question.question || "Select up to three options:"
-    
   );
-  console.log("help");
-  // const [answerOptions, setAnswerOptions]=useState([
-  //   { checked: false, value: "Option 1" },
-  //   { checked: false, value: "Option 2" },
-  //   { checked: false, value: "Option 3" },
-  //   { checked: false, value: "Option 4" },
-  //   { checked: false, value: "Option 5" },
-  //   { checked: false, value: "Option 6" },
-  //   { checked: false, value: "Option 7" },
-  //   { checked: false, value: "Option 8" },
-  // ])
 
   const [answerOptions, setAnswerOptions] = useState( copyOptions(question.answerOptions) || copyOptions ([
       "Option 1",
