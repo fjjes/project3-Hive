@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SurveyQuestionPage from "../SurveyQuestionPage";
-import "./Logo.css";
+import "./SurveyLandingPage.css";
 //import { Link } from "react-router-dom";
 // import image from "../../../images/website.jpg";
 

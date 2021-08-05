@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-export default function NewSlider({ getValue, setValue, title, classes }) {
+export default function SliderComponent({ getValue, setValue, title, classes }) {
   if (classes == null) {
     return null;
   }

@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 const Comment = ({ questionNumber, question }) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
+  
+  setValidationErrorMessage("")
 
   const handleChange = (e) => {
     let updateAnswers = { ...answers };

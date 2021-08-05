@@ -41,18 +41,6 @@ function CommentOne({ question, questionNumber }) {
     setQuestions(deleteQuestion);
   };
 
-  // useEffect(() => {
-  //   const newQuestionList = [...questions];
-  //   newQuestionList[questionNumber - 1] = {
-  //     ...newQuestionList[questionNumber - 1],
-  //     question:questionText,
-  //     // questionNumber,
-  //     answerOptions: "",
-  //   };
-  //   setQuestions(newQuestionList);
-  //   console.log("newQuestionlist:", questions);
-  // }, []);
-
 	useEffect(() => {
 		onSave()
 	}, [])
@@ -72,9 +60,8 @@ function CommentOne({ question, questionNumber }) {
             <p> {questionText}</p>
           )}
           <div>
-            <input
-              textarea
-              rows="10"
+            <textarea
+              disabled
               cols="50"
               label="comment"
               placeholder="Input"

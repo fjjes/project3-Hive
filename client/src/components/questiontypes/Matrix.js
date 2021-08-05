@@ -3,7 +3,7 @@ import { AnswerContext } from "../pages/SurveyQuestionPage";
 import "../Form.css";
 
 const Matrix = (props, questionNumber) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);
 
@@ -37,9 +37,11 @@ const Matrix = (props, questionNumber) => {
     }
     if (allHaveValues) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("Please select one option from each row.")
     }
   }, [values]);
 

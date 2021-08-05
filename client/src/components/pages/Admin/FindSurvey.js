@@ -102,7 +102,7 @@ const FindSurvey = (props) => {
                   <button 
                     className="icon4" 
                     title="toMap"
-                    onClick={()=>history.push(`/data-visualization/${row._id}`)}>
+                    onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
                   <span className="slash" style={{ color: "#fff" }}>/</span>

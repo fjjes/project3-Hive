@@ -3,7 +3,7 @@ import { AnswerContext } from "../pages/SurveyQuestionPage";
 import "../Form.css";
 
 const SelectInput = (props) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);
 
@@ -35,9 +35,11 @@ const SelectInput = (props) => {
     }
     if (allHaveValues) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("Please select one option from each row.")
     }
   }, [values]);
 

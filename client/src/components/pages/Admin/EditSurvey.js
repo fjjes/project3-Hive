@@ -9,34 +9,12 @@ import * as IoIcons from "react-icons/io";
 import QuestionContext from './QuestionContext'
 
 
-  // const EditSurvey=({surveyId, survey})=>{
-  //   let questionList= survey?.questions
-  //   let company= survey?.company
-  //   let version= survey?.version
-  //   let surveyNumber= survey?.surveyNumber
-  //   let narrative= survey?.narrative
-  //   let number= survey?.questions?.length
-   
-  //     const history = useHistory();
-  //     const [newCompany, setNewCompany] = useState(company);
-  //     const [newVersion, setNewVersion] = useState(version);
-  //     const [newSurveyNumber, setNewSurveyNumber]=useState(surveyNumber)
-  //     const [newNarrative, setNewNarrative] = useState(narrative);
-  //     const [questionNumber, setQuestionNumber] = useState(number);
-  //     const [newAnswerOptions, setNewAnswerOptions]=useState([])
-  //     const [error, setError] = useState();
-  
-  //     const [questions, setQuestions] = useState(questionList);
-  //     const value = { questions, setQuestions };
-
 const EditSurvey=({surveyId})=>{
     const history = useHistory();
     const [newCompany, setNewCompany] = useState();
     const [newVersion, setNewVersion] = useState();
     const [newSurveyNumber, setNewSurveyNumber]=useState()
     const [newNarrative, setNewNarrative] = useState();
-    // const [questionNumber, setQuestionNumber] = useState(0);
-    const [newAnswerOptions, setNewAnswerOptions]=useState([])
     const [error, setError] = useState();
 
     const [questions, setQuestions] = useState([]);
@@ -53,8 +31,6 @@ const EditSurvey=({surveyId})=>{
             setNewCompany(data.company);
             setNewVersion(data.version);
             setNewSurveyNumber(data.surveyNumber)
-            // setNewAnswerOptions(data.questions.map((questionBlock, i)=>({answerOptions:questionBlock.answerOptions})))
-            // setQuestionNumber(data.questions.length)
         };
         getSurvey();
     }, [surveyId]);
@@ -62,17 +38,92 @@ const EditSurvey=({surveyId})=>{
 
     const addAQuestion = (e) => {
         e.preventDefault();
-        // let counter = questionNumber + 1;
-        // setQuestionNumber(counter);
-    
-        // const newQuestions = [...questions];
-        // newQuestions.push({questionType: e.target.value, questionNumber: counter});
-        // setQuestions(newQuestions);
+        const newQuestions = [...questions];
+    let answerOptions = null 
+    let question=""
+    switch (e.target.value) {
+      case "radio":
+        answerOptions = [
+          "Option1",
+          "Option2",
+          "Option3",
+          "Option4",
+          "Option5",
+        ] 
+        question="What is your department or team?"
+        break;
+        case "checkbox":
+        answerOptions = [
+          "Option1",
+          "Option2",
+          "Option3",
+          "Option4",
+          "Option5",
+        ]
+        question="Select up to three options:" 
+        break;
+        case "matrix1":
+          answerOptions = [
+            { text: "Ability to concentrate" },
+            { text: "Ability to conduct telephone conversations" },
+            { text: "Ability to find a meeting room within a reasonable timeframe" },
+            { text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
+            { text: "Ability to conduct confidential conversations" },
+            { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
+            { text: "Ability to work in the office with remote contacts" },
+            { text: "Ability to easily switch between face-to-face work and work at home"},
+            { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
+          ]
+          question="Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
+          break;
+        case "matrix2":
+          answerOptions = [
+            { text: "text 1" },
+            { text: "text 2" },
+            { text: "text 3" },
+            { text: "text 4" },
+            { text: "text 5" }
+          ]
+          question="Please rate the importance of the following from 1 to 10:"
+          break;
+        case "comment":
+          answerOptions=""
+          question="Enter a comment:"
+          break;
+        case "select":
+          answerOptions=[
+            { text: "Rethinking workspaces in the company" },
+            { text: "Review the organization of meetings Rethinking moments" },
+            { text: "Spaces of conviviality" },
+            { text: "Do not change anything" },
+            { text: "Other" },
+          ]
+          question="In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:"
+          break;
+        case "postal":
+          answerOptions=""
+          question="Enter your postal code:"
+          break;
+        case "slider":
+          answerOptions=[
+            "Home",
+            "Traveling",
+            "At the office",
+            "In the client's office",
+            "Elsewhere",
+          ]
+          question="Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
+          break;
+        default:
+          answerOptions= ""
+          question=""
+          break;
 
-
-    const newQuestions = [...questions];
+    }
     newQuestions.push({
       questionType: e.target.value,
+			question: question,
+			answerOptions: answerOptions
       
     });
     setQuestions(newQuestions);

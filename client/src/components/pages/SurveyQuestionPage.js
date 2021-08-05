@@ -14,7 +14,8 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   const [error, setError] = useState();
   const [answers, setAnswers] = useState({});
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(false);
-  const value = { answers, setAnswers, setIsNextButtonDisabled };
+  const [validationErrorMessage, setValidationErrorMessage] = useState("")
+  const value = { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage };
 
   const [index, setIndex] = useState(0);
   const [progressBarDone, setProgressBarDone] = useState(0);
@@ -108,17 +109,22 @@ useEffect(()=>{
                 <SurveyQuestion questionBlock={questionArray[index]} />
               </AnswerContext.Provider>
               <div className="btns">
+                <div className="validation-error">
+                  <p>
+                    {validationErrorMessage}
+                  </p>
+                </div>
                 {index === 0 && (
                   <button
                     className="col2 next-btn"
-                    // disabled={isNextButtonDisabled}
+                    disabled={isNextButtonDisabled}
                     onClick={goToNextQuestion}
                   >
                     Next
                   </button>
                 )}
                 {index === questionArray.length - 1 && (
-                  <div className="row">
+                  <div className="back-next-button-row">
                     <button className="col1 back-btn" onClick={goBackAQuestion}>
                       Back
                     </button>
@@ -133,7 +139,7 @@ useEffect(()=>{
                   </div>
                 )}
                 {index !== 0 && index !== questionArray.length - 1 && (
-                  <div className="row">
+                  <div className="back-next-button-row">
                     <button className="col1 back-btn" onClick={goBackAQuestion}>
                       Back
                     </button>

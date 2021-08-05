@@ -12,7 +12,7 @@ const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
 	return option
 })
 
-const SliderTwo = ({question, questionNumber}) => {
+const SliderOne = ({question, questionNumber}) => {
   const {questions, setQuestions} = useContext(QuestionContext)
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText]=useState(question.question || "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%.")
@@ -33,13 +33,6 @@ const SliderTwo = ({question, questionNumber}) => {
   };
 
   const onSave = () => {
-    // setQuestions(questions);
-    // console.log("save!!!");
-    //   const previousQuestions=questions
-    //   previousQuestions[questionNumber]={question:questionText,answerOptions}
-    //   setQuestions(previousQuestions)
-    //   console.log("clicked save", questions);
-    // setInEditMode({ status: false });
     setQuestions(questions => {
 			const updatedQuestions = [...questions]
 			updatedQuestions[questionNumber - 1] = {
@@ -216,4 +209,4 @@ const SliderTwo = ({question, questionNumber}) => {
   );
 };
 
-export default SliderTwo;
+export default SliderOne;

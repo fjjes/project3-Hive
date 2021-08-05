@@ -7,16 +7,6 @@ import "./AdminPortal.css";
 
 const AdminPortalEdit = () => {
     const {surveyId}= useParams()
-    // const [survey, setSurvey]=useState({})
-        
-    // useEffect(() => {
-    //     const getSurvey = async () => {
-    //         let response = await fetch(`/api/survey/${surveyId}`);
-    //         let data = await response.json();
-    //         setSurvey(data)            
-    //     };
-    //     getSurvey();
-    // }, [surveyId]);
 
   return (
     <div className="admin-container">
@@ -27,10 +17,7 @@ const AdminPortalEdit = () => {
         </div>
       </div>
       <div className="admin-container-bottom">
-        <EditSurvey 
-        surveyId={surveyId} 
-        // survey={survey}
-         />
+        <EditSurvey surveyId={surveyId}/>
       </div>
     </div>
   );

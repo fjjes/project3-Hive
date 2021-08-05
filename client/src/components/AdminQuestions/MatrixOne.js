@@ -26,20 +26,12 @@ const MatrixOne = ({ question, questionNumber }) => {
       { text: "Ability to concentrate" },
       { text: "Ability to conduct telephone conversations" },
       { text: "Ability to find a meeting room within a reasonable timeframe" },
-      {
-        text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-      },
+      { text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
       { text: "Ability to conduct confidential conversations" },
-      {
-        text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-      },
+      { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
       { text: "Ability to work in the office with remote contacts" },
-      {
-        text: "Ability to easily switch between face-to-face work and work at home",
-      },
-      {
-        text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-      },
+      { text: "Ability to easily switch between face-to-face work and work at home"},
+      { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
     ])
   );
   const [columns, setColumns] = useState([
@@ -57,9 +49,6 @@ const MatrixOne = ({ question, questionNumber }) => {
 
   const onSave = () => {
     console.log("save!!!");
-    // const previousQuestions=[...questions]
-    // previousQuestions[questionNumber]={question:questionText,answerOptions:[...answerOptions]}
-    // setQuestions(previousQuestions)
 		setQuestions(questions => {
 			const updatedQuestions = [...questions]
 			updatedQuestions[questionNumber - 1] = {
@@ -99,7 +88,6 @@ const MatrixOne = ({ question, questionNumber }) => {
   const OnAddInput = () => {
     console.log("clicked add");
     setAnswerOptions([...answerOptions, matrixOneOption]);
-    // setQuestionText ([...questionText]);
     console.log("add input", answerOptions);
     setInEditMode({ status: true });
   };
@@ -197,8 +185,6 @@ const MatrixOne = ({ question, questionNumber }) => {
       <table>
         <tbody>
           <tr>
-            {/* removing this empty <th></th> will mess up the layout of matrix labels */}
-            {/* cl is the satisfied,disatisfied ,column headings */}
             <th></th>
             {columns.map((cl, i) => {
               return (
