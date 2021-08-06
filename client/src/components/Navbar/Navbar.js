@@ -1,20 +1,20 @@
-// import logo from '../../images/hivetagline2.png'
+import logo from '../../images/hivetagline2.png'
 import {Nav, NavLink, Bars, NavMenu, NavBtnLink} from './NavbarElements';
 
 const Navbar = () => {
   return (
     <div className="navbar">
       <Nav>
-        {/* <NavLink to='/'>
+        <NavLink to='/'>
           <img src={logo} alt="logo"  style={{ width:'50%', alignItems:'flex-start'}}/>
-        </NavLink> */}
+        </NavLink>
         <Bars />
         <NavMenu>
           {/* <NavLink to='/' activeStyle>Home</NavLink> */}
           <NavLink to='/create-new' activeStyle={{color:"#f59645"}}>Create New</NavLink>
           <NavLink to='/find-list' activeStyle={{color:"#f59645"}}>Find Surveys</NavLink>
           <NavLink to='/data-visual' activeStyle={{color:"#f59645"}}>Data Visualization</NavLink>
-          <NavBtnLink to='/'>Sign out</NavBtnLink>
+          <NavBtnLink to='/'>Logout</NavBtnLink>
         </NavMenu>
       </Nav>
     </div>
