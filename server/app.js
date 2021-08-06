@@ -7,7 +7,6 @@ let logger = require('morgan');
 let usersRouter = require('./routes/users');
 let answersRouter = require('./routes/answer');
 let surveyRouter = require('./routes/survey');
-// Import maps route
 
 let app = express();
 
@@ -20,7 +19,6 @@ app.use(cookieParser());
 app.use('/api/user', usersRouter);
 app.use('/api/answer', answersRouter);
 app.use('/api/survey', surveyRouter);
-// Create the maps endpoint
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
