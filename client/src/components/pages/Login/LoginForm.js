@@ -1,7 +1,9 @@
 import { useState } from "react";
+//import AuthenticationContext from "../../../auth/AuthenticationContext"
 
 const LoginForm = ({Login, error})=>{
-    const [loginDetails, setLoginDetails] = useState({email:"", password:""})
+    //const authContext = useContext(AuthenticationContext)
+    const [loginDetails, setLoginDetails] = useState({username:"", password:""})
     
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -13,13 +15,13 @@ const LoginForm = ({Login, error})=>{
            <div className="form-inner">
                <h2>Login</h2>
                <div className="form-group">
-                   <label htmlFor="email">Email:</label>
+                   <label htmlFor="username">Username:</label>
                    <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    value={loginDetails.email}
-                    onChange={(e)=>setLoginDetails({...loginDetails, email:e.target.value})}
+                    type="text" 
+                    name="username" 
+                    id="username" 
+                    value={loginDetails.username}
+                    onChange={(e)=>setLoginDetails({...loginDetails, username:e.target.value})}
                     />
                </div>
                <div className="form-group">
@@ -33,7 +35,7 @@ const LoginForm = ({Login, error})=>{
                     />
                </div>
                {error && <p>{error}</p>}
-               <input type="submit" value="Login"/>
+               <input type="submit" value="LOGIN"/>
            </div>
        </form>
     )

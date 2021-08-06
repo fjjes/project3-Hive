@@ -41,6 +41,7 @@ const PostalCode = ({ questionNumber, question }) => {
       setIsNextButtonDisabled(false)
       setValidationErrorMessage("")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

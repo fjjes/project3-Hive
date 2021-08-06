@@ -16,7 +16,6 @@ const NewSurvey = ({ rowId }) => {
   const [version, setVersion] = useState("");
   const [narrative, setNarrative] = useState("This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)");
   const [error, setError] = useState();
-  const [answerOptions, setAnswerOptions] = useState([])
 
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
@@ -32,18 +31,11 @@ const NewSurvey = ({ rowId }) => {
       setCompany(data.company);
       setVersion(data.version);
       setSurveyNumber(data.surveyNumber)
-      setAnswerOptions(data.questions.answerOptions)
     };
     if (rowId) {
       getSurvey();
     }
   }, [rowId]);
-  
-  console.log("questions: ", questions);
-  console.log("narrative: ", narrative)
-  console.log("company: ", company);
-  console.log("version: ", version);
-  console.log("answer options: ", answerOptions)
 
   function onInputChange(event, setFunction) {
     setFunction(event.target.value);
@@ -207,7 +199,6 @@ console.log('surveyToCreate',surveyToCreate)
     }
   }
 
-  console.log('questions newSurvey:', questions)
   return (
     <div>
       {/* TOP PART OF PAGE */}

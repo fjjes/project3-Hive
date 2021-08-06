@@ -6,7 +6,7 @@ import * as BsIcons from "react-icons/bs";
 import * as GiIcons from "react-icons/gi";
 import * as MdIcons from "react-icons/md";
 import * as RiIcons from "react-icons/ri";
-import { DivMode } from "react-particles-js";
+// import { DivMode } from "react-particles-js";
 
 const copyOptions = (orginalOptions) => orginalOptions.map((option) => {
 	return option
