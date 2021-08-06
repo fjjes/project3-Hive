@@ -51,7 +51,7 @@ useEffect(()=>{
 
   useEffect(() => {
     if(Object.keys(answers).length > 0 && answers.constructor === Object){
-      let fullProgress = Math.round(((index+1) / (questionArray.length)) * 100); 
+      let fullProgress = Math.round((Object.keys(answers).length / (questionArray.length)) * 100); 
       setProgressBarDone(fullProgress);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,6 +93,7 @@ useEffect(()=>{
     <div className="survey-page">
       {endSurvey === false ? (
         <div>
+          <Progress done={progressBarDone} />
           <div className="survey-card">
             <div className="the-survey">
               <AnswerContext.Provider value={value}>
@@ -145,7 +146,6 @@ useEffect(()=>{
               </div>
             </div>
           </div>
-          <Progress done={progressBarDone} />
         </div>
       ) : (
         <div className="survey-card">
