@@ -7,6 +7,8 @@ let logger = require('morgan');
 let usersRouter = require('./routes/users');
 let answersRouter = require('./routes/answer');
 let surveyRouter = require('./routes/survey');
+
+let mapsRouter = require('./routes/maps');
 // Import maps route
 
 let app = express();
@@ -21,6 +23,8 @@ app.use('/api/user', usersRouter);
 app.use('/api/answer', answersRouter);
 app.use('/api/survey', surveyRouter);
 // Create the maps endpoint
+
+app.use('/api/maps', mapsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
