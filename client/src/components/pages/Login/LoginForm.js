@@ -1,9 +1,7 @@
 import { useState } from "react";
 import './Login.css'
-//import AuthenticationContext from "../../../auth/AuthenticationContext"
 
 const LoginForm = ({Login, error})=>{
-    //const authContext = useContext(AuthenticationContext)
     const [loginDetails, setLoginDetails] = useState({username:"", password:""})
     
     const handleSubmit = (e)=>{

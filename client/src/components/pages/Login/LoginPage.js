@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom'
-import Navbar from "../../Navbar/Navbar";
+// import Navbar from "../../Navbar/Navbar";
+import NewSurvey from "../Admin/NewSurvey"
 import LoginForm from './LoginForm'
 import logo from '../../../images/hivelogo.png'
 import './Login.css'
@@ -22,7 +23,7 @@ const LoginPage = ()=>{
 
         if(details.username === AdminUser.username && details.password === AdminUser.password){
             console.log("logged in")
-            setUser({name:details.password, username: details.username}) //!!!
+            setUser({name:details.password, username: details.username}) 
             history.push('/create-new')
         }else{
             console.log("details do not match")
@@ -30,16 +31,11 @@ const LoginPage = ()=>{
         }
     }
 
-    // const Logout=()=>{
-    //     setUser({username:""})
-    // }
-
     return(
         <div className="Login-page">
             {(user.username !== "") ? (
                 <div>
-                    <Navbar user={user} />
-                    {/* <button onClick={Logout}>Logout</button> */}
+                    <NewSurvey/>
                 </div>
             ):(
                 <div className='container'>

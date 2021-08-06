@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginPage from "./components/pages/Login/LoginPage";
 import AdminPortal from "./components/pages/Admin/AdminPortal";
 import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
 import SurveyLandingPage from "./components/pages/LandingPage/SurveyLandingPage";
@@ -9,6 +10,7 @@ import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
 import "./App.css";
 
+
 function App() {
   const [rowId, setRowId] = useState();
 
@@ -17,9 +19,11 @@ function App() {
   }
 
   return (
-    <div className="App">
       <Router>
         <Switch>
+        <Route exact path="/">
+            <LoginPage />
+          </Route>
           <Route path="/survey/:surveyId">
             <SurveyLandingPage />
           </Route>
@@ -40,13 +44,9 @@ function App() {
             <Route path="/data-visual">
               <DataVisualization/>
             </Route>
-            <Route exact path="/">
-              <AdminPortal />
-            </Route>
           </div>
         </Switch>
       </Router>
-    </div>
   );
 }
 
