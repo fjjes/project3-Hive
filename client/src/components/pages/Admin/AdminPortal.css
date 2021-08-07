@@ -109,7 +109,7 @@ h2 {
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  margin: 10px auto;
+  margin: 10px auto 0px auto;
   width: 50%;
 }
 
@@ -122,6 +122,30 @@ h2 {
 }
 .search-input {
   display: inline;
+}
+
+.company-and-survey-name-inputs-and-error {
+  display: flex;
+  flex-direction: column;
+}
+
+.validation-error-survey-number {
+  width: 50%;
+  align-self: center;
+  height: 20px;
+}
+
+
+.validation-error-survey-number {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.validation-error-survey-number p {
+  color: red;
+  padding: 0;
+  font-size: 0.85rem;
+  align-self: center;
 }
 
 /* *************************** CREATE SURVEY *************************** */
