@@ -17,7 +17,12 @@ const NewSurvey = ({ rowId }) => {
     "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
   );
   const [error, setError] = useState();
-  const [validationError, setValidationError] = useState("")
+  const [validationErrorCompany, setValidationErrorCompany] = useState("")
+  const [validationErrorVersion, setValidationErrorVersion] = useState("")
+  const [validationErrorSurveyNumber, setValidationErrorSurveyNumber] = useState("")
+  const validationErrorCompanyMessage = "Company name is required."
+  const validationErrorVersionMessage = "Survey version is required."
+  const validationErrorSurveyNumberMessage = "Survey number is required."
 
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
@@ -40,17 +45,35 @@ const NewSurvey = ({ rowId }) => {
   }, [rowId]);
 
   const handleInputChange = (e) => {
-    console.log('changed')
-    setValidationError("")
     if (e.target.id === "company-name") {
       setCompany(e.target.value)
+      if (e.target.value) {
+        setValidationErrorCompany("")
+      }
+      else if (!e.target.value) {
+        setValidationErrorCompany(validationErrorCompanyMessage)
+      }
     }
     else if (e.target.id === "survey-version") {
       setVersion(e.target.value)
+      if (e.target.value) {
+        setValidationErrorVersion("")
+      }
+      else if (!e.target.value) {
+        setValidationErrorVersion(validationErrorVersionMessage)
+      }
     }
     else if (e.target.id === "survey-number") {
-      if (isNaN(e.target.value)) {
-        setValidationError("This field must be a number.")
+      if (e.target.value) {
+        if (isNaN(e.target.value)) {
+          setValidationErrorSurveyNumber("This field must be a number.")
+        }
+        else if (!isNaN(e.target.value)) {
+          setValidationErrorSurveyNumber("")
+        }
+      }
+      else if (!e.target.value) {
+        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
       }
       setSurveyNumber(e.target.value)
     }
@@ -150,8 +173,17 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
-    if (validationError || !company || !version) {
+    if (validationErrorSurveyNumber || !surveyNumber || !company || !version) {
       window.scrollTo(0,0);
+      if (!company) {
+        setValidationErrorCompany(validationErrorCompanyMessage)
+      }
+      if (!version) {
+        setValidationErrorVersion(validationErrorVersionMessage)
+      }
+      if (!surveyNumber) {
+        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
+      }
     }
 
     let currentDate = new Date();
@@ -201,37 +233,48 @@ const NewSurvey = ({ rowId }) => {
       </h2>
       <form className="company-and-survey-name-inputs-and-error">
         <div className="company-and-survey-name-inputs">
-          <input
-            name="company"
-            id="company-name"
-            className="survey-info"
-            placeholder="Company name (required)"
-            value={company}
-            required
-            onChange={(e) => handleInputChange(e)}
-          />
-          <input
-            name="version"
-            id="survey-version"
-            className="survey-info"
-            placeholder="Survey version (required)"
-            value={version}
-            required
-            onChange={(e) => handleInputChange(e)}
-          />
-          <input
-            name="surveyNumber"
-            id="survey-number"
-            className="survey-info"
-            placeholder="Survey Number (required)"
-            value={surveyNumber}
-            required
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
-        <div className="validation-error-survey-number" 
-        >
-          <p>{validationError}</p>
+          <div className="company">
+            <input
+              name="company"
+              id="company-name"
+              className="survey-info"
+              placeholder="Company name"
+              value={company}
+              required
+              onChange={(e) => handleInputChange(e)}
+            />
+            <div className="validation-error-name-version-number">
+              <p>{validationErrorCompany}</p>
+            </div>
+          </div>
+          <div className="version">
+            <input
+              name="version"
+              id="survey-version"
+              className="survey-info"
+              placeholder="Survey version"
+              value={version}
+              required
+              onChange={(e) => handleInputChange(e)}
+            />
+            <div className="validation-error-name-version-number">
+              <p>{validationErrorVersion}</p>
+            </div>
+          </div>
+          <div className="surveyNumber">
+            <input
+              name="surveyNumber"
+              id="survey-number"
+              className="survey-info"
+              placeholder="Survey number"
+              value={surveyNumber}
+              required
+              onChange={(e) => handleInputChange(e)}
+            />
+            <div className="validation-error-name-version-number">
+              <p>{validationErrorSurveyNumber}</p>
+            </div>
+          </div>
         </div>
       </form>
       
@@ -312,14 +355,6 @@ const NewSurvey = ({ rowId }) => {
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
-        {error && !(company || version || surveyNumber) && (
-          <div>
-            <p style={{ color: "red", fontSize: "1rem" }}>
-              (Make sure the company name and the survey version filled out!){" "}
-              <br />
-            </p>
-          </div>
-        )}
         <button
           type="submit"
           className="save-survey-button"

@@ -114,9 +114,9 @@ h2 {
 }
 
 .company-and-survey-name-inputs input {
-  width: 80%;
   font-size: 1rem;
 }
+
 .company-and-survey-name-inputs .col{
   margin-left: 5px;
 }
@@ -129,19 +129,15 @@ h2 {
   flex-direction: column;
 }
 
-.validation-error-survey-number {
-  width: 50%;
+.validation-error-name-version-number {
+  width: 100%;
   align-self: center;
   height: 20px;
-}
-
-
-.validation-error-survey-number {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
-.validation-error-survey-number p {
+.validation-error-name-version-number p {
   color: red;
   padding: 0;
   font-size: 0.85rem;
