@@ -150,6 +150,10 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
+    if (validationError || !company || !version) {
+      window.scrollTo(0,0);
+    }
+
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
