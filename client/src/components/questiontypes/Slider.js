@@ -16,7 +16,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
   const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
-  const [values, setValues] = useState(new Array(texts.length).fill(0));
+  const [values, setValues] = useState(answers[questionNumber] || new Array(texts.length).fill(0));
 
   useEffect(() => {
     if (totalCount === 100) {
