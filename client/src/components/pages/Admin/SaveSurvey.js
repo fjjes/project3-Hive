@@ -8,7 +8,7 @@ import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 
-const NewSurvey = ({ rowId, copyOrOriginal }) => {
+const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const history = useHistory();
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
@@ -388,4 +388,4 @@ const NewSurvey = ({ rowId, copyOrOriginal }) => {
   );
 };
 
-export default NewSurvey;
+export default SaveSurvey;
