@@ -20,13 +20,10 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [validationErrorCompany, setValidationErrorCompany] = useState("")
   const [validationErrorVersion, setValidationErrorVersion] = useState("")
   const [validationErrorSurveyNumber, setValidationErrorSurveyNumber] = useState("")
-  const validationErrorCompanyMessage = "Company name is required."
-  const validationErrorVersionMessage = "Survey version is required."
-  const validationErrorSurveyNumberMessage = "Survey number is required."
-
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
 
+  // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
   useEffect(() => {
     const getSurvey = async () => {
       let response = await fetch(`/api/survey/${rowId}`);
@@ -44,6 +41,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     }
   }, [rowId]);
 
+  // Check that the company/version/survey number fields are all filled out appropriately and set error messages as needed:
   const handleInputChange = (e) => {
     if (e.target.id === "company-name") {
       setCompany(e.target.value)
@@ -51,7 +49,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         setValidationErrorCompany("")
       }
       else if (!e.target.value) {
-        setValidationErrorCompany(validationErrorCompanyMessage)
+        setValidationErrorCompany("Company name is required.")
       }
     }
     else if (e.target.id === "survey-version") {
@@ -60,7 +58,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         setValidationErrorVersion("")
       }
       else if (!e.target.value) {
-        setValidationErrorVersion(validationErrorVersionMessage)
+        setValidationErrorVersion("Survey version is required.")
       }
     }
     else if (e.target.id === "survey-number") {
@@ -73,15 +71,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         }
       }
       else if (!e.target.value) {
-        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
+        setValidationErrorSurveyNumber("Survey number is required.")
       }
       setSurveyNumber(e.target.value)
     }
   }
 
+  // Default answer options and questions to be pulled into each question component that's added to a new survey:
   const addAQuestion = (e) => {
     e.preventDefault();
-
     const newQuestions = [...questions];
     let answerOptions = null;
     let question = "";
@@ -163,19 +161,21 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   };
 
   async function handleSubmit() {
+    // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear.
     if (validationErrorSurveyNumber || !surveyNumber || !company || !version) {
       window.scrollTo(0,0);
       if (!company) {
-        setValidationErrorCompany(validationErrorCompanyMessage)
+        setValidationErrorCompany("Company name is required.")
       }
       if (!version) {
-        setValidationErrorVersion(validationErrorVersionMessage)
+        setValidationErrorVersion("Survey version is required.")
       }
       if (!surveyNumber) {
-        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
+        setValidationErrorSurveyNumber("Survey number is required.")
       }
     }
 
+    // If no errors, the survey is created:
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -191,9 +191,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     console.log("surveyToCreate", surveyToCreate);
     console.log("survey:", surveyToCreate);
 
-    // Post a survey to the DB (EDITED ORIGINAL)
+    // Post a survey to the DB (EDITED ORIGINAL SURVEY - saves over original version)
     if (copyOrOriginal === "original") {
-      console.log("copyOrOriginal: ", copyOrOriginal)
       try {
         let editResponse = await fetch(`/api/survey/${rowId}`, {
           method: "PUT",
@@ -217,10 +216,26 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       console.log("surveyNum:", surveyNumber,"", "version:", version)
     }
 
-    // Post a survey to the DB (NEW OR COPY)
+    // Post a survey to the DB (NEW OR COPY - does not save over the original version)
     else {
-      console.log("copyOrOriginal: ", copyOrOriginal)
+      // Check if the surveyNumber or version is already used (currently surveyNumber needs to be unique but version doesn't - check with client and update?).
+      const findSurvey = async () => {
+        let response = await fetch(`/api/survey/${rowId}`);
+        let searchData = await response.json();
+        console.log("searchData.surveyNumber: ", searchData.surveyNumber);
+        if (searchData.surveyNumber === surveyNumber) {
+          setValidationErrorSurveyNumber("Sorry, this number is already used.")
+          window.scrollTo(0,0);
+        }
+        if (searchData.version === version) {
+          setValidationErrorVersion("Sorry, this version is already used.")
+          window.scrollTo(0,0);
+        }
+      }
 
+      findSurvey()
+
+      // If the survey number isn't already taken, post the survey to the DB:
       try {
         let createSurvey = await fetch("/api/survey", {
           method: "POST",
@@ -355,7 +370,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
-            {/* Displays the question components that have been selected */}
+            {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
               updateNarrative={(narrative) => setNarrative(narrative)}
@@ -381,7 +396,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
           className="save-survey-button"
           onClick={handleSubmit}
         >
-          Save Survey{" "}
+          Save Survey
         </button>
       </div>
     </div>
