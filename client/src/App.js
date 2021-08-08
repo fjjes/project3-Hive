@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
 import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
+import SurveyAnswersPage from "./components/pages/Admin/SurveyAnswersPage";
 import "./App.css";
 
 
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/data-visual">
               <DataVisualization/>
+            </Route>
+            <Route path="/survey-answers">
+              <SurveyAnswersPage/>
             </Route>
           </div>
         </Switch>
