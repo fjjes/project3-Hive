@@ -41,6 +41,7 @@ const SelectInput = (props) => {
       setIsNextButtonDisabled(true);
       setValidationErrorMessage("Please select one option from each row.")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
   useEffect(() => {

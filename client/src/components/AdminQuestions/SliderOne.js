@@ -100,6 +100,7 @@ const SliderOne = ({question, questionNumber}) => {
 
   useEffect(() => {
 		onSave()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
   return (

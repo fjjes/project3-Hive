@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import logo from "../../../images/hiveicon.png";
 import EditSurvey from "./EditSurvey";
