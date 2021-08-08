@@ -8,7 +8,7 @@ import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 
-const NewSurvey = ({ rowId }) => {
+const NewSurvey = ({ rowId, copyOrOriginal }) => {
   const history = useHistory();
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
@@ -98,23 +98,13 @@ const NewSurvey = ({ rowId }) => {
         answerOptions = [
           { text: "Ability to concentrate" },
           { text: "Ability to conduct telephone conversations" },
-          {
-            text: "Ability to find a meeting room within a reasonable timeframe",
-          },
-          {
-            text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-          },
+          { text: "Ability to find a meeting room within a reasonable timeframe" },
+          { text: "Ability to access collaborative spaces for informal exchanges with my colleagues" },
           { text: "Ability to conduct confidential conversations" },
-          {
-            text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-          },
+          { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)" },
           { text: "Ability to work in the office with remote contacts" },
-          {
-            text: "Ability to easily switch between face-to-face work and work at home",
-          },
-          {
-            text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-          },
+          { text: "Ability to easily switch between face-to-face work and work at home" },
+          { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)" },
         ];
         question =
           "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
@@ -200,26 +190,57 @@ const NewSurvey = ({ rowId }) => {
     });
     console.log("surveyToCreate", surveyToCreate);
     console.log("survey:", surveyToCreate);
-    // Post the custom survey data to the DB
-    try {
-      let createSurvey = await fetch("/api/survey", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(surveyToCreate),
-      });
-      console.log("Creating a custom-built survey, yay!", surveyToCreate);
 
-      if (createSurvey.status !== 200) {
-        let errorMessage = await createSurvey.text();
-        console.log("We have an error: ", errorMessage);
-        setError(errorMessage);
-      } else {
-        setError(undefined);
-        console.log("create response is successful");
-        history.push("/find-list");
+    // Post a survey to the DB (EDITED ORIGINAL)
+    if (copyOrOriginal === "original") {
+      console.log("copyOrOriginal: ", copyOrOriginal)
+      try {
+        let editResponse = await fetch(`/api/survey/${rowId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(surveyToCreate),
+        });
+        console.log("surveyToUpdate:", surveyToCreate);
+  
+        if (editResponse.status !== 200) {
+          let errorMessage = await editResponse.text();
+          console.log("We have an error: ", errorMessage);
+          setError(errorMessage);
+        }else{
+          setError(undefined);
+          console.log("edit response is successful");
+          history.push("/find-list");
+        }
+      } catch (error) {
+        console.log("Fetch failed to reach the server:", error);
       }
-    } catch (error) {
-      console.log("Fetch failed to reach the server:", error);
+      console.log("surveyNum:", surveyNumber,"", "version:", version)
+    }
+
+    // Post a survey to the DB (NEW OR COPY)
+    else {
+      console.log("copyOrOriginal: ", copyOrOriginal)
+
+      try {
+        let createSurvey = await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(surveyToCreate),
+        });
+        console.log("Creating a custom-built survey, yay!", surveyToCreate);
+  
+        if (createSurvey.status !== 200) {
+          let errorMessage = await createSurvey.text();
+          console.log("We have an error: ", errorMessage);
+          setError(errorMessage);
+        } else {
+          setError(undefined);
+          console.log("create response is successful");
+          history.push("/find-list");
+        }
+      } catch (error) {
+        console.log("Fetch failed to reach the server:", error);
+      }
     }
   }
 
