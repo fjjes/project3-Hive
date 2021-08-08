@@ -110,19 +110,39 @@ h2 {
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  margin: 10px auto;
+  margin: 10px auto 0px auto;
   width: 50%;
 }
 
 .company-and-survey-name-inputs input {
-  width: 80%;
   font-size: 1rem;
 }
+
 .company-and-survey-name-inputs .col{
   margin-left: 5px;
 }
 .search-input {
   display: inline;
+}
+
+.company-and-survey-name-inputs-and-error {
+  display: flex;
+  flex-direction: column;
+}
+
+.validation-error-name-version-number {
+  width: 100%;
+  align-self: center;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.validation-error-name-version-number p {
+  color: red;
+  padding: 0;
+  font-size: 0.85rem;
+  align-self: center;
 }
 
 /* *************************** CREATE SURVEY *************************** */
