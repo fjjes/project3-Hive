@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/pages/Login/LoginPage";
 import AdminPortal from "./components/pages/Admin/AdminPortal";
-import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
+// import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
 import SurveyLandingPage from "./components/pages/LandingPage/SurveyLandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
@@ -14,9 +14,14 @@ import "./App.css";
 
 function App() {
   const [rowId, setRowId] = useState();
+  const [copyOrOriginal, setCopyOrOriginal] = useState();
 
   const resetRowId = () => {
     setRowId()
+  }
+
+  const resetCopyOrOriginal = () => {
+    setCopyOrOriginal()
   }
 
   return (
@@ -31,14 +36,14 @@ function App() {
           <div>
             <Navbar />
             <Route exact path="/create-new">
-              <AdminPortal rowId={rowId} />
+              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
             </Route>
             <Route path="/find-list">
-              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} />
+              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
             </Route>
-            <Route exact path="/edit-survey/:surveyId">
+            {/* <Route exact path="/edit-survey/:surveyId">
               <AdminPortalEdit/>
-            </Route>
+            </Route> */}
             <Route path="/map/:surveyId">
               <Map/>
             </Route>

@@ -1,9 +1,9 @@
 import logo from "../../../images/hiveicon.png";
-import NewSurvey from "./NewSurvey";
+import SaveSurvey from "./SaveSurvey";
 import "../../../components/Form.css";
 import "./AdminPortal.css";
 
-const AdminPortal = ({rowId}) => {
+const AdminPortal = ({rowId, copyOrOriginal}) => {
   return (
     <div className="admin-container">
       <div className="admin-container-top">
@@ -13,7 +13,7 @@ const AdminPortal = ({rowId}) => {
         </div>
       </div>
       <div className="admin-container-bottom">
-        <NewSurvey rowId={rowId} />
+        <SaveSurvey rowId={rowId} copyOrOriginal={copyOrOriginal} />
       </div>
     </div>
   );

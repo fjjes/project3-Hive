@@ -8,7 +8,7 @@ import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 
-const NewSurvey = ({ rowId }) => {
+const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const history = useHistory();
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
@@ -20,13 +20,10 @@ const NewSurvey = ({ rowId }) => {
   const [validationErrorCompany, setValidationErrorCompany] = useState("")
   const [validationErrorVersion, setValidationErrorVersion] = useState("")
   const [validationErrorSurveyNumber, setValidationErrorSurveyNumber] = useState("")
-  const validationErrorCompanyMessage = "Company name is required."
-  const validationErrorVersionMessage = "Survey version is required."
-  const validationErrorSurveyNumberMessage = "Survey number is required."
-
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
 
+  // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
   useEffect(() => {
     const getSurvey = async () => {
       let response = await fetch(`/api/survey/${rowId}`);
@@ -44,6 +41,7 @@ const NewSurvey = ({ rowId }) => {
     }
   }, [rowId]);
 
+  // Check that the company/version/survey number fields are all filled out appropriately and set error messages as needed:
   const handleInputChange = (e) => {
     if (e.target.id === "company-name") {
       setCompany(e.target.value)
@@ -51,7 +49,7 @@ const NewSurvey = ({ rowId }) => {
         setValidationErrorCompany("")
       }
       else if (!e.target.value) {
-        setValidationErrorCompany(validationErrorCompanyMessage)
+        setValidationErrorCompany("Company name is required.")
       }
     }
     else if (e.target.id === "survey-version") {
@@ -60,7 +58,7 @@ const NewSurvey = ({ rowId }) => {
         setValidationErrorVersion("")
       }
       else if (!e.target.value) {
-        setValidationErrorVersion(validationErrorVersionMessage)
+        setValidationErrorVersion("Survey version is required.")
       }
     }
     else if (e.target.id === "survey-number") {
@@ -73,15 +71,15 @@ const NewSurvey = ({ rowId }) => {
         }
       }
       else if (!e.target.value) {
-        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
+        setValidationErrorSurveyNumber("Survey number is required.")
       }
       setSurveyNumber(e.target.value)
     }
   }
 
+  // Default answer options and questions to be pulled into each question component that's added to a new survey:
   const addAQuestion = (e) => {
     e.preventDefault();
-
     const newQuestions = [...questions];
     let answerOptions = null;
     let question = "";
@@ -98,23 +96,13 @@ const NewSurvey = ({ rowId }) => {
         answerOptions = [
           { text: "Ability to concentrate" },
           { text: "Ability to conduct telephone conversations" },
-          {
-            text: "Ability to find a meeting room within a reasonable timeframe",
-          },
-          {
-            text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-          },
+          { text: "Ability to find a meeting room within a reasonable timeframe" },
+          { text: "Ability to access collaborative spaces for informal exchanges with my colleagues" },
           { text: "Ability to conduct confidential conversations" },
-          {
-            text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-          },
+          { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)" },
           { text: "Ability to work in the office with remote contacts" },
-          {
-            text: "Ability to easily switch between face-to-face work and work at home",
-          },
-          {
-            text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-          },
+          { text: "Ability to easily switch between face-to-face work and work at home" },
+          { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)" },
         ];
         question =
           "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
@@ -173,19 +161,21 @@ const NewSurvey = ({ rowId }) => {
   };
 
   async function handleSubmit() {
+    // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear.
     if (validationErrorSurveyNumber || !surveyNumber || !company || !version) {
       window.scrollTo(0,0);
       if (!company) {
-        setValidationErrorCompany(validationErrorCompanyMessage)
+        setValidationErrorCompany("Company name is required.")
       }
       if (!version) {
-        setValidationErrorVersion(validationErrorVersionMessage)
+        setValidationErrorVersion("Survey version is required.")
       }
       if (!surveyNumber) {
-        setValidationErrorSurveyNumber(validationErrorSurveyNumberMessage)
+        setValidationErrorSurveyNumber("Survey number is required.")
       }
     }
 
+    // If no errors, the survey is created:
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -200,26 +190,72 @@ const NewSurvey = ({ rowId }) => {
     });
     console.log("surveyToCreate", surveyToCreate);
     console.log("survey:", surveyToCreate);
-    // Post the custom survey data to the DB
-    try {
-      let createSurvey = await fetch("/api/survey", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(surveyToCreate),
-      });
-      console.log("Creating a custom-built survey, yay!", surveyToCreate);
 
-      if (createSurvey.status !== 200) {
-        let errorMessage = await createSurvey.text();
-        console.log("We have an error: ", errorMessage);
-        setError(errorMessage);
-      } else {
-        setError(undefined);
-        console.log("create response is successful");
-        history.push("/find-list");
+    // Post a survey to the DB (EDITED ORIGINAL SURVEY - saves over original version)
+    if (copyOrOriginal === "original") {
+      try {
+        let editResponse = await fetch(`/api/survey/${rowId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(surveyToCreate),
+        });
+        console.log("surveyToUpdate:", surveyToCreate);
+  
+        if (editResponse.status !== 200) {
+          let errorMessage = await editResponse.text();
+          console.log("We have an error: ", errorMessage);
+          setError(errorMessage);
+        }else{
+          setError(undefined);
+          console.log("edit response is successful");
+          history.push("/find-list");
+        }
+      } catch (error) {
+        console.log("Fetch failed to reach the server:", error);
       }
-    } catch (error) {
-      console.log("Fetch failed to reach the server:", error);
+      console.log("surveyNum:", surveyNumber,"", "version:", version)
+    }
+
+    // Post a survey to the DB (NEW OR COPY - does not save over the original version)
+    else {
+      // Check if the surveyNumber or version is already used (currently surveyNumber needs to be unique but version doesn't - check with client and update?).
+      const findSurvey = async () => {
+        let response = await fetch(`/api/survey/${rowId}`);
+        let searchData = await response.json();
+        console.log("searchData.surveyNumber: ", searchData.surveyNumber);
+        if (searchData.surveyNumber === surveyNumber) {
+          setValidationErrorSurveyNumber("Sorry, this number is already used.")
+          window.scrollTo(0,0);
+        }
+        if (searchData.version === version) {
+          setValidationErrorVersion("Sorry, this version is already used.")
+          window.scrollTo(0,0);
+        }
+      }
+
+      findSurvey()
+
+      // If the survey number isn't already taken, post the survey to the DB:
+      try {
+        let createSurvey = await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(surveyToCreate),
+        });
+        console.log("Creating a custom-built survey, yay!", surveyToCreate);
+  
+        if (createSurvey.status !== 200) {
+          let errorMessage = await createSurvey.text();
+          console.log("We have an error: ", errorMessage);
+          setError(errorMessage);
+        } else {
+          setError(undefined);
+          console.log("create response is successful");
+          history.push("/find-list");
+        }
+      } catch (error) {
+        console.log("Fetch failed to reach the server:", error);
+      }
     }
   }
 
@@ -334,7 +370,7 @@ const NewSurvey = ({ rowId }) => {
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
-            {/* Displays the question components that have been selected */}
+            {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
               updateNarrative={(narrative) => setNarrative(narrative)}
@@ -360,11 +396,11 @@ const NewSurvey = ({ rowId }) => {
           className="save-survey-button"
           onClick={handleSubmit}
         >
-          Save Survey{" "}
+          Save Survey
         </button>
       </div>
     </div>
   );
 };
 
-export default NewSurvey;
+export default SaveSurvey;

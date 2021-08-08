@@ -12,6 +12,7 @@ const FindSurvey = (props) => {
   const [searchInputNumber, setSearchInputNumber] = useState("");
 
   props.resetRowId();
+  props.resetCopyOrOriginal();
 
   function onSearchInputChange(event, setFunction) {
     console.log(
@@ -83,19 +84,28 @@ const FindSurvey = (props) => {
                   <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
                 </td>
                 <td>
-                  <button 
+                  <Link 
+                    to="/create-new"
                     className="icon3" 
                     title="Edit" 
-                    onClick={()=>history.push(`/edit-survey/${row._id}`)}>
+                    style={{ color: "black" }}
+                    // onClick={()=>history.push(`/create-new/${row._id}`)}>
+                    onClick={() => {
+                        props.setCopyOrOriginal("original");
+                        props.setRowId(row._id);
+                    }}>
                     <BsIcons.BsPencilSquare />
-                  </button>
+                  </Link>
                   <span className="slash" style={{ color: "#fff" }}>/</span> 
                   <Link
                     to="/create-new"
                     className="icon5"
                     title="Copy"
                     style={{ color: "black" }}
-                    onClick={() => props.setRowId(row._id)}>
+                    onClick={() => {
+                      props.setCopyOrOriginal("copy");
+                      props.setRowId(row._id)
+                    }}>
                     <ImIcons.ImCopy />
                   </Link>
                   <span className="slash" style={{ color: "#fff" }}>/</span> 

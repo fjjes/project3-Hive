@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom'
 // import Navbar from "../../Navbar/Navbar";
-import NewSurvey from "../Admin/NewSurvey"
+import SaveSurvey from "../Admin/SaveSurvey"
 import LoginForm from './LoginForm'
 import logo from '../../../images/hivelogo.png'
 import './Login.css'
@@ -35,7 +35,7 @@ const LoginPage = ()=>{
         <div className="Login-page">
             {(user.username !== "") ? (
                 <div>
-                    <NewSurvey/>
+                    <SaveSurvey/>
                 </div>
             ):(
                 <div className='container'>
