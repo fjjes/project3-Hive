@@ -27,6 +27,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
       setIsNextButtonDisabled(true);
       setValidationErrorMessage("Please select values that total to 100.");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalCount, setIsNextButtonDisabled]);
 
   useEffect(() => {

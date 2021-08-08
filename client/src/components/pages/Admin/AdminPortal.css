@@ -4,7 +4,8 @@
 
 .admin-container,
 .navbar,
-.list-table {
+.list-table,
+.data-collected {
   font-family: "Sora", sans-serif;
   box-sizing: border-box;
   margin: 0;

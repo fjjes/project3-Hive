@@ -17,6 +17,7 @@ function RadioButtons({ questionNumber, question, texts }) {
   useEffect(() => {
     setIsNextButtonDisabled(true);
     setValidationErrorMessage("Please select an option.")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function RadioButtons({ questionNumber, question, texts }) {
       setIsNextButtonDisabled(false);
       setValidationErrorMessage("")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   useEffect(() => {

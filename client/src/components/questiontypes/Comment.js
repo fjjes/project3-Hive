@@ -15,6 +15,7 @@ const Comment = ({ questionNumber, question }) => {
 
   useEffect(() => {
     setIsNextButtonDisabled(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

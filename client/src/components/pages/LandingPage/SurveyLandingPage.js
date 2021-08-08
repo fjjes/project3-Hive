@@ -35,6 +35,7 @@ export default function Logo({ flashcard }) {
     if(index){
       setShowQuestions(true)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
