@@ -28,10 +28,14 @@ const SurveyAnswersPage =()=>{
 
     let arr = [];
     let questionNum = 1;
+    let typeArr=[]
     for (let i = 0; i < newDataList[0]?.survey.questions.length; i++) {
       arr.push(questionNum++);
+      typeArr.push(newDataList[0]?.survey.questions[i].questionType)
     }
     console.log("arr",arr)
+    console.log("typeArr",typeArr)
+
 //    console.log('answersList:', answersList)
 //     const answerLength= Object.keys(answersList).length
 
@@ -84,8 +88,18 @@ const SurveyAnswersPage =()=>{
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{moment(row.answeredDate).format("MM/DD/yyyy")}</td>
-                                <td></td>
                                 {/* {arr.map((num,i)=> <td key={i}>{()=>displayAnswer(num)}</td>)}  */}
+                               
+                                {/* {Object.entries(row.answers).forEach(ans=>{
+                                    console.log('ans:', ans)
+                                })} */}
+
+                                {Object.values(row.answers).map((ans, i)=>{
+                                    return(
+                                        <td>{console.log(ans)}</td>
+                                    )
+                                })}
+                                
                             </tr>
                             )
                         })}
