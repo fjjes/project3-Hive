@@ -345,19 +345,19 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
             <span className="icons">
               <FaIcons.FaListOl />
             </span>
-            Matrix-Num
+            Matrix - Number
           </button>
           <button value="radio" onClick={addAQuestion}>
             <span className="icons">
               <RiIcons.RiRadioButtonLine />
             </span>
-            RadioButton
+            Radio Buttons
           </button>
           <button value="postal" onClick={addAQuestion}>
             <span className="icons">
               <MdIcons.MdLocalPostOffice />
             </span>
-            PostalCode
+            Postal Code
           </button>
           <button value="select" onClick={addAQuestion}>
             <span className="icons">
