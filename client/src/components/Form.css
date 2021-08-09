@@ -155,6 +155,12 @@ h1 {
 	width: 800px;
 }
 
+.matrix.question-component.admin-question-component {
+	display: grid;
+  height: auto;
+  width: auto;
+}
+
 .postal-code-question-component {
 	display: flex;
 	flex-direction: column;
