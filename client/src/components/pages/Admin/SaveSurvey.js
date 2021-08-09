@@ -160,6 +160,12 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     setQuestions(newQuestions);
   };
 
+  // Automatically go to the bottom of the survey as new questions are added
+  useEffect(() => {
+    window.scrollTo(0,document.body.scrollHeight);
+
+  }, [questions])
+
   async function handleSubmit() {
     // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear.
     if (validationErrorSurveyNumber || !surveyNumber || !company || !version) {
