@@ -101,12 +101,6 @@ h2 {
   padding: 20px 0;
 }
 
-.note-to-self {
-  color: red;
-  font-size: 0.9rem;
-  padding: 0;
-}
-
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
@@ -186,6 +180,7 @@ h2 {
   background-color: white;
   padding: 5px;
   margin: 15px;
+  display: flex;
 }
 
 .updated-copy-of-survey .admin-question-component {
@@ -284,30 +279,52 @@ h2 {
   :hover:after {
   content: attr(title);
 }
+
+.question-and-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.question-and-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-border-line {
+  border-right: 0.5px #197e9c solid;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.delete-option-button {
+  width: 65px !important;
+}
+
 /* .questionText is for the edit and save button when you are in the edit mode */
 .questionText {
   display: flex;
   flex-direction: column;
 }
 
+.edit-buttons-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-button {
+  display: flex;
+  flex-direction: column;
+}
+
 .edit-button button {
-  width: 40px;
   cursor: pointer;
-  background-color: #197e9c;
- 
-}
-
-.questionAndButtons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.edit-button2 {
-  display: flex;
-  /* flex-direction: column; */
-  margin: -20px 0px 0px 30px;
-  float: right;
+  background-color: white;
+  color: #197e9c;
+  padding: 0px 0px;
+  margin: 0px 10px;
+  text-align: left;
+  width: 105px;
 }
 
 .slider-admin {

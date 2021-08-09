@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import  QuestionContext from "../pages/Admin/QuestionContext"
-import * as BsIcons from "react-icons/bs";
-import * as GiIcons from "react-icons/gi";
-import * as MdIcons from "react-icons/md";
+import QuestionContext from "../pages/Admin/QuestionContext";
 import "../pages/Admin/AdminPortal.css";
-import * as RiIcons from "react-icons/ri";
+import {
+  EditButton,
+  DeleteButton,
+  SaveButton,
+  CancelButton,
+} from "./AdminEditButtons";
 
 function PostalCodeOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
@@ -20,14 +22,14 @@ function PostalCodeOne({ question, questionNumber }) {
 
   const onSave = () => {
     console.log("save!!!");
-		setQuestions(questions => {
-    const previousQuestions=[...questions]
-    previousQuestions[questionNumber - 1]={
-			...previousQuestions[questionNumber - 1], 
-			question:questionText
-		}
-		return [...previousQuestions]
-	  })
+    setQuestions((questions) => {
+      const previousQuestions = [...questions];
+      previousQuestions[questionNumber - 1] = {
+        ...previousQuestions[questionNumber - 1],
+        question: questionText,
+      };
+      return [...previousQuestions];
+    });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
@@ -35,7 +37,7 @@ function PostalCodeOne({ question, questionNumber }) {
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
-    setQuestionText(questions[questionNumber - 1].question)
+    setQuestionText(questions[questionNumber - 1].question);
   };
 
   const onDelete = (e) => {
@@ -45,76 +47,40 @@ function PostalCodeOne({ question, questionNumber }) {
     setQuestions(deleteQuestion);
   };
 
-  // useEffect(() => {
-  //   const newQuestionList = [...questions];
-  //   newQuestionList[questionNumber - 1] = {
-  //     ...newQuestionList[questionNumber - 1],
-  //     question: questionText,
-  //     // questionNumber,
-  //     answerOptions: "",
-  //   };
-  //   setQuestions(newQuestionList);
-  // }, []);
-
   useEffect(() => {
-		onSave()
+    onSave();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+  }, []);
 
   return (
     <div className="question-component admin-question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <div className="questionAndButtons">
-        <div className="questionText">
-          {inEditMode.status ? (
-            <input
-              type="text"
-              value={questionText}
-              onChange={(e) => setQuestionText(e.target.value)}
-            />
-          ) : (
-            <p>{questionText}</p>
-          )}
-          <input 
-            disabled
-          />
+      <div className="question-and-buttons">
+        <div className="side-border-line">
+          <p className="question-intro">Q{questionNumber}.</p>
+          <div className="questionText">
+            {inEditMode.status ? (
+              <input
+                type="text"
+                value={questionText}
+                onChange={(e) => setQuestionText(e.target.value)}
+              />
+            ) : (
+              <p>{questionText}</p>
+            )}
+            <input disabled />
+          </div>
         </div>
-        <div className="postalCodeone-buttons">
+
+        <div className="edit-buttons-group">
           {inEditMode.status ? (
             <div className="edit-button">
-              <button
-                className="clear icn1"
-                title="Save"
-                onClick={() => onSave()}
-              >
-                <GiIcons.GiSaveArrow />
-              </button>
-              <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span>
-              <button
-                className="clear icn2"
-                title="Cancel"
-                onClick={() => onCancel()}
-              >
-                <MdIcons.MdCancel />
-              </button>
+              <SaveButton onSave={onSave} />
+              <CancelButton onCancel={onCancel} />
             </div>
           ) : (
             <div className="edit-button">
-              <button
-                className="clear icn3"
-                title="Edit"
-                onClick={() => onEditClicked()}
-              >
-                <BsIcons.BsPencilSquare />
-              </button>
-              <button style={{ float: "right" }} onClick={onDelete}>
-                <RiIcons.RiDeleteBinFill />
-              </button>
-              {/* <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span> */}
+              <EditButton onEditClicked={onEditClicked} />
+              <DeleteButton onDelete={onDelete} />
             </div>
           )}
         </div>
