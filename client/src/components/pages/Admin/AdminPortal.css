@@ -152,6 +152,9 @@ h2 {
   width: 15%;
   padding: 10px 20px;
   margin-left: -20px;
+  position: sticky;
+  top: 0;
+  height: 100%;
 }
 
 .survey-selection-sidebar button {
