@@ -6,6 +6,7 @@ const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
     const [selectSurvey, setSelectSurvey]=useState()
+    // const [surveyId, setSurveyId]=useState()
     let surveyId="60dca10c89301e61da23c478"
 
     const getSurveyList = async ()=>{
@@ -18,7 +19,10 @@ const SurveyAnswersPage =()=>{
         getSurveyList()
     },[])
 
-   
+//    const displayData =()=>{
+//     const selectedId= selectSurvey._id
+//     setSurveyId(selectedId)
+//    }
   
 
     useEffect(()=>{
@@ -42,28 +46,27 @@ const SurveyAnswersPage =()=>{
 
     let arr = [];
     let questionNum = 1;
-    let typeArr=[]
     for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
-      typeArr.push(newDataList[0]?.survey.questions[i].questionType)
     }
     console.log("arr",arr)
-    console.log("typeArr",typeArr)
-
     
     const getStringsFromAnswer=(ans)=>{
-        if(ans?.questionType==='checkbox'){
-            return ans.options.filter(option=>option.checked).map(option=>{
-                if(option.value==='Other'){
-                    return ans.other.value
-                }
-                return option.value
-            }).join('\n')
-        }
-        if(typeof ans === "object"){
-            return Object.values(ans).map(value => getStringsFromAnswer(value)).join('\n')
-        }
-        return ans.toString()
+        // if(ans){
+            if(ans?.questionType==='checkbox'){
+                return ans.options.filter(option=>option.checked).map(option=>{
+                    if(option.value==='Other'){
+                        return ans.other.value
+                    }
+                    return option.value
+                }).join('\n')
+            }
+            
+            if(typeof ans === "object"){
+                return Object.values(ans).map(value => getStringsFromAnswer(value)).join('\n')
+            }
+            return ans.toString()
+        // }   
     }
     
 
@@ -74,15 +77,16 @@ const SurveyAnswersPage =()=>{
                 <div className="select-survey">
                 
                 <select name="_id"  onChange={(e)=>setSelectSurvey(e.target.value)}>
-                    <option>--Select an Existing Survey--</option>
+                    <option>--Select a Survey--</option>
                     {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
                 </select>
-                <button className="display">Display data</button>
+                <button className="display" 
+                // onClick={displayData}
+                >Display data</button>
                 </div>
               
-                    <h3 className="record-num">Number of answer records of this Survey:<span className="count">{newDataList?.length}</span></h3>
-                    <button className="export">Export to Excel</button>
-               
+                <h3 className="record-num">Number of answer records of this Survey:<span className="count">{newDataList?.length}</span></h3>
+                <button className="export">Export to Excel</button>
             </div>
             
 
@@ -107,9 +111,7 @@ const SurveyAnswersPage =()=>{
                                 {Object.values(row.answers).map((ans, i)=>{return <td className="data-text" key={i}><pre>{getStringsFromAnswer(ans)}</pre></td>})}
                             </tr>
                             )
-                        })}
-                     
-                            
+                        })}      
                     </tbody>
                 </table>
             </div>
