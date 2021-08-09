@@ -57,7 +57,7 @@ function Checkboxes({ questionNumber, question, texts }) {
   }, [answers, questionNumber]);
 
   return (
-    <div className="question-component">
+    <div className="checkbox question-component">
       <form className="checkbox-form-control">
         <p className="question-intro">Q{questionNumber}.</p>
         <span>

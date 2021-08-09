@@ -140,7 +140,44 @@ h1 {
 }
 
 .slider button:disabled {
-  background-color: grey;
+	background-color: grey;
+}
+
+.radio.question-component {
+	display: grid;
+	height: 300px;
+	width: 800px;
+}
+
+.matrix.question-component {
+	display: grid;
+	height: 300px;
+	width: 800px;
+}
+
+.postal-code-question-component {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
+	width: 800px;
+}
+
+.comment.question-component {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
+	width: 800px;
+}
+
+.checkbox.question-component {
+	display: flex;
+  align-items: flex-end;
+	height: 300px;
+	width: 800px;
 }
 
 .question-component p,
@@ -182,13 +219,14 @@ h1 {
   font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   color: rgb(107, 106, 106);
-  padding: 6px;
+  padding: 10px;
   width: 200px;
   border: none;
   border-radius: 10px;
   background-color: rgb(238, 237, 237);
   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
 }
+
 
 .question-intro {
   padding-top: 0px;
@@ -203,6 +241,7 @@ h1 {
 .narrative-component p {
   padding-bottom: 15px;
 }
+
 
 .checkbox-form-group input {
   margin-right: 5px;
@@ -287,7 +326,8 @@ td {
 .survey-card {
   background-color: #f5f5f5;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+	overflow: hidden;
   align-items: center;
   position: relative;
   margin: 20px 0px 0px 0px;

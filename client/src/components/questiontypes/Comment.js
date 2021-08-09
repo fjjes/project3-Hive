@@ -19,13 +19,12 @@ const Comment = ({ questionNumber, question }) => {
   }, []);
 
   return (
-    <div className="question-component">
+    <div className="comment question-component">
       <p className="question-intro">Q{questionNumber}.</p>
       <span>
         <p className="question-intro">{question}</p>
       </span>
       <textarea
-        style={{ marginLeft: "90px" }}
         rows="4"
         cols="50"
         label="comment"
