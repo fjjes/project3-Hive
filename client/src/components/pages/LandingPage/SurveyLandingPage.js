@@ -43,7 +43,6 @@ export default function Logo({ flashcard }) {
       {showQuestions === false ? (
         <div
           className={`card ${flip ? "flip" : ""}`}
-          onClick={() => setFlip(!flip)}
         >
           <div class="thefront">
             {!flip ? (
@@ -54,7 +53,7 @@ export default function Logo({ flashcard }) {
                   src="https://assets6.lottiefiles.com/packages/lf20_186dxgq7.json"
                   className="logo"
                 ></Player>
-                <p>Click to Flip</p>
+								<button className="enter-button" onClick={() => setFlip(!flip)}>ENTER</button>
               </>
             ) : (
               <></>
