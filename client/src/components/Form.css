@@ -156,8 +156,7 @@ h1 {
 	display: grid;
 }
 
-.matrix.question-component.admin-question-component {
-	display: grid;
+.admin-question-component {
   height: auto;
   width: auto;
 }
