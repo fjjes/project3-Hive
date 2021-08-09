@@ -38,6 +38,14 @@ const SurveyAnswersPage =()=>{
 
     
     const getStringsFromAnswer=(ans)=>{
+        if(ans.questionType==='checkbox'){
+            return ans.options.filter(option=>option.checked).map(option=>{
+                if(option.value==='Other'){
+                    return ans.other.value
+                }
+                return option.value
+            }).join('\n')
+        }
         if(typeof ans === "object"){
             // return Object.values(ans).forEach(value => console.log('value',value))
             return Object.values(ans).map(value => getStringsFromAnswer(value)).join('\n')
