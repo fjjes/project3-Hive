@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import moment from "moment";
 import './AdminPortal.css'
-import { get } from 'lodash';
+// import { get } from 'lodash';
 
 const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
@@ -14,9 +14,7 @@ const SurveyAnswersPage =()=>{
             console.log('data:', data)
             console.log('id:',data[0].survey._id)
 
-            const filteredData = data.filter(newData=>{
-                return newData.survey?._id === surveyId
-            })
+            const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
         }
         getAnswers();
@@ -47,7 +45,6 @@ const SurveyAnswersPage =()=>{
             }).join('\n')
         }
         if(typeof ans === "object"){
-            // return Object.values(ans).forEach(value => console.log('value',value))
             return Object.values(ans).map(value => getStringsFromAnswer(value)).join('\n')
         }
         return ans.toString()
@@ -79,7 +76,7 @@ const SurveyAnswersPage =()=>{
                 <button style={{float:'right'}}>Export to Excel</button>
             </div>
 
-            <div className="list-table">
+            <div className="data-table">
                 <table>
                     <tbody>
                         <tr>
@@ -90,26 +87,14 @@ const SurveyAnswersPage =()=>{
                         <tr>
                             <th></th>
                             <th></th>
-                            {/* headings Q1, Q2, Q3... */}
                             {arr.map((num,i)=> <th key={i}>Q{num}</th>)} 
                         </tr>
                         {newDataList.map((row, index)=>{
                             return(
                             <tr key={index}>
                                 <td>{index+1}</td>
-                                <td>{moment(row.answeredDate).format("MM/DD/yyyy")}</td>                               
-                                {/* {Object.values(row.answers).forEach(ans=>{
-                                    console.log('ans:', ans)
-                                })} */}
-                                
-                                {/* {Object.values(row.answers).map((ans, i)=>{
-                                    return(
-                                        <td key={i}>{console.log(ans)}</td>
-                                    )
-                                })} */}
-
-                                {Object.values(row.answers).map((ans, i)=>{return <td key={i}><pre>{getStringsFromAnswer(ans)}</pre></td>})}
-                              
+                                <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>                               
+                                {Object.values(row.answers).map((ans, i)=>{return <td className="data-text" key={i}><pre>{getStringsFromAnswer(ans)}</pre></td>})}
                             </tr>
                             )
                         })}
