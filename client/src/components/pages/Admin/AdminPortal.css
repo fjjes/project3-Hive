@@ -163,16 +163,24 @@ h2 {
 
 /* Left Sidebar */
 .survey-selection-sidebar {
-  width: 15%;
+  /* width: 15%;
   padding: 10px 20px;
   margin-left: -20px;
   position: sticky;
   top: 0;
-  height: 100%;
+  height: 100%; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (1 of 3) */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: flex-start;
+  position: sticky;
+  top: 0;
+  height: 100%; 
+  padding-top: 15px;
 }
 
 .survey-selection-sidebar button {
-  margin: 0;
+  /* margin: 0;
   margin-left: -20px;
   border-radius: 0 10px 10px 0px;
   border: 1px #bce6f8 solid;
@@ -181,10 +189,27 @@ h2 {
   background-color: #fff;
   box-shadow: inset -3px -3px 10px grey;
   color: black;
-  display: flex;
+  display: flex; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (2 of 3) */
+  margin: 0;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px #bce6f8 solid;
+  font-size: 1rem;
+  background-color: #fff;
+  box-shadow: inset -3px -3px 10px grey;
+  color: black;
+  width: 100px;
+  height: 100px;
 }
+
 .survey-selection-sidebar .icons{
-  padding-right: 20px;
+  /* padding-right: 20px; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
+  display: block;
+  font-size: 2rem;
+  /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
+  pointer-events: none; 
 }
 
 .survey-selection-sidebar button:hover {
