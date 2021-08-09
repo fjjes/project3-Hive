@@ -185,6 +185,7 @@ h2 {
 }
 .survey-selection-sidebar .icons{
   padding-right: 20px;
+  pointer-events: none; /* When this line is removed, if we click on the icon, the button doesn't work. */
 }
 
 .survey-selection-sidebar button:hover {
