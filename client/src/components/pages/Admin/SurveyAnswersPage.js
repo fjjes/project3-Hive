@@ -1,11 +1,25 @@
 import { useEffect, useState } from 'react';
 import moment from "moment";
 import './AdminPortal.css'
-// import { get } from 'lodash';
 
 const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
+    const [surveyList, setSurveyList]=useState([])
+    const [selectSurvey, setSelectSurvey]=useState()
     let surveyId="60dca10c89301e61da23c478"
+
+    const getSurveyList = async ()=>{
+        let response = await fetch("/api/survey")
+        let data= await response.json();
+        setSurveyList(data)
+    }
+
+    useEffect(()=>{
+        getSurveyList()
+    },[])
+
+   
+  
 
     useEffect(()=>{
         const getAnswers = async ()=>{
@@ -14,7 +28,9 @@ const SurveyAnswersPage =()=>{
             console.log('data:', data)
             console.log('id:',data[0].survey._id)
 
-            const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
+            const filteredData = data.filter(newData=>{
+                return newData.survey?._id === surveyId
+            })
             setNewDataList(filteredData)
         }
         getAnswers();
@@ -27,7 +43,7 @@ const SurveyAnswersPage =()=>{
     let arr = [];
     let questionNum = 1;
     let typeArr=[]
-    for (let i = 0; i < newDataList[0]?.survey.questions.length; i++) {
+    for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
       typeArr.push(newDataList[0]?.survey.questions[i].questionType)
     }
@@ -36,7 +52,7 @@ const SurveyAnswersPage =()=>{
 
     
     const getStringsFromAnswer=(ans)=>{
-        if(ans.questionType==='checkbox'){
+        if(ans?.questionType==='checkbox'){
             return ans.options.filter(option=>option.checked).map(option=>{
                 if(option.value==='Other'){
                     return ans.other.value
@@ -51,25 +67,32 @@ const SurveyAnswersPage =()=>{
     }
     
 
+   
     return(
         <div className='data-collected'>
             <div className="select-survey">
-            {/* <div> */}
+                <div>
+                    <select name="_id"  onChange={(e)=>setSelectSurvey(e.target.value)}>
+                        <option>--Select an Existing Survey--</option>
+                        {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
+                    </select>
+                </div>
+            {/* <div>
                 <select>
                     <option>--Select a company--</option>
                 </select>
-            {/* </div>
-            <div> */}
+            </div>
+            <div>
                 <select>
                     <option>--Select the Survey Version--</option>
                 </select>
-            {/* </div>
-            <div> */}
+            </div>
+            <div>
                 <select>
                     <option>--Select the Survey Number--</option>
                 </select>
-            {/* </div> */}
-            <button>Display data</button>
+            </div> */}
+            <button >Display data</button>
             </div>
             <div>
                 <h3>Number of answer records of this Survey:{newDataList?.length}</h3>
