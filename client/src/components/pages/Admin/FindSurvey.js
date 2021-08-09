@@ -49,7 +49,7 @@ const FindSurvey = (props) => {
   return (
     <div className="list-table">
       <h2>Find an Existing Survey</h2>
-      <button className="view-all-button">View all surveys</button>
+      {/* <button className="view-all-button">View all surveys</button>
 
       <input
         id="search-by-company"
@@ -64,7 +64,7 @@ const FindSurvey = (props) => {
         value={searchInputNumber}
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
-      />
+      /> */}
       <table>
         <tbody>
           <tr>

@@ -70,34 +70,21 @@ const SurveyAnswersPage =()=>{
    
     return(
         <div className='data-collected'>
-            <div className="select-survey">
-                <div>
-                    <select name="_id"  onChange={(e)=>setSelectSurvey(e.target.value)}>
-                        <option>--Select an Existing Survey--</option>
-                        {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
-                    </select>
+            <div className='upper-section'>
+                <div className="select-survey">
+                
+                <select name="_id"  onChange={(e)=>setSelectSurvey(e.target.value)}>
+                    <option>--Select an Existing Survey--</option>
+                    {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
+                </select>
+                <button className="display">Display data</button>
                 </div>
-            {/* <div>
-                <select>
-                    <option>--Select a company--</option>
-                </select>
+              
+                    <h3 className="record-num">Number of answer records of this Survey:<span className="count">{newDataList?.length}</span></h3>
+                    <button className="export">Export to Excel</button>
+               
             </div>
-            <div>
-                <select>
-                    <option>--Select the Survey Version--</option>
-                </select>
-            </div>
-            <div>
-                <select>
-                    <option>--Select the Survey Number--</option>
-                </select>
-            </div> */}
-            <button >Display data</button>
-            </div>
-            <div>
-                <h3>Number of answer records of this Survey:{newDataList?.length}</h3>
-                <button style={{float:'right'}}>Export to Excel</button>
-            </div>
+            
 
             <div className="data-table">
                 <table>

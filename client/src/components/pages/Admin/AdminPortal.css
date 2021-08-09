@@ -280,8 +280,44 @@ h2 {
 }
 
 .list-table h2 {
+  margin-top: 30px;
   margin-bottom: 30px;
   text-align: center;
+}
+.data-collected .upper-section{
+  margin-top: 20px;
+  align-items: center;
+}
+
+.data-collected .record-num{
+margin-top: 30px;
+margin-bottom: 10px;
+background: #393F4B;
+color: white;
+padding:5px 5px;
+width:21.5%;
+}
+
+.data-collected .record-num span{
+  margin-left:10px;
+  color:#f59645;
+}
+
+.data-collected button{
+  border: 0;
+  background-color:  #393F4B;
+  color: white;
+  padding:6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.data-collected .display{
+  margin-left:10px;
+}
+
+.data-collected .export{
+  margin-bottom: 20px;
+  margin-left: 1750px;
 }
 
 .list-table .icon1,
