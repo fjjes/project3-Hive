@@ -7,6 +7,7 @@ import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const history = useHistory();
@@ -382,16 +383,36 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               updateNarrative={(narrative) => setNarrative(narrative)}
             />
           </div>
-          <QuestionContext.Provider value={value}>
-            {questions.map((questionBlock, index) => (
-              <div key={index}>
-                <QuestionComponent
-                  question={questionBlock}
-                  questionNumber={index + 1}
-                />
-              </div>
-            ))}
-          </QuestionContext.Provider>
+
+        <QuestionContext.Provider value={value}>
+          <DragDropContext>
+            <Droppable droppableId="questions1">
+              {(provided) => (
+                <ul style={{listStyle: "none"}} {...provided.droppableProps} ref={provided.innerRef}>
+                  {questions.map((questionBlock, index) => {
+                    return (
+                      // change .questionType eventually
+                      <Draggable key={questionBlock.questionType} draggableId={questionBlock.questionType} index={index}>
+                        {(provided) => (
+                          <div>
+                          <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                            <QuestionComponent
+                              question={questionBlock}
+                              questionNumber={index + 1}
+                              surveyNumber={surveyNumber}
+                            />
+                          </li>
+                        </div>
+                        )}
+                      </Draggable>
+                    )})}
+                    {/* {provided.placeholder} */}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </QuestionContext.Provider>
+
         </div>
       </div>
       {/* BOTTOM PART OF PAGE */}
