@@ -5,6 +5,34 @@ color: #f59645; MAIN ORANGE
 color: #bce6f8; Light blueish-grey
 color: #575759; Dark grey from logo text */
 
+header {
+	display: flex;
+	align-items: center;
+	/* position: relative; */
+	height: 100px;
+	width: 100%;
+	margin-top: 2px;
+	background-color: rgb(238, 238, 238);
+	box-shadow: -7px -7px 17px #fff,
+	7px 7px 10px rgba(70, 70, 70, 0.15);
+	box-sizing: border-box;
+}
+
+nav img {
+	margin-left: 10px;
+	padding: 19px 20px;
+	border-radius: 10px;
+	box-shadow: -3px -3px 10px #ffffff,
+							3px 3px 5px #bfbfc0;	
+	width: 37%;
+}
+
+.progress-survey {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -152,6 +180,7 @@ h1 {
 	display: grid;
 }
 
+
 .matrix.question-component {
 	display: grid;
 }
@@ -265,7 +294,10 @@ td {
 
 .matrix .label-rows {
   text-align: start;
+	height: 35px;
 }
+
+.matrix-table tr:nth-child(even) {background: #CCC}
 
 .radio label {
   margin-left: 5px;

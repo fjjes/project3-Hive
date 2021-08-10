@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import NarrativeOne from "../../AdminQuestions/NarrativeOne";
+import { v4 as uuidv4 } from "uuid";
 import QuestionComponent from "./QuestionComponent";
 import * as RiIcons from "react-icons/ri";
 import * as FaIcons from "react-icons/fa";
@@ -155,6 +156,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     }
     newQuestions.push({
       questionType: e.target.value,
+      id: uuidv4(),
       question: question,
       answerOptions: answerOptions,
     });
@@ -194,6 +196,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     };
     surveyToCreate.questions.forEach((question, index) => {
       question.questionNumber = index + 1;
+      delete question.id 
     });
     console.log("surveyToCreate", surveyToCreate);
     console.log("survey:", surveyToCreate);
@@ -400,7 +403,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                   {questions.map((questionBlock, index) => {
                     return (
                       // change .questionType eventually
-                      <Draggable key={questionBlock.questionType} draggableId={questionBlock.questionType} index={index}>
+                      <Draggable key={questionBlock.id} draggableId={questionBlock.id} index={index}>
                         {(provided) => (
                           <div>
                           <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>

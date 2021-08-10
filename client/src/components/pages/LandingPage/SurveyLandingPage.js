@@ -39,9 +39,9 @@ export default function Logo({ flashcard }) {
   },[])
 
   return (
-    <div>
+  <div>
       {showQuestions === false ? (
-        <div
+				<div
           className={`card ${flip ? "flip" : ""}`}
         >
           <div class="thefront">
@@ -56,51 +56,27 @@ export default function Logo({ flashcard }) {
 								<button className="enter-button" onClick={() => setFlip(!flip)}>ENTER</button>
               </>
             ) : (
-              <></>
+							<></>
             )}
           </div>
           <div className="theback">
             <h1>Hello {company} Team!</h1>
             {/* <img src={image} style={{height:100}} alt="start-img"/> */}
             <p>{narrative}</p>
-
-            {/* <Link to="/survey">
-          <button className="logo-button" type="button">
-            ENTER
-          </button>
-        </Link>
-        <Link to="/survey">
-          <button className="neu-button" type="button">
-            ENTER
-          </button>
-        </Link> */}
-            {/* <div className="adminportal"
-          >
-        <Link to="/admin">
-        <button className="admin-portal-button">Admin Portal</button>
-        </Link>
-          </div> */}
-            {/* <button
-              className="logo-button"
-              type="button"
-              onClick={() => setShowQuestions(true)}
-            >
-              ENTER
-            </button> */}
             <button
               className="neu-button"
               type="button"
               onClick={() => setShowQuestions(true)}
-            >
+							>
               ENTER
             </button>
           </div>
         </div>
       ) : (
-        <div>
+				<div>
           <SurveyQuestionPage survey={survey} questionArray={questionArray} />
         </div>
       )}
-    </div>
+	</div>
   );
 }
