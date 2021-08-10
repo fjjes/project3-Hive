@@ -7,6 +7,7 @@ import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const history = useHistory();
@@ -264,7 +265,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       }
     }
   }
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
 
+    const items = Array.from(questions);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setQuestions(items);
+  }
   return (
     <div>
       {/* TOP PART OF PAGE */}
@@ -382,16 +391,36 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               updateNarrative={(narrative) => setNarrative(narrative)}
             />
           </div>
-          <QuestionContext.Provider value={value}>
-            {questions.map((questionBlock, index) => (
-              <div key={index}>
-                <QuestionComponent
-                  question={questionBlock}
-                  questionNumber={index + 1}
-                />
-              </div>
-            ))}
-          </QuestionContext.Provider>
+
+        <QuestionContext.Provider value={value}>
+          <DragDropContext  onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="questions1">
+              {(provided) => (
+                <ul style={{listStyle: "none"}} {...provided.droppableProps} ref={provided.innerRef}>
+                  {questions.map((questionBlock, index) => {
+                    return (
+                      // change .questionType eventually
+                      <Draggable key={questionBlock.questionType} draggableId={questionBlock.questionType} index={index}>
+                        {(provided) => (
+                          <div>
+                          <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                            <QuestionComponent
+                              question={questionBlock}
+                              questionNumber={index + 1}
+                              surveyNumber={surveyNumber}
+                            />
+                          </li>
+                        </div>
+                        )}
+                      </Draggable>
+                    )})}
+                    {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </QuestionContext.Provider>
+
         </div>
       </div>
       {/* BOTTOM PART OF PAGE */}

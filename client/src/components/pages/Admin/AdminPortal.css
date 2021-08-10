@@ -109,6 +109,11 @@ h2 {
   background-color: #35c0c2;
 }
 
+input[type=radio],
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
 /* Misc */
 .dividerLine {
   border-bottom: rgba(0, 0, 0, 0.2) solid;

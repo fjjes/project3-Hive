@@ -35,12 +35,15 @@ function App() {
           </Route>
           <div>
             <Navbar />
-            <Route exact path="/create-new">
+            
+              <Route exact path="/create-new">
               <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
-            </Route>
+              </Route>
+            
             <Route path="/find-list">
               <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
             </Route>
+          
             {/* <Route exact path="/edit-survey/:surveyId">
               <AdminPortalEdit/>
             </Route> */}
