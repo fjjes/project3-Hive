@@ -94,7 +94,7 @@ useEffect(()=>{
     <div className="survey-page">
 			<header>
 				<nav>
-					<img src={logo}></img>
+					<img className="hive-tagline" src={logo}></img>
 				</nav>
 			</header>
       {endSurvey === false ? (

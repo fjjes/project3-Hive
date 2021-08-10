@@ -68,7 +68,7 @@ export default function Logo({ flashcard }) {
               type="button"
               onClick={() => setShowQuestions(true)}
 							>
-              ENTER
+              START
             </button>
           </div>
         </div>
