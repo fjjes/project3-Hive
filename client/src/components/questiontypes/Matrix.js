@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 import "../Form.css";
 
-const Matrix = (props, questionNumber) => {
+const Matrix = (props) => {
   const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);

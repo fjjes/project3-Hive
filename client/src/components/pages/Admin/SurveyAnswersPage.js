@@ -6,6 +6,7 @@ const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
     const [selectSurvey, setSelectSurvey]=useState()
+    const [displayTable, setDisplayTable]=useState(false)
     // const [surveyId, setSurveyId]=useState()
     let surveyId="60dca10c89301e61da23c478"
 
@@ -22,6 +23,7 @@ const SurveyAnswersPage =()=>{
 //    const displayData =()=>{
 //     const selectedId= selectSurvey._id
 //     setSurveyId(selectedId)
+//     setDisplayTable(true)
 //    }
   
 
@@ -32,9 +34,7 @@ const SurveyAnswersPage =()=>{
             console.log('data:', data)
             console.log('id:',data[0].survey._id)
 
-            const filteredData = data.filter(newData=>{
-                return newData.survey?._id === surveyId
-            })
+            const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
         }
         getAnswers();
@@ -51,25 +51,46 @@ const SurveyAnswersPage =()=>{
     }
     console.log("arr",arr)
     
-    const getStringsFromAnswer=(ans)=>{
-        // if(ans){
-            if(ans?.questionType==='checkbox'){
-                return ans.options.filter(option=>option.checked).map(option=>{
-                    if(option.value==='Other'){
-                        return ans.other.value
-                    }
-                    return option.value
-                }).join('\n')
-            }
-            
-            if(typeof ans === "object"){
-                return Object.values(ans).map(value => getStringsFromAnswer(value)).join('\n')
-            }
-            return ans.toString()
-        // }   
-    }
     
+    const getTextStringsFromCheckbox=(ans)=>{
+        if(ans?.questionType==='checkbox'){
+            return ans.options.filter(option=>option.checked).map(option=>{
+                if(option.value==='Other'){
+                    return ans.other.value
+                }
+                return option.value
+            }).join('\n')
+        }
+        // if(typeof ans === "object"){
+        //     return Object.values(ans).map(value => getTextStringsFromCheckbox(value))
+        // }
+        return ans?.toString()  
+    }
 
+    const getTextStringsFromAnswer=(ans)=>{
+        if(ans){
+            if(typeof ans === "object"){
+                if(ans?.questionType==='slider'){
+                    return "slider text"
+                }
+               
+                    // console.log('obj',Object.values(ans).map(value=>value.text))
+                    return Object.values(ans).map(value => getTextStringsFromAnswer(value.text)).join('\n')
+            } return ans?.toString()
+        } else{
+            return null
+        } 
+    }
+
+    const getValueStringsFromAnswer=(ans)=>{  
+        if(ans?.questionType==='slider'){
+            return Object.values(ans).map(value => getValueStringsFromAnswer(value)).join('\n')
+        }   
+        if(typeof ans === "object"){
+            return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
+        }
+        return ans?.toString()  
+    }
    
     return(
         <div className='data-collected'>
@@ -108,7 +129,26 @@ const SurveyAnswersPage =()=>{
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>                               
-                                {Object.values(row.answers).map((ans, i)=>{return <td className="data-text" key={i}><pre>{getStringsFromAnswer(ans)}</pre></td>})}
+                                {Object.values(row.answers).map((ans, i)=>{
+                                    return (<>
+                                            {/* {ans ?
+                                            <> */}
+                                                {typeof ans !== 'object' ? 
+                                                    <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
+                                                :(
+                                                    ans?.questionType==='checkbox' ?
+                                                            <td className="data-text" key={i}><pre>{getTextStringsFromCheckbox(ans)}</pre></td>
+                                                        :
+                                                        <td className="data-text" key={i}><pre><tr>
+                                                                <td className="data-text">{getTextStringsFromAnswer(ans)}</td>
+                                                                <td className="data-text">{getValueStringsFromAnswer(ans)}</td>
+                                                            </tr></pre></td> 
+                                                            
+                                                )}
+                                            {/* </>
+                                            :null} */}
+                                            </>)   
+                                })}
                             </tr>
                             )
                         })}      
