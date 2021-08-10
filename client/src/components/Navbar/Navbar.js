@@ -1,12 +1,14 @@
-import logo from '../../images/hivetagline2.png'
+import logo from "../../images/hiveicon.png";
 import {Nav, NavLink, Bars, NavMenu, NavBtnLink} from './NavbarElements';
+// import "./AdminPortal.css";
 
 const Navbar = () => {
   return (
     <div className="navbar">
       <Nav>
         <NavLink to='/'>
-          <img src={logo} alt="logo"  style={{ width:'65%', alignItems:'flex-start'}}/>
+					<h1 style={{color: "white"}}>Admin Portal</h1>
+					<img src={logo} alt="Hive logo" className="admin-logo" />
         </NavLink>
         <Bars />
         <NavMenu>
