@@ -61,7 +61,7 @@ const Matrix = (props) => {
       <span>
         <p className="question-intro">{props.question}</p>
       </span>
-      <table>
+      <table className="matrix-table">
         <tbody>
           <tr>
             <th></th>

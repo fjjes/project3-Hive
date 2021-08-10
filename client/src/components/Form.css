@@ -294,11 +294,10 @@ td {
 
 .matrix .label-rows {
   text-align: start;
+	height: 35px;
 }
 
-/* .matrix-table {
-	background-color: yellow;
-} */
+.matrix-table tr:nth-child(even) {background: #CCC}
 
 .radio label {
   margin-left: 5px;
