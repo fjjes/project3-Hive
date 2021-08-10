@@ -148,7 +148,7 @@ useEffect(()=>{
           </div>
         </div>
       ) : (
-        <div className="survey-card">
+        <div className="survey-card closing">
           <h2>Thank you for your participation!!</h2>
         </div>
       )}
