@@ -265,7 +265,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       }
     }
   }
+  function handleOnDragEnd(result) {
+    if (!result.destination) return;
 
+    const items = Array.from(questions);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setQuestions(items);
+  }
   return (
     <div>
       {/* TOP PART OF PAGE */}
@@ -385,7 +393,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
           </div>
 
         <QuestionContext.Provider value={value}>
-          <DragDropContext>
+          <DragDropContext  onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="questions1">
               {(provided) => (
                 <ul style={{listStyle: "none"}} {...provided.droppableProps} ref={provided.innerRef}>
