@@ -10,7 +10,7 @@ export default function Logo({ flashcard }) {
   const { surveyId } = useParams();
   const [survey, setSurvey] = useState();
   const [narrative, setNarrative] = useState("");
-  const [company, setCompany] = useState("");
+  const [heading, setHeading]= useState("")
   const [questionArray, setQuestionArray] = useState([]);
   const [flip, setFlip] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
@@ -21,9 +21,8 @@ export default function Logo({ flashcard }) {
       let data = await response.json();
       console.log("retrieved data:", data);
       setSurvey(data);
-      console.log("narrative:", data.narrative);
       setNarrative(data.narrative);
-      setCompany(data.company);
+      setHeading(data.heading)
       setQuestionArray(data.questions);
       console.log("Survey questions:", data.questions);
     };
@@ -60,7 +59,7 @@ export default function Logo({ flashcard }) {
             )}
           </div>
           <div className="theback">
-            <h1>Hello {company} Team!</h1>
+            <h1>{heading}</h1>
             {/* <img src={image} style={{height:100}} alt="start-img"/> */}
             <p>{narrative}</p>
             <button

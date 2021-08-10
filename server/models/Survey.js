@@ -15,6 +15,7 @@ const surveySchema = new Schema({
     type: String,
     required:true
   }, 
+  heading: String,
   narrative: String,
   questions:[
     {

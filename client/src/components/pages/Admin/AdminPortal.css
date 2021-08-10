@@ -272,6 +272,21 @@ input[type=checkbox] {
   height: 100%;
 }
 
+.survey-selected-components .intro-heading{
+  padding-left: 15px;
+  margin-top: 15px;;
+}
+.survey-selected-components .intro-heading input{
+  width:90%;
+}
+.survey-selected-components .intro-heading label{
+font-weight: bold;  
+margin-left:8px;
+}
+.survey-selected-components .intro-heading input::placeholder{
+  align-items: center;
+}
+
 /* Bottom (save button) */
 .save-survey-button-and-link {
   align-items: center;

@@ -15,6 +15,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
+  const [heading, setHeading] = useState("")
   const [narrative, setNarrative] = useState(
     "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
   );
@@ -33,6 +34,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       let data = await response.json();
       console.log("data:", data);
       setQuestions(data.questions);
+      setHeading(data.heading);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -190,6 +192,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       surveyNumber,
       company,
       version,
+      heading,
       narrative,
       questions,
       createdDate: currentDate,
@@ -388,6 +391,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
+            <div className="intro-heading">
+              <label>Intro Heading:</label>
+              <input 
+                  type="text" 
+                  placeholder="ex: Hello ABCD executive Team!!"
+                  value={heading}
+                  onChange={(e)=>setHeading(e.target.value)}
+              />
+            </div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
