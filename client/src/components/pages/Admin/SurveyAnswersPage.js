@@ -5,8 +5,8 @@ import './AdminPortal.css'
 const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
-    const [selectSurvey, setSelectSurvey]=useState()
-    const [displayTable, setDisplayTable]=useState(false)
+    // const [displayTable, setDisplayTable]=useState(false)
+    // const [count, setCount]=useState(0)
     // const [surveyId, setSurveyId]=useState()
     let surveyId="60dca10c89301e61da23c478"
 
@@ -20,11 +20,12 @@ const SurveyAnswersPage =()=>{
         getSurveyList()
     },[])
 
-//    const displayData =()=>{
-//     const selectedId= selectSurvey._id
-//     setSurveyId(selectedId)
-//     setDisplayTable(true)
-//    }
+  
+    // const display =()=>{
+    //     setDisplayTable(true)
+    //     setCount(newDataList.length)
+    // }
+  
   
 
     useEffect(()=>{
@@ -70,26 +71,32 @@ const SurveyAnswersPage =()=>{
     const getTextStringsFromAnswer=(ans)=>{
         if(ans){
             if(typeof ans === "object"){
-                if(ans?.questionType==='slider'){
-                    return "slider text"
-                }
-               
+                // if(ans?.questionType==='slider'){
+                //     return "slider text"
+                // }
                     // console.log('obj',Object.values(ans).map(value=>value.text))
-                    return Object.values(ans).map(value => getTextStringsFromAnswer(value.text)).join('\n')
-            } return ans?.toString()
+                    return Object.values(ans).map(value => getTextStringsFromAnswer(value.text))
+            } 
+            return ans?.toString()
         } else{
             return null
         } 
     }
 
     const getValueStringsFromAnswer=(ans)=>{  
-        if(ans?.questionType==='slider'){
-            return Object.values(ans).map(value => getValueStringsFromAnswer(value)).join('\n')
-        }   
-        if(typeof ans === "object"){
-            return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
+        if(ans){
+            if(ans?.questionType==='slider'){
+                return Object.values(ans).map(value => getValueStringsFromAnswer(value))
+            }   
+            if(typeof ans === "object"){
+                // console.log("...", Object.values(ans).map(value => getValueStringsFromAnswer(value.value)))
+                return Object.values(ans).map(value => getValueStringsFromAnswer(value.value))
+            }
+            return ans?.toString()
+        }else{
+            return null
         }
-        return ans?.toString()  
+         
     }
    
     return(
@@ -97,12 +104,14 @@ const SurveyAnswersPage =()=>{
             <div className='upper-section'>
                 <div className="select-survey">
                 
-                <select name="_id"  onChange={(e)=>setSelectSurvey(e.target.value)}>
+                <select name="_id"  
+                // onChange={(e)=>setSurveyId(e.target.value)}
+                >
                     <option>--Select a Survey--</option>
                     {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
                 </select>
                 <button className="display" 
-                // onClick={displayData}
+                // onClick={()=>display()}
                 >Display data</button>
                 </div>
               
@@ -139,11 +148,51 @@ const SurveyAnswersPage =()=>{
                                                     ans?.questionType==='checkbox' ?
                                                             <td className="data-text" key={i}><pre>{getTextStringsFromCheckbox(ans)}</pre></td>
                                                         :
-                                                        <td className="data-text" key={i}><pre><tr>
-                                                                <td className="data-text">{getTextStringsFromAnswer(ans)}</td>
-                                                                <td className="data-text">{getValueStringsFromAnswer(ans)}</td>
-                                                            </tr></pre></td> 
-                                                            
+                                                        // <td className="data-text" key={i}>
+                                                        //     <pre>
+                                                        //         <tr>
+                                                        //         <td className="data-text">{getTextStringsFromAnswer(ans)}</td>
+                                                        //         <td className="data-text">{getValueStringsFromAnswer(ans)}</td>
+                                                        //         </tr>
+                                                        //     </pre>
+                                                        // </td> 
+                                                        
+                                                        <td className="data-text" key={i}>
+                                                            { i === 0 ?
+                                                            <table>
+                                                                <tbody>
+                                                                <tr>
+                                                                   { getTextStringsFromAnswer(ans).map((textCol, x)=>{
+                                                                       return(
+                                                                        <td key={x}>{textCol}</td>
+                                                                       )
+                                                                   })}
+                                                               </tr>
+                                                               <tr>
+                                                                   {getValueStringsFromAnswer(ans).map((col, ind)=>{
+                                                                       return(
+                                                                           <td key={ind}>{col}</td>
+                                                                       )
+                                                                   })
+
+                                                                   }
+                                                               </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            :
+                                                            <tr>
+                                                                    {getValueStringsFromAnswer(ans).map((col, ind)=>{
+                                                                        return(
+                                                                            <td key={ind}>{col}</td>
+                                                                        )
+                                                                    })
+
+                                                                    }
+                                                            </tr>
+                                                            } 
+                                                           
+                                                        </td>
+   
                                                 )}
                                             {/* </>
                                             :null} */}
