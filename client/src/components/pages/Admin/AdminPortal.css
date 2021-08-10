@@ -123,16 +123,22 @@ input[type=checkbox] {
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  margin: 10px auto 0px auto;
-  width: 50%;
+  /* margin: 10px auto 0px auto; */
+  margin: 10px auto 10px 210px;
+  /* width: 70%; */
 }
 
 .company-and-survey-name-inputs input {
   font-size: 1rem;
+  padding: 10px 10px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display:block;
+  width: 130%;
 }
 
 .company-and-survey-name-inputs .col{
-  margin-left: 5px;
+  margin-right: 90px;
 }
 .search-input {
   display: inline;
@@ -276,11 +282,16 @@ input[type=checkbox] {
   margin-top: 15px;;
 }
 .survey-selected-components .intro-heading input{
-  width:90%;
+  width:98%;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display:block;
 }
 .survey-selected-components .intro-heading label{
 font-weight: bold;  
-margin-left:8px;
+/* margin-left:3px; */
 }
 .survey-selected-components .intro-heading input::placeholder{
   align-items: center;

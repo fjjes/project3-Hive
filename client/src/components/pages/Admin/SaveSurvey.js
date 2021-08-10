@@ -290,7 +290,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       </h2>
       <form className="company-and-survey-name-inputs-and-error">
         <div className="company-and-survey-name-inputs">
-          <div className="company">
+          <div className="company col">
             <input
               name="company"
               id="company-name"
@@ -304,7 +304,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               <p>{validationErrorCompany}</p>
             </div>
           </div>
-          <div className="version">
+          <div className="version col">
             <input
               name="version"
               id="survey-version"
@@ -318,7 +318,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               <p>{validationErrorVersion}</p>
             </div>
           </div>
-          <div className="surveyNumber">
+          <div className="surveyNumber col">
             <input
               name="surveyNumber"
               id="survey-number"
@@ -392,10 +392,9 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
             <div className="intro-heading">
-              <label>Intro Heading:</label>
               <input 
                   type="text" 
-                  placeholder="ex: Hello ABCD executive Team!!"
+                  placeholder="Include a heading,    Ex: Hello ABCD executive Team!!"
                   value={heading}
                   onChange={(e)=>setHeading(e.target.value)}
               />
