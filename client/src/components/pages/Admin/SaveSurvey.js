@@ -414,7 +414,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                         )}
                       </Draggable>
                     )})}
-                    {/* {provided.placeholder} */}
+                    {provided.placeholder}
                 </ul>
               )}
             </Droppable>
