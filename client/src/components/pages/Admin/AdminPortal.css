@@ -241,6 +241,11 @@ input[type=checkbox] {
   margin: 0px;
 }
 
+.admin-question-component input[type="radio"],
+.admin-question-component input[type="checkbox"] {
+  pointer-events: none;
+}
+
 .narrative-text-area {
   width: 85%;
 }
