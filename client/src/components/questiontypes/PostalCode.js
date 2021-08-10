@@ -72,7 +72,6 @@ const PostalCode = ({ questionNumber, question }) => {
       <input
         // rows="4"
         // cols="50"
-        style={{ marginLeft: "40px" }}
         label="postalcode"
         // value={postalcode}
         value={answers[questionNumber]}

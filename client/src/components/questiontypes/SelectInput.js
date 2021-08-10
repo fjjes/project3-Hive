@@ -63,11 +63,11 @@ const SelectInput = (props) => {
         return (
           <ul key={i}>
             <li
-              style={{
-                listStyleType: "none",
-                textAlign: "left",
-                marginLeft: "30px",
-              }}
+               style={{
+                 listStyleType: "none",
+                 textAlign: "left",
+                 marginLeft: "30px",
+               }}
             >
               {row.text}:&nbsp;
               <select value={row.value} onChange={(e) => handleChange(e, i)}>
