@@ -379,11 +379,18 @@ td {
   padding: 20px;
 }
 
+.survey-page {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .survey-page .closing{
+	display: grid;
+	justify-items: center;
   height:30vh;
   width:500px;
-  padding-left: 130px;
-  margin-top: 250px;
+  margin-top: 200px;
 }
 
 .btns {
