@@ -48,11 +48,11 @@ const ExportCSV = ({newDataList, fileName}) => {
             let answerStringOranswerArrays= Object.values(row.answers).map((ans)=> formatAnswers(ans)); 
             console.log("answerStringOranswerArrays:", answerStringOranswerArrays)
             
-        answerStringOranswerArrays.forEach((item, i)=>{//change i
+        answerStringOranswerArrays.forEach((item, j)=>{//change i
             // if(item[i]){
                 console.log("item", item)
                 if(typeof item === 'string'){
-                    csvRow[`Q${i+1}`]=item
+                    csvRow[`Q${j+1}`]=item
                 }
                 // console.log("befor the error:", Object.values(item[i]))
                 // if(Object.values(item[i]).isArray()){
