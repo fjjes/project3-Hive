@@ -402,7 +402,6 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                 <ul style={{listStyle: "none"}} {...provided.droppableProps} ref={provided.innerRef}>
                   {questions.map((questionBlock, index) => {
                     return (
-                      // change .questionType eventually
                       <Draggable key={questionBlock.id} draggableId={questionBlock.id} index={index}>
                         {(provided) => (
                           <div>
