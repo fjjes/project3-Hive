@@ -23,7 +23,13 @@ function RadioOne({ question, questionNumber }) {
   );
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
-      copyOptions(["Option1", "Option2", "Option3", "Option4", "Option5"])
+      copyOptions([
+        "Administration", 
+        "Sales Professional", 
+        "Specialist Management", 
+        "Senior Management", 
+        "Director"
+      ])
   );
 
   const onEditClicked = () => {

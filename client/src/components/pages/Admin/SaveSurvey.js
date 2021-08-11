@@ -89,12 +89,25 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     let question = "";
     switch (e.target.value) {
       case "radio":
-        answerOptions = ["Option1", "Option2", "Option3", "Option4", "Option5"];
+        answerOptions = [
+          "Administration", 
+          "Sales Professional", 
+          "Specialist Management", 
+          "Senior Management", 
+          "Director"
+        ];
         question = "What is your department or team?";
         break;
       case "checkbox":
-        answerOptions = ["Option1", "Option2", "Option3", "Option4", "Option5"];
-        question = "Select up to three options:";
+        answerOptions = [
+          "A work bubble/pod", 
+          "A room of silence to concentrate", 
+          "A project space or open creative space", 
+          "A nap room", 
+          "A work Station in a co-working place located outside the company",
+          "Other"
+        ];
+        question = "What spaces would you like to use that is not  currently offered by the company? You can select upto three spaces. If none of them interests you, please do not select anything.";
         break;
       case "matrix1":
         answerOptions = [
