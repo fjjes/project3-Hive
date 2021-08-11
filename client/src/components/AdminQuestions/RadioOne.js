@@ -24,7 +24,13 @@ function RadioOne({ question, questionNumber }) {
   );
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
-      copyOptions(["Option1", "Option2", "Option3", "Option4", "Option5"])
+      copyOptions([
+        "Administration", 
+        "Sales Professional", 
+        "Specialist Management", 
+        "Senior Management", 
+        "Director"
+      ])
   );
 
   const onEditClicked = () => {
@@ -127,6 +133,7 @@ function RadioOne({ question, questionNumber }) {
                   <RiIcons.RiDeleteBinFill /> 
                   </button>
                 </div>
+                
               ) : (
                 <div key={option}>
                   <input
@@ -140,6 +147,7 @@ function RadioOne({ question, questionNumber }) {
                 </div>
               );
             })}
+            {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
           </div>
         </div>
         <div className="edit-buttons-group">
@@ -147,7 +155,6 @@ function RadioOne({ question, questionNumber }) {
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

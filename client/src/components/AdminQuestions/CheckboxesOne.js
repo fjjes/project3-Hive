@@ -20,20 +20,18 @@ function CheckboxesOne({ question, questionNumber }) {
   const [inEditMode, setInEditMode] = useState({ status: false });
   const checkboxesOneOption = "";
   const [questionText, setQuestionText] = useState(
-    question.question || "Select up to three options:"
+    question.question || "What spaces would you like to use that is not  currently offered by the company? You can select upto three spaces. If none of them interests you, please do not select anything."
   );
 
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
-        "Option 1",
-        "Option 2",
-        "Option 3",
-        "Option 4",
-        "Option 5",
-        "Option 6",
-        "Option 7",
-        "Option 8",
+        "A work bubble/pod", 
+        "A room of silence to concentrate", 
+        "A project space or open creative space", 
+        "A nap room", 
+        "A work Station in a co-working place located outside the company",
+        "Other"
       ])
   );
 
@@ -138,6 +136,7 @@ function CheckboxesOne({ question, questionNumber }) {
                   </div>
                 );
               })}
+              {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
               {inEditMode.status ? (
                 <p style={{ color: "red" }}>
                   Note: the last option will always be a comment field.
@@ -151,7 +150,6 @@ function CheckboxesOne({ question, questionNumber }) {
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

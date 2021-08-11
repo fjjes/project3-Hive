@@ -15,6 +15,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
   const [version, setVersion] = useState("");
+  const [heading, setHeading] = useState("")
   const [narrative, setNarrative] = useState(
     "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
   );
@@ -33,6 +34,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       let data = await response.json();
       console.log("data:", data);
       setQuestions(data.questions);
+      setHeading(data.heading);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -87,12 +89,25 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     let question = "";
     switch (e.target.value) {
       case "radio":
-        answerOptions = ["Option1", "Option2", "Option3", "Option4", "Option5"];
+        answerOptions = [
+          "Administration", 
+          "Sales Professional", 
+          "Specialist Management", 
+          "Senior Management", 
+          "Director"
+        ];
         question = "What is your department or team?";
         break;
       case "checkbox":
-        answerOptions = ["Option1", "Option2", "Option3", "Option4", "Option5"];
-        question = "Select up to three options:";
+        answerOptions = [
+          "A work bubble/pod", 
+          "A room of silence to concentrate", 
+          "A project space or open creative space", 
+          "A nap room", 
+          "A work Station in a co-working place located outside the company",
+          "Other"
+        ];
+        question = "What spaces would you like to use that is not  currently offered by the company? You can select upto three spaces. If none of them interests you, please do not select anything.";
         break;
       case "matrix1":
         answerOptions = [
@@ -190,6 +205,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       surveyNumber,
       company,
       version,
+      heading,
       narrative,
       questions,
       createdDate: currentDate,
@@ -282,12 +298,12 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       {/* TOP PART OF PAGE */}
       <h2>
         {!rowId
-          ? "Build your own survey by choosing from the components on the left."
-          : "Edit your survey here."}
+          ? "Build your own survey by choosing from the components on the left"
+          : "Edit your survey here"}
       </h2>
       <form className="company-and-survey-name-inputs-and-error">
         <div className="company-and-survey-name-inputs">
-          <div className="company">
+          <div className="company col">
             <input
               name="company"
               id="company-name"
@@ -301,7 +317,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               <p>{validationErrorCompany}</p>
             </div>
           </div>
-          <div className="version">
+          <div className="version col">
             <input
               name="version"
               id="survey-version"
@@ -315,7 +331,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
               <p>{validationErrorVersion}</p>
             </div>
           </div>
-          <div className="surveyNumber">
+          <div className="surveyNumber col">
             <input
               name="surveyNumber"
               id="survey-number"
@@ -388,6 +404,14 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
+            <div className="intro-heading">
+              <input 
+                  type="text" 
+                  placeholder="Include a heading,    Ex: Hello ABCD executive Team!!"
+                  value={heading}
+                  onChange={(e)=>setHeading(e.target.value)}
+              />
+            </div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
