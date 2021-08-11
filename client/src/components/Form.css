@@ -276,6 +276,11 @@ h1 {
   font-size: 1.1rem;
 }
 
+/* MATRIX IS CURRENTLY TOO BIG TO FIT WITH A LARGER FONT SIZE :( */
+.matrix.question-component.user  * {
+  font-size: 0.6rem;
+}
+
 .narrative-component p {
   padding-bottom: 15px;
 }
