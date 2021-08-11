@@ -1,9 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
-import  QuestionContext from "../pages/Admin/QuestionContext"
-import * as BsIcons from "react-icons/bs";
-import * as GiIcons from "react-icons/gi";
-import * as MdIcons from "react-icons/md";
+import QuestionContext from "../pages/Admin/QuestionContext";
+import {
+  EditButton,
+  DeleteButton,
+  SaveButton,
+  CancelButton,
+  AddInputButton,
+} from "./AdminEditButtons";
 import * as RiIcons from "react-icons/ri";
+
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
+    return { text: option.text };
+  });
 
 const SelectOne = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
@@ -13,13 +22,14 @@ const SelectOne = ({ question, questionNumber }) => {
       "In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:"
   );
   const [answerOptions, setAnswerOptions] = useState(
-    question.answerOptions || [
-      { text: "Rethinking workspaces in the company" },
-      { text: "Review the organization of meetings Rethinking moments" },
-      { text: "Spaces of conviviality" },
-      { text: "Do not change anything" },
-      { text: "Other" },
-    ]
+    copyOptions(question.answerOptions) ||
+      copyOptions([
+        { text: "Rethinking workspaces in the company" },
+        { text: "Review the organization of meetings Rethinking moments" },
+        { text: "Spaces of conviviality" },
+        { text: "Do not change anything" },
+        { text: "Other" },
+      ])
   );
   const selectionOption = {};
 
@@ -34,35 +44,30 @@ const SelectOne = ({ question, questionNumber }) => {
     setInEditMode({ status: true });
   };
 
-  // const onSave = () => {
-  //   setQuestions(questions);
-  //   setQuestionText(questionText);
-  //   //   const previousQuestions=questions
-  //   //   previousQuestions[questionNumber]={}
-  //   //   setQuestion(previousQuestions)
-  //   //   console.log("clicked save", questions);
-  //   setInEditMode({ status: false });
-  // };
-
   const onSave = () => {
-    // setQuestions(questions);
     console.log("save!!!");
-      const previousQuestions=questions
-      previousQuestions[questionNumber]={question:questionText,answerOptions}
-      setQuestions(previousQuestions)
-      console.log("clicked save", questions);
+    setQuestions((questions) => {
+      const updatedQuestions = [...questions];
+      updatedQuestions[questionNumber - 1] = {
+        ...updatedQuestions[questionNumber - 1],
+        question: questionText,
+        answerOptions: copyOptions(answerOptions),
+      };
+      console.log("answerOption", answerOptions);
+      return [...updatedQuestions];
+    });
+    console.log("clicked save", questions);
     setInEditMode({ status: false });
   };
 
-  console.log("questions: ", questions); 
-  // console.log("questionText: ", questionText);
-  // console.log("answerOptions: ", answerOptions)
-  // console.log("answerOptions[0]: ", answerOptions[0])
-  // console.log("answerOptions[0].text: ", answerOptions[0].text)
+  console.log("questions: ", questions);
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    console.log(questions, answerOptions);
+    setQuestionText(questions[questionNumber - 1].question);
+    setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
 
   const onDelete = (e) => {
@@ -72,207 +77,117 @@ const SelectOne = ({ question, questionNumber }) => {
     setQuestions(deleteQuestion);
   };
 
-	const deleteOptions = () => {  //delete starts on the bottom
-		answerOptions.splice(answerOptions - 1, 1);
-		const deleteTheOptions = [...answerOptions];
-		setAnswerOptions(deleteTheOptions);
-		setInEditMode({ status: true });
-	};
+  const deleteOptions = (index) => {
+    console.log(index, "index", answerOptions);
+    let updatedAnswerOptions = answerOptions.filter(
+      (answer, answerIndex) => index !== answerIndex
+    );
+    setAnswerOptions(updatedAnswerOptions);
+    console.log(updatedAnswerOptions);
+  };
 
-
-  useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    setQuestions(newQuestionList);
-  }, [questionText]);
-
-  const OnAddInput = () => {
+  const onAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([
-      ...answerOptions,selectionOption
-    ]);
+    setAnswerOptions([...answerOptions, selectionOption]);
     console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
   };
   const onInputChange = (event, index) => {
-    const previousAnswerOptions = answerOptions;
-    previousAnswerOptions[index].text = event.target.value;
-    setAnswerOptions(previousAnswerOptions);
-    // console.log("answerOptions[index]: ", answerOptions[index])
+    setAnswerOptions((answer) => {
+      answer[index].text = event.target.value;
+      return answer;
+    });
+    console.log(questions[questionNumber - 1].answerOptions[index]);
+    console.log("input changes here");
   };
 
   useEffect(() => {
-    const newQuestionList = [...questions];
-    newQuestionList[questionNumber - 1] = {
-      ...newQuestionList[questionNumber - 1],
-      question: questionText,
-      // questionNumber,
-      answerOptions,
-    };
-    setQuestions(newQuestionList);
-  }, [answerOptions]);
+    onSave();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="selectOne question-component admin-question-component">
-      <button style={{ float: "right", width: "43px" }} onClick={onDelete}>
-        <RiIcons.RiDeleteBinFill />
-      </button>
-      <div className="edit-button">
-        <button
-          style={{ float: "right", width: "43px" }} 
-          className="clear-icn3"
-          title="Edit"
-          onClick={() => onEditClicked()}
-        >
-          <BsIcons.BsPencilSquare />
-        </button>
-        <span className="slash" style={{ color: "#fff" }}>
-          /
-        </span>
-      {/* </div> */}
-
-      <div>
+      <div className="question-and-buttons">
+        <div className="question-and-options side-border-line">
+          <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
-        <div className="edit-button2">
-              <button
-                className="clear icn1"
-                title="Save"
-                onClick={() => onSave()}
-              >
-                <GiIcons.GiSaveArrow />
-              </button>
-              <span className="slash" style={{ color: "#fff" }}>
-                /
-              </span>
-              <button
-                className="clear icn2"
-                title="Cancel"
-                onClick={() => onCancel()}
-              >
-                <MdIcons.MdCancel />
-              </button>
+            <textarea
+              type="text"
+              className="question-intro"
+              value={questionText}
+              style={{ height: "100px", width: "90%" }}
+              onChange={(e) => setQuestionText(e.target.value)}
+            />
+          ) : (
+            <p className="question-intro">{questionText}</p>
+          )}
 
-              <div className="edit-button">
-                <button
-                  className="clear icn4"
-                  title="Add"
-                  onClick={() => OnAddInput()}
-                >
-                  <BsIcons.BsFillPlusCircleFill />
-                </button>
-              </div>
+          {inEditMode.status
+            ? answerOptions.map((row, i) => {
+                return (
+                  <ul key={row.text}>
+                    <li style={{ listStyleType: "none", textAlign: "left" }}>
+                      <input
+                        id={row.text}
+                        defaultValue={row.text}
+                        style={{ width: row.text && row.text.length + "ch" }}
+                        onChange={(e) => onInputChange(e, i)}
+                      />
+                      :&nbsp;
+                      <select value={row.value}>
+                        <option>--Select--</option>
+                        {selectArray.map((selection, index) => {
+                          return (
+                            <option key={index} value={selection}>
+                              {selection}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <button className="delete-option-button" 
+                      onClick={() => deleteOptions(i)}>
+                        <RiIcons.RiDeleteBinFill /> 
+                      </button>
+                    </li>
+                  </ul>
+                );
+              })
+            : answerOptions.map((row, i) => {
+                return (
+                  <ul key={i}>
+                    <li style={{ listStyleType: "none", textAlign: "left" }}>
+                      {answerOptions[i].text}:&nbsp;
+                      <select value={row.value}>
+                        <option>--Select--</option>
+                        {selectArray.map((selection, index) => {
+                          return (
+                            <option key={index} value={selection}>
+                              {selection}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </li>
+                  </ul>
+                );
+              })}
+              {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
+        </div>
+        <div className="edit-buttons-group">
+          {inEditMode.status ? (
+            <div className="edit-button">
+              <SaveButton onSave={onSave} />
+              <CancelButton onCancel={onCancel} />
             </div>
           ) : (
-            <div> </div>
+            <div className="edit-button">
+              <EditButton onEditClicked={onEditClicked} />
+              <DeleteButton onDelete={onDelete} />
+            </div>
           )}
         </div>
-      <p className="question-intro">Q{questionNumber}.</p>
-      {inEditMode.status ? (
-        <textarea
-          type="text"
-          className="question-intro"
-          value={questionText}
-          placeholder={questionText}
-          style={{ height: "100px", width: "90%" }}
-          onChange={(e) => setQuestionText(e.target.value)}
-        />
-      ) : (
-        <p className="question-intro">{questionText}</p>
-      )}
-
-      {inEditMode.status
-        ? answerOptions.map((row, i) => {
-            return (
-              <ul key={i}>
-                <li style={{ listStyleType: "none", textAlign: "left" }}>
-                  <input
-                    id={row.text}
-                    defaultValue={row.text}
-                    placeholder={row.text}
-                    style={{ width: row.text && row.text.length + "ch" }}
-                    onChange={(e) => onInputChange(e, i)}
-                  />
-                  :&nbsp;
-                  <select value={row.value}>
-                    <option>--Select--</option>
-                    {selectArray.map((selection, index) => {
-                      return (
-                        <option key={index} value={selection}>
-                          {selection}
-                        </option>
-                      );
-                    })}
-                  </select>
-								<button onClick={deleteOptions}>delete</button>
-                </li>
-              </ul>
-            );
-          })
-        : answerOptions.map((row, i) => {
-            return (
-              <ul key={i}>
-                <li style={{ listStyleType: "none", textAlign: "left" }}>
-                  {answerOptions[i].text}:&nbsp;
-                  <select value={row.value}>
-                    <option>--Select--</option>
-                    {selectArray.map((selection, index) => {
-                      return (
-                        <option key={index} value={selection}>
-                          {selection}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </li>
-              </ul>
-            );
-          })}
-
-      {/* {inEditMode.status ? (
-        <div className="edit-button">
-          <button className="clear icn1" title="Save" onClick={() => onSave()}>
-            <GiIcons.GiSaveArrow />
-          </button>
-          <span className="slash" style={{ color: "#fff" }}>
-            /
-          </span>
-          <button
-            className="clear icn2"
-            title="Cancel"
-            onClick={() => onCancel()}
-          >
-            <MdIcons.MdCancel />
-          </button>
-
-          <div className="edit-button">
-            <button
-              className="clear icn4"
-              title="Add"
-              onClick={() => OnAddInput()}
-            >
-              <BsIcons.BsFillPlusCircleFill />
-            </button>
-          </div>
-        </div>
-      ) : (
-        // </div>
-        <div className="edit-button">
-          {/* <button
-                className="clear icn3"
-                title="Edit"
-                onClick={() => onEditClicked()}
-              >
-                <BsIcons.BsPencilSquare />
-              </button> */}
-          {/* <span className="slash" style={{ color: "#fff" }}>
-            /
-          </span> */}
-        </div>
+      </div>
     </div>
   );
 };

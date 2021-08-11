@@ -2,13 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 function Checkboxes({ questionNumber, question, texts }) {
-  const { answers, setAnswers } = useContext(AnswerContext);
+  const { answers, setAnswers, setValidationErrorMessage } = useContext(AnswerContext);
   const [options, setOptions] = useState(
     texts.map((option) => ({ value: option, checked: false }))
   );
 
   const [disabled, setDisabled] = useState(false);
-  const [error, setError] = useState("");
   const [other, setOther] = useState({ value: "" });
 
   let checkedArray = [];
@@ -32,13 +31,14 @@ function Checkboxes({ questionNumber, question, texts }) {
     setOptions(newOptions);
     if (numberCount > 2) {
       setDisabled(true);
-      setError("Only select 3!"); // Store and pull the max number in from DB??
+      // No error message needed since it doesn't allow them to select more than 3.
+      setValidationErrorMessage(""); 
     } else {
       setDisabled(false);
-      setError("");
+      setValidationErrorMessage("");
     }
     let updateAnswers = { ...answers };
-    updateAnswers[questionNumber] = { options: newOptions, other: other };
+    updateAnswers[questionNumber] = { options: newOptions, other: other, questionType:'checkbox'};
     setAnswers(updateAnswers);
   };
 
@@ -57,12 +57,10 @@ function Checkboxes({ questionNumber, question, texts }) {
   }, [answers, questionNumber]);
 
   return (
-    <div className="question-component">
+    <div className="checkbox question-component user">
       <form className="checkbox-form-control">
-        <p className="question-intro">Q{questionNumber}.</p>
-        <span>
-          <p className="question-intro">{question}</p>
-        </span>
+        <p className="question-intro">Question {questionNumber}</p>
+        <p className="question-intro">{question}</p>
         <div className="checkbox-form-group">
           {options.map((option, index) => {
             return (
@@ -97,7 +95,6 @@ function Checkboxes({ questionNumber, question, texts }) {
             );
           })}
         </div>
-        <div style={{ color: "red" }}>{error}</div>
       </form>
     </div>
   );

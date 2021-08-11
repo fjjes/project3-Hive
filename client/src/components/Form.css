@@ -5,6 +5,34 @@ color: #f59645; MAIN ORANGE
 color: #bce6f8; Light blueish-grey
 color: #575759; Dark grey from logo text */
 
+header {
+	display: flex;
+	align-items: center;
+	/* position: relative; */
+	height: 100px;
+	width: 100%;
+	margin-top: 2px;
+	background-color: #f5f5f5;
+	box-shadow: -7px -7px 17px #fff,
+	7px 7px 10px rgba(70, 70, 70, 0.15);
+	box-sizing: border-box;
+}
+
+.hive-tagline {
+	margin-left: 10px;
+	padding: 19px 20px;
+	border-radius: 10px;
+	box-shadow: -3px -3px 10px #ffffff,
+							3px 3px 5px #bfbfc0;	
+	width: 37%;
+}
+
+.progress-survey {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -13,6 +41,11 @@ color: #575759; Dark grey from logo text */
 h1 {
   padding: 20px 0;
   text-align: center;
+}
+
+.question-component {
+	height: 300px;
+	width: 800px;
 }
 
 .admin-portal-button {
@@ -51,9 +84,10 @@ h1 {
 }
 
 .slider p {
+	display: flex;
+	align-items: center;
   font-size: 1rem;
   height: auto;
-  font-size: 1em;
   padding: 0px;
   margin: auto 0;
   text-align: start;
@@ -78,8 +112,8 @@ h1 {
 
 .totalcount p {
   padding: 0px 10px 0px 0px;
-  margin-top: 2px;
   color: rgb(105, 105, 105);
+	margin: 2px 2px 0px 0px;
 }
 
 .totalcount {
@@ -140,8 +174,46 @@ h1 {
 }
 
 .slider button:disabled {
-  background-color: grey;
+	background-color: grey;
 }
+
+.radio.question-component {
+	display: grid;
+}
+
+
+.matrix.question-component {
+	display: grid;
+}
+
+.admin-question-component {
+  height: auto;
+  width: auto;
+}
+
+.postal-code-question-component {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
+	width: 800px;
+	
+}
+
+.comment.question-component {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.checkbox.question-component {
+	display: flex;
+  align-items: flex-end;
+}
+
+
 
 .question-component p,
 .question-component span,
@@ -166,10 +238,9 @@ h1 {
 .question-component textarea {
   /* comments */
   outline: none;
-  font-family: "Poppins", sans-serif;
   padding: 7px;
   width: 400px;
-  color: rgb(107, 106, 106);
+  color: rgb(121, 121, 121);
   border: none;
   border-radius: 10px;
   background-color: rgb(238, 237, 237);
@@ -179,10 +250,9 @@ h1 {
 .postal-code-question-component input {
   text-align: center;
   outline: none;
-  font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   color: rgb(107, 106, 106);
-  padding: 6px;
+  padding: 10px;
   width: 200px;
   border: none;
   border-radius: 10px;
@@ -190,19 +260,32 @@ h1 {
   box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
 }
 
+
 .question-intro {
   padding-top: 0px;
   font-size: 1.1em;
+  font-weight: bold;
+  padding-bottom: 20px !important;
 }
 
 .question-number {
   font-weight: bold;
-  padding-bottom: 0px;
+}
+
+/* ADJUST THIS TO CHANGE THE FONT SIZE OF ALL THE USER-SIDE SURVEY CARDS (not including error messages/buttons/progress bar) */
+.question-component.user  * {
+  font-size: 1.1rem;
+}
+
+/* MATRIX IS CURRENTLY TOO BIG TO FIT WITH A LARGER FONT SIZE :( */
+.matrix.question-component.user  * {
+  font-size: 0.6rem;
 }
 
 .narrative-component p {
   padding-bottom: 15px;
 }
+
 
 .checkbox-form-group input {
   margin-right: 5px;
@@ -221,19 +304,24 @@ td {
 
 .matrix .label-rows {
   text-align: start;
+	height: 35px;
 }
 
+.matrix-table tr:nth-child(even) {background: #CCC}
+
 .radio label {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .progress {
-  background-color: #d8d8d8;
+  background-color: #cccccc;
   border-radius: 20px;
   position: relative;
-  margin: 15px 0;
+  margin: 25px 0px 5px 0px;
   height: 30px;
-  width: 300px;
+  width: 800px;
+	/* box-shadow: inset -7px -7px 20px 0 rgba(255, 255, 255, 1),
+							inset -7px -7px 20px 0 rgba(255, 255, 255, 0.719); */
 }
 
 .progress-done {
@@ -252,7 +340,6 @@ td {
 /* s */
 
 .survey-page button {
-  font-family: "Poppins", sans-serif;
   font-weight: bolder;
   color: white;
   outline: none;
@@ -287,16 +374,32 @@ td {
 .survey-card {
   background-color: #f5f5f5;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+	overflow: hidden;
   align-items: center;
   position: relative;
-  margin: 120px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
   width: 800px;
   height: 500px;
+	border-radius: 10px;
   /* box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2); */
   box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
     -8px -8px 12px 0 rgb(255, 255, 255);
   padding: 20px;
+}
+
+.survey-page {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.survey-page .closing{
+	display: grid;
+	justify-items: center;
+  height:30vh;
+  width:500px;
+  margin-top: 200px;
 }
 
 .btns {
@@ -313,4 +416,19 @@ td {
 
 .row {
   margin-top: 50px;
+}
+
+/* Validation Errors */
+.validation-error {
+  display: flex;
+  color: red;
+  margin: 30px 0 10px 0;
+  justify-content: flex-end;
+  height: 20px;
+}
+
+.validation-error p {
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
 }

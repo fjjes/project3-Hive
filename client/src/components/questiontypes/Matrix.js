@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 import "../Form.css";
 
-const Matrix = (props, questionNumber) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+const Matrix = (props) => {
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [values, setValues] = useState(props.texts);
 
@@ -37,10 +37,13 @@ const Matrix = (props, questionNumber) => {
     }
     if (allHaveValues) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("Please select one option from each row.")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
   useEffect(() => {
@@ -53,12 +56,10 @@ const Matrix = (props, questionNumber) => {
   }, []);
 
   return (
-    <div className="matrix question-component">
-      <p className="question-intro">Q{props.questionNumber}.</p>
-      <span>
-        <p className="question-intro">{props.question}</p>
-      </span>
-      <table>
+    <div className="matrix question-component user">
+      <p className="question-intro">Question {props.questionNumber}</p>
+      <p className="question-intro">{props.question}</p>
+      <table className="matrix-table">
         <tbody>
           <tr>
             <th></th>

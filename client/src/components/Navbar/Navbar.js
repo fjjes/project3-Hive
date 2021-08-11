@@ -1,21 +1,23 @@
-import React from 'react';
-// import logo from '../../images/hivetagline2.png'
+import logo from "../../images/hiveicon.png";
 import {Nav, NavLink, Bars, NavMenu, NavBtnLink} from './NavbarElements';
+// import "./AdminPortal.css";
 
 const Navbar = () => {
   return (
     <div className="navbar">
       <Nav>
-        {/* <NavLink to='/'>
-          <img src={logo} alt="logo"  style={{ width:'50%', alignItems:'flex-start'}}/>
-        </NavLink> */}
+        <NavLink to='/'>
+					<h1 style={{color: "white"}}>Admin Portal</h1>
+					<img src={logo} alt="Hive logo" className="admin-logo" />
+        </NavLink>
         <Bars />
         <NavMenu>
           {/* <NavLink to='/' activeStyle>Home</NavLink> */}
           <NavLink to='/create-new' activeStyle={{color:"#f59645"}}>Create New</NavLink>
-          <NavLink to='/find-list' activeStyle={{color:"#f59645"}}>Find Surveys</NavLink>
-          <NavLink to='/data-vis' activeStyle={{color:"#f59645"}}>Data Visualization</NavLink>
-          <NavBtnLink to='/sign-out'>Sign out</NavBtnLink>
+          <NavLink to='/find-list' activeStyle={{color:"#f59645"}}>Existing Surveys</NavLink>
+          <NavLink to='/survey-answers' activeStyle={{color:"#f59645"}}>Data Collected</NavLink>
+          <NavLink to='/data-visual' activeStyle={{color:"#f59645"}}>Data Visualization</NavLink>
+          <NavBtnLink to='/'>Logout</NavBtnLink>
         </NavMenu>
       </Nav>
     </div>

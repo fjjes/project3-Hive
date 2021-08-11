@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import QuestionContext from "../pages/Admin/QuestionContext";
-import "../pages/Admin/AdminPortal.css";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 import {
   EditButton,
   DeleteButton,
@@ -15,32 +16,32 @@ const copyOptions = (originalOptions) =>
     return option;
   });
 
-function RadioOne({ question, questionNumber }) {
+const SliderOne = ({ question, questionNumber }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const radioOption = "";
   const [questionText, setQuestionText] = useState(
-    question.question || "What is your department or team?"
+    question.question ||
+      "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
   );
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
-        "Administration", 
-        "Sales Professional", 
-        "Specialist Management", 
-        "Senior Management", 
-        "Director"
+        "Home",
+        "Traveling",
+        "At the office",
+        "In the client's office",
+        "Elsewhere",
       ])
   );
+
+  const selectionOption = "";
 
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
   };
-  console.log("questions in radio", questions);
 
   const onSave = () => {
-    console.log("save!!!");
     setQuestions((questions) => {
       const updatedQuestions = [...questions];
       updatedQuestions[questionNumber - 1] = {
@@ -58,11 +59,13 @@ function RadioOne({ question, questionNumber }) {
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    console.log(questions, answerOptions);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
 
-  const onDelete = () => {
+  const onDelete = (e) => {
+    e.preventDefault();
     questions.splice(questionNumber - 1, 1);
     const deleteQuestion = [...questions];
     setQuestions(deleteQuestion);
@@ -79,8 +82,8 @@ function RadioOne({ question, questionNumber }) {
 
   const onAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, radioOption]);
-    console.log("answer", answerOptions);
+    setAnswerOptions([...answerOptions, selectionOption]);
+    console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -99,56 +102,72 @@ function RadioOne({ question, questionNumber }) {
   }, []);
 
   return (
-    <div className="radio-one question-component admin-question-component">
+    <div className="question-component admin-question-component">
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
-            <input
+            <textarea
               type="text"
+              className="question-intro"
               value={questionText}
+              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
             <p className="question-intro">{questionText}</p>
           )}
-          <div className="questionText">
-            {answerOptions.map((option, index) => {
-              return inEditMode.status ? (
-                <div key={option}>
+          {answerOptions.map((row, index) => {
+            return inEditMode.status ? (
+              <div key={row} className="slider-admin">
+                <div className="slider-admin-edit">
                   <input
-                    type="radio"
-                    id={option}
-                    name="option-group"
-                    color="primary"
-                  />
-                  <input
-                    defaultValue={option}
+                    defaultValue={row}
                     onChange={(e) => onInputChange(e, index)}
                   />
-                  <button
-                    className="delete-option-button"
-                    onClick={() => deleteOptions(index)}
-                  >
-                  <RiIcons.RiDeleteBinFill /> 
-                  </button>
                 </div>
-                
-              ) : (
-                <div key={option}>
-                  <input
-                    type="radio"
-                    id={option}
-                    name="option-group"
-                    color="primary"
-                    // onChange={(e) => setQuestion(e.target.value)}
-                  />
-                  <label>{option}</label>
-                </div>
-              );
-            })}
-            {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
-          </div>
+                <Slider
+                  ariaLabelledbyForHandle="input-slider"
+                  step={5}
+                  min={0}
+                  max={100}
+                />
+                <input
+                  className="input"
+                  type="number"
+                  step={5}
+                  min={0}
+                  max={100}
+                  aria-labelledby="input-slider"
+                />
+                <button
+                  className="delete-option-button"
+                  onClick={() => deleteOptions(index)}
+                >
+                <RiIcons.RiDeleteBinFill /> 
+                </button>
+              </div>
+            ) : (
+              <div key={row} className="slider-admin">
+                <p>{row}</p>
+                <Slider
+                  ariaLabelledbyForHandle="input-slider"
+                  step={5}
+                  min={0}
+                  max={100}
+                />
+                <input
+                  className="input"
+                  type="number"
+                  step={5}
+                  min={0}
+                  max={100}
+                  aria-labelledby="input-slider"
+                />
+              </div>
+            );
+          })}
+          {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
         </div>
         <div className="edit-buttons-group">
           {inEditMode.status ? (
@@ -166,6 +185,6 @@ function RadioOne({ question, questionNumber }) {
       </div>
     </div>
   );
-}
+};
 
-export default RadioOne;
+export default SliderOne;

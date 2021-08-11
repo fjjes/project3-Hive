@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
+import * as GrIcons from "react-icons/gr";
 
 const FindSurvey = (props) => {
   const history=useHistory();
@@ -11,6 +12,7 @@ const FindSurvey = (props) => {
   const [searchInputNumber, setSearchInputNumber] = useState("");
 
   props.resetRowId();
+  props.resetCopyOrOriginal();
 
   function onSearchInputChange(event, setFunction) {
     console.log(
@@ -47,7 +49,7 @@ const FindSurvey = (props) => {
   return (
     <div className="list-table">
       <h2>Find an Existing Survey</h2>
-      <button className="view-all-button">View all surveys</button>
+      {/* <button className="view-all-button">View all surveys</button>
 
       <input
         id="search-by-company"
@@ -62,7 +64,7 @@ const FindSurvey = (props) => {
         value={searchInputNumber}
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
-      />
+      /> */}
       <table>
         <tbody>
           <tr>
@@ -82,23 +84,39 @@ const FindSurvey = (props) => {
                   <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
                 </td>
                 <td>
-                  <button 
+                  <Link 
+                    to="/create-new"
                     className="icon3" 
                     title="Edit" 
-                    onClick={()=>history.push(`/edit-survey/${row._id}`)}>
+                    style={{ color: "black" }}
+                    // onClick={()=>history.push(`/create-new/${row._id}`)}>
+                    onClick={() => {
+                        props.setCopyOrOriginal("original");
+                        props.setRowId(row._id);
+                    }}>
                     <BsIcons.BsPencilSquare />
-                  </button>
+                  </Link>
                   <span className="slash" style={{ color: "#fff" }}>/</span> 
                   <Link
                     to="/create-new"
                     className="icon5"
                     title="Copy"
                     style={{ color: "black" }}
-                    onClick={() => props.setRowId(row._id)}>
+                    onClick={() => {
+                      props.setCopyOrOriginal("copy");
+                      props.setRowId(row._id)
+                    }}>
                     <ImIcons.ImCopy />
                   </Link>
+                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <button 
+                    className="icon4" 
+                    title="toMap"
+                    onClick={()=>history.push(`/map/${row._id}`)}>
+                    <GrIcons.GrMap/>
+                    </button>
                   <span className="slash" style={{ color: "#fff" }}>/</span>
-                  <button className="icon4" title="Delete"
+                  <button className="icon5" title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
                     <RiIcons.RiDeleteBinFill />
                   </button>

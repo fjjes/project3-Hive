@@ -1,48 +1,64 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginPage from "./components/pages/Login/LoginPage";
 import AdminPortal from "./components/pages/Admin/AdminPortal";
-import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
-import Logo from "./components/pages/LandingPage/Logo";
+// import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
+import SurveyLandingPage from "./components/pages/LandingPage/SurveyLandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
+import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
+import SurveyAnswersPage from "./components/pages/Admin/SurveyAnswersPage";
 import "./App.css";
+
 
 function App() {
   const [rowId, setRowId] = useState();
+  const [copyOrOriginal, setCopyOrOriginal] = useState();
 
   const resetRowId = () => {
     setRowId()
   }
 
+  const resetCopyOrOriginal = () => {
+    setCopyOrOriginal()
+  }
+
   return (
-    <div className="App">
       <Router>
         <Switch>
+        <Route exact path="/">
+            <LoginPage />
+          </Route>
           <Route path="/survey/:surveyId">
-            <Logo />
+            <SurveyLandingPage />
           </Route>
           <div>
             <Navbar />
-            <Route exact path="/create-new">
-              <AdminPortal rowId={rowId} />
-            </Route>
+            
+              <Route exact path="/create-new">
+              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
+              </Route>
+            
             <Route path="/find-list">
-              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} />
+              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
             </Route>
-            <Route exact path="/edit-survey/:surveyId">
+          
+            {/* <Route exact path="/edit-survey/:surveyId">
               <AdminPortalEdit/>
+            </Route> */}
+            <Route path="/map/:surveyId">
+              <Map/>
             </Route>
-            <Route path='/data-vis'>
+            <Route path="/data-visual">
               <DataVisualization/>
             </Route>
-            <Route exact path="/">
-              <AdminPortal />
+            <Route path="/survey-answers">
+              <SurveyAnswersPage/>
             </Route>
           </div>
         </Switch>
       </Router>
-    </div>
   );
 }
 

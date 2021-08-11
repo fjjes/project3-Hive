@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 const Comment = ({ questionNumber, question }) => {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
+  
+  setValidationErrorMessage("")
 
   const handleChange = (e) => {
     let updateAnswers = { ...answers };
@@ -13,16 +15,14 @@ const Comment = ({ questionNumber, question }) => {
 
   useEffect(() => {
     setIsNextButtonDisabled(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
+    <div className="comment question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       <textarea
-        style={{ marginLeft: "90px" }}
         rows="4"
         cols="50"
         label="comment"
