@@ -44,7 +44,7 @@ const CancelButton = ({ onCancel }) => {
 const AddInputButton = ({ onAddInput }) => {
   return (
     <div className="edit-button">
-      <button title="Add" onClick={() => onAddInput()}>
+      <button className="add-option" title="Add" onClick={() => onAddInput()}>
         <BsIcons.BsFillPlusCircleFill />
         &nbsp; Add Option
       </button>

@@ -450,6 +450,9 @@ width:21.5%;
   text-align: left;
   width: 105px;
 }
+.edit-button .add-option{
+  width: auto;
+}
 
 .slider-admin {
   display: grid;
