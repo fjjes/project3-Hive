@@ -43,11 +43,9 @@ function RadioButtons({ questionNumber, question, texts }) {
   }, []);
 
   return (
-    <div className="radio question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
+    <div className="radio question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       {texts.map((option, index) => {
         return (
           <div key={index}>

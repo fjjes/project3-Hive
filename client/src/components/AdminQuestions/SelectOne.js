@@ -7,9 +7,10 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return { text: option.text };
   });
 
@@ -109,7 +110,7 @@ const SelectOne = ({ question, questionNumber }) => {
     <div className="selectOne question-component admin-question-component">
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
-          <p className="question-intro">Q{questionNumber}.</p>
+          <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
             <textarea
               type="text"
@@ -144,7 +145,10 @@ const SelectOne = ({ question, questionNumber }) => {
                           );
                         })}
                       </select>
-                      <button className="delete-option-button" onClick={() => deleteOptions(i)}>delete</button>
+                      <button className="delete-option-button" 
+                      onClick={() => deleteOptions(i)}>
+                        <RiIcons.RiDeleteBinFill /> 
+                      </button>
                     </li>
                   </ul>
                 );

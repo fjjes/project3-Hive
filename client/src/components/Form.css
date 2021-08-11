@@ -84,9 +84,10 @@ h1 {
 }
 
 .slider p {
+	display: flex;
+	align-items: center;
   font-size: 1rem;
   height: auto;
-  font-size: 1em;
   padding: 0px;
   margin: auto 0;
   text-align: start;
@@ -111,8 +112,8 @@ h1 {
 
 .totalcount p {
   padding: 0px 10px 0px 0px;
-  margin-top: 2px;
   color: rgb(105, 105, 105);
+	margin: 2px 2px 0px 0px;
 }
 
 .totalcount {
@@ -237,7 +238,6 @@ h1 {
 .question-component textarea {
   /* comments */
   outline: none;
-  font-family: "Poppins", sans-serif;
   padding: 7px;
   width: 400px;
   color: rgb(121, 121, 121);
@@ -250,7 +250,6 @@ h1 {
 .postal-code-question-component input {
   text-align: center;
   outline: none;
-  font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   color: rgb(107, 106, 106);
   padding: 10px;
@@ -265,11 +264,22 @@ h1 {
 .question-intro {
   padding-top: 0px;
   font-size: 1.1em;
+  font-weight: bold;
+  padding-bottom: 20px !important;
 }
 
 .question-number {
   font-weight: bold;
-  padding-bottom: 0px;
+}
+
+/* ADJUST THIS TO CHANGE THE FONT SIZE OF ALL THE USER-SIDE SURVEY CARDS (not including error messages/buttons/progress bar) */
+.question-component.user  * {
+  font-size: 1.1rem;
+}
+
+/* MATRIX IS CURRENTLY TOO BIG TO FIT WITH A LARGER FONT SIZE :( */
+.matrix.question-component.user  * {
+  font-size: 0.6rem;
 }
 
 .narrative-component p {
@@ -300,7 +310,7 @@ td {
 .matrix-table tr:nth-child(even) {background: #CCC}
 
 .radio label {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .progress {
@@ -330,7 +340,6 @@ td {
 /* s */
 
 .survey-page button {
-  font-family: "Poppins", sans-serif;
   font-weight: bolder;
   color: white;
   outline: none;
@@ -379,11 +388,18 @@ td {
   padding: 20px;
 }
 
+.survey-page {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .survey-page .closing{
+	display: grid;
+	justify-items: center;
   height:30vh;
   width:500px;
-  padding-left: 130px;
-  margin-top: 250px;
+  margin-top: 200px;
 }
 
 .btns {

@@ -8,9 +8,10 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return option;
   });
 
@@ -102,7 +103,7 @@ function CheckboxesOne({ question, questionNumber }) {
     <div className="question-component admin-question-component">
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
-          <p className="question-intro">Q{questionNumber}.</p>
+          <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
             <input
               type="text"
@@ -125,8 +126,7 @@ function CheckboxesOne({ question, questionNumber }) {
                     <button
                       className="delete-option-button"
                       onClick={() => deleteOptions(index)}
-                    >
-                      delete
+                    ><RiIcons.RiDeleteBinFill /> 
                     </button>
                   </div>
                 ) : (

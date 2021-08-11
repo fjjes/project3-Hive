@@ -8,9 +8,10 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return { text: option.text };
   });
 const MatrixOne = ({ question, questionNumber }) => {
@@ -127,7 +128,7 @@ const MatrixOne = ({ question, questionNumber }) => {
     <div className="question-component admin-question-component matrix">
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
-          <p className="question-intro">Q{questionNumber}.</p>
+          <p className="question-intro">Question {questionNumber}</p>
 
           {inEditMode.status ? (
             <input
@@ -171,7 +172,7 @@ const MatrixOne = ({ question, questionNumber }) => {
                         })}
                         <td>
                           <button className="delete-option-button" onClick={() => deleteOptions(i)}>
-                            delete
+                          <RiIcons.RiDeleteBinFill /> 
                           </button>
                         </td>
                       </>
