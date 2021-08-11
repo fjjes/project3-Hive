@@ -45,38 +45,40 @@ const ExportCSV = ({newDataList, fileName}) => {
                 Answered_date: answeredDate
             }
             console.log("row.answers", row.answers)
-     
-            let answerStringOranswerArrays= row.answers.map((ans)=> formatAnswers(ans)); 
+
+        let answersArray= questionList.map((question, ind)=>{
+            if(row.answers[ind+1]){
+                return row.answers[ind+1]
+            }else{
+                return null
+            }
+        })
+            let answerStringOranswerArrays= answersArray.map((ans)=> formatAnswers(ans)); 
             console.log("answerStringOranswerArrays:", answerStringOranswerArrays)
         answerStringOranswerArrays.forEach((item, index)=>{
            if(item){
-                // if(item[i]){
-                    // let item= answerStringOranswerArrays[index]
-                    console.log("item", item)
-                    if(typeof item === 'string'){
-                        csvRow[`Q${index+1}`]=item
-                    }else if(typeof item === 'object'){
-                        if(questionList[index].questionType === 'checkbox'){
-                            for(let ansIndex=0; ansIndex<3; ansIndex++){
-                                // item.forEach((itm)=>{
-                                if(ansIndex<item.length){
-                                    csvRow[`Q${(index+1)}-${ansIndex+1}`]=item[ansIndex]
-                                }else{
-                                    csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""
-                                }
-
-                                // })
+                console.log("item", item)
+                if(typeof item === 'string'){
+                    csvRow[`Q${index+1}`]=item
+                }else if(typeof item === 'object'){
+                    if(questionList[index].questionType === 'checkbox'){
+                        for(let ansIndex=0; ansIndex<3; ansIndex++){
+                            if(ansIndex<item.length){
+                                csvRow[`Q${(index+1)}-${ansIndex+1}`]=item[ansIndex]
+                            }else{
+                                csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""
                             }
-                        }else{
-                            questionList[index].answerOptions.forEach((option)=>{
-                                console.log("optionText:", option.text)
-                                item.forEach((itm)=>{
-                                    csvRow[`Q${(index+1)}-${option?.text}`]=itm
-
-                                })
-                            })
                         }
+                    }else{
+                        questionList[index].answerOptions.forEach((option)=>{
+                            console.log("optionText:", option.text)
+                            item.forEach((itm)=>{
+                                csvRow[`Q${(index+1)}-${option?.text}`]=itm
+
+                            })
+                        })
                     }
+                }
            }else{
                if(questionList[index].questionType ==="checkbox"){
                     for(let ansIndex=0; ansIndex<3; ansIndex++){
