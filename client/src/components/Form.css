@@ -84,9 +84,10 @@ h1 {
 }
 
 .slider p {
+	display: flex;
+	align-items: center;
   font-size: 1rem;
   height: auto;
-  font-size: 1em;
   padding: 0px;
   margin: auto 0;
   text-align: start;
@@ -111,8 +112,8 @@ h1 {
 
 .totalcount p {
   padding: 0px 10px 0px 0px;
-  margin-top: 2px;
   color: rgb(105, 105, 105);
+	margin: 2px 2px 0px 0px;
 }
 
 .totalcount {
