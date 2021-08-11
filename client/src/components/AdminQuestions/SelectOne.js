@@ -7,9 +7,10 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return { text: option.text };
   });
 
@@ -144,7 +145,10 @@ const SelectOne = ({ question, questionNumber }) => {
                           );
                         })}
                       </select>
-                      <button className="delete-option-button" onClick={() => deleteOptions(i)}>delete</button>
+                      <button className="delete-option-button" 
+                      onClick={() => deleteOptions(i)}>
+                        <RiIcons.RiDeleteBinFill /> 
+                      </button>
                     </li>
                   </ul>
                 );
@@ -168,13 +172,13 @@ const SelectOne = ({ question, questionNumber }) => {
                   </ul>
                 );
               })}
+              {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
         </div>
         <div className="edit-buttons-group">
           {inEditMode.status ? (
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

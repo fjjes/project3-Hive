@@ -1,6 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap"); */
-/* @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap'); */
-
 /* ADJUST THESE IMPORT/FONT-FAMILY LINES TO CHANGE THE FONT THROUGHOUT THE APP */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
@@ -15,6 +12,7 @@
 }
 
 /* END OF FONT OPTIONS */
+
 
 
 /*......... Added with Navbar........ */
@@ -57,7 +55,9 @@ body {
   font-size: 15px;
   background-color: #f3f3f3;
   /* margin: 20px, 10px, 10px, 20px; */
-  display: grid;
+  /* display: flex;
+	flex-direction: column;
+	align-items: center; */
   /* height: 100vh; */
   place-items: center;
 }

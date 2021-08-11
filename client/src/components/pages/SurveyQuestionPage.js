@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SurveyQuestion from "../SurveyQuestion";
 import Progress from "../Progress";
+import logo from '../../images/hivetagline2.png'
 
 export const AnswerContext = React.createContext({
   setDisabled: () => {},
@@ -91,8 +92,13 @@ useEffect(()=>{
 
   return (
     <div className="survey-page">
+			<header>
+				<nav>
+					<img className="hive-tagline" src={logo}></img>
+				</nav>
+			</header>
       {endSurvey === false ? (
-        <div>
+        <div className="progress-survey">
           <Progress done={progressBarDone} />
           <div className="survey-card">
             <div className="the-survey">

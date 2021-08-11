@@ -8,9 +8,10 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return { text: option.text };
   });
 
@@ -156,7 +157,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
                         })}
                         <td>
                           <button className="delete-option-button" onClick={() => deleteOptions(i)}>
-                            delete
+                          <RiIcons.RiDeleteBinFill /> 
                           </button>
                         </td>
                       </tr>
@@ -180,13 +181,13 @@ const MatrixTwo = ({ question, questionNumber }) => {
                   })}
             </tbody>
           </table>
+          {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
         </div>
         <div className="edit-buttons-group">
           {inEditMode.status ? (
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

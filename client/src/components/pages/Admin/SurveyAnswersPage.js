@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ExportCSV from './ExportCSV';
 import moment from "moment";
 import './AdminPortal.css'
 
@@ -8,7 +9,9 @@ const SurveyAnswersPage =()=>{
     // const [displayTable, setDisplayTable]=useState(false)
     // const [count, setCount]=useState(0)
     // const [surveyId, setSurveyId]=useState()
-    let surveyId="60dca10c89301e61da23c478"
+    const [dataCollected, setDataCollected]=useState([])
+    const fileName = 'table1';
+    let surveyId="60dca10c89301e61da23c478";
 
     const getSurveyList = async ()=>{
         let response = await fetch("/api/survey")
@@ -37,6 +40,7 @@ const SurveyAnswersPage =()=>{
 
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
+            setDataCollected(filteredData)
         }
         getAnswers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,9 +75,9 @@ const SurveyAnswersPage =()=>{
     const getTextStringsFromAnswer=(ans)=>{
         if(ans){
             if(typeof ans === "object"){
-                // if(ans?.questionType==='slider'){
-                //     return "slider text"
-                // }
+                if(ans?.questionType==='slider'){
+                    return null
+                }
                     // console.log('obj',Object.values(ans).map(value=>value.text))
                     return Object.values(ans).map(value => getTextStringsFromAnswer(value.text))
             } 
@@ -116,7 +120,7 @@ const SurveyAnswersPage =()=>{
                 </div>
               
                 <h3 className="record-num">Number of answer records of this Survey:<span className="count">{newDataList?.length}</span></h3>
-                <button className="export">Export to Excel</button>
+                <ExportCSV csvData={dataCollected} fileName={fileName}/>
             </div>
             
 
@@ -159,8 +163,8 @@ const SurveyAnswersPage =()=>{
                                                         
                                                         <td className="data-text" key={i}>
                                                             { i === 0 ?
-                                                            <table>
-                                                                <tbody>
+                                                            <td>
+                                                          
                                                                 <tr>
                                                                    { getTextStringsFromAnswer(ans).map((textCol, x)=>{
                                                                        return(
@@ -177,8 +181,7 @@ const SurveyAnswersPage =()=>{
 
                                                                    }
                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                                            </td>
                                                             :
                                                             <tr>
                                                                     {getValueStringsFromAnswer(ans).map((col, ind)=>{

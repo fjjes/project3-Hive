@@ -59,46 +59,46 @@ const Matrix = (props) => {
     <div className="matrix question-component user">
       <p className="question-intro">Question {props.questionNumber}</p>
       <p className="question-intro">{props.question}</p>
-        <table>
-          <tbody>
-            <tr>
-              <th></th>
-              {columns.map((cl, i) => {
-                return (
-                  <th key={i}>
-                    <label>{cl}</label>
-                  </th>
-                );
-              })}
-            </tr>
-            {values.map((row, i) => {
+      <table className="matrix-table">
+        <tbody>
+          <tr>
+            <th></th>
+            {columns.map((cl, i) => {
               return (
-                <tr key={i}>
-                  <td className="label-rows">
-                    <label>{row.text}</label>
-                  </td>
-                  {columns.map((col, index) => {
-                    return (
-                      <td key={index}>
-                        <input
-                          type="radio"
-                          name={row.text}
-                          value={col}
-                          onChange={(e) => handleChange(e, i)}
-                          checked={
-                            answers[props.questionNumber]
-                              ? answers[props.questionNumber][i].value === col
-                              : false
-                          }
-                        />
-                      </td>
-                    );
-                  })}
-                </tr>
+                <th key={i}>
+                  <label>{cl}</label>
+                </th>
               );
             })}
-          </tbody>
-        </table>
+          </tr>
+          {values.map((row, i) => {
+            return (
+              <tr key={i}>
+                <td className="label-rows">
+                  <label>{row.text}</label>
+                </td>
+                {columns.map((col, index) => {
+                  return (
+                    <td key={index}>
+                      <input
+                        type="radio"
+                        name={row.text}
+                        value={col}
+                        onChange={(e) => handleChange(e, i)}
+                        checked={
+                          answers[props.questionNumber]
+                            ? answers[props.questionNumber][i].value === col
+                            : false
+                        }
+                      />
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };
