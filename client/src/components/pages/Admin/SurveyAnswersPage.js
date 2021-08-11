@@ -9,9 +9,13 @@ const SurveyAnswersPage =()=>{
     // const [displayTable, setDisplayTable]=useState(false)
     // const [count, setCount]=useState(0)
     // const [surveyId, setSurveyId]=useState()
-    const [dataCollected, setDataCollected]=useState([])
+    // const [dataCollected, setDataCollected]=useState([])
     const fileName = 'table1';
     let surveyId="60dca10c89301e61da23c478";
+
+
+
+
 
     const getSurveyList = async ()=>{
         let response = await fetch("/api/survey")
@@ -40,7 +44,7 @@ const SurveyAnswersPage =()=>{
 
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
-            setDataCollected(filteredData)
+            // setDataCollected(filteredData)
         }
         getAnswers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,11 +77,12 @@ const SurveyAnswersPage =()=>{
     }
 
     const getTextStringsFromAnswer=(ans)=>{
+        // console.log("ans 76", ans)
         if(ans){
             if(typeof ans === "object"){
-                if(ans?.questionType==='slider'){
-                    return null
-                }
+                // if(ans?.questionType==='slider'){
+                //     return null
+                // }
                     // console.log('obj',Object.values(ans).map(value=>value.text))
                     return Object.values(ans).map(value => getTextStringsFromAnswer(value.text))
             } 
@@ -89,12 +94,15 @@ const SurveyAnswersPage =()=>{
 
     const getValueStringsFromAnswer=(ans)=>{  
         if(ans){
-            if(ans?.questionType==='slider'){
-                return Object.values(ans).map(value => getValueStringsFromAnswer(value))
-            }   
+            // if(ans?.questionType==='slider'){
+            //     console.log("ans line 93:", ans)
+            //     return ans.values.map(value => value)
+            // }   
             if(typeof ans === "object"){
                 // console.log("...", Object.values(ans).map(value => getValueStringsFromAnswer(value.value)))
-                return Object.values(ans).map(value => getValueStringsFromAnswer(value.value))
+               return Object.values(ans).map(value => getValueStringsFromAnswer(value.value))
+            //    setDataCollected(str)
+            //     return str;
             }
             return ans?.toString()
         }else{
@@ -119,8 +127,8 @@ const SurveyAnswersPage =()=>{
                 >Display data</button>
                 </div>
               
-                <h3 className="record-num">Number of answer records of this Survey:<span className="count">{newDataList?.length}</span></h3>
-                <ExportCSV csvData={dataCollected} fileName={fileName}/>
+                <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
+                <ExportCSV newDataList={newDataList} fileName={fileName}/>
             </div>
             
 
@@ -143,6 +151,7 @@ const SurveyAnswersPage =()=>{
                                 <td>{index+1}</td>
                                 <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>                               
                                 {Object.values(row.answers).map((ans, i)=>{
+                                    // console.log("ans", row.answers)
                                     return (<>
                                             {/* {ans ?
                                             <> */}
@@ -163,8 +172,8 @@ const SurveyAnswersPage =()=>{
                                                         
                                                         <td className="data-text" key={i}>
                                                             { i === 0 ?
-                                                            <td>
-                                                          
+                                                            <table>
+                                                                <tbody>
                                                                 <tr>
                                                                    { getTextStringsFromAnswer(ans).map((textCol, x)=>{
                                                                        return(
@@ -181,7 +190,8 @@ const SurveyAnswersPage =()=>{
 
                                                                    }
                                                                </tr>
-                                                            </td>
+                                                                </tbody>
+                                                            </table>
                                                             :
                                                             <tr>
                                                                     {getValueStringsFromAnswer(ans).map((col, ind)=>{
