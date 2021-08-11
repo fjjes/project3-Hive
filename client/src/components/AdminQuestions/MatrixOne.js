@@ -194,13 +194,13 @@ const MatrixOne = ({ question, questionNumber }) => {
               })}
             </tbody>
           </table>
+          {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
         </div>
         <div className="edit-buttons-group">
           {inEditMode.status ? (
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

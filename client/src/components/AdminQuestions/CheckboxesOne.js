@@ -138,6 +138,7 @@ function CheckboxesOne({ question, questionNumber }) {
                   </div>
                 );
               })}
+              {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
               {inEditMode.status ? (
                 <p style={{ color: "red" }}>
                   Note: the last option will always be a comment field.
@@ -151,7 +152,6 @@ function CheckboxesOne({ question, questionNumber }) {
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">

@@ -285,8 +285,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       {/* TOP PART OF PAGE */}
       <h2>
         {!rowId
-          ? "Build your own survey by choosing from the components on the left."
-          : "Edit your survey here."}
+          ? "Build your own survey by choosing from the components on the left"
+          : "Edit your survey here"}
       </h2>
       <form className="company-and-survey-name-inputs-and-error">
         <div className="company-and-survey-name-inputs">

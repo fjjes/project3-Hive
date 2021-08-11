@@ -126,6 +126,7 @@ function RadioOne({ question, questionNumber }) {
                     delete
                   </button>
                 </div>
+                
               ) : (
                 <div key={option}>
                   <input
@@ -139,6 +140,7 @@ function RadioOne({ question, questionNumber }) {
                 </div>
               );
             })}
+            {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
           </div>
         </div>
         <div className="edit-buttons-group">
@@ -146,7 +148,6 @@ function RadioOne({ question, questionNumber }) {
             <div className="edit-button">
               <SaveButton onSave={onSave} />
               <CancelButton onCancel={onCancel} />
-              <AddInputButton onAddInput={onAddInput} />
             </div>
           ) : (
             <div className="edit-button">
