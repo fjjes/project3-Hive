@@ -9,8 +9,8 @@ import {
 } from "./AdminEditButtons";
 import * as RiIcons from "react-icons/ri";
 
-const copyOptions = (orginalOptions) =>
-  orginalOptions.map((option) => {
+const copyOptions = (originalOptions) =>
+  originalOptions.map((option) => {
     return { text: option.text };
   });
 
