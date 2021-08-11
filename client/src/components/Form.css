@@ -208,7 +208,6 @@ h1 {
 .question-component textarea {
   /* comments */
   outline: none;
-  font-family: "Poppins", sans-serif;
   padding: 7px;
   width: 400px;
   color: rgb(121, 121, 121);
@@ -221,7 +220,6 @@ h1 {
 .postal-code-question-component input {
   text-align: center;
   outline: none;
-  font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   color: rgb(107, 106, 106);
   padding: 10px;
@@ -236,11 +234,17 @@ h1 {
 .question-intro {
   padding-top: 0px;
   font-size: 1.1em;
+  font-weight: bold;
+  padding-bottom: 20px !important;
 }
 
 .question-number {
   font-weight: bold;
-  padding-bottom: 0px;
+}
+
+/* ADJUST THIS TO CHANGE THE FONT SIZE OF ALL THE USER-SIDE SURVEY CARDS (not including error messages/buttons/progress bar) */
+.question-component.user  * {
+  font-size: 1.1rem;
 }
 
 .narrative-component p {
@@ -268,7 +272,7 @@ td {
 }
 
 .radio label {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .progress {
@@ -296,7 +300,6 @@ td {
 /* s */
 
 .survey-page button {
-  font-family: "Poppins", sans-serif;
   font-weight: bolder;
   color: white;
   outline: none;

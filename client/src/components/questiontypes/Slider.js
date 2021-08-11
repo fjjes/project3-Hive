@@ -59,12 +59,9 @@ export default function InputSlider({ questionNumber, question, texts }) {
   };
 
   return (
-    <div className="question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
-
+    <div className="question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       {texts.map((text, index) => (
         <SliderComponent
           key={index}

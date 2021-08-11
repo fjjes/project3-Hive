@@ -19,11 +19,9 @@ const Comment = ({ questionNumber, question }) => {
   }, []);
 
   return (
-    <div className="comment question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
+    <div className="comment question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       <textarea
         rows="4"
         cols="50"

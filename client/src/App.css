@@ -1,4 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap"); */
+/* @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap'); */
+
+/* ADJUST THESE IMPORT/FONT-FAMILY LINES TO CHANGE THE FONT THROUGHOUT THE APP */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+  /* font-family: 'Lato', sans-serif; */
+  /* font-family: 'Noto Sans JP', sans-serif; */
+  font-family: 'Nunito', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+/* END OF FONT OPTIONS */
+
 
 /*......... Added with Navbar........ */
 /* @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
@@ -32,14 +49,12 @@ html {
 
 p {
   font-size: 10px;
-  font-family: "Poppins", sans-serif;
   padding: 2rem;
   text-align: justify;
 }
 
 body {
   font-size: 15px;
-  font-family: Poppins, sans-serif;
   background-color: #f3f3f3;
   /* margin: 20px, 10px, 10px, 20px; */
   display: grid;
