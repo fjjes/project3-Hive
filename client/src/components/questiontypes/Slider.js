@@ -41,9 +41,10 @@ export default function InputSlider({ questionNumber, question, texts }) {
     } else {
       setAnswers((answers) => {
         let updateAnswers = { ...answers };
-        updateAnswers[questionNumber] = {values, questionType:'slider'};
+        updateAnswers[questionNumber] = values;
         return updateAnswers;
       });
+      console.log("reduce", values)
       setTotalCount(values.reduce((a, b) => a + Number(b)));
       console.log(totalCount);
     }
