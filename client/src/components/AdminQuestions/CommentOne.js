@@ -55,7 +55,7 @@ function CommentOne({ question, questionNumber }) {
       <div className="question-and-buttons">
         <div className="side-border-line">
 
-      <p className="question-intro">Q{questionNumber}.</p>
+      <p className="question-intro">Question {questionNumber}</p>
         <div className="questionText">
           {inEditMode.status ? (
             <input

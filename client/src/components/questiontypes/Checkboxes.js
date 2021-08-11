@@ -57,12 +57,10 @@ function Checkboxes({ questionNumber, question, texts }) {
   }, [answers, questionNumber]);
 
   return (
-    <div className="checkbox question-component">
+    <div className="checkbox question-component user">
       <form className="checkbox-form-control">
-        <p className="question-intro">Q{questionNumber}.</p>
-        <span>
-          <p className="question-intro">{question}</p>
-        </span>
+        <p className="question-intro">Question {questionNumber}</p>
+        <p className="question-intro">{question}</p>
         <div className="checkbox-form-group">
           {options.map((option, index) => {
             return (

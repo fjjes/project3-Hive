@@ -428,9 +428,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                   {questions.map((questionBlock, index) => {
                     console.log(questionBlock)
                     return (
-                      // change .questionType eventually
-                      <Draggable key={questionBlock.id} draggableId={questionBlock.id|| questionBlock._id} index={index}>
-
+                      <Draggable key={questionBlock.id} draggableId={questionBlock.id || questionBlock._id} index={index}>
                         {(provided) => (
                           <div>
                           <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>

@@ -56,11 +56,9 @@ const Matrix = (props) => {
   }, []);
 
   return (
-    <div className="matrix question-component">
-      <p className="question-intro">Q{props.questionNumber}.</p>
-      <span>
-        <p className="question-intro">{props.question}</p>
-      </span>
+    <div className="matrix question-component user">
+      <p className="question-intro">Question {props.questionNumber}</p>
+      <p className="question-intro">{props.question}</p>
       <table className="matrix-table">
         <tbody>
           <tr>

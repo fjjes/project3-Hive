@@ -54,20 +54,18 @@ const SelectInput = (props) => {
   }, []);
 
   return (
-    <div className="select question-component">
-      <p className="question-intro">Q{props.questionNumber}.</p>
-      <span>
-        <p className="question-intro">{props.question}</p>
-      </span>
+    <div className="select question-component user">
+      <p className="question-intro">Question {props.questionNumber}</p>
+      <p className="question-intro">{props.question}</p>
       {values.map((row, i) => {
         return (
           <ul key={i}>
             <li
-               style={{
-                 listStyleType: "none",
-                 textAlign: "left",
-                 marginLeft: "30px",
-               }}
+              style={{
+                listStyleType: "none",
+                textAlign: "left",
+                marginLeft: "30px",
+              }}
             >
               {row.text}:&nbsp;
               <select value={row.value} onChange={(e) => handleChange(e, i)}>
