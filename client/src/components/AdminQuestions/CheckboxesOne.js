@@ -8,6 +8,7 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) =>
   orginalOptions.map((option) => {
@@ -127,8 +128,7 @@ function CheckboxesOne({ question, questionNumber }) {
                     <button
                       className="delete-option-button"
                       onClick={() => deleteOptions(index)}
-                    >
-                      delete
+                    ><RiIcons.RiDeleteBinFill /> 
                     </button>
                   </div>
                 ) : (

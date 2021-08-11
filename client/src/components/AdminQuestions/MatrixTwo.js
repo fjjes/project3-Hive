@@ -8,6 +8,7 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) =>
   orginalOptions.map((option) => {
@@ -156,7 +157,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
                         })}
                         <td>
                           <button className="delete-option-button" onClick={() => deleteOptions(i)}>
-                            delete
+                          <RiIcons.RiDeleteBinFill /> 
                           </button>
                         </td>
                       </tr>

@@ -7,6 +7,7 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) =>
   orginalOptions.map((option) => {
@@ -144,7 +145,10 @@ const SelectOne = ({ question, questionNumber }) => {
                           );
                         })}
                       </select>
-                      <button className="delete-option-button" onClick={() => deleteOptions(i)}>delete</button>
+                      <button className="delete-option-button" 
+                      onClick={() => deleteOptions(i)}>
+                        <RiIcons.RiDeleteBinFill /> 
+                      </button>
                     </li>
                   </ul>
                 );

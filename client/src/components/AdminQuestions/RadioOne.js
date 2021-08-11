@@ -8,6 +8,7 @@ import {
   CancelButton,
   AddInputButton,
 } from "./AdminEditButtons";
+import * as RiIcons from "react-icons/ri";
 
 const copyOptions = (orginalOptions) =>
   orginalOptions.map((option) => {
@@ -123,7 +124,7 @@ function RadioOne({ question, questionNumber }) {
                     className="delete-option-button"
                     onClick={() => deleteOptions(index)}
                   >
-                    delete
+                  <RiIcons.RiDeleteBinFill /> 
                   </button>
                 </div>
               ) : (
