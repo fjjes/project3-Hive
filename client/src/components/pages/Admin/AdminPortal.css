@@ -1,23 +1,35 @@
 /* *************************** GENERIC STUFF *************************** */
-/*......... Added with Navbar........ */
-@import url("https://fonts.googleapis.com/css2?family=Sora&display=swap");
+
+html {
+  scroll-behavior: smooth;
+	height: 100%;
+}
 
 .admin-container,
 .navbar,
 .list-table {
-  font-family: "Sora", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+.data-collected{
+  box-sizing: border-box;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 /* ............................... */
 /* Page In General */
+.data-collected .data-text{
+  font-size:x-small;
+}
 
 h1 {
   width: 200px;
 }
 h2 {
   text-align: center;
+  /* margin-left: 215px; */
 }
 
 .admin-container {
@@ -25,18 +37,18 @@ h2 {
   flex-direction: column;
   background-color: #fff;
   box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+  /* padding: 20px; */
   /* width: 80vw; */
   /* height: 100%; */
-  height: 90vh;
+  height: 100%;
 }
 
 /* Page Top */
 
 .admin-logo {
-  height: 100px;
+  height: 90px;
   position: relative;
-  left: 20px;
+	right: 10%;
 }
 
 .admin-container-title-and-logo {
@@ -94,34 +106,59 @@ h2 {
   background-color: #35c0c2;
 }
 
+input[type=radio],
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
 /* Misc */
 .dividerLine {
   border-bottom: rgba(0, 0, 0, 0.2) solid;
   padding: 20px 0;
 }
 
-.note-to-self {
-  color: red;
-  font-size: 0.9rem;
-  padding: 0;
-}
-
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  margin: 10px auto;
-  width: 50%;
+  /* margin: 10px auto 0px auto; */
+  margin: 10px auto 10px 210px;
+  /* width: 70%; */
 }
 
 .company-and-survey-name-inputs input {
-  width: 80%;
   font-size: 1rem;
+  padding: 10px 10px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display:block;
+  width: 130%;
 }
+
 .company-and-survey-name-inputs .col{
-  margin-left: 5px;
+  margin-right: 90px;
 }
 .search-input {
   display: inline;
+}
+
+.company-and-survey-name-inputs-and-error {
+  display: flex;
+  flex-direction: column;
+}
+
+.validation-error-name-version-number {
+  width: 100%;
+  align-self: center;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.validation-error-name-version-number p {
+  color: red;
+  padding: 0;
+  font-size: 0.85rem;
+  align-self: center;
 }
 
 /* *************************** CREATE SURVEY *************************** */
@@ -134,13 +171,24 @@ h2 {
 
 /* Left Sidebar */
 .survey-selection-sidebar {
-  width: 15%;
+  /* width: 15%;
   padding: 10px 20px;
   margin-left: -20px;
+  position: sticky;
+  top: 0;
+  height: 100%; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (1 of 3) */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: flex-start;
+  position: sticky;
+  top: 0;
+  height: 100%; 
+  padding-top: 15px;
 }
 
 .survey-selection-sidebar button {
-  margin: 0;
+  /* margin: 0;
   margin-left: -20px;
   border-radius: 0 10px 10px 0px;
   border: 1px #bce6f8 solid;
@@ -149,38 +197,29 @@ h2 {
   background-color: #fff;
   box-shadow: inset -3px -3px 10px grey;
   color: black;
-  display: flex;
-}
-.survey-selection-sidebar .icons{
-  padding-right: 20px;
- 
-}
-
-/* added edit survey changes!!!!!!!!!!!!!!!! */
-.survey-selection-sidebar-edit {
-  width: 15%;
-  padding: 10px 20px;
-  margin-left: -20px;
-}
-
-/* added edit survey changes!!!!!!!!!!!!!!! */
-.survey-selection-sidebar-edit button { 
+  display: flex; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (2 of 3) */
   margin: 0;
-  margin-left: -20px;
-  border-radius: 0 10px 10px 0px;
+  padding: 5px;
+  border-radius: 10px;
   border: 1px #bce6f8 solid;
-  border-left: 0;
   font-size: 1rem;
-  background-color: #393F4B;
-  color: white;
-  display: flex;
+  background-color: #fff;
+  box-shadow: inset -3px -3px 10px grey;
+  color: black;
+  width: 100px;
+  height: 100px;
 }
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-.survey-selection-sidebar-edit .icons{
-  padding-right: 20px;
- 
+.survey-selection-sidebar .icons{
+  /* padding-right: 20px; */
+  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
+  display: block;
+  font-size: 2rem;
+  /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
+  pointer-events: none; 
 }
+
 .survey-selection-sidebar button:hover {
   transform: translate(1px, 1px);
 }
@@ -191,6 +230,7 @@ h2 {
   background-color: white;
   padding: 5px;
   margin: 15px;
+  display: flex;
 }
 
 .updated-copy-of-survey .admin-question-component {
@@ -202,6 +242,11 @@ h2 {
 .admin-question-component input {
   display: inline-block;
   margin: 0px;
+}
+
+.admin-question-component input[type="radio"],
+.admin-question-component input[type="checkbox"] {
+  pointer-events: none;
 }
 
 .narrative-text-area {
@@ -229,15 +274,37 @@ h2 {
   height: 100%;
 }
 
+.survey-selected-components .intro-heading{
+  padding-left: 15px;
+  margin-top: 15px;;
+}
+.survey-selected-components .intro-heading input{
+  width:98%;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display:block;
+}
+.survey-selected-components .intro-heading label{
+font-weight: bold;  
+/* margin-left:3px; */
+}
+.survey-selected-components .intro-heading input::placeholder{
+  align-items: center;
+}
+
 /* Bottom (save button) */
 .save-survey-button-and-link {
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: 20px;
+	height: 90px;
 }
 
-.list-table table {
+.list-table table,
+.data-table table {
   /* margin: 0 auto; */
   margin-top: 20px;
   display: flex;
@@ -260,15 +327,63 @@ h2 {
   /* text-align: center;   */
 }
 
+.data-table td{
+  border: 1px solid #cecfd5;
+  padding:2px 10px;
+}
+.data-table th{
+  background-color: grey;
+  color: white;
+  font-weight: bolder;
+  padding: 2px 5px 2px 5px;
+}
+
 .list-table h2 {
+  margin-top: 30px;
   margin-bottom: 30px;
   text-align: center;
+}
+.data-collected .upper-section{
+  margin-top: 20px;
+  align-items: center;
+}
+
+.data-collected .record-num{
+margin-top: 30px;
+margin-bottom: 10px;
+background: #393F4B;
+color: white;
+padding:5px 5px;
+width:21.5%;
+}
+
+.data-collected .record-num span{
+  margin-left:10px;
+  color:#f59645;
+}
+
+.data-collected button{
+  border: 0;
+  background-color:  #393F4B;
+  color: white;
+  padding:6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.data-collected .display{
+  margin-left:10px;
+}
+
+.data-collected .export{
+  margin-bottom: 20px;
+  /* margin-left: 1750px; */
 }
 
 .list-table .icon1,
 .icon2,
 .icon3,
-.icon4 {
+.icon4,
+.icon5{
   background-color: white;
   font-size: medium;
   border: none;
@@ -284,41 +399,102 @@ h2 {
   .icon2[title]
   .icon3[title]
   .icon4[title]
+  .icon5[title]
   :hover:after {
   content: attr(title);
 }
+
+.question-and-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.question-and-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-border-line {
+  border-right: 0.5px #197e9c solid;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.delete-option-button {
+  width: 65px !important;
+}
+
 /* .questionText is for the edit and save button when you are in the edit mode */
 .questionText {
   display: flex;
   flex-direction: column;
 }
 
+.edit-buttons-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-button {
+  display: flex;
+  flex-direction: column;
+}
+
 .edit-button button {
-  width: 40px;
   cursor: pointer;
-  background-color: #197e9c;
- 
+  background-color: white;
+  color: #197e9c;
+  padding: 0px 0px;
+  margin: 10px 0px 5px 10px;
+  text-align: left;
+  width: 105px;
+}
+.edit-button .add-option{
+  width: auto;
 }
 
-.questionAndButtons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.slider-admin {
+  display: grid;
+  grid-template-columns: 3fr 9fr 1fr 1fr;
+  column-gap: 2em;
+  row-gap: 1em;
+  width: 100%;
+  line-height: 1em;
+  height: 40px;
 }
 
-.edit-button2 {
-  display: flex;
-  /* flex-direction: column; */
-  margin: -20px 0px 0px 30px;
-  float: right;
+.slider-admin-edit {
+	display: grid;
+	grid-template-columns: 1fr 1fr 9fr 1fr;
 }
 
-/* .clear-icn3 {
-  float: right;
-} */
+.slider-admin-edit button {
+	margin-right: 60px;
+}
 
-/* .radioOne button {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-} */
+.slider-admin p {
+  font-size: 1rem;
+  height: auto;
+  font-size: 1em;
+  padding: 0px;
+  margin: auto 0;
+  text-align: start;
+}
+
+.slider-admin div {
+  margin: auto;
+}
+
+.slider-admin input {
+  outline: none;
+  background-color: rgb(244, 241, 241);
+  color: rgb(126, 126, 126);
+  width: 4em;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff;
+  height: fit-content;
+  margin: auto;
+}

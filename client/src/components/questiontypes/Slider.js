@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 import { makeStyles } from "@material-ui/core/styles";
-import NewSlider from "./newslider";
+import SliderComponent from "./SliderComponent";
 import "../Form.css";
 
 const useStyles = makeStyles({
@@ -13,18 +13,21 @@ const useStyles = makeStyles({
 export default function InputSlider({ questionNumber, question, texts }) {
   console.log(texts);
   const classes = useStyles();
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
-  const [values, setValues] = useState(new Array(texts.length).fill(0));
+  const [values, setValues] = useState(answers[questionNumber] || new Array(texts.length).fill(0));
 
   useEffect(() => {
     if (totalCount === 100) {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("Please select values that total to 100.");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalCount, setIsNextButtonDisabled]);
 
   useEffect(() => {
@@ -41,6 +44,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
         updateAnswers[questionNumber] = values;
         return updateAnswers;
       });
+      console.log("reduce", values)
       setTotalCount(values.reduce((a, b) => a + Number(b)));
       console.log(totalCount);
     }
@@ -56,14 +60,11 @@ export default function InputSlider({ questionNumber, question, texts }) {
   };
 
   return (
-    <div className="question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
-
+    <div className="question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       {texts.map((text, index) => (
-        <NewSlider
+        <SliderComponent
           key={index}
           getValue={values[index]}
           setValue={setValue(index)}
@@ -71,7 +72,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
           classes={classes}
         />
       ))}
-      <NewSlider />
+      <SliderComponent />
       <div className="totalcount">
         <p>Total:</p>
         <input type="text" value={totalCount}></input>

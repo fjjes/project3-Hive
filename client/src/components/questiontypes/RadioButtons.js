@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 function RadioButtons({ questionNumber, question, texts }) {
-  const { answers, setAnswers, setIsNextButtonDisabled } =
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
     useContext(AnswerContext);
   const [value, setValue] = useState("");
 
@@ -16,16 +16,21 @@ function RadioButtons({ questionNumber, question, texts }) {
 
   useEffect(() => {
     setIsNextButtonDisabled(true);
+    setValidationErrorMessage("Please select an option.")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     console.log(answers[questionNumber]);
     if (!answers[questionNumber]) {
       setIsNextButtonDisabled(true);
+      setValidationErrorMessage("Please select an option.")
       console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(false);
+      setValidationErrorMessage("")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   useEffect(() => {
@@ -38,11 +43,9 @@ function RadioButtons({ questionNumber, question, texts }) {
   }, []);
 
   return (
-    <div className="radio question-component">
-      <p className="question-intro">Q{questionNumber}.</p>
-      <span>
-        <p className="question-intro">{question}</p>
-      </span>
+    <div className="radio question-component user">
+      <p className="question-intro">Question {questionNumber}</p>
+      <p className="question-intro">{question}</p>
       {texts.map((option, index) => {
         return (
           <div key={index}>
