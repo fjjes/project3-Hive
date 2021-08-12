@@ -185,6 +185,29 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   }, [questions])
 
   async function handleSubmit() {
+    const findSurvey = async () => {
+      console.log("rowId: ", rowId)
+      let response = await fetch(`/api/survey/`);
+      let searchData = await response.json();
+      console.log("searchData: ", searchData);
+      console.log("searchData.length: ", searchData.length)
+      // Check all of the data in the DB to see if the data at any index has a survey number that matches the one that's just been entered (set below to only run findSurvey for non-original surveys (so if we click the edit button, it will just save using the original survey number))
+      for (let i = 0; i<searchData.length; i++) {
+        console.log("*********** i: ", i)
+        console.log("searchData[i].surveyNumber: ", searchData[i].surveyNumber);
+        console.log("surveyNumber: ", surveyNumber);
+        console.log("searchData[i].company: ", searchData[i].company);
+        console.log("company: ", company);
+        console.log("searchData[i].version: ", searchData[i].version);
+        console.log("version: ", version);
+        console.log("searchData[i]: ", searchData[i])
+        // *** It's forcing the survey number to be unique...  We don't want this.  FIX ***
+        if (searchData[i].surveyNumber === Number(surveyNumber) && toString(searchData[i].version) === toString(version) && searchData[i].company === company) {
+          setValidationErrorSurveyNumber("Sorry, this combination of company, version, and survey number is already used.")
+          window.scrollTo(0,0);
+        }
+      }
+    }
     // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear.
     if (validationErrorSurveyNumber || !surveyNumber || !company || !version) {
       window.scrollTo(0,0);
@@ -197,6 +220,10 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       if (!surveyNumber) {
         setValidationErrorSurveyNumber("Survey number is required.")
       }
+    } else {
+      if (copyOrOriginal !== "original") {
+        findSurvey()
+      } 
     }
 
     // If no errors, the survey is created:
@@ -244,24 +271,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
 
     // Post a survey to the DB (NEW OR COPY - does not save over the original version)
     else {
-      // Check if the surveyNumber or version is already used (currently surveyNumber needs to be unique but version doesn't - check with client and update?).
-      const findSurvey = async () => {
-        let response = await fetch(`/api/survey/${rowId}`);
-        let searchData = await response.json();
-        console.log("searchData.surveyNumber: ", searchData.surveyNumber);
-        if (searchData.surveyNumber === surveyNumber) {
-          setValidationErrorSurveyNumber("Sorry, this number is already used.")
-          window.scrollTo(0,0);
-        }
-        if (searchData.version === version) {
-          setValidationErrorVersion("Sorry, this version is already used.")
-          window.scrollTo(0,0);
-        }
-      }
-
-      findSurvey()
-
-      // If the survey number isn't already taken, post the survey to the DB:
+      // If the survey number isn't already taken (already checked for this in the findSurvey function above), post the survey to the DB:
       try {
         let createSurvey = await fetch("/api/survey", {
           method: "POST",
