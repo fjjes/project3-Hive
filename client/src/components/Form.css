@@ -432,3 +432,9 @@ td {
   margin: 0;
   font-size: 0.85rem;
 }
+
+/* RADIO BUTTONS */
+.user input[type="checkbox"],
+.user input[type="radio"] {
+  filter:hue-rotate(172deg) brightness(1.4);
+}
