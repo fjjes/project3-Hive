@@ -14,8 +14,8 @@ const Navbar = () => {
         <NavMenu>
           {/* <NavLink to='/' activeStyle>Home</NavLink> */}
           <NavLink to='/create-new' activeStyle={{color:"#f59645"}}>Create New</NavLink>
-          <NavLink to='/find-list' activeStyle={{color:"#f59645"}}>Existing Surveys</NavLink>
-          <NavLink to='/survey-answers' activeStyle={{color:"#f59645"}}>Data Collected</NavLink>
+          <NavLink to='/existing-surveys' activeStyle={{color:"#f59645"}}>Existing Surveys</NavLink>
+          <NavLink to='/data-collected' activeStyle={{color:"#f59645"}}>Data Collected</NavLink>
           <NavLink to='/data-visual' activeStyle={{color:"#f59645"}}>Data Visualization</NavLink>
           <NavBtnLink to='/'>Logout</NavBtnLink>
         </NavMenu>

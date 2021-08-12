@@ -89,7 +89,6 @@ const FindSurvey = (props) => {
                     className="icon3" 
                     title="Edit" 
                     style={{ color: "black" }}
-                    // onClick={()=>history.push(`/create-new/${row._id}`)}>
                     onClick={() => {
                         props.setCopyOrOriginal("original");
                         props.setRowId(row._id);

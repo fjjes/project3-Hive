@@ -40,7 +40,7 @@ function App() {
               <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
               </Route>
             
-            <Route path="/find-list">
+            <Route path="/existing-surveys">
               <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
             </Route>
           
@@ -53,7 +53,7 @@ function App() {
             <Route path="/data-visual">
               <DataVisualization/>
             </Route>
-            <Route path="/survey-answers">
+            <Route path="/data-collected">
               <SurveyAnswersPage/>
             </Route>
           </div>
