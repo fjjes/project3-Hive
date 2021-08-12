@@ -26,11 +26,11 @@ const MatrixTwo = ({ question, questionNumber }) => {
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
-        { text: "text 1" },
-        { text: "text 2" },
-        { text: "text 3" },
-        { text: "text 4" },
-        { text: "text 5" },
+        { text: "Provide better working comfort" },
+        { text: "Stimulate creativity and collective performance" },
+        { text: "Fascilitate access to information and news from business lines and departments" },
+        { text: "Break down silos between departments and increase cross functional lines" },
+        { text: "Provide spaces for more tranquility to work and concentration" }
       ])
   );
 

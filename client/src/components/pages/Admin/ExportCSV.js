@@ -14,6 +14,7 @@ const ExportCSV = ({newDataList, fileName}) => {
       arr.push(questionNum++);
     }
 
+    let questionList =newDataList[0]?.survey?.questions
     const formatAnswers = (ans) =>{
         if(ans){
             if(typeof ans === 'object'){
@@ -43,39 +44,51 @@ const ExportCSV = ({newDataList, fileName}) => {
                 Record_Number: record, 
                 Answered_date: answeredDate
             }
+            console.log("row.answers", row.answers)
 
-
-            let answerStringOranswerArrays= Object.values(row.answers).map((ans)=> formatAnswers(ans)); 
+        let answersArray= questionList.map((question, ind)=>{
+            if(row.answers[ind+1]){
+                return row.answers[ind+1]
+            }else{
+                return null
+            }
+        })
+            let answerStringOranswerArrays= answersArray.map((ans)=> formatAnswers(ans)); 
             console.log("answerStringOranswerArrays:", answerStringOranswerArrays)
-            
-        answerStringOranswerArrays.forEach((item, i)=>{//change i
-            // if(item[i]){
+        answerStringOranswerArrays.forEach((item, index)=>{
+           if(item){
                 console.log("item", item)
                 if(typeof item === 'string'){
-                    csvRow[`Q${i+1}`]=item
+                    csvRow[`Q${index+1}`]=item
+                }else if(typeof item === 'object'){
+                    if(questionList[index].questionType === 'checkbox'){
+                        for(let ansIndex=0; ansIndex<3; ansIndex++){
+                            if(ansIndex<item.length){
+                                csvRow[`Q${(index+1)}-${ansIndex+1}`]=item[ansIndex]
+                            }else{
+                                csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""
+                            }
+                        }
+                    }else{
+                        questionList[index].answerOptions.forEach((option)=>{
+                            console.log("optionText:", option.text)
+                            item.forEach((itm)=>{
+                                csvRow[`Q${(index+1)}-${option?.text}`]=itm
+
+                            })
+                        })
+                    }
                 }
-                // console.log("befor the error:", Object.values(item[i]))
-                // if(Object.values(item[i]).isArray()){
-                //     let entries= new Map([(item.map((itm, j)=>{
-                //         let Q = Object.keys(itm)
-                //         let A = Object.values(itm[i][j])
-                //         return [Q+1, A]
-                //     })
-                //     )])
-                //     console.log("entries", entries) 
-                //     const QAobj= Object.fromEntries(entries)
-                // }
-            // }else{
-            //     return null
-            // }
-        }) 
-        
+           }else{
+               if(questionList[index].questionType ==="checkbox"){
+                    for(let ansIndex=0; ansIndex<3; ansIndex++){
+                            csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""  
+                    }
+               }
+           }
+        })    
             return csvRow
         })
-        // {id: 1, date:"todate"},
-        // {id: 2, date:"date yesterday"}
-    
-    // console.log("data ",csvData)
 
     const exportToCSV = (csvData, fileName) => {
         const ws = XLSX.utils.json_to_sheet(csvData);

@@ -126,11 +126,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         break;
       case "matrix2":
         answerOptions = [
-          { text: "text 1" },
-          { text: "text 2" },
-          { text: "text 3" },
-          { text: "text 4" },
-          { text: "text 5" },
+          { text: "Provide better working comfort" },
+          { text: "Stimulate creativity and collective performance" },
+          { text: "Fascilitate access to information and news from business lines and departments" },
+          { text: "Break down silos between departments and increase cross functional lines" },
+          { text: "Provide spaces for more tranquility to work and concentration" }
         ];
         question = "Please rate the importance of the following from 1 to 10:";
         break;
@@ -234,7 +234,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         }else{
           setError(undefined);
           console.log("edit response is successful");
-          history.push("/find-list");
+          history.push("/existing-surveys");
         }
       } catch (error) {
         console.log("Fetch failed to reach the server:", error);
@@ -277,7 +277,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         } else {
           setError(undefined);
           console.log("create response is successful");
-          history.push("/find-list");
+          history.push("/existing-surveys");
         }
       } catch (error) {
         console.log("Fetch failed to reach the server:", error);
