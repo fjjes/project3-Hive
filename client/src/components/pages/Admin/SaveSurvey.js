@@ -417,7 +417,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
             <div className="intro-heading">
               <input 
                   type="text" 
-                  placeholder="Include a heading,    Ex: Hello ABCD executive Team!!"
+                  placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
                   value={heading}
                   onChange={(e)=>setHeading(e.target.value)}
               />
