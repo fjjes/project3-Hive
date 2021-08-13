@@ -390,10 +390,15 @@ font-weight: bold;
 .icon3,
 .icon4,
 .icon5{
-  background-color: white;
   font-size: medium;
   border: none;
 }
+
+.icon4,
+.icon5{
+	background-color: inherit;
+}
+
 
 .list-table .slash {
   margin-left: 5px;

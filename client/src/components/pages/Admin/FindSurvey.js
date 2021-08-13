@@ -95,7 +95,7 @@ const FindSurvey = (props) => {
                     }}>
                     <BsIcons.BsPencilSquare />
                   </Link>
-                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <Link
                     to="/create-new"
                     className="icon5"
@@ -107,14 +107,14 @@ const FindSurvey = (props) => {
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <button 
                     className="icon4" 
                     title="toMap"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
-                  <span className="slash" style={{ color: "#fff" }}>/</span>
+                  <span className="slash" style={{ color: "black" }}>/</span>
                   <button className="icon5" title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
                     <RiIcons.RiDeleteBinFill />
