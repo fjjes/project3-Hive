@@ -327,7 +327,11 @@ td {
 	height: 35px;
 }
 
-tr:nth-child(even) {background: #CCC}
+.list-table
+ tr:nth-child(even) {background: #CCC}
+
+ .matrix
+ tr:nth-child(even) {background: #CCC}
 
 .radio label {
   margin-left: 15px;

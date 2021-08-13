@@ -510,6 +510,23 @@ font-weight: bold;
   margin: auto;
 }
 
-/* .upload-image {
-	
-} */
+.upload-image {
+	display: flex;
+	justify-content: center;
+	border-radius: 10px;
+  background-color: white;
+  padding: 5px;
+  margin: 15px;
+  display: flex;
+	width: auto;
+	height: auto;
+	background-color: white;
+	border: inset 2px dotted grey;
+}
+
+ .upload-image h5 {
+	 font-size: 1.5em;
+	cursor: pointer;
+	border-radius: 10px;
+	padding: auto;
+}
