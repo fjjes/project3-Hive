@@ -111,9 +111,9 @@ h1 {
 }
 
 .totalcount p {
-  padding: 0px 10px 0px 0px;
+  padding: 0px 1px 0px 0px;
   color: rgb(105, 105, 105);
-	margin: 2px 2px 0px 0px;
+	margin: 0px 2px 0px 0px;
 }
 
 .totalcount {
@@ -126,7 +126,7 @@ h1 {
   cursor: default;
   outline: none;
   text-align: center;
-  /* margin: 20px 0px 10px 0px; */
+	margin: -4px 0px 0px 2px;
   height: 20px;
   width: 4em;
   background-color: rgb(244, 241, 241);
@@ -185,7 +185,13 @@ h1 {
 .matrix.question-component {
 	display: grid;
 	overflow: scroll;
+	height: 360px;
 }
+
+/* .matrix-table {
+	border: 0.3px solid grey;
+	padding: 0px;
+} */
 
 .admin-question-component {
   height: auto;
@@ -209,14 +215,17 @@ h1 {
 	align-items: center;
 }
 
-.checkbox.question-component {
-	display: flex;
-  align-items: flex-end;
+
+
+.checkbox.question-component input {
+	padding-left: 40px;
 }
 
 .survey-question {
 	overflow: scroll;
+	height: 360px;
 }
+
 
 
 .question-component p,
@@ -243,6 +252,7 @@ h1 {
   /* comments */
   outline: none;
   padding: 7px;
+	height: 500px;
   width: 400px;
   color: rgb(121, 121, 121);
   border: none;
@@ -293,6 +303,12 @@ h1 {
 
 .checkbox-form-group input {
   margin-right: 5px;
+}
+
+.checkbox-form-group {
+	display: grid;
+	row-gap: 15px;
+	padding-left: 10px;
 }
 
 .select li {
