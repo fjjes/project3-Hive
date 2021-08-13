@@ -349,7 +349,7 @@ tr:nth-child(even) {background: #CCC}
 }
 
 .progress-done {
-  background: linear-gradient(to right, #096688, #84bccc);
+  background: linear-gradient(to right, #0789b8, #84bccc);
   border-radius: 20px;
   color: white;
   font-size: larger;

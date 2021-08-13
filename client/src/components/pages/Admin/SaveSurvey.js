@@ -25,6 +25,31 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [validationErrorSurveyNumber, setValidationErrorSurveyNumber] = useState("")
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
+	const [image, setImage] = useState({ preview: "", raw: "" });
+
+	const handleChangeImage = e => {
+		if (e.target.files.length) {
+			setImage({
+				preview: URL.createObjectURL(e.target.files[0]),
+				raw: e.target.files[0]
+			});
+		}
+	};
+
+	const handleUpload = async e => {
+		e.preventDefault();
+		const formData = new FormData();
+		formData.append("image", image.raw);
+
+		await fetch("YOUR_URL", {
+			method: "POST",
+			headers: {
+				"Content-Type": "multipart/form-data"
+			},
+			body: formData
+		});
+	};
+
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
   useEffect(() => {
@@ -422,6 +447,27 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                   onChange={(e)=>setHeading(e.target.value)}
               />
             </div>
+						<div className="upload-image">
+							<label htmlFor="upload-button">
+								{image.preview ? (
+									<img src={image.preview} alt="dummy" width="30" height="30" />
+								) : (
+									<>
+										{/* <span className="fa-stack fa-2x mt-3 mb-2">
+											<i className="fas fa-circle fa-stack-2x" />
+											<i className="fas fa-store fa-stack-1x fa-inverse" />
+										</span> */}
+										<h5>Upload your photo</h5>
+									</>
+								)}
+							</label>
+						</div>
+						<input
+							type="file"
+							id="upload-button"
+							style={{ display: "none" }}
+							onChange={handleChangeImage}
+						/>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
