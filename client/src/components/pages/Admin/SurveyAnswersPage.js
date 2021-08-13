@@ -38,6 +38,8 @@ const SurveyAnswersPage =()=>{
     for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
     }    
+
+    let questionList =newDataList[0]?.survey?.questions
     
     const getTextStringsFromCheckbox=(ans)=>{
         if(ans?.questionType==='checkbox'){
@@ -51,22 +53,29 @@ const SurveyAnswersPage =()=>{
         return ans?.toString()  
     }
 
-    const getTextStringsFromAnswer=(ans)=>{
+    const getTextStringsFromAnswer=(ans, i)=>{
         if(ans){
             if(typeof ans === "object"){
-               
+                if(questionList[i].questionType === 'slider'){
+                    return questionList[i].answerOptions.join('\n')
+                }else{
                     return Object.values(ans).map(value => getTextStringsFromAnswer(value.text)).join('\n')
-            } 
+                }
+            }
             return ans?.toString()
         } else{
             return null
         } 
     }
 
-    const getValueStringsFromAnswer=(ans)=>{  
+    const getValueStringsFromAnswer=(ans, i)=>{  
         if(ans){ 
             if(typeof ans === "object"){
-               return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
+                if(questionList[i].questionType === 'slider'){
+                    return ans.join('\n')
+                }else{
+                    return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
+                }
             }
             return ans?.toString()
         }else{
@@ -80,7 +89,7 @@ const SurveyAnswersPage =()=>{
                 <div className="select-survey">
                     <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
                         <option>--Select a Survey--</option>
-                        {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
+                        {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} --- {item.version} ---{item.surveyNumber}</option>)}
                     </select>
                 </div>
               
@@ -134,8 +143,8 @@ const SurveyAnswersPage =()=>{
                                                         <td className="data-text" key={i}>
                                                             <pre>
                                                                 <tr>
-                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans)}</td>
-                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans)}</td>
+                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
+                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
                                                                 </tr>
                                                             </pre>
                                                         </td> 

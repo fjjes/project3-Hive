@@ -313,6 +313,11 @@ font-weight: bold;
   border-collapse: collapse;
   margin-bottom: 70px;
 }
+.question-list{
+  display:flex;
+  justify-content: center;
+  text-align: center;
+}
 
 .list-table th {
   background-color: grey;
