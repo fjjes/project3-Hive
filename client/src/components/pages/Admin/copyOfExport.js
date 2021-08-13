@@ -3,24 +3,23 @@ import moment from "moment";
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
-const ExportCSV = ({newDataList, fileName}) => {
+
+const ExportCSV = ({newDataList, fileName, questionArray}) => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
-    console.log("newDataList", newDataList)
-
-    // let arr = [];
-    // let questionNum = 1;
-    // for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
-    //   arr.push(questionNum++);
-    // }
-
+    console.log("data", newDataList)
+console.log('questionArray', questionArray)
+    
+let arr = [];
+    let questionNum = 1;
+    for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
+      arr.push(questionNum++);
+    }
     let questionList =newDataList[0]?.survey?.questions
-
-    const formatAnswers = (ans, i) =>{
+    
+    const formatAnswers = (ans, index) =>{
+        console.log("questions:", questionArray[index])//!!!!!!!!!!!!!!!!!!!!!!!!!!!
         if(ans){
-            // console.log('questionType of each answer', questionList[i]?.questionType)
-            // console.log('ans', ans)
-
             if(typeof ans === 'object'){
                 if(ans.questionType==='checkbox'){
                     return ans.options.filter(option=>option.checked).map(option=>{
@@ -29,10 +28,10 @@ const ExportCSV = ({newDataList, fileName}) => {
                         }
                         return option.value
                     })
-                }else if(questionList[i].questionType === 'slider'){
-                    return ans
+                }else if(ans.questionType === 'slider'){
+                    return ans.values
                 }else{
-                    return Object.values(ans).map(value => formatAnswers(value.value))
+                    return Object.values(ans).map(value => formatAnswers((value.value)))
                 }
             }
             return ans.toString()
@@ -40,12 +39,8 @@ const ExportCSV = ({newDataList, fileName}) => {
             return null
         }   
     }
-    let csvData = []
-    if(questionList){
 
-   
-
-     csvData = newDataList.map((row, i)=>{
+    const csvData = newDataList.map((row, i)=>{
             let record=i+1;
             let answeredDate= moment(row.answeredDate).format("MM/DD/yyyy");
             let csvRow= {
@@ -61,8 +56,11 @@ const ExportCSV = ({newDataList, fileName}) => {
                 return null
             }
         })
-            let answerStringOranswerArrays= answersArray.map((ans, i)=> formatAnswers(ans, i)); 
-            console.log("answerStringOranswerArrays:", answerStringOranswerArrays)
+        console.log("answersArray", answersArray)
+        // answersArray.map((ans)=> console.log("ans now:", ans))//ans is one persons'one questions' value, no key!!
+        let answerStringOranswerArrays= answersArray.map((ans, index)=> formatAnswers(ans, index)); //!!!!!!!!!!!!!!
+
+        console.log("answerStringOranswerArrays:", answerStringOranswerArrays)
         answerStringOranswerArrays.forEach((item, index)=>{
            if(item){
                 // console.log("item", item)
@@ -77,18 +75,12 @@ const ExportCSV = ({newDataList, fileName}) => {
                                 csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""
                             }
                         }
-                    }else if(questionList[index].questionType=== 'slider'||
-                    questionList[index].questionType=== 'select' ||
-                    questionList[index].questionType=== 'matrix1' ||
-                    questionList[index].questionType=== 'matrix2'){
-                        item.forEach((answer, i)=>{
-                            csvRow[`Q${(index+1)}-${i+1}`]=answer
-                        })
                     }else{
                         questionList[index].answerOptions.forEach((option)=>{
                             // console.log("optionText:", option.text)
                             item.forEach((itm)=>{
                                 csvRow[`Q${(index+1)}-${option?.text}`]=itm
+
                             })
                         })
                     }
@@ -103,7 +95,6 @@ const ExportCSV = ({newDataList, fileName}) => {
         })    
             return csvRow
         })
-    }
 
     const exportToCSV = (csvData, fileName) => {
         const ws = XLSX.utils.json_to_sheet(csvData);

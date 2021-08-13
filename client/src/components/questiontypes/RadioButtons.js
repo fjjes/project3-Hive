@@ -48,7 +48,7 @@ function RadioButtons({ questionNumber, question, texts }) {
       <p className="question-intro">{question}</p>
       {texts.map((option, index) => {
         return (
-          <div key={index}>
+          <div style={{paddingLeft: "10px"}} key={index}>
             <input
               type="radio"
               id={option}

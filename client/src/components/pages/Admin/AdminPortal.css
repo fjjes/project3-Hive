@@ -345,16 +345,19 @@ font-weight: bold;
 }
 .data-collected .upper-section{
   margin-top: 20px;
-  align-items: center;
+  margin-left:40px;
+  padding: 10px 0px 0px 10px;
+  /* border: 1px solid black; */
+  width:45%;
 }
 
 .data-collected .record-num{
-margin-top: 30px;
-margin-bottom: 10px;
-background: #393F4B;
-color: white;
-padding:5px 5px;
-width:21.5%;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background: #393F4B;
+  color: white;
+  padding:5px 5px;
+  width:46%;
 }
 
 .data-collected .record-num span{
