@@ -348,7 +348,11 @@ font-weight: bold;
   margin-left:40px;
   padding: 10px 0px 0px 10px;
   /* border: 1px solid black; */
-  width:45%;
+  width:100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .data-collected .record-num{
@@ -356,8 +360,7 @@ font-weight: bold;
   margin-bottom: 10px;
   background: #393F4B;
   color: white;
-  padding:5px 5px;
-  width:46%;
+  padding:5px 5px;  
 }
 
 .data-collected .record-num span{

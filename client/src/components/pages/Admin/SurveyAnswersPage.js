@@ -6,14 +6,8 @@ import './AdminPortal.css'
 const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
-    // const [displayTable, setDisplayTable]=useState(false)
-    // const [count, setCount]=useState(0)
     const [surveyId, setSurveyId]=useState(null)
-    // const [dataCollected, setDataCollected]=useState([])
     const fileName = 'table1';
-    // let surveyId="6115b5d6b0e7595740e9ccce";
-// let surveyId="61144bf3b0e7595740e9ca4c"
-
 
     const getSurveyList = async ()=>{
         let response = await fetch("/api/survey")
@@ -25,23 +19,13 @@ const SurveyAnswersPage =()=>{
         getSurveyList()
     },[])
 
-  
-    // const display =()=>{
-    //     setDisplayTable(true)
-    //     setCount(newDataList.length)
-    // }
-  
-  
-
     useEffect(()=>{
         const getAnswers = async ()=>{
             let response = await fetch("/api/answer")
             let data= await response.json();
-            // console.log('data:', data)
             console.log('id:', surveyId)
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
-            // setDataCollected(filteredData)
         }
         if(surveyId){
             getAnswers();
@@ -49,16 +33,11 @@ const SurveyAnswersPage =()=>{
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[surveyId])
 
-    // console.log("newDatalist:", newDataList)
-
-
     let arr = [];
     let questionNum = 1;
     for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
-    }
-    console.log("arr",arr)
-    
+    }    
     
     const getTextStringsFromCheckbox=(ans)=>{
         if(ans?.questionType==='checkbox'){
@@ -113,14 +92,10 @@ const SurveyAnswersPage =()=>{
         <div className='data-collected'>
             <div className='upper-section'>
                 <div className="select-survey">
-                
-                <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
-                    <option>--Select a Survey--</option>
-                    {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
-                </select>
-                <button className="display" 
-                // onClick={()=>display()}
-                >Display data</button>
+                    <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
+                        <option>--Select a Survey--</option>
+                        {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} - {item.version} - {item.surveyNumber}</option>)}
+                    </select>
                 </div>
               
                 <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
