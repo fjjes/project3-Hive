@@ -48,20 +48,13 @@ const SurveyAnswersPage =()=>{
                 return option.value
             }).join('\n')
         }
-        // if(typeof ans === "object"){
-        //     return Object.values(ans).map(value => getTextStringsFromCheckbox(value))
-        // }
         return ans?.toString()  
     }
 
     const getTextStringsFromAnswer=(ans)=>{
-        // console.log("ans 76", ans)
         if(ans){
             if(typeof ans === "object"){
-                // if(ans?.questionType==='slider'){
-                //     return null
-                // }
-                    // console.log('obj',Object.values(ans).map(value=>value.text))
+               
                     return Object.values(ans).map(value => getTextStringsFromAnswer(value.text)).join('\n')
             } 
             return ans?.toString()
@@ -71,16 +64,9 @@ const SurveyAnswersPage =()=>{
     }
 
     const getValueStringsFromAnswer=(ans)=>{  
-        if(ans){
-            // if(ans?.questionType==='slider'){
-            //     console.log("ans line 93:", ans)
-            //     return ans.values.map(value => value)
-            // }   
+        if(ans){ 
             if(typeof ans === "object"){
-                // console.log("...", Object.values(ans).map(value => getValueStringsFromAnswer(value.value)))
                return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
-            //    setDataCollected(str)
-            //     return str;
             }
             return ans?.toString()
         }else{
@@ -99,12 +85,24 @@ const SurveyAnswersPage =()=>{
                 </div>
               
                 <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
-                {/* {newDataList[0]?.survey?.questions ?  */}
                     <ExportCSV newDataList={newDataList} fileName={fileName}/>
             </div>
-            
+            {surveyId && newDataList?.length>0 ? 
+            <div>
+            <div className="question-list">
+                <table >
+                    {arr.map((num, i)=>{
+                        return(
+                        <tr key={i}>
+                            <td>Q{num}</td>
+                            <td className="data-text obj" >{newDataList[0]?.survey?.questions[i].question}</td>
+                        </tr>)
+                    })}
+                </table>
+            </div>
 
             <div className="data-table">
+                
                 <table>
                     <tbody>
                         <tr>
@@ -136,8 +134,8 @@ const SurveyAnswersPage =()=>{
                                                         <td className="data-text" key={i}>
                                                             <pre>
                                                                 <tr>
-                                                                <td className="data-text">{getTextStringsFromAnswer(ans)}</td>
-                                                                <td className="data-text">{getValueStringsFromAnswer(ans)}</td>
+                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans)}</td>
+                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans)}</td>
                                                                 </tr>
                                                             </pre>
                                                         </td> 
@@ -188,7 +186,11 @@ const SurveyAnswersPage =()=>{
                         })}      
                     </tbody>
                 </table>
+                </div>
+          
+
             </div>
+              :null}
         </div>
     )
 }

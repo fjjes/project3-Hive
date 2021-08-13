@@ -304,7 +304,7 @@ font-weight: bold;
 }
 
 .list-table table,
-.data-table table {
+.data-table table{
   /* margin: 0 auto; */
   margin-top: 20px;
   display: flex;
@@ -321,10 +321,15 @@ font-weight: bold;
   padding: 2px 20px 2px 20px;
 }
 
-.list-table td {
+.list-table td,
+.question-list td {
   border: 1px solid #cecfd5;
   padding: 10px 15px;
   /* text-align: center;   */
+}
+
+.data-collected .obj{
+  text-align: start;
 }
 
 .data-table td{
@@ -403,6 +408,7 @@ font-weight: bold;
 .list-table .slash {
   margin-left: 5px;
   margin-right: 5px;
+  opacity:.0001;
 }
 
 .list-table
