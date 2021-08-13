@@ -148,43 +148,6 @@ const SurveyAnswersPage =()=>{
                                                                 </tr>
                                                             </pre>
                                                         </td> 
-                                                        
-                                                        // <td className="data-text" key={i}>
-                                                        //     { i === 0 ?
-                                                        //     <table>
-                                                        //         <tbody>
-                                                        //         <tr>
-                                                        //            { getTextStringsFromAnswer(ans).map((textCol, x)=>{
-                                                        //                return(
-                                                        //                 <td key={x}>{textCol}</td>
-                                                        //                )
-                                                        //            })}
-                                                        //        </tr>
-                                                        //        <tr>
-                                                        //            {getValueStringsFromAnswer(ans).map((col, ind)=>{
-                                                        //                return(
-                                                        //                    <td key={ind}>{col}</td>
-                                                        //                )
-                                                        //            })
-
-                                                        //            }
-                                                        //        </tr>
-                                                        //         </tbody>
-                                                        //     </table>
-                                                        //     :
-                                                        //     <tr>
-                                                        //             {getValueStringsFromAnswer(ans).map((col, ind)=>{
-                                                        //                 return(
-                                                        //                     <td key={ind}>{col}</td>
-                                                        //                 )
-                                                        //             })
-
-                                                        //             }
-                                                        //     </tr>
-                                                        //     } 
-                                                           
-                                                        // </td>
-   
                                                 )}
                                             {/* </>
                                             :null} */}

@@ -76,15 +76,16 @@ const ExportCSV = ({newDataList, fileName}) => {
                                     csvRow[`Q${(index+1)}-${ansIndex+1}`]= ""
                                 }
                             }
-                        }else if(questionList[index].questionType=== 'slider'||
-                            questionList[index].questionType=== 'select' ||
-                            questionList[index].questionType=== 'matrix1' ||
-                            questionList[index].questionType=== 'matrix2'){
+                        }else if(questionList[index].questionType=== 'slider'){
                                 item.forEach((answer, i)=>{
-                                    csvRow[`Q${(index+1)}-${i+1}`]=answer
-                                })
-                            // console.log('questionList[index] for optionText', questionList[index])
-
+                                    csvRow[`Q${(index+1)}-${questionList[index].answerOptions[i]}`]=answer
+                                })                        
+                        }else if(questionList[index].questionType=== 'select' ||
+                                questionList[index].questionType=== 'matrix1' ||
+                                questionList[index].questionType=== 'matrix2'){
+                                    item.forEach((answer, i)=>{
+                                        csvRow[`Q${(index+1)}-${questionList[index].answerOptions[i].text}`]=answer
+                                    })
                         }else{
                             questionList[index].answerOptions.forEach((option)=>{
                                 item.forEach((itm)=>{
