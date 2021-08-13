@@ -450,7 +450,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
 						<div className="upload-image">
 							<label htmlFor="upload-button">
 								{image.preview ? (
-									<img src={image.preview} alt="dummy" width="30" height="30" />
+									<img src={image.preview} alt="dummy" width="auto" height="auto" />
 								) : (
 									<>
 										{/* <span className="fa-stack fa-2x mt-3 mb-2">
