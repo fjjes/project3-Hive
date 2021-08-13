@@ -36,19 +36,19 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
 		}
 	};
 
-	const handleUpload = async e => {
-		e.preventDefault();
-		const formData = new FormData();
-		formData.append("image", image.raw);
+	// const handleUpload = async e => {
+	// 	e.preventDefault();
+	// 	const formData = new FormData();
+	// 	formData.append("image", image.raw);
 
-		await fetch("YOUR_URL", {
-			method: "POST",
-			headers: {
-				"Content-Type": "multipart/form-data"
-			},
-			body: formData
-		});
-	};
+	// 	await fetch("YOUR_URL", {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data"
+	// 		},
+	// 		body: formData
+	// 	});
+	// };
 
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
@@ -60,6 +60,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
+			setImage(data.image);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -258,6 +259,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       company,
       version,
       heading,
+			image,
       narrative,
       questions,
       createdDate: currentDate,
@@ -453,21 +455,16 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
 									<img src={image.preview} alt="dummy" width="auto" height="auto" />
 								) : (
 									<>
-										{/* <span className="fa-stack fa-2x mt-3 mb-2">
-											<i className="fas fa-circle fa-stack-2x" />
-											<i className="fas fa-store fa-stack-1x fa-inverse" />
-										</span> */}
 										<h5>Upload your photo</h5>
 									</>
 								)}
 							</label>
+							<input
+								type="file"
+								id="upload-button"
+								onChange={handleChangeImage}
+							/>
 						</div>
-						<input
-							type="file"
-							id="upload-button"
-							style={{ display: "none" }}
-							onChange={handleChangeImage}
-						/>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}

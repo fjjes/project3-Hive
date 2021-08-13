@@ -522,17 +522,15 @@ font-weight: bold;
 }
 
 .upload-image {
-	display: flex;
-	justify-content: center;
+	display: grid;
+	justify-items: center;
 	border-radius: 10px;
   background-color: white;
   padding: 5px;
   margin: 15px;
-  display: flex;
 	width: auto;
 	height: auto;
 	background-color: white;
-	border: inset 2px dotted grey;
 }
 
  .upload-image h5 {
@@ -541,3 +539,7 @@ font-weight: bold;
 	border-radius: 10px;
 	padding: auto;
 }
+/* 
+.upload-image input{
+	background-color: rgb(197, 0, 0);
+} */

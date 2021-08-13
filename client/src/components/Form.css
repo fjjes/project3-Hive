@@ -44,8 +44,9 @@ h1 {
 }
 
 .question-component {
-	height: 300px;
+	height: 350px;
 	width: 800px;
+	overflow: scroll;
 }
 
 .admin-portal-button {
@@ -184,10 +185,12 @@ h1 {
 
 .matrix.question-component {
 	display: grid;
-	overflow: scroll;
 	height: 360px;
 }
 
+/* .matrix.question-component::-webkit-scrollbar-track {
+  background: red;
+} */
 /* .matrix-table {
 	border: 0.3px solid grey;
 	padding: 0px;
@@ -222,7 +225,7 @@ h1 {
 }
 
 .survey-question {
-	overflow: scroll;
+	/* overflow: scroll; */
 	height: 360px;
 }
 
@@ -328,10 +331,10 @@ td {
 }
 
 .list-table
- tr:nth-child(even) {background: #CCC}
+ tr:nth-child(even) {background: rgb(216, 216, 216)}
 
  .matrix
- tr:nth-child(even) {background: #CCC}
+ tr:nth-child(even) {background: rgb(235, 235, 235)}
 
 .radio label {
   margin-left: 15px;
