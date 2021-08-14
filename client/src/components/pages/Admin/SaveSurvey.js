@@ -27,6 +27,31 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     useState("");
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
+	const [image, setImage] = useState({ preview: "", raw: "" });
+
+	const handleChangeImage = e => {
+		if (e.target.files.length) {
+			setImage({
+				preview: URL.createObjectURL(e.target.files[0]),
+				raw: e.target.files[0]
+			});
+		}
+	};
+
+	// const handleUpload = async e => {
+	// 	e.preventDefault();
+	// 	const formData = new FormData();
+	// 	formData.append("image", image.raw);
+
+	// 	await fetch("YOUR_URL", {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data"
+	// 		},
+	// 		body: formData
+	// 	});
+	// };
+
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
   useEffect(() => {
@@ -37,6 +62,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
+			setImage(data.image);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -252,6 +278,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       company,
       version,
       heading,
+			image,
       narrative,
       questions,
       createdDate: currentDate,
@@ -453,6 +480,22 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                 onChange={(e) => setHeading(e.target.value)}
               />
             </div>
+						<div className="upload-image">
+							<label htmlFor="upload-button">
+								{image.preview ? (
+									<img src={image.preview} alt="dummy" width="auto" height="auto" />
+								) : (
+									<>
+										<h5>Upload your photo</h5>
+									</>
+								)}
+							</label>
+							<input
+								type="file"
+								id="upload-button"
+								onChange={handleChangeImage}
+							/>
+						</div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
