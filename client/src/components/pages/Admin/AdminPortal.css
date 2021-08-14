@@ -121,7 +121,8 @@ input[type=checkbox] {
 .company-and-survey-name-inputs {
   display: flex;
   /* margin: 10px auto 0px auto; */
-  margin: 10px auto 10px 210px;
+  /* margin: 10px auto 10px 210px; */
+  margin: 20px auto;
   /* width: 70%; */
 }
 
