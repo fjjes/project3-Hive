@@ -41,8 +41,8 @@ const SurveyAnswersPage =()=>{
 
     let questionList =newDataList[0]?.survey?.questions
     
-    const getTextStringsFromCheckbox=(ans)=>{
-        if(ans?.questionType==='checkbox'){
+    const getTextStringsFromCheckbox=(ans, i)=>{
+        if(questionList[i].questionType==='checkbox'){
             return ans.options.filter(option=>option.checked).map(option=>{
                 if(option.value==='Other'){
                     return ans.other.value
@@ -105,6 +105,7 @@ const SurveyAnswersPage =()=>{
                         <tr key={i}>
                             <td>Q{num}</td>
                             <td className="data-text obj" >{newDataList[0]?.survey?.questions[i].question}</td>
+                            {/* <td className="data-text obj"><b>{toUpper(newDataList[0]?.survey?.questions[i].questionType)}</b></td> */}
                         </tr>)
                     })}
                 </table>
@@ -128,7 +129,16 @@ const SurveyAnswersPage =()=>{
                             return(
                             <tr key={index}>
                                 <td>{index+1}</td>
-                                <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>                               
+                                <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
+                                {/* {
+                                         let answersArray= questionList.map((question, ind)=>{
+                                            if(row.answers[ind+1]){
+                                                return row.answers[ind+1]
+                                            }else{
+                                                return null
+                                            }
+                                        })
+                                }                              */}
                                 {Object.values(row.answers).map((ans, i)=>{
                                     // console.log("ans", row.answers)
                                     return (<>
@@ -138,7 +148,7 @@ const SurveyAnswersPage =()=>{
                                                     <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
                                                 :(
                                                     ans?.questionType==='checkbox' ?
-                                                            <td className="data-text" key={i}><pre>{getTextStringsFromCheckbox(ans)}</pre></td>
+                                                            <td className="data-text" key={i}><pre>{getTextStringsFromCheckbox(ans, i)}</pre></td>
                                                         :
                                                         <td className="data-text" key={i}>
                                                             <pre>

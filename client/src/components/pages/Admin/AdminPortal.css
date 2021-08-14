@@ -67,7 +67,8 @@ h2 {
 /* Page Bottom */
 .admin-container-bottom {
   padding: 20px;
-  background-color: #bce6f8;
+  background-color:#bce6f8;
+  /* background-color:rgb(217, 233, 238); */
   margin: 0px -20px -20px -20px;
   border-radius: 0 0 5px 5px;
 }
@@ -166,7 +167,8 @@ input[type=checkbox] {
 /* Left and Right Parts */
 .survey-selection-container {
   display: flex;
-  background-color: #bce6f8;
+  background-color:#bce6f8;
+  /* background-color: rgb(217, 233, 238); */
 }
 
 /* Left Sidebar */
@@ -303,8 +305,7 @@ font-weight: bold;
 	height: 90px;
 }
 
-.list-table table,
-.data-table table{
+.list-table table{
   /* margin: 0 auto; */
   margin-top: 20px;
   display: flex;
@@ -312,11 +313,30 @@ font-weight: bold;
   text-align: center;
   border-collapse: collapse;
   margin-bottom: 70px;
+  /* display: grid; */
+	overflow: scroll;
+	height: 450px;
 }
+
+.data-table table{
+    /* margin: 0 auto; */
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 70px;
+    overflow: scroll;
+    height: 380px;
+}
+
 .question-list{
   display:flex;
   justify-content: center;
   text-align: center;
+  height: 220px;
+  overflow: scroll;
+
 }
 
 .list-table th {
@@ -391,7 +411,7 @@ font-weight: bold;
 }
 
 .data-collected .export{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   /* margin-left: 1750px; */
 }
 

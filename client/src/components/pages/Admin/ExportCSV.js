@@ -12,7 +12,7 @@ const ExportCSV = ({newDataList, fileName}) => {
     // let questionNum = 1;
     // for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
     //   arr.push(questionNum++);
-    // }
+    // } 
 
     let questionList =newDataList[0]?.survey?.questions
 
@@ -22,7 +22,7 @@ const ExportCSV = ({newDataList, fileName}) => {
             // console.log('ans', ans)
 
             if(typeof ans === 'object'){
-                if(ans.questionType==='checkbox'){
+                if(questionList[i].questionType==='checkbox'){
                     return ans.options.filter(option=>option.checked).map(option=>{
                         if(option.value==='Other'){
                             return ans.other.value

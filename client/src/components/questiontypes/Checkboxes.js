@@ -38,7 +38,7 @@ function Checkboxes({ questionNumber, question, texts }) {
       setValidationErrorMessage("");
     }
     let updateAnswers = { ...answers };
-    updateAnswers[questionNumber] = { options: newOptions, other: other, questionType:'checkbox'};
+    updateAnswers[questionNumber] = { options: newOptions, other: other};
     setAnswers(updateAnswers);
   };
 
