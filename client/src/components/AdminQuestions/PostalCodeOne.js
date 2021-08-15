@@ -62,6 +62,7 @@ function PostalCodeOne({ question, questionNumber }) {
               <input
                 type="text"
                 value={questionText}
+                style={{ marginBottom:"10px" , fontWeight:"bold"}}
                 onChange={(e) => setQuestionText(e.target.value)}
               />
             ) : (

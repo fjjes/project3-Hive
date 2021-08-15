@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import QuestionContext from "../pages/Admin/QuestionContext";
-import {
-  EditButton,
-  DeleteButton,
-  SaveButton,
-  CancelButton,
-} from "./AdminEditButtons";
+import { EditButton, DeleteButton, SaveButton, CancelButton} from "./AdminEditButtons";
 
 function CommentOne({ question, questionNumber }) {
   const { questions, setQuestions } = useContext(QuestionContext);
@@ -58,9 +53,11 @@ function CommentOne({ question, questionNumber }) {
       <p className="question-intro">Question {questionNumber}</p>
         <div className="questionText">
           {inEditMode.status ? (
-            <input
+            <textarea
             type="text"
+            className="question-intro"
             value={questionText}
+            style={{ height: "100px", width: "90%", marginBottom:"10px" }}
             onChange={(e) => setQuestionText(e.target.value)}
             />
             ) : (

@@ -104,9 +104,11 @@ function RadioOne({ question, questionNumber }) {
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
-            <input
+            <textarea
               type="text"
+              className="question-intro"
               value={questionText}
+              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
