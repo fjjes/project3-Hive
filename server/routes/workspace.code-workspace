@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "..\\.."
+		},
+		{
+			"path": "..\\..\\..\\map_Experiment"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "map_Experiment",
+		"liveServer.settings.port": 5501
+	}
+}

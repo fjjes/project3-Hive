@@ -7,12 +7,12 @@ const Answer = require('../models/Answer')
 // Import Survey and Answer models
 // Create GET /maps?survey=[surveyNumber]
 router.get('/', async (req, res, next) => {
-    const { survey } = req.query;
-    console.log(survey)
+    const { surveyId } = req.query;
+    console.log('Question Number: ', surveyId)
   
-    let surveyData = await Survey.findOne({ surveyNumber: survey}).exec();
+    let surveyData = await Survey.findOne({ _id: surveyId}).exec();
 
-    console.log(surveyData)
+    console.log('Survey Data: ', surveyData)
     
     // Find the question number (or ID) with a question type of 'postal'
     // 1. Loop through `surveyData`
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
     // 2. In Answer model find all answers for the above question ID. Place them in an array.
     let answerData = await Answer.find({ survey: surveyData._id}).exec();
 
-    console.log(answerData)
+    console.log('Answer Data: ', answerData)
 
     const postalAnswers = answerData.map(element => element.answers[postalQuestion.questionNumber]);
 
