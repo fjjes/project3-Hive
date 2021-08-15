@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import QuestionContext from "../pages/Admin/QuestionContext";
 import { EditButton, DeleteButton, SaveButton, CancelButton} from "./AdminEditButtons";
 
-function CommentOne({ question, questionNumber }) {
+function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(
@@ -12,6 +12,7 @@ function CommentOne({ question, questionNumber }) {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
   const onSave = () => {
     console.log("save!!!");
@@ -25,11 +26,13 @@ function CommentOne({ question, questionNumber }) {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
   };
 
