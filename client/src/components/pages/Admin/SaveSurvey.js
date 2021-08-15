@@ -242,7 +242,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       survey.version === version &&
       survey.company === company
       )
-    if (surveyExists) {
+    if (surveyExists && copyOrOriginal !== "original") {
       setValidationErrorDuplicate("Sorry, this combination of company, version, and survey number is already used.")
       window.scrollTo(0, 0);
       // event.preventDefault();
