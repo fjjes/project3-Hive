@@ -242,9 +242,23 @@ input[type=checkbox] {
 }
 
 .admin-question-component label,
-.admin-question-component input {
+.admin-question-component input,
+.admin-question-component select{
   display: inline-block;
   margin: 0px;
+  box-shadow: none !important;
+}
+
+.admin-question-component textarea{
+  outline: none;
+    padding: 7px;
+    height: 60px !important;
+    width: 90% !important;
+    color: black !important;
+    border: none;
+    border-radius: 10px;
+    /* background-color: rgb(238, 237, 237); */
+    box-shadow: none !important;
 }
 
 .admin-question-component input[type="radio"],
