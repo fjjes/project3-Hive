@@ -8,11 +8,11 @@ const ExportCSV = ({newDataList, fileName}) => {
     const fileExtension = '.xlsx';
     // console.log("newDataList", newDataList)
 
-    // let arr = [];
-    // let questionNum = 1;
-    // for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
-    //   arr.push(questionNum++);
-    // } 
+    let arr = [];
+    let questionNum = 1;
+    for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
+      arr.push(questionNum++);
+    } 
 
     let questionList =newDataList[0]?.survey?.questions
 
@@ -113,9 +113,16 @@ const ExportCSV = ({newDataList, fileName}) => {
         //     { s: { r: 0, c: 2 }, e: { r: 0, c: arr.length +1 }},
         //     { s: { r: 0, c: 0 }, e: { r: 2, c: 0 }},
         //     { s: { r: 0, c: 1 }, e: { r: 2, c: 1 }},
-
         // ]
         // ws["!merges"] = merge;
+       
+
+    //     const range =[
+    //         { s: { r: 0, c: 0 }, e: { r: 0, c: arr.length +1 }}
+    //     ]
+    //    range.s={ font:{bold:true}}
+     
+
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const data = new Blob([excelBuffer], {type: fileType});
