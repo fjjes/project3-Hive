@@ -28,6 +28,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
 	const [image, setImage] = useState({ preview: "", raw: "" });
+  const [action, setAction] = useState("")
 
 	const handleChangeImage = e => {
 		if (e.target.files.length) {
@@ -218,11 +219,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       answerOptions: answerOptions,
     });
     setQuestions(newQuestions);
+    setAction("add")
   };
 
-  // Automatically go to the bottom of the survey as new questions are added
+  // Automatically go to the bottom of the survey as new questions are added, but not when questions are edited/deleted
   useEffect(() => {
-    window.scrollTo(0, document.body.scrollHeight);
+    if (action === "add") {
+      window.scrollTo(0, document.body.scrollHeight);
+      setAction("")
+    }
   }, [questions]);
 
   const findSurvey = async () => {
@@ -238,6 +243,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       )
       if (surveyExists) {
         setValidationErrorDuplicate("Sorry, this combination of company, version, and survey number is already used.")
+        window.scrollTo(0, 0);
         // event.preventDefault();
         // event.stopPropagation();
         return surveyExists
@@ -246,7 +252,6 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         setValidationErrorDuplicate("")
         return null
       }
-    //     window.scrollTo(0, 0);
   };
   async function handleSubmit(event) {
     findSurvey()
@@ -341,10 +346,6 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
     }
   }
 }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [validationErrorSurveyNumber]);
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -482,7 +483,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
             </div>
 						<div className="upload-image">
 							<label htmlFor="upload-button">
-								{image.preview ? (
+								{image?.preview ? (
 									<img src={image.preview} alt="dummy" width="auto" height="auto" />
 								) : (
 									<>
@@ -552,6 +553,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
         <button
           type="submit"
           className="save-survey-button"
+          id="save-survey-button"
           onClick={event => handleSubmit(event)}
         >
           Save Survey
