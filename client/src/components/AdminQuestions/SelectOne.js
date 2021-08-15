@@ -14,7 +14,7 @@ const copyOptions = (originalOptions) =>
     return { text: option.text };
   });
 
-const SelectOne = ({ question, questionNumber }) => {
+const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(
@@ -42,6 +42,7 @@ const SelectOne = ({ question, questionNumber }) => {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
@@ -58,6 +59,7 @@ const SelectOne = ({ question, questionNumber }) => {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   console.log("questions: ", questions);
@@ -65,6 +67,7 @@ const SelectOne = ({ question, questionNumber }) => {
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     console.log(questions, answerOptions);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);

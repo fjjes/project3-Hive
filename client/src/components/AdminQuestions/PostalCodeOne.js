@@ -8,7 +8,7 @@ import {
   CancelButton,
 } from "./AdminEditButtons";
 
-function PostalCodeOne({ question, questionNumber }) {
+function PostalCodeOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(
@@ -18,6 +18,7 @@ function PostalCodeOne({ question, questionNumber }) {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
@@ -32,11 +33,13 @@ function PostalCodeOne({ question, questionNumber }) {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
   };
 

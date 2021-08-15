@@ -10,7 +10,7 @@ import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const SaveSurvey = ({ rowId, copyOrOriginal }) => {
+const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot }) => {
   const history = useHistory();
   const [surveyNumber, setSurveyNumber] = useState("");
   const [company, setCompany] = useState("");
@@ -24,7 +24,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
   const [validationErrorCompany, setValidationErrorCompany] = useState("");
   const [validationErrorVersion, setValidationErrorVersion] = useState("");
   const [validationErrorSurveyNumber, setValidationErrorSurveyNumber] =
-    useState("");
+  useState("");
+  const [stillInEditModeError, setStillInEditModeError] = useState("");
   const [questions, setQuestions] = useState([]);
   const value = { questions, setQuestions };
 	const [image, setImage] = useState({ preview: "", raw: "" });
@@ -241,21 +242,22 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       survey.version === version &&
       survey.company === company
       )
-      if (surveyExists) {
-        setValidationErrorDuplicate("Sorry, this combination of company, version, and survey number is already used.")
-        window.scrollTo(0, 0);
-        // event.preventDefault();
-        // event.stopPropagation();
-        return surveyExists
-      }
-      else {
-        setValidationErrorDuplicate("")
-        return null
-      }
+    if (surveyExists) {
+      setValidationErrorDuplicate("Sorry, this combination of company, version, and survey number is already used.")
+      window.scrollTo(0, 0);
+      // event.preventDefault();
+      // event.stopPropagation();
+      return surveyExists
+    }
+    else {
+      setValidationErrorDuplicate("")
+      return null
+    }
   };
+
   async function handleSubmit(event) {
     findSurvey()
-    // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear.
+    // If there are any validation errors for the company/version/survey number, we're automatically taken to the top of the page and error messages appear. If we're still in edit mode in any of the questions, an error message will appear before the save survey button (no scrolling).
     let surveyFound = null
     if (validationErrorSurveyNumber || validationErrorDuplicate || !surveyNumber || !company || !version) {
       window.scrollTo(0, 0);
@@ -268,15 +270,17 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       if (!surveyNumber) {
         setValidationErrorSurveyNumber("Survey number is required.");
       }
-    } else {
+    } else if (wholeSurveyInEditModeOrNot) {
+        setStillInEditModeError("Please save all edits before submitting.")
+    }
+    else {
       if (copyOrOriginal !== "original") {
         surveyFound = await findSurvey(event);
-        // console.log("surveyFound? (not editing original): ", surveyFound)
       }
     }
 
     // If no errors, the survey is created:
-    if (!(validationErrorSurveyNumber || validationErrorVersion || validationErrorCompany || validationErrorDuplicate)) {
+    if (!(validationErrorSurveyNumber || validationErrorVersion || validationErrorCompany || validationErrorDuplicate || stillInEditModeError)) {
     let currentDate = new Date();
     let surveyToCreate = {
       surveyNumber,
@@ -356,6 +360,15 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
 
     setQuestions(items);
   }
+
+  useEffect(() => {
+    if (wholeSurveyInEditModeOrNot) {
+      setStillInEditModeError("Please save all edits before submitting.")
+    }
+    else {
+      setStillInEditModeError("")
+    }
+  }, [wholeSurveyInEditModeOrNot])
 
   return (
     <div>
@@ -501,6 +514,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
             <NarrativeOne
               narrative={narrative}
               updateNarrative={(narrative) => setNarrative(narrative)}
+              wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+              setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
             />
           </div>
 
@@ -532,6 +547,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
                                   question={questionBlock}
                                   questionNumber={index + 1}
                                   surveyNumber={surveyNumber}
+                                  wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+                                  setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
                                 />
                               </li>
                             </div>
@@ -550,6 +567,9 @@ const SaveSurvey = ({ rowId, copyOrOriginal }) => {
       {/* BOTTOM PART OF PAGE */}
       <div className="dividerLine"></div>
       <div className="save-survey-button-and-link">
+        <div className="validation-error-name-version-number">
+          <p>{stillInEditModeError}</p>
+        </div>
         <button
           type="submit"
           className="save-survey-button"

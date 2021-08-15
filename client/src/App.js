@@ -15,6 +15,7 @@ import "./App.css";
 function App() {
   const [rowId, setRowId] = useState();
   const [copyOrOriginal, setCopyOrOriginal] = useState();
+  const [wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot] = useState(false);
 
   const resetRowId = () => {
     setRowId()
@@ -37,7 +38,10 @@ function App() {
             <Navbar />
             
               <Route exact path="/create-new">
-              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
+              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} 
+              wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+              setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
+              />
               </Route>
             
             <Route path="/existing-surveys">

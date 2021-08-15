@@ -15,7 +15,7 @@ const copyOptions = (originalOptions) =>
     return option;
   });
 
-function RadioOne({ question, questionNumber }) {
+function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const radioOption = "";
@@ -36,6 +36,7 @@ function RadioOne({ question, questionNumber }) {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
   console.log("questions in radio", questions);
 
@@ -53,11 +54,13 @@ function RadioOne({ question, questionNumber }) {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
