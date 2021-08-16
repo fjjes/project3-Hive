@@ -91,7 +91,7 @@ useEffect(()=>{
   };
 
   return (
-    <div className="survey-page">
+		<div className="survey-page">
 			<header>
 				<nav>
 					<img className="hive-tagline" src={logo}></img>
@@ -100,8 +100,8 @@ useEffect(()=>{
       {endSurvey === false ? (
         <div className="progress-survey">
           <Progress done={progressBarDone} />
-          <div className="survey-card">
-            <div className="the-survey">
+					<div className="survey-card animate__animated animate__fadeIn">
+						<div className="the-survey">
               <AnswerContext.Provider value={value}>
                 <SurveyQuestion questionBlock={questionArray[index]} />
               </AnswerContext.Provider>
