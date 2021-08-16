@@ -38,7 +38,7 @@ export default function Logo({ flashcard }) {
   },[])
 
   return (
-  <div>
+  <div className="card-container">
       {showQuestions === false ? (
 				<div
           className={`card ${flip ? "flip" : ""}`}
