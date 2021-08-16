@@ -298,8 +298,9 @@ input[type=checkbox] {
 }
 
 .survey-selected-components .intro-heading{
-  padding-left: 15px;
-  margin-top: 15px;;
+  padding: 0px;
+  margin: 15px;
+  width: 100%;
 }
 .survey-selected-components .intro-heading input{
   width:98%;
@@ -308,6 +309,7 @@ input[type=checkbox] {
   border: 1px solid #ddd;
   box-sizing: border-box;
   display:block;
+  border-radius: 10px;
 }
 .survey-selected-components .intro-heading label{
 font-weight: bold;  
