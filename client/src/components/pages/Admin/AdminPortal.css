@@ -71,6 +71,7 @@ h2 {
   /* background-color:rgb(217, 233, 238); */
   margin: 0px -20px -20px -20px;
   border-radius: 0 0 5px 5px;
+  min-height: 100vh;
 }
 
 /* Buttons and Input */
