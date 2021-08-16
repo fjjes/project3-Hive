@@ -19,7 +19,7 @@ const Comment = ({ questionNumber, question }) => {
   }, []);
 
   return (
-    <div className="comment question-component user">
+		<div className="comment question-component user animate__animated animate__fadeIn">
       <p className="question-intro">Question {questionNumber}</p>
       <p className="question-intro">{question}</p>
       <textarea
