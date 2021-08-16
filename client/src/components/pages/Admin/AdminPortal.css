@@ -268,11 +268,15 @@ input[type=checkbox] {
 
 .narrative-text-area {
   width: 85%;
+  height: 300px;
+	width: 800px;
 }
 
 .narrative-text-area-input {
   width: 100% !important;
-  white-space:pre-wrap;
+  white-space:break-spaces;
+  height: 300px;
+	width: 800px;
 }
 
 .survey-selected-components {
