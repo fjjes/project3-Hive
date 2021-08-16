@@ -336,13 +336,22 @@ font-weight: bold;
 .data-table table{
     /* margin: 0 auto; */
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
     text-align: center;
     border-collapse: collapse;
     margin-bottom: 70px;
     overflow: scroll;
     height: 380px;
+	}
+	
+	.data-table {
+	/* display: flex; */
+	/* justify-content: center; */
+	overflow: scroll;
+}
+
+.master-data-table {
+    display: flex;
+    justify-content: center;
 }
 
 .question-list{

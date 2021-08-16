@@ -105,7 +105,7 @@ const SurveyAnswersPage =()=>{
                     })}
                 </table>
             </div>
-
+					<div className="master-data-table">
             <div className="data-table">
                 
                 <table>
@@ -167,6 +167,7 @@ const SurveyAnswersPage =()=>{
           
 
             </div>
+					</div>
               :null}
         </div>
     )
