@@ -65,7 +65,7 @@ const FindSurvey = (props) => {
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
       /> */}
-      <table>
+      <table style={{height: "100%"}}>
         <tbody>
           <tr>
             <th>Company</th>

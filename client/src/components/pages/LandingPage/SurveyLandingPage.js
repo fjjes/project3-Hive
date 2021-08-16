@@ -38,7 +38,7 @@ export default function Logo({ flashcard }) {
   },[])
 
   return (
-  <div>
+  <div className="card-container">
       {showQuestions === false ? (
 				<div
           className={`card ${flip ? "flip" : ""}`}
@@ -61,7 +61,7 @@ export default function Logo({ flashcard }) {
           <div className="theback">
             <h1>{heading}</h1>
             {/* <img src={image} style={{height:100}} alt="start-img"/> */}
-            <p>{narrative}</p>
+            <p style={{ whiteSpace: "pre-wrap",}}>{narrative}</p>
             <button
               className="neu-button"
               type="button"
