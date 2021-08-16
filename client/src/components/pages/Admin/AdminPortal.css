@@ -4,6 +4,11 @@ html {
   scroll-behavior: smooth;
 	height: 100%;
 }
+.navbar{
+  position: sticky;
+  top:0;
+  z-index: 5;
+}
 
 .admin-container,
 .navbar,
@@ -13,7 +18,7 @@ html {
   padding: 0;
 }
 
-.data-collected{
+.data-collected, .data-visual{
   box-sizing: border-box;
   margin-right: 10px;
   margin-left: 10px;
@@ -186,7 +191,7 @@ input[type=checkbox] {
   grid-template-columns: 1fr 1fr;
   align-content: flex-start;
   position: sticky;
-  top: 0;
+  top: 90px;
   height: 100%; 
   padding-top: 15px;
 }
