@@ -23,7 +23,7 @@ const SurveyAnswersPage =()=>{
         const getAnswers = async ()=>{
             let response = await fetch("/api/answer")
             let data= await response.json();
-            console.log('id:', surveyId)
+            // console.log('id:', surveyId)
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
         }
@@ -40,24 +40,19 @@ const SurveyAnswersPage =()=>{
     }    
 
     let questionList =newDataList[0]?.survey?.questions
-    
-    const getTextStringsFromCheckbox=(ans, i)=>{
-        if(questionList[i].questionType==='checkbox'){
-            return ans.options.filter(option=>option.checked).map(option=>{
-                if(option.value==='Other'){
-                    return ans.other.value
-                }
-                return option.value
-            }).join('\n')
-        }
-        return ans?.toString()  
-    }
 
     const getTextStringsFromAnswer=(ans, i)=>{
         if(ans){
             if(typeof ans === "object"){
                 if(questionList[i].questionType === 'slider'){
                     return questionList[i].answerOptions.join('\n')
+                }else if(questionList[i].questionType==='checkbox'){
+                    return ans.options.filter(option=>option.checked).map(option=>{
+                        if(option.value==='Other'){
+                            return ans.other.value
+                        }
+                        return option.value
+                    }).join('\n')
                 }else{
                     return Object.values(ans).map(value => getTextStringsFromAnswer(value.text)).join('\n')
                 }
@@ -71,7 +66,7 @@ const SurveyAnswersPage =()=>{
     const getValueStringsFromAnswer=(ans, i)=>{  
         if(ans){ 
             if(typeof ans === "object"){
-                if(questionList[i].questionType === 'slider'){
+                if(questionList[i]?.questionType === 'slider'){
                     return ans.join('\n')
                 }else{
                     return Object.values(ans).map(value => getValueStringsFromAnswer(value.value)).join('\n')
@@ -147,8 +142,8 @@ const SurveyAnswersPage =()=>{
                                                 {typeof ans !== 'object' ? 
                                                     <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
                                                 :(
-                                                    ans?.questionType==='checkbox' ?
-                                                            <td className="data-text" key={i}><pre>{getTextStringsFromCheckbox(ans, i)}</pre></td>
+                                                    questionList[i].questionType==='checkbox' ?
+                                                            <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
                                                         :
                                                         <td className="data-text" key={i}>
                                                             <pre>
