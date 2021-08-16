@@ -44,7 +44,7 @@ function NarrativeOne(props) {
   return (
     <div className="question-component admin-question-component narrative-component">
       <div className="side-border-line">
-        <p style={{ fontWeight: "bold", textAlign: "left" }}>Narrative</p>
+        <p style={{ fontWeight: "bold", textAlign: "left", whiteSpace: "pre-wrap",}}>Narrative</p>
         <div className="question-and-buttons">
           <div className="narrative-text-area">
             {inEditMode.status ? (
@@ -56,7 +56,7 @@ function NarrativeOne(props) {
                 onChange={handleNarrativeChange}
               />
             ) : (
-              <p>{props.narrative}</p>
+              <p style={{ whiteSpace: "pre-wrap",}}>{props.narrative} </p>
             )}
           </div>
         </div>
@@ -79,3 +79,5 @@ function NarrativeOne(props) {
 }
 
 export default NarrativeOne;
+
+

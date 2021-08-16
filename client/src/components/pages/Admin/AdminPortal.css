@@ -272,6 +272,7 @@ input[type=checkbox] {
 
 .narrative-text-area-input {
   width: 100% !important;
+  white-space:pre-wrap;
 }
 
 .survey-selected-components {
