@@ -4,6 +4,7 @@ import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
 import * as GrIcons from "react-icons/gr";
+import * as AiIcons from "react-icons/ai";
 
 const FindSurvey = (props) => {
   const history=useHistory();
@@ -114,6 +115,17 @@ const FindSurvey = (props) => {
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
+                  <span className="slash" style={{ color: "black" }}>/</span>
+                  <Link
+                    to="/chart"
+                    className="icon5"
+                    title="Charts"
+                    style={{ color: "black" }}
+                    onClick={() => {
+                      props.setRowId(row._id)
+                    }}>
+                    <AiIcons.AiOutlineAreaChart />
+                  </Link>
                   <span className="slash" style={{ color: "black" }}>/</span>
                   <button className="icon5" title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
