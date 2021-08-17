@@ -91,7 +91,7 @@ const DataVisualization =()=>{
             </div>
             {showChart && 
             <div className="data-charts">
-                <ShowGraphs options={options} qType={qType} answers={answers} question={question} qNum={qNum}/>
+                <ShowGraphs options={options} qType={qType} answers={answers} question={question} qNum={qNum} dataList={newDataList}/>
             </div>}
             </div>
             :null}
