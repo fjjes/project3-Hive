@@ -10,6 +10,7 @@ const DataVisualization =()=>{
     const [qType, setQType]=useState()
     const [question, setQuestion]=useState()
     const [answers, setAnswers]=useState([])
+    const [qNum, setQnum]=useState()
 
     const getSurveyList = async ()=>{
         let response = await fetch("/api/survey")
@@ -46,6 +47,7 @@ const DataVisualization =()=>{
         let options = question?.answerOptions
         let qType = question?.questionType
         let answersForThatQuestion = newDataList.map((data)=> data.answers[index])
+        let qNum =index
     //  console.log(answersForThatQuestion)
     //  console.log('options:', options)
     //  console.log('questionType:', qType)
@@ -54,13 +56,14 @@ const DataVisualization =()=>{
         setQType(qType)
         setAnswers(answersForThatQuestion)
         setShowChart(true)
+        setQnum(qNum)
     }
    useEffect(()=>{
         getChartInfo()
    },[surveyId])
 
     return(
-        <div className='data-collected'>
+        <div className='data-visual'>
             <div className='upper-section'>
                 <div className="select-survey">
                     <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
@@ -84,7 +87,7 @@ const DataVisualization =()=>{
             </div>
             {showChart && 
             <div className="data-charts">
-                <ShowGraphs options={options} qType={qType} answers={answers} question={question}/>
+                <ShowGraphs options={options} qType={qType} answers={answers} question={question} qNum={qNum}/>
             </div>}
             </div>
             :null}
