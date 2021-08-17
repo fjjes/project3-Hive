@@ -1,4 +1,4 @@
-import { Bar, Pie } from "react-chartjs-2"
+import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
 
 const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
     // let opt= options?.sort()
@@ -24,6 +24,40 @@ const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
 //matrix, select
    
 
+// checkboxes
+console.log("All answers: ", answers)
+
+let otherArray = []
+let prettyOtherArray = []
+let checkedOptionsArray = []
+// let checkboxAns=checkedOptionsArray?.sort()
+// const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
+// console.log ('checkbox percent', checkboxesPercentages)
+// let checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+// let checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+// console.log("checkboxesOpt: ", checkboxesOpt)
+// console.log("chechboxesPercentages: ", checkboxesPercentages)
+if(typeof answers === 'object'){
+    if(qType==='checkbox'){
+        for (let i=0; i<answers.length; i++) {
+            // GRAB OTHER VALUE:
+            // console.log("answers[i].other.value: ", i, answers[i].other.value)
+            otherArray.push(answers[i].other.value)
+            prettyOtherArray = otherArray.filter(element => {return element}).join("\n");
+            // GRAB OPTIONS THAT HAVE BEEN CHECKED
+            for (let x = 0; x < answers[i].options.length; x++) {
+                if (answers[i].options[x].checked === true) {
+                    // console.log("answers[i].options[x].value: ", i, x, answers[i].options[x].value)
+                    checkedOptionsArray.push(answers[i].options[x].value)
+                }
+            }
+        }
+    console.log("other array: ", otherArray)
+    console.log("pretty other array: ", prettyOtherArray)
+    console.log("checkedOptionsArray: ", checkedOptionsArray)
+    }
+}
+
     return (
         <div>
             <hr/>
@@ -48,6 +82,30 @@ const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
                     }}
                     >
                     </Pie>
+                </div>
+                :null}
+                {qType==='checkbox' ?
+                <div className="chart-container">
+                    <Pie
+                    data={{
+                        // labels: opt,
+                        labels: checkedOptionsArray,
+                        datasets:[{
+                            // *** HARDCODED DATA NEEDS TO BE REPLACED WITH THE COUNTS PULLED FROM EACH SURVEY ***
+                            data: [1, 4, 2, 5, 7, 12, 2, 24, 11, 19],
+                            // data:countArr,
+                            // data:checkboxesPercentArr,
+                            backgroundColor:colors,
+                            hoverBorderWidth:3,
+                            hoverBorderColor:'#000'
+                        }]
+                    }}
+                    >
+                    </Pie>
+                    <p style={{padding: "5px", fontWeight: "bold"}}>Other responses reorded: </p>
+                    <p style={{padding: "5px", whiteSpace: "pre-wrap"}}>
+                        {prettyOtherArray}
+                    </p>
                 </div>
                 :null}
                 {/* {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
