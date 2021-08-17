@@ -7,7 +7,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     // console.log('options:', options)
     // console.log('ans:', ans)
 
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"]
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"] // Hive colours
         // 'purple', 'green', 'orange', 'cyan', 'purple'
     
     
@@ -15,14 +15,14 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
 //     let countArr = [...count.values()]
 
 
-//radio
+//radio --------------------------------
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     console.log ('percent',percentRadio)
     let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
     let optRadio =Object.keys(percentRadio).map(percent=>percent)
 
-    //matrix, select
+//matrix, select -----------------------
     console.log('answers:', answers)
    let ansObj = answers?.map((an, i)=>an[0]?.value)
    console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
@@ -35,26 +35,21 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     // let labelObj =Object.keys(percentArrObj).map(percent=>percent)
     // console.log ('labelObj',labelObj)
 
-// checkboxes
-console.log("All answers: ", answers)
+// checkboxes ---------------------------
+// console.log("All answers: ", answers)
 
 let otherArray = []
-let prettyOtherArray = []
+let otherArrayWithoutEmptyStrings = []
 let checkedOptionsArray = []
-// let checkboxAns=checkedOptionsArray?.sort()
-// const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
-// console.log ('checkbox percent', checkboxesPercentages)
-// let checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-// let checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-// console.log("checkboxesOpt: ", checkboxesOpt)
-// console.log("chechboxesPercentages: ", checkboxesPercentages)
+let checkboxesOpt = []
+let checkboxesPercentArr = []
 if(typeof answers === 'object'){
     if(qType==='checkbox'){
         for (let i=0; i<answers.length; i++) {
             // GRAB OTHER VALUE:
             // console.log("answers[i].other.value: ", i, answers[i].other.value)
             otherArray.push(answers[i].other.value)
-            prettyOtherArray = otherArray.filter(element => {return element}).join("\n");
+            otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
             // GRAB OPTIONS THAT HAVE BEEN CHECKED
             for (let x = 0; x < answers[i].options.length; x++) {
                 if (answers[i].options[x].checked === true) {
@@ -63,9 +58,18 @@ if(typeof answers === 'object'){
                 }
             }
         }
-    console.log("other array: ", otherArray)
-    console.log("pretty other array: ", prettyOtherArray)
-    console.log("checkedOptionsArray: ", checkedOptionsArray)
+        let checkboxAns=checkedOptionsArray?.sort()
+        // console.log("checkboxAns: ", checkboxAns)
+        const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
+        // console.log ('checkbox percent', checkboxesPercentages)
+        checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+        checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+        // console.log("checkboxesOpt: ", checkboxesOpt)
+        // console.log("chechboxesPercentages: ", checkboxesPercentages)
+        // console.log("chechboxesPercentArr: ", checkboxesPercentArr)
+        // console.log("other array: ", otherArray)
+        // console.log("pretty other array: ", otherArrayWithoutEmptyStrings)
+        // console.log("checkedOptionsArray: ", checkedOptionsArray)
     }
 }
 
@@ -100,10 +104,12 @@ if(typeof answers === 'object'){
                     <Pie
                     data={{
                         // labels: opt,
-                        labels: checkedOptionsArray,
+                        // labels: checkedOptionsArray,
+                        labels: checkboxesOpt,
                         datasets:[{
                             // *** HARDCODED DATA NEEDS TO BE REPLACED WITH THE COUNTS PULLED FROM EACH SURVEY ***
-                            data: [1, 4, 2, 5, 7, 12, 2, 24, 11, 19],
+                            // data: [1, 4, 2, 5, 7, 12, 2, 24, 11, 19],
+                            data: checkboxesPercentArr,
                             // data:countArr,
                             // data:checkboxesPercentArr,
                             backgroundColor:colors,
@@ -113,10 +119,12 @@ if(typeof answers === 'object'){
                     }}
                     >
                     </Pie>
-                    <p style={{padding: "5px", fontWeight: "bold"}}>Other responses reorded: </p>
-                    <p style={{padding: "5px", whiteSpace: "pre-wrap"}}>
-                        {prettyOtherArray}
-                    </p>
+                    <div className="checkboxes-other-responses">
+                        <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                        <p style={{whiteSpace: "pre-wrap"}}>
+                            {otherArrayWithoutEmptyStrings}
+                        </p>
+                    </div>
                 </div>
                 :null}
                 

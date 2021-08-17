@@ -472,10 +472,6 @@ font-weight: bold;
   /* margin-left: 1750px; */
 }
 
-.chart-container {
-  width: 500px;
-}
-
 .existing-surveys-edit-column {
   padding-left: 5px !important;
   padding-right: 5px !important;
@@ -611,3 +607,13 @@ font-weight: bold;
 .upload-image input{
 	background-color: rgb(197, 0, 0);
 } */
+
+/* CHARTS */
+.chart-container {
+  width: 500px;
+}
+
+.checkboxes-other-responses p {
+  font-size: 0.75rem;
+  padding: 5px;
+}
