@@ -7,7 +7,7 @@ const Navbar = () => {
     <div className="navbar">
       <Nav>
         <NavLink to='/'>
-					<h1 style={{color: "white"}}>Admin Portal</h1>
+					<h1 style={{color: "white", width: "200px"}}>Admin Portal</h1>
 					<img src={logo} alt="Hive logo" className="admin-logo" />
         </NavLink>
         <Bars />

@@ -29,9 +29,11 @@ html {
   font-size:x-small;
 }
 
-h1 {
+/* h1 {
   width: 200px;
-}
+} */
+
+
 h2 {
   text-align: center;
   /* margin-left: 215px; */
@@ -390,7 +392,7 @@ font-weight: bold;
 
 .list-table td,
 .question-list td {
-  border: 1px solid #cecfd5;
+  border: 1px solid #17171a;
   padding: 10px 15px;
   /* text-align: center;   */
 }
@@ -455,6 +457,10 @@ font-weight: bold;
 .data-collected .export{
   margin-bottom: 10px;
   /* margin-left: 1750px; */
+}
+
+.chart-container {
+  width: 500px;
 }
 
 .list-table .icon1,
