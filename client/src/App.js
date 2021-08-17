@@ -36,30 +36,31 @@ function App() {
           </Route>
           <div>
             <Navbar />
-            
               <Route exact path="/create-new">
-              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} 
-              wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
-              setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
-              />
+                <AdminPortal 
+                  rowId={rowId} 
+                  copyOrOriginal={copyOrOriginal} 
+                  wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+                  setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
+                />
               </Route>
-            
-            <Route path="/existing-surveys">
-              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
-            </Route>
-          
-            {/* <Route exact path="/edit-survey/:surveyId">
-              <AdminPortalEdit/>
-            </Route> */}
-            <Route path="/map/:surveyId">
-              <Map/>
-            </Route>
-            <Route path="/data-visual">
-              <DataVisualization/>
-            </Route>
-            <Route path="/data-collected">
-              <SurveyAnswersPage/>
-            </Route>
+              <Route path="/existing-surveys">
+                <FindSurvey 
+                  setRowId={setRowId} 
+                  resetRowId={resetRowId} 
+                  setCopyOrOriginal={setCopyOrOriginal} 
+                  resetCopyOrOriginal={resetCopyOrOriginal} 
+                />
+              </Route>
+              <Route path="/map/:surveyId">
+                <Map/>
+              </Route>
+              <Route path="/data-visual">
+                <DataVisualization/>
+              </Route>
+              <Route path="/data-collected">
+                <SurveyAnswersPage/>
+              </Route>
           </div>
         </Switch>
       </Router>
