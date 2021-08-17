@@ -1,21 +1,16 @@
 import { Bar, Pie } from "react-chartjs-2"
 
 const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
-    let opt= options?.sort()
+    // let opt= options?.sort()
     let ans=answers?.sort()
 
     console.log('qtype:', qType)
-    console.log('options:', opt)
+    console.log('options:', options)
     console.log('answers:', ans)
 
-   let colors=[
-        "#197e9c",
-        "#35c0c2",
-        "#f59645",
-        "#bce6f8",
-        "#575759"
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"]
         // 'purple', 'green', 'orange', 'cyan', 'purple'
-    ]
+    
     
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
 //     let countArr = [...count.values()]
@@ -25,7 +20,7 @@ const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
     const percentages = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     console.log ('percent',percentages)
     let percentArr= Object.values(percentages).map(percent=>percent)
-
+    let opt =Object.keys(percentages).map(percent=>percent)
 //matrix, select
    
 
