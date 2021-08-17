@@ -60,7 +60,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
   };
 
   return (
-    <div className="question-component user">
+		<div className="question-component user animate__animated animate__fadeIn">
       <p className="question-intro">Question {questionNumber}</p>
       <p className="question-intro">{question}</p>
       {texts.map((text, index) => (

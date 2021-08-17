@@ -54,7 +54,7 @@ const SelectInput = (props) => {
   }, []);
 
   return (
-    <div className="select question-component user">
+		<div className="select question-component user animate__animated animate__fadeIn">
       <p className="question-intro">Question {props.questionNumber}</p>
       <p className="question-intro">{props.question}</p>
       {values.map((row, i) => {

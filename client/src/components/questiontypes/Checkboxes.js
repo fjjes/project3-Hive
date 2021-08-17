@@ -63,7 +63,7 @@ function Checkboxes({ questionNumber, question, texts }) {
   }, [answers, questionNumber]);
 
   return (
-    <div className="checkbox question-component user">
+		<div className="checkbox question-component user animate__animated animate__fadeIn">
       <form className="checkbox-form-control">
         <p className="question-intro">Question {questionNumber}</p>
         <p className="question-intro">{question}</p>
