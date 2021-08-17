@@ -8,7 +8,14 @@ const ShowGraphs = ({question, options, qType,  answers}) => {
     console.log('options:', opt)
     console.log('answers:', ans)
 
-   let colors=['purple', 'green', 'orange', 'cyan', 'purple']
+   let colors=[
+        "#197e9c",
+        "#35c0c2",
+        "#f59645",
+        "#bce6f8",
+        "#575759"
+        // 'purple', 'green', 'orange', 'cyan', 'purple'
+    ]
     
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
 //     let countArr = [...count.values()]
@@ -32,17 +39,21 @@ const ShowGraphs = ({question, options, qType,  answers}) => {
                 <h4>{qType}</h4>
                 {/* <h5>{answers}</h5> */}
                 {qType==='radio' ?
-                <Pie
-                data={{
-                    labels: opt,
-                    datasets:[{
-                        // data:countArr,
-                        data:percentArr,
-                        backgroundColor:colors
-                    }]
-                }}
-                >
-                </Pie>
+                <div className="chart-container">
+                    <Pie
+                    data={{
+                        labels: opt,
+                        datasets:[{
+                            // data:countArr,
+                            data:percentArr,
+                            backgroundColor:colors,
+                            hoverBorderWidth:3,
+                            hoverBorderColor:'#000'
+                        }]
+                    }}
+                    >
+                    </Pie>
+                </div>
                 :null}
                 {/* {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
                 <Bar

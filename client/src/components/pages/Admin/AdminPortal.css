@@ -463,20 +463,11 @@ font-weight: bold;
   width: 500px;
 }
 
-.list-table .icon1,
-.icon2,
-.icon3,
-.icon4,
-.icon5{
+.list-table .existing-surveys-edit-icon {
   font-size: medium;
   border: none;
+  background-color: inherit;
 }
-
-.icon4,
-.icon5{
-	background-color: inherit;
-}
-
 
 .list-table .slash {
   margin-left: 5px;
@@ -484,12 +475,7 @@ font-weight: bold;
   opacity:.0001;
 }
 
-.list-table
-  .icon1[title]
-  .icon2[title]
-  .icon3[title]
-  .icon4[title]
-  .icon5[title]
+.list-table .existing-surveys-edit-icon[title]
   :hover:after {
   content: attr(title);
 }

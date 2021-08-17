@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import ShowGraphs from './ShowGraphs';
+import { useParams } from "react-router-dom";
 
 const DataVisualization =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [showChart, setShowChart] = useState(false)
     const [surveyList, setSurveyList]=useState([])
-    const [surveyId, setSurveyId]=useState(null)
+    // const [surveyId, setSurveyId]=useState(null)
     const [options, setOptions]=useState([])
     const [qType, setQType]=useState()
     const [question, setQuestion]=useState()
     const [answers, setAnswers]=useState([])
+
+    const {surveyId} = useParams();
 
     const getSurveyList = async ()=>{
         let response = await fetch("/api/survey")
@@ -27,6 +30,7 @@ const DataVisualization =()=>{
             let data= await response.json();
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
+            console.log("Data for survey #: ", surveyId)
             console.log('data', filteredData)
         }
         if(surveyId){
@@ -62,12 +66,12 @@ const DataVisualization =()=>{
     return(
         <div className='data-collected'>
             <div className='upper-section'>
-                <div className="select-survey">
+                {/* <div className="select-survey">
                     <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
                         <option>--Select a Survey--</option>
                         {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} --- {item.version} ---{item.surveyNumber}</option>)}
                     </select>
-                </div>
+                </div> */}
             </div>
             {surveyId && newDataList?.length>0 ? 
             <div>
