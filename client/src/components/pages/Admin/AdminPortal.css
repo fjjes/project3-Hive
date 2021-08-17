@@ -382,6 +382,11 @@ font-weight: bold;
   overflow: scroll;
 }
 
+.data-visual .question-list {
+  height: auto;
+  overflow: auto;
+}
+
 .data-visual table{
   margin-top: 20px;
   display:flex;
