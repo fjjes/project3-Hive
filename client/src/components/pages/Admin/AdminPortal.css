@@ -397,6 +397,7 @@ font-weight: bold;
   padding: 2px 20px 2px 20px;
 }
 
+.list-table th,
 .list-table td,
 .question-list td {
   border: 1px solid #17171a;
