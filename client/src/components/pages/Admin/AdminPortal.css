@@ -362,7 +362,7 @@ font-weight: bold;
     overflow: scroll;
     height: 380px;
 	}
-	
+  
 	.data-table {
 	/* display: flex; */
 	/* justify-content: center; */
@@ -380,7 +380,14 @@ font-weight: bold;
   text-align: center;
   height: 220px;
   overflow: scroll;
+}
 
+.data-visual table{
+  margin-top: 20px;
+  display:flex;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 70px;
 }
 
 .list-table th {
@@ -417,7 +424,7 @@ font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
 }
-.data-collected .upper-section{
+.data-collected .upper-section, .data-visual .upper-section{
   margin-top: 20px;
   margin-left:40px;
   padding: 10px 0px 0px 10px;

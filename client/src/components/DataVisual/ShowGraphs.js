@@ -1,6 +1,6 @@
 import { Bar, Pie } from "react-chartjs-2"
 
-const ShowGraphs = ({question, options, qType,  answers}) => {
+const ShowGraphs = ({question, options, qType,  answers, qNum}) => {
     let opt= options?.sort()
     let ans=answers?.sort()
 
@@ -32,11 +32,11 @@ const ShowGraphs = ({question, options, qType,  answers}) => {
     return (
         <div>
             <hr/>
-            <h1>{question}</h1> 
+            <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
             <hr/>
-            <div className="graph-section">
+            
+            <div className="graph-section" style={{width:'25%', height:'25%'}}>
                 {/* <h2>{options}</h2> */}
-                <h4>{qType}</h4>
                 {/* <h5>{answers}</h5> */}
                 {qType==='radio' ?
                 <div className="chart-container">
