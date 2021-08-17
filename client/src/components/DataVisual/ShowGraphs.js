@@ -8,7 +8,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     // console.log('ans:', ans)
 
    let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"] // Hive colours
-        // 'purple', 'green', 'orange', 'cyan', 'purple'
+   let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
     
     
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
@@ -89,7 +89,8 @@ if(typeof answers === 'object'){
                         datasets:[{
                             // data:countArr,
                             data:percentArrRadio,
-                            backgroundColor:colors,
+                            // backgroundColor:colors,
+                            backgroundColor:checkboxesPercentArr.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
@@ -103,16 +104,10 @@ if(typeof answers === 'object'){
                 <div className="chart-container">
                     <Pie
                     data={{
-                        // labels: opt,
-                        // labels: checkedOptionsArray,
                         labels: checkboxesOpt,
                         datasets:[{
-                            // *** HARDCODED DATA NEEDS TO BE REPLACED WITH THE COUNTS PULLED FROM EACH SURVEY ***
-                            // data: [1, 4, 2, 5, 7, 12, 2, 24, 11, 19],
                             data: checkboxesPercentArr,
-                            // data:countArr,
-                            // data:checkboxesPercentArr,
-                            backgroundColor:colors,
+                            backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
@@ -121,9 +116,7 @@ if(typeof answers === 'object'){
                     </Pie>
                     <div className="checkboxes-other-responses">
                         <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
-                        <p style={{whiteSpace: "pre-wrap"}}>
-                            {otherArrayWithoutEmptyStrings}
-                        </p>
+                        <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
                     </div>
                 </div>
                 :null}
