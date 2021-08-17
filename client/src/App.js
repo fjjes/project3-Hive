@@ -2,16 +2,13 @@ import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginPage from "./components/pages/Login/LoginPage";
 import AdminPortal from "./components/pages/Admin/AdminPortal";
-// import AdminPortalEdit from "./components/pages/Admin/AdminPortalEdit";
 import SurveyLandingPage from "./components/pages/LandingPage/SurveyLandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
 import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
-import Chart from "./components/DataVisual/Chart";
 import SurveyAnswersPage from "./components/pages/Admin/SurveyAnswersPage";
 import "./App.css";
-
 
 function App() {
   const [rowId, setRowId] = useState();
@@ -30,55 +27,39 @@ function App() {
       <Router>
         <Switch>
         <Route exact path="/">
-            <LoginPage />
+          <LoginPage />
+        </Route>
+        <Route path="/survey/:surveyId">
+          <SurveyLandingPage />
+        </Route>
+        <div>
+          <Navbar />
+          <Route exact path="/create-new">
+            <AdminPortal 
+              rowId={rowId} 
+              copyOrOriginal={copyOrOriginal} 
+              wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+              setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
+            />
           </Route>
-          <Route path="/survey/:surveyId">
-            <SurveyLandingPage />
+          <Route path="/existing-surveys">
+            <FindSurvey 
+              setRowId={setRowId} 
+              resetRowId={resetRowId} 
+              setCopyOrOriginal={setCopyOrOriginal} 
+              resetCopyOrOriginal={resetCopyOrOriginal} 
+            />
           </Route>
-          <div>
-            <Navbar />
-              <Route exact path="/create-new">
-                <AdminPortal 
-                  rowId={rowId} 
-                  copyOrOriginal={copyOrOriginal} 
-                  wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
-                  setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
-                />
-              </Route>
-              <Route path="/existing-surveys">
-                <FindSurvey 
-                  setRowId={setRowId} 
-                  resetRowId={resetRowId} 
-                  setCopyOrOriginal={setCopyOrOriginal} 
-                  resetCopyOrOriginal={resetCopyOrOriginal} 
-                />
-              </Route>
-              <Route path="/map/:surveyId">
-                <Map/>
-              </Route>
-              <Route path="/data-visual">
-                <DataVisualization/>
-              </Route>
-              <Route path="/data-collected">
-                <SurveyAnswersPage/>
-              </Route>
-            
-            <Route path="/existing-surveys">
-              <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
-            </Route>
-            <Route path="/map/:surveyId">
-              <Map/>
-            </Route>
-            <Route path="/data-visual">
-              <DataVisualization/>
-            </Route>
-            <Route path="/chart">
-              <Chart/>
-            </Route>
-            <Route path="/data-collected">
-              <SurveyAnswersPage/>
-            </Route>
-          </div>
+          <Route path="/map/:surveyId">
+            <Map/>
+          </Route>
+          <Route path="/data-visual">
+            <DataVisualization/>
+          </Route>
+          <Route path="/data-collected">
+            <SurveyAnswersPage/>
+          </Route>
+        </div>
         </Switch>
       </Router>
   );
