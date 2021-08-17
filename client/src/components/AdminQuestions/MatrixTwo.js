@@ -15,7 +15,7 @@ const copyOptions = (originalOptions) =>
     return { text: option.text };
   });
 
-const MatrixTwo = ({ question, questionNumber }) => {
+const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixTwoOption = {};
@@ -26,11 +26,11 @@ const MatrixTwo = ({ question, questionNumber }) => {
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
-        { text: "text 1" },
-        { text: "text 2" },
-        { text: "text 3" },
-        { text: "text 4" },
-        { text: "text 5" },
+        { text: "Provide better working comfort" },
+        { text: "Stimulate creativity and collective performance" },
+        { text: "Fascilitate access to information and news from business lines and departments" },
+        { text: "Break down silos between departments and increase cross functional lines" },
+        { text: "Provide spaces for more tranquility to work and concentration" }
       ])
   );
 
@@ -49,6 +49,7 @@ const MatrixTwo = ({ question, questionNumber }) => {
   const onEditClicked = () => {
     console.log("clicked matrixbox");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
@@ -65,11 +66,13 @@ const MatrixTwo = ({ question, questionNumber }) => {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
@@ -116,11 +119,12 @@ const MatrixTwo = ({ question, questionNumber }) => {
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
-
           {inEditMode.status ? (
-            <input
+            <textarea
               type="text"
+              className="question-intro"
               value={questionText}
+              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (

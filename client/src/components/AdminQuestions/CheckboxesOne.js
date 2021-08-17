@@ -15,7 +15,7 @@ const copyOptions = (originalOptions) =>
     return option;
   });
 
-function CheckboxesOne({ question, questionNumber }) {
+function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const checkboxesOneOption = "";
@@ -38,6 +38,7 @@ function CheckboxesOne({ question, questionNumber }) {
   const onEditClicked = () => {
     console.log("clicked checkbox");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
@@ -54,11 +55,14 @@ function CheckboxesOne({ question, questionNumber }) {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
+
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
@@ -105,9 +109,11 @@ function CheckboxesOne({ question, questionNumber }) {
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
           {inEditMode.status ? (
-            <input
+            <textarea
               type="text"
+              className="question-intro"
               value={questionText}
+              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (

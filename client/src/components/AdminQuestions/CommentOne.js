@@ -1,13 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import QuestionContext from "../pages/Admin/QuestionContext";
-import {
-  EditButton,
-  DeleteButton,
-  SaveButton,
-  CancelButton,
-} from "./AdminEditButtons";
+import { EditButton, DeleteButton, SaveButton, CancelButton} from "./AdminEditButtons";
 
-function CommentOne({ question, questionNumber }) {
+function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const [questionText, setQuestionText] = useState(
@@ -17,6 +12,7 @@ function CommentOne({ question, questionNumber }) {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
   const onSave = () => {
     console.log("save!!!");
@@ -30,11 +26,13 @@ function CommentOne({ question, questionNumber }) {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
   };
 
@@ -58,9 +56,11 @@ function CommentOne({ question, questionNumber }) {
       <p className="question-intro">Question {questionNumber}</p>
         <div className="questionText">
           {inEditMode.status ? (
-            <input
+            <textarea
             type="text"
+            className="question-intro"
             value={questionText}
+            style={{ height: "100px", width: "90%", marginBottom:"10px" }}
             onChange={(e) => setQuestionText(e.target.value)}
             />
             ) : (

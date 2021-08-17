@@ -2,9 +2,15 @@
 const Progress = ({done}) => {
     return (
         <div className="progress">
-            <div className="progress-done" style={{opacity: 1, width: `${done}%`}} >
-                {done}%
+            {done===0?
+            <div className="progress-done zero" style={{opacity: 1, width: `${done}%`}} >  
+            {done}% complete  
             </div>
+            :
+            <div className="progress-done" style={{opacity: 1, width: `${done}%`}} >  
+            {done}% complete  
+            </div>
+         }   
         </div>
     );
 }

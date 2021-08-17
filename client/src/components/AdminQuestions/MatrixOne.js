@@ -14,7 +14,7 @@ const copyOptions = (originalOptions) =>
   originalOptions.map((option) => {
     return { text: option.text };
   });
-const MatrixOne = ({ question, questionNumber }) => {
+const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) => {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixOneOption = {};
@@ -61,6 +61,7 @@ const MatrixOne = ({ question, questionNumber }) => {
   const onEditClicked = () => {
     console.log("clicked matrixbox");
     setInEditMode({ status: true });
+    setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
@@ -77,11 +78,13 @@ const MatrixOne = ({ question, questionNumber }) => {
     });
     console.log("clicked save", questions);
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setInEditMode({ status: false });
+    setWholeSurveyInEditModeOrNot(false);
     console.log(questions, answerOptions);
     setQuestionText(questions[questionNumber - 1].question);
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
@@ -131,9 +134,11 @@ const MatrixOne = ({ question, questionNumber }) => {
           <p className="question-intro">Question {questionNumber}</p>
 
           {inEditMode.status ? (
-            <input
+              <textarea
               type="text"
+              className="question-intro"
               value={questionText}
+              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
