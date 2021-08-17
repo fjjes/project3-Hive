@@ -56,7 +56,7 @@ const Matrix = (props) => {
   }, []);
 
   return (
-    <div className="matrix question-component user">
+		<div className="matrix question-component user animate__animated animate__fadeIn">
       <p className="question-intro">Question {props.questionNumber}</p>
       <p className="question-intro">{props.question}</p>
       <table className="matrix-table">

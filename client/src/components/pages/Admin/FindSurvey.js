@@ -4,6 +4,7 @@ import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
 import * as GrIcons from "react-icons/gr";
+import * as AiIcons from "react-icons/ai";
 
 const FindSurvey = (props) => {
   const history=useHistory();
@@ -65,7 +66,7 @@ const FindSurvey = (props) => {
         placeholder="Search by survey number"
         onChange={(event) => onSearchInputChange(event, setSearchInputNumber)}
       /> */}
-      <table>
+      <table style={{height: "100%"}}>
         <tbody>
           <tr>
             <th>Company</th>
@@ -89,14 +90,13 @@ const FindSurvey = (props) => {
                     className="icon3" 
                     title="Edit" 
                     style={{ color: "black" }}
-                    // onClick={()=>history.push(`/create-new/${row._id}`)}>
                     onClick={() => {
                         props.setCopyOrOriginal("original");
                         props.setRowId(row._id);
                     }}>
                     <BsIcons.BsPencilSquare />
                   </Link>
-                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <Link
                     to="/create-new"
                     className="icon5"
@@ -108,14 +108,25 @@ const FindSurvey = (props) => {
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <span className="slash" style={{ color: "#fff" }}>/</span> 
+                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <button 
                     className="icon4" 
                     title="toMap"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
-                  <span className="slash" style={{ color: "#fff" }}>/</span>
+                  <span className="slash" style={{ color: "black" }}>/</span>
+                  <Link
+                    to="/chart"
+                    className="icon5"
+                    title="Charts"
+                    style={{ color: "black" }}
+                    onClick={() => {
+                      props.setRowId(row._id)
+                    }}>
+                    <AiIcons.AiOutlineAreaChart />
+                  </Link>
+                  <span className="slash" style={{ color: "black" }}>/</span>
                   <button className="icon5" title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
                     <RiIcons.RiDeleteBinFill />

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { AnswerContext } from "../pages/SurveyQuestionPage";
 
 function Checkboxes({ questionNumber, question, texts }) {
-  const { answers, setAnswers, setValidationErrorMessage } = useContext(AnswerContext);
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } = useContext(AnswerContext);
   const [options, setOptions] = useState(
     texts.map((option) => ({ value: option, checked: false }))
   );
@@ -38,7 +38,7 @@ function Checkboxes({ questionNumber, question, texts }) {
       setValidationErrorMessage("");
     }
     let updateAnswers = { ...answers };
-    updateAnswers[questionNumber] = { options: newOptions, other: other, questionType:'checkbox'};
+    updateAnswers[questionNumber] = { options: newOptions, other: other};
     setAnswers(updateAnswers);
   };
 
@@ -50,6 +50,12 @@ function Checkboxes({ questionNumber, question, texts }) {
   };
 
   useEffect(() => {
+    setIsNextButtonDisabled(false);
+    setValidationErrorMessage("")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (answers[questionNumber]) {
       setOptions(answers[questionNumber].options);
       setOther(answers[questionNumber].other);
@@ -57,7 +63,7 @@ function Checkboxes({ questionNumber, question, texts }) {
   }, [answers, questionNumber]);
 
   return (
-    <div className="checkbox question-component user">
+		<div className="checkbox question-component user animate__animated animate__fadeIn">
       <form className="checkbox-form-control">
         <p className="question-intro">Question {questionNumber}</p>
         <p className="question-intro">{question}</p>

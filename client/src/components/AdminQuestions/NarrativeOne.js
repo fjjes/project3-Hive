@@ -20,18 +20,21 @@ function NarrativeOne(props) {
   const onEditClicked = () => {
     console.log("clicked edit");
     setInEditMode({ status: true });
+    props.setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
     props.updateNarrative(tempNarrative);
     console.log("clicked save");
     setInEditMode({ status: false });
+    props.setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
     console.log("clicked cancel");
     setTempNarrative(props.narrative);
     setInEditMode({ status: false });
+    props.setWholeSurveyInEditModeOrNot(false);
   };
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function NarrativeOne(props) {
   return (
     <div className="question-component admin-question-component narrative-component">
       <div className="side-border-line">
-        <p style={{ fontWeight: "bold", textAlign: "left" }}>Narrative</p>
+        <p style={{ fontWeight: "bold", textAlign: "left", whiteSpace: "pre-wrap",}}>Narrative</p>
         <div className="question-and-buttons">
           <div className="narrative-text-area">
             {inEditMode.status ? (
@@ -53,7 +56,7 @@ function NarrativeOne(props) {
                 onChange={handleNarrativeChange}
               />
             ) : (
-              <p>{props.narrative}</p>
+              <p style={{ whiteSpace: "pre-wrap",}}>{props.narrative} </p>
             )}
           </div>
         </div>
@@ -76,3 +79,5 @@ function NarrativeOne(props) {
 }
 
 export default NarrativeOne;
+
+

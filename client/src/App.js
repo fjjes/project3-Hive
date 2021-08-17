@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import FindSurvey from "./components/pages/Admin/FindSurvey";
 import Map from "./components/DataVisual/Map";
 import DataVisualization from "./components/DataVisual/DataVisualization";
+import Chart from "./components/DataVisual/Chart";
 import SurveyAnswersPage from "./components/pages/Admin/SurveyAnswersPage";
 import "./App.css";
 
@@ -15,6 +16,7 @@ import "./App.css";
 function App() {
   const [rowId, setRowId] = useState();
   const [copyOrOriginal, setCopyOrOriginal] = useState();
+  const [wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot] = useState(false);
 
   const resetRowId = () => {
     setRowId()
@@ -37,10 +39,13 @@ function App() {
             <Navbar />
             
               <Route exact path="/create-new">
-              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} />
+              <AdminPortal rowId={rowId} copyOrOriginal={copyOrOriginal} 
+              wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot}
+              setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot}
+              />
               </Route>
             
-            <Route path="/find-list">
+            <Route path="/existing-surveys">
               <FindSurvey setRowId={setRowId} resetRowId={resetRowId} setCopyOrOriginal={setCopyOrOriginal} resetCopyOrOriginal={resetCopyOrOriginal} />
             </Route>
           
@@ -53,7 +58,10 @@ function App() {
             <Route path="/data-visual">
               <DataVisualization/>
             </Route>
-            <Route path="/survey-answers">
+            <Route path="/chart">
+              <Chart/>
+            </Route>
+            <Route path="/data-collected">
               <SurveyAnswersPage/>
             </Route>
           </div>

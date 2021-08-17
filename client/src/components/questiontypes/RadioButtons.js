@@ -43,12 +43,12 @@ function RadioButtons({ questionNumber, question, texts }) {
   }, []);
 
   return (
-    <div className="radio question-component user">
+		<div className="radio question-component user animate__animated animate__fadeIn">
       <p className="question-intro">Question {questionNumber}</p>
       <p className="question-intro">{question}</p>
       {texts.map((option, index) => {
         return (
-          <div key={index}>
+          <div style={{paddingLeft: "10px"}} key={index}>
             <input
               type="radio"
               id={option}
