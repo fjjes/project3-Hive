@@ -1,6 +1,7 @@
 import { Bar, Pie } from "react-chartjs-2"
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
+    console.log('datalist:', dataList)
     // let opt= options?.sort()
 
     console.log('qtype:', qType)
@@ -22,19 +23,30 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
     let optRadio =Object.keys(percentRadio).map(percent=>percent)
 
-    //matrix, select
-    console.log('answers:', answers)
-   let ansObj = answers?.map((an, i)=>an[0]?.value)
-   console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
-    const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
-    console.log ('percentObj',percentObj)//{1: 44.4444,    2: 11.1111,  3: 11.11111,  4: 22.2222,  5: 11.11111 }
-    let percentArrObj= Object.values(percentObj).map(percent=>percent)
-    console.log('percentArrObj:', percentArrObj)//[44.4444, 11.1111, 11.11111, 22.2222, 11.11111]
-    let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map((op,i)=>op.text)
-    console.log('optObj', optObj)
-    // let labelObj =Object.keys(percentArrObj).map(percent=>percent)
-    // console.log ('labelObj',labelObj)
+    // //matrix, select
+    // // if(qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ){
+    //     console.log('answers:', answers)
+    //     let ansObj = answers?.map((an, i)=>an[0]?.value)
+    //     console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
+    //      const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
+    //      console.log ('percentObj',percentObj)//{1: 44.4444,    2: 11.1111,  3: 11.11111,  4: 22.2222,  5: 11.11111 }
+    //      let percentArrObj= Object.values(percentObj).map(percent=>percent)
+    //      console.log('percentArrObj:', percentArrObj)//[44.4444, 11.1111, 11.11111, 22.2222, 11.11111]
+         let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map((op,i)=>op.text)
+         console.log('optObj', optObj)
+        //  let labelObj =Object.keys(percentArrObj).map(percent=>percent)
+        //  console.log ('labelObj',labelObj)     
+    // // }
 
+  const getPercentObj=(i)=>{
+    let ansObj = answers?.map((an, ind)=>an[i]?.value)
+    const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
+    console.log ('percentObj',percentObj)
+    let percentArrObj= Object.values(percentObj).map(percent=>percent)
+    let labelObj =Object.keys(percentArrObj).map(percent=>percent)
+         console.log ('labelObj',labelObj)     
+      return percentObj
+  }
     return (
         <div>
             <hr/>
@@ -68,10 +80,11 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
                             labels: optObj,
                             // {percentObj ?
                             datasets: optObj?.map((opt, i)=>{
+                                console.log('label:', Object.keys(getPercentObj(i))[i])
                                 return(
                                     {
-                                        label:Object.keys(percentObj)[i],
-                                        data:percentArrObj,
+                                        label:Object.keys(getPercentObj(i))[i],
+                                        data:Object.values(getPercentObj(i)).map(percent=>percent),
                                         backgroundColor:colors[i],
                                         barThickness:12
                                     }
@@ -83,6 +96,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
                         </Bar>
                 </div>
                 :null}
+                {/* {qType === 'comment' &&
+                <p>Please visit "Data-Collected" tab to view all the comments for this question</p>} */}
             </div>
            
         </div>
