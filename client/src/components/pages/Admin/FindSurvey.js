@@ -84,7 +84,7 @@ const FindSurvey = (props) => {
                 <td>
                   <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
                 </td>
-                <td>
+                <td className="existing-surveys-edit-column">
                   <Link 
                     to="/create-new"
                     className="existing-surveys-edit-icon" 
@@ -96,7 +96,6 @@ const FindSurvey = (props) => {
                     }}>
                     <BsIcons.BsPencilSquare />
                   </Link>
-                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <Link
                     to="/create-new"
                     className="existing-surveys-edit-icon"
@@ -108,21 +107,18 @@ const FindSurvey = (props) => {
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Map"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
-                  <span className="slash" style={{ color: "black" }}>/</span>
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Chart"
                     onClick={()=>history.push(`/data-visual/${row._id}`)}>
                     <AiIcons.AiOutlineAreaChart />
                   </button>
-                  <span className="slash" style={{ color: "black" }}>/</span>
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Delete"
