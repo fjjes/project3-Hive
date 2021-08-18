@@ -363,9 +363,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 
   useEffect(() => {
     if (wholeSurveyInEditModeOrNot) {
+      console.log("*** Whole survey is IN EDIT MODE.")
       setStillInEditModeError("Please save all edits before submitting.")
     }
     else {
+      console.log("*** Whole survey is NOT in edit mode.")
       setStillInEditModeError("")
     }
   }, [wholeSurveyInEditModeOrNot])
