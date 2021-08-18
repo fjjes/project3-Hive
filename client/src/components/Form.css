@@ -48,8 +48,7 @@ h1 {
 .question-component {
 	height: 350px;
 	width: 800px;
-	/* overflow: scroll; */
-  /* overflow: auto; */
+  overflow: auto;
 }
 
 .admin-portal-button {
