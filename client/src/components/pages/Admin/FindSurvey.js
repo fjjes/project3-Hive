@@ -84,50 +84,42 @@ const FindSurvey = (props) => {
                 <td>
                   <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
                 </td>
-                <td>
+                <td className="existing-surveys-edit-column">
                   <Link 
                     to="/create-new"
-                    className="icon3" 
+                    className="existing-surveys-edit-icon" 
                     title="Edit" 
-                    style={{ color: "black" }}
                     onClick={() => {
                         props.setCopyOrOriginal("original");
                         props.setRowId(row._id);
                     }}>
                     <BsIcons.BsPencilSquare />
                   </Link>
-                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <Link
                     to="/create-new"
-                    className="icon5"
+                    className="existing-surveys-edit-icon"
                     title="Copy"
-                    style={{ color: "black" }}
                     onClick={() => {
                       props.setCopyOrOriginal("copy");
                       props.setRowId(row._id)
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <span className="slash" style={{ color: "black" }}>/</span> 
                   <button 
-                    className="icon4" 
-                    title="toMap"
+                    className="existing-surveys-edit-icon" 
+                    title="Map"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button>
-                  <span className="slash" style={{ color: "black" }}>/</span>
-                  <Link
-                    to="/chart"
-                    className="icon5"
-                    title="Charts"
-                    style={{ color: "black" }}
-                    onClick={() => {
-                      props.setRowId(row._id)
-                    }}>
+                  <button 
+                    className="existing-surveys-edit-icon" 
+                    title="Chart"
+                    onClick={()=>history.push(`/data-visual/${row._id}`)}>
                     <AiIcons.AiOutlineAreaChart />
-                  </Link>
-                  <span className="slash" style={{ color: "black" }}>/</span>
-                  <button className="icon5" title="Delete"
+                  </button>
+                  <button 
+                    className="existing-surveys-edit-icon" 
+                    title="Delete"
                     onClick={() => handleDeleteClick(row._id)}>
                     <RiIcons.RiDeleteBinFill />
                   </button>
