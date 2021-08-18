@@ -89,7 +89,6 @@ const FindSurvey = (props) => {
                     to="/create-new"
                     className="existing-surveys-edit-icon" 
                     title="Edit" 
-                    style={{ color: "black" }}
                     onClick={() => {
                         props.setCopyOrOriginal("original");
                         props.setRowId(row._id);
@@ -100,7 +99,6 @@ const FindSurvey = (props) => {
                     to="/create-new"
                     className="existing-surveys-edit-icon"
                     title="Copy"
-                    style={{ color: "black" }}
                     onClick={() => {
                       props.setCopyOrOriginal("copy");
                       props.setRowId(row._id)

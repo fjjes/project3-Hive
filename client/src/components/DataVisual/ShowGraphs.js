@@ -1,5 +1,4 @@
-import { Bar, Pie } from "react-chartjs-2"
-// import {useState } from 'react';
+import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     // const [valueLabel, setValueLabel]=useState([])
@@ -7,8 +6,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     console.log('qtype:', qType)
     
 
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"]
-        // 'purple', 'green', 'orange', 'cyan', 'purple'
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"] // Hive colours
+   let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
     
     
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
@@ -35,6 +34,44 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
       return percentObj
   }
 
+// checkboxes ---------------------------
+// console.log("All answers: ", answers)
+
+let otherArray = []
+let otherArrayWithoutEmptyStrings = []
+let checkedOptionsArray = []
+let checkboxesOpt = []
+let checkboxesPercentArr = []
+if(typeof answers === 'object'){
+    if(qType==='checkbox'){
+        for (let i=0; i<answers.length; i++) {
+            // GRAB OTHER VALUE:
+            // console.log("answers[i].other.value: ", i, answers[i].other.value)
+            otherArray.push(answers[i].other.value)
+            otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
+            // GRAB OPTIONS THAT HAVE BEEN CHECKED
+            for (let x = 0; x < answers[i].options.length; x++) {
+                if (answers[i].options[x].checked === true) {
+                    // console.log("answers[i].options[x].value: ", i, x, answers[i].options[x].value)
+                    checkedOptionsArray.push(answers[i].options[x].value)
+                }
+            }
+        }
+        let checkboxAns=checkedOptionsArray?.sort()
+        // console.log("checkboxAns: ", checkboxAns)
+        const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
+        // console.log ('checkbox percent', checkboxesPercentages)
+        checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+        checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+        // console.log("checkboxesOpt: ", checkboxesOpt)
+        // console.log("chechboxesPercentages: ", checkboxesPercentages)
+        // console.log("chechboxesPercentArr: ", checkboxesPercentArr)
+        // console.log("other array: ", otherArray)
+        // console.log("pretty other array: ", otherArrayWithoutEmptyStrings)
+        // console.log("checkedOptionsArray: ", checkedOptionsArray)
+    }
+}
+
     return (
         <div>
             {qType === 'comment' &&
@@ -57,13 +94,35 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
                         datasets:[{
                             // data:countArr,
                             data:percentArrRadio,
-                            backgroundColor:colors,
+                            // backgroundColor:colors,
+                            backgroundColor:checkboxesPercentArr.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
                     }}
                     >
                     </Pie>
+                </div>
+                :null}
+                
+                {qType==='checkbox' ?
+                <div className="chart-container">
+                    <Pie
+                    data={{
+                        labels: checkboxesOpt,
+                        datasets:[{
+                            data: checkboxesPercentArr,
+                            backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
+                            hoverBorderWidth:3,
+                            hoverBorderColor:'#000'
+                        }]
+                    }}
+                    >
+                    </Pie>
+                    <div className="checkboxes-other-responses">
+                        <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                        <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                    </div>
                 </div>
                 :null}
                 
