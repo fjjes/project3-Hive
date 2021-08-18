@@ -447,6 +447,11 @@ font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
 }
+
+.list-table a {
+  text-decoration: none;
+}
+
 .data-collected .upper-section, .data-visual .upper-section{
   margin-top: 20px;
   margin-left:40px;
