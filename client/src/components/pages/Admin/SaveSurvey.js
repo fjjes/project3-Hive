@@ -491,7 +491,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
-            <div className="intro-heading">
+            <div className="intro-heading admin-question-component">
               <input
                 type="text"
                 placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
@@ -499,7 +499,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
                 onChange={(e) => setHeading(e.target.value)}
               />
             </div>
-						<div className="upload-image">
+						<div className="upload-image admin-question-component">
 							<label htmlFor="upload-button">
 								{image?.preview ? (
 									<img src={image.preview} width="200px" height="200px" />
