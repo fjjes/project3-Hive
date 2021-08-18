@@ -64,6 +64,7 @@ const DataVisualization =()=>{
     }
    useEffect(()=>{
         getChartInfo()
+            // eslint-disable-next-line react-hooks/exhaustive-deps
    },[surveyId])
 
     return(

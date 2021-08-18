@@ -6,7 +6,6 @@ import * as XLSX from 'xlsx';
 const ExportCSV = ({newDataList, fileName}) => {
     const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     const fileExtension = '.xlsx';
-    // console.log("newDataList", newDataList)
 
     let arr = [];
     let questionNum = 1;
@@ -18,9 +17,6 @@ const ExportCSV = ({newDataList, fileName}) => {
 
     const formatAnswers = (ans, i) =>{
         if(ans){
-            // console.log('questionType of each answer', questionList[i]?.questionType)
-            // console.log('ans', ans)
-
             if(typeof ans === 'object'){
                 if(questionList[i].questionType==='checkbox'){
                     return ans.options.filter(option=>option.checked).map(option=>{
