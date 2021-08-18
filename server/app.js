@@ -2,6 +2,7 @@ let createError = require('http-errors');
 let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let path = require('path')
 
 //let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -24,6 +25,11 @@ app.use('/api/survey', surveyRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+app.get("/api/images/:id", (req, res) => {
+	console.log(req.params)
+	res.sendFile("/uploads/"+req.params.id)
+})
 
 // error handler
 app.use(function(err, req, res, next) {

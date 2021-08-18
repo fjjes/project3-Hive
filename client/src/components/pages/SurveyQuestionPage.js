@@ -154,7 +154,7 @@ useEffect(()=>{
           </div>
         </div>
       ) : (
-        <div className="survey-card closing">
+					<div className="survey-card closing animate__animated animate__fadeIn">
           <h2>Thank you for your participation!!</h2>
         </div>
       )}

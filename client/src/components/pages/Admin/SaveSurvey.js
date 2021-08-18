@@ -40,19 +40,19 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 		}
 	};
 
-	// const handleUpload = async e => {
-	// 	e.preventDefault();
-	// 	const formData = new FormData();
-	// 	formData.append("image", image.raw);
+	const handleUpload = async e => {
+		// e.preventDefault();
+		const formData = new FormData();
+		formData.append("image", image.raw);
 
-	// 	await fetch("YOUR_URL", {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "multipart/form-data"
-	// 		},
-	// 		body: formData
-	// 	});
-	// };
+		await fetch(`/api/survey/${rowId}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "multipart/form-data"
+			},
+			body: formData
+		});
+	};
 
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
@@ -328,13 +328,16 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
     else if (!surveyFound) {
       // If the combination of company/version/surveyNumber isn't already taken, post the survey to the DB:
       try {
+				const formData = new FormData();
+				formData.append("image", image.raw);
+				formData.append("data", JSON.stringify(surveyToCreate))
         let createSurvey = await fetch("/api/survey", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(surveyToCreate),
+          // headers: { "Content-Type": "application/json" },
+          body: formData,
         });
         console.log("Creating a custom-built survey, yay!", surveyToCreate);
-
+				console.log(createSurvey.status)
         if (createSurvey.status !== 200) {
           let errorMessage = await createSurvey.text();
           console.log("We have an error: ", errorMessage);
@@ -497,7 +500,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 						<div className="upload-image">
 							<label htmlFor="upload-button">
 								{image?.preview ? (
-									<img src={image.preview} alt="dummy" width="auto" height="auto" />
+									<img src={image.preview} width="200px" height="200px" />
 								) : (
 									<>
 										<h5>Upload your photo</h5>
@@ -505,10 +508,14 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 								)}
 							</label>
 							<input
+								name="image"
+								id="image"
+								// value={image}
+								// onChange={(e) => setImage(e.target.files.length)}
 								type="file"
-								id="upload-button"
 								onChange={handleChangeImage}
 							/>
+								{/* <button onClick={handleUpload}>Upload</button> */}
 						</div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne

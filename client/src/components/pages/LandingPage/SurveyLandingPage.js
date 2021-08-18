@@ -14,6 +14,7 @@ export default function Logo({ flashcard }) {
   const [questionArray, setQuestionArray] = useState([]);
   const [flip, setFlip] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
+	const [image, setImage] = useState("");
 
   useEffect(() => {
     const getSurveyQuestions = async () => {
@@ -23,6 +24,7 @@ export default function Logo({ flashcard }) {
       setSurvey(data);
       setNarrative(data.narrative);
       setHeading(data.heading)
+			setImage(data.img)
       setQuestionArray(data.questions);
       console.log("Survey questions:", data.questions);
     };
@@ -60,7 +62,7 @@ export default function Logo({ flashcard }) {
           </div>
           <div className="theback">
             <h1>{heading}</h1>
-            {/* <img src={image} style={{height:100}} alt="start-img"/> */}
+            {image && <img src={"/api/images/"+image} style={{height:100}} alt="start-img"/>}
             <p style={{ whiteSpace: "pre-wrap",}}>{narrative}</p>
             <button
               className="neu-button"
