@@ -1,6 +1,8 @@
 import { Bar, Pie } from "react-chartjs-2"
+// import {useState } from 'react';
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
+    // const [valueLabel, setValueLabel]=useState([])
     console.log('datalist:', dataList)
     console.log('qtype:', qType)
     
@@ -11,6 +13,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
 //     let countArr = [...count.values()]
+
 
 
 //radio
@@ -72,8 +75,10 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
                             // {percentObj ?
                             datasets: optObj?.map((opt, i)=>{
                                 console.log('label:', Object.keys(getPercentObj(i))[i])
+                                // console.log('label:',valueLabel[i] )
                                 return(
                                     {
+                                        // label:valueLabel[i],
                                         label:Object.keys(getPercentObj(i))[i],
                                         data:Object.values(getPercentObj(i)).map(percent=>percent),
                                         backgroundColor:colors[i],
@@ -119,5 +124,24 @@ export default ShowGraphs;
 
 
 
+// if(qType==='select'){
+//     let labelArr=[]
+//     let num =1
+//     console.log('length:::',dataList[0].survey.questions[qNum].answerOptions.length )//5 for select
+//     for(let i=0; i<dataList[0].survey.questions[qNum].answerOptions.length;i++){
+//       labelArr.push(num++)
+//     }
+//     console.log('select label:', labelArr)
+//    setValueLabel(labelArr)
+// }else if(qType=== 'matrix1'){
+//     let labelArr = ['Very Satisfied', 'Satisfied', 'Neither Satisfied Nor Dissatisfied', 'Dissatisfied', 'Very Satisfied']
+//     setValueLabel(labelArr)
+//     console.log('matrix1 label:', labelArr)
 
+//   }else if(qType=== 'matrix2'){
+//       let labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+//       setValueLabel(labelArr)
+//       console.log('matrix2 label:', labelArr)
+
+//   }
 
