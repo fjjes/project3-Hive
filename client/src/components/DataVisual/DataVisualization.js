@@ -94,7 +94,7 @@ const DataVisualization =()=>{
                 <ShowGraphs options={options} qType={qType} answers={answers} question={question} qNum={qNum} dataList={newDataList}/>
             </div>}
             </div>
-            :null}
+            :<h2>"Selected survey do not have any records for now!"</h2>}
         </div>
     )
 }
