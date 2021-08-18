@@ -2,11 +2,8 @@ import { Bar, Pie } from "react-chartjs-2"
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     console.log('datalist:', dataList)
-    // let opt= options?.sort()
-
     console.log('qtype:', qType)
-    // console.log('options:', options)
-    // console.log('ans:', ans)
+    
 
    let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759"]
         // 'purple', 'green', 'orange', 'cyan', 'purple'
@@ -19,39 +16,32 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
 //radio
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
-    console.log ('percent',percentRadio)
+    console.log ('percentRadio',percentRadio)
     let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
-    let optRadio =Object.keys(percentRadio).map(percent=>percent)
+    // let optRadio =Object.keys(percentRadio).map(percent=>percent)
+   
+    //matrix, select
+    let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op.text)
+    console.log('optObj', optObj)
 
-    // //matrix, select
-    // // if(qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ){
-    //     console.log('answers:', answers)
-    //     let ansObj = answers?.map((an, i)=>an[0]?.value)
-    //     console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
-    //      const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
-    //      console.log ('percentObj',percentObj)//{1: 44.4444,    2: 11.1111,  3: 11.11111,  4: 22.2222,  5: 11.11111 }
-    //      let percentArrObj= Object.values(percentObj).map(percent=>percent)
-    //      console.log('percentArrObj:', percentArrObj)//[44.4444, 11.1111, 11.11111, 22.2222, 11.11111]
-         let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map((op,i)=>op.text)
-         console.log('optObj', optObj)
-        //  let labelObj =Object.keys(percentArrObj).map(percent=>percent)
-        //  console.log ('labelObj',labelObj)     
-    // // }
 
   const getPercentObj=(i)=>{
     let ansObj = answers?.map((an, ind)=>an[i]?.value)
     const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
-    console.log ('percentObj',percentObj)
-    let percentArrObj= Object.values(percentObj).map(percent=>percent)
-    let labelObj =Object.keys(percentArrObj).map(percent=>percent)
-         console.log ('labelObj',labelObj)     
+    console.log ('percentObj',percentObj)    
       return percentObj
   }
+
     return (
         <div>
+            {qType === 'comment' &&
+                <h3>Please visit "Data-Collected" tab to view all the comments for this question</h3>} 
+            {qType === 'postal' &&
+                <p>Please visit "Data-Collected" tab to view all the postalcodes for this question</p>} 
+            {(qType === 'radio' || qType === 'select' || qType === 'matrix1' || qType=== 'matrix2'|| qType=== 'slider'|| qType=== 'checkbox') &&<>
             <hr/>
             <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
-            <hr/>
+            <hr/></>}
             
             <div className="graph-section" style={{width:'25%', height:'25%'}}>
             
@@ -59,7 +49,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
                 <div className="chart-container">
                     <Pie
                     data={{
-                        labels: optRadio,
+                        // labels: optRadio,
+                        labels: dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op),
                         datasets:[{
                             // data:countArr,
                             data:percentArrRadio,
@@ -105,3 +96,28 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
 }
  
 export default ShowGraphs; 
+
+
+    // //matrix, select
+    // // if(qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ){
+    //     console.log('answers:', answers)
+    //     let ansObj = answers?.map((an, i)=>an[0]?.value)
+    //     console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
+    //      const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
+    //      console.log ('percentObj',percentObj)//{1: 44.4444,    2: 11.1111,  3: 11.11111,  4: 22.2222,  5: 11.11111 }
+    //      let percentArrObj= Object.values(percentObj).map(percent=>percent)
+    //      console.log('percentArrObj:', percentArrObj)//[44.4444, 11.1111, 11.11111, 22.2222, 11.11111]
+   
+   
+    // let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op.text)
+    // console.log('optObj', optObj)
+   
+   
+    //  let labelObj =Object.keys(percentArrObj).map(percent=>percent)
+   //  console.log ('labelObj',labelObj)     
+// // }
+
+
+
+
+
