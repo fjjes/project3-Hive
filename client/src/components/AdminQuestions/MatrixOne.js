@@ -129,7 +129,11 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
 
   return (
     <div className="question-component admin-question-component matrix">
-      <div className="question-and-buttons">
+
+     
+      <div className="question-and-buttons" style={{display: "flex", flexDirection: "row", overflow: "hidden"}}>
+      <div className="temp-container" style={{overflowY: "auto", overflowX: "hidden"}}>
+
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
 
@@ -202,6 +206,7 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
           </table>
           {inEditMode.status? <AddInputButton onAddInput={onAddInput} /> : null}
         </div>
+          </div>
         <div className="edit-buttons-group">
           {inEditMode.status ? (
             <div className="edit-button">

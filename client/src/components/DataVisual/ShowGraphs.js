@@ -39,6 +39,7 @@ const getLabel=()=>{
 }
 useEffect(()=>{
     getLabel()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 },[dataList, qNum])
 
     
@@ -55,39 +56,28 @@ useEffect(()=>{
 
 // checkboxes ---------------------------
 // console.log("All answers: ", answers)
-
 let otherArray = []
 let otherArrayWithoutEmptyStrings = []
 let checkedOptionsArray = []
 let checkboxesOpt = []
 let checkboxesPercentArr = []
 if(typeof answers === 'object'){
-    if(qType==='checkbox'){
+    if (qType==='checkbox'){
         for (let i=0; i<answers.length; i++) {
-            // GRAB OTHER VALUE:
-            // console.log("answers[i].other.value: ", i, answers[i].other.value)
+            // GRAB "OTHER" VALUE:
             otherArray.push(answers[i].other.value)
             otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
             // GRAB OPTIONS THAT HAVE BEEN CHECKED
             for (let x = 0; x < answers[i].options.length; x++) {
                 if (answers[i].options[x].checked === true) {
-                    // console.log("answers[i].options[x].value: ", i, x, answers[i].options[x].value)
                     checkedOptionsArray.push(answers[i].options[x].value)
                 }
             }
         }
         let checkboxAns=checkedOptionsArray?.sort()
-        // console.log("checkboxAns: ", checkboxAns)
         const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
-        // console.log ('checkbox percent', checkboxesPercentages)
         checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
         checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-        // console.log("checkboxesOpt: ", checkboxesOpt)
-        // console.log("chechboxesPercentages: ", checkboxesPercentages)
-        // console.log("chechboxesPercentArr: ", checkboxesPercentArr)
-        // console.log("other array: ", otherArray)
-        // console.log("pretty other array: ", otherArrayWithoutEmptyStrings)
-        // console.log("checkedOptionsArray: ", checkedOptionsArray)
     }
 }
 
@@ -103,6 +93,41 @@ if(typeof answers === 'object'){
       return percentObj
   }
   console.log('valueLabel:',valueLabel )
+// slider -------------------------------
+let sliderOptionsArray = []
+let sliderPercentArr = []
+let sliderLabels = []
+if(typeof answers === 'object'){
+    if (qType === 'slider') {
+        console.log("******************")
+        console.log("answers: ", answers)
+        console.log("question: ", question)
+        console.log("qNum: ", qNum)
+        console.log("DataList: ", dataList)
+        console.log("answers[0]: ", answers[0])
+        for (let i=0; i<dataList.length; i++) {
+            sliderPercentArr = dataList[i].answers[qNum]
+            console.log("sliderPercentArr: ", sliderPercentArr)
+            // survey[x]value[i] + survey[y]value[i] + survey[z]value[i]
+            // survey[x]value[a] + survey[y]value[a] + survey[z]value[a]
+            console.log("+++++++++")
+            console.log("dataList[0].survey: ", dataList[0].survey)
+            console.log("dataList[0].survey.questions[0]: ", dataList[0].survey.questions[0])
+            console.log("dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
+            console.log("dataList[0].survey.questions[0].answerOptions[0].text: ", dataList[0].survey.questions[0].answerOptions[0].text)
+            console.log("&&&&&&& dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
+            console.log("&&&&&&& typeof dataList[0].survey.questions[0].answerOptions[0]: ", typeof dataList[0].survey.questions[0].answerOptions[0])
+
+            sliderLabels = [...sliderLabels, dataList[0].survey.questions[0].answerOptions[0]]
+            
+        //         for (let x=0; x<dataList[i].survey.questions[qNum].answerOptions.length; x++) {
+        //             sliderOptionsArray = [...sliderOptionsArray, dataList[i].survey.questions[qNum].answerOptions[x].text]
+        }
+
+        console.log("@@@@@@@sliderOptionsArry: ", sliderOptionsArray)
+        console.log("dataList[0].survey.questions[1].answerOptions: ", dataList[0].survey.questions[1].answerOptions)
+    } 
+}
 
     return (
         <div>
@@ -187,6 +212,28 @@ if(typeof answers === 'object'){
                         </Bar>
                 </div>
                 :null}
+
+                {qType==='slider' ?
+                    <div className="chart-container">
+                        <Pie
+                        data={{
+                            // labels: sliderOptionsArray,
+                            // labels: simpleAnswerOptions,
+                            labels: sliderLabels,
+                            datasets:[{
+                                // data: sliderOptions,
+                                data: sliderPercentArr,
+                                // data: [1, 4, 21, 23, 2],
+                                backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
+                                hoverBorderWidth:3,
+                                hoverBorderColor:'#000'
+                            }]
+                        }}
+                        >
+                        </Pie>
+                    </div>
+                    :null}
+
             </div>
            
         </div>
