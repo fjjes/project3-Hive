@@ -8,7 +8,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
     console.log('qNum', qNum)
     // console.log('answers line 8::', answers)
 
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "black", "#A8EB12","#805F42", "#52577C", "#21D126" ] // Hive colours
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","black", "#6D92A0", "#D4A66A"] // Hive colours
    let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
 
 const getLabel=()=>{
@@ -193,7 +193,7 @@ if(typeof answers === 'object'){
                 :null}
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
-                    <div style={{width:"300%"}}>
+                    <div style={{width:"200%"}}>
                         <Bar
                         data={{
                             labels: optObj,
@@ -230,7 +230,7 @@ if(typeof answers === 'object'){
                         options={{
                             // maintainAspectRatio:false,
                             // plugins:{
-                                barValueSpacing:40,
+                                barValueSpacing:20,
                                 tooltips:{
                                     callbacks:{
                                       label:function(toolTipItem){
