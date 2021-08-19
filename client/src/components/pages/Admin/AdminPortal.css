@@ -24,7 +24,7 @@ html {
   padding: 0;
 }
 
-.data-collected, .data-visual{
+.data-collected{
   box-sizing: border-box;
   margin-right: 10px;
   margin-left: 10px;
@@ -396,13 +396,11 @@ font-weight: bold;
     text-align: center;
     border-collapse: collapse;
     margin-bottom: 70px;
+    height: 300px;
     overflow: scroll;
-    height: 380px;
 	}
   
 	.data-table {
-	/* display: flex; */
-	/* justify-content: center; */
 	overflow: scroll;
 }
 
@@ -410,40 +408,21 @@ font-weight: bold;
     display: flex;
     justify-content: center;
 }
-
 .question-list{
   display:flex;
   justify-content: center;
   text-align: center;
-  height: 220px;
+  height: 48px;
   overflow: scroll;
+  margin-bottom: 20px;;
 }
 
-.data-visual .question-list {
-  height: auto;
-  overflow: auto;
-}
-
-.data-visual table{
-  margin-top: 20px;
-  display:flex;
-  text-align: center;
-  border-collapse: collapse;
-  margin-bottom: 70px;
-}
-
-.data-visual tr:hover {
+.data-collected tr:hover {
   /* background-color: #f59645 !important; */
   background-color: hsl(28, 90%, 72%) ;
   color:black;
   font-weight: bold;
 }
-
-/* .data-visual tr:visited {
-  background-color: hsl(28, 90%, 72%) !important;
-  color:black;
-  font-weight: bolder;
-} */
 
 .list-table th {
   background-color: grey;
@@ -499,7 +478,7 @@ font-weight: bold;
   font-weight: bold;
 }
 
-.data-collected .upper-section, .data-visual .upper-section{
+.data-collected .upper-section{
   margin-top: 20px;
   margin-left:40px;
   padding: 10px 0px 0px 10px;
@@ -512,7 +491,7 @@ font-weight: bold;
 }
 
 .data-collected .record-num{
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 10px;
   background: #393F4B;
   color: white;
@@ -523,22 +502,37 @@ font-weight: bold;
   margin-left:10px;
   color:#f59645;
 }
+.data-collected .button-row{
+display: flex;
+justify-content: center;
+}
 
-.data-collected button{
+.data-collected .export-btn, .data-collected .table-btn{
   border: 0;
   background-color:  #393F4B;
   color: white;
   padding:6px;
   border-radius: 6px;
   cursor: pointer;
-}
-.data-collected .display{
-  margin-left:10px;
+  font-weight: bolder;
+  margin-bottom: 20px;
 }
 
-.data-collected .export{
-  margin-bottom: 10px;
-  /* margin-left: 1750px; */
+.data-collected .export-btn{
+  margin-right: 5px;
+}
+
+.data-collected .table-btn{
+  margin-left: 5px;
+}
+
+.data-collected .export-btn:hover,
+.data-collected .table-btn:hover{
+color:#f59645;
+}
+
+.data-collected .display{
+  margin-left:10px;
 }
 
 .existing-surveys-edit-column {
@@ -546,7 +540,8 @@ font-weight: bold;
   padding-right: 5px !important;
 }
 
-.list-table .existing-surveys-edit-icon {
+.list-table .existing-surveys-edit-icon,
+.data-collected .existing-surveys-edit-icon {
   font-size: medium;
   border: none;
   background-color: inherit;
@@ -691,7 +686,9 @@ font-weight: bold;
 
 /* CHARTS */
 .chart-container {
-  width: 500px;
+  margin-top: 20px;
+  width: 350px; 
+  height: 350px;
 }
 
 .checkboxes-other-responses p {
