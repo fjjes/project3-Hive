@@ -50,7 +50,7 @@ const FindSurvey = (props) => {
   };
 
   return (
-    <div> {width >500 && (
+    <div> {width >300 && (
     <div className="list-table">
       <h2>Find an Existing Survey</h2>
       {/* <button className="view-all-button">View all surveys</button>

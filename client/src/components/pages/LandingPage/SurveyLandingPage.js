@@ -7,6 +7,7 @@ import "./SurveyLandingPage.css";
 //import { Link } from "react-router-dom";
 // import image from "../../../images/website.jpg";
 import Picture from './orange.png';
+import useWindowSize from "../../../utilities/useWindowSize"
 
 export default function Logo({ flashcard }) {
   const { surveyId } = useParams();
@@ -17,6 +18,7 @@ export default function Logo({ flashcard }) {
   const [flip, setFlip] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
 	const [image, setImage] = useState("");
+  const {width} = useWindowSize();
 
   useEffect(() => {
     const getSurveyQuestions = async () => {
@@ -44,6 +46,8 @@ export default function Logo({ flashcard }) {
 
 
   return (
+    <div>
+      {width > 300 && (
   <div className="card-container">
       {showQuestions === false ? (
 				<div
@@ -84,5 +88,6 @@ export default function Logo({ flashcard }) {
         </div>
       )}
 	</div>
-  );
-}
+  )}
+  </div>
+  )}

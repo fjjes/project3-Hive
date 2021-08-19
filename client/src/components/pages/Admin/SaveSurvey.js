@@ -66,7 +66,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
-			setImage(data.img);
+			// setImage(data.img);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -169,7 +169,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           { text: "Provide better working comfort" },
           { text: "Stimulate creativity and collective performance" },
           {
-            text: "Fascilitate access to information and news from business lines and departments",
+            text: "Facilitate access to information and news from business lines and departments",
           },
           {
             text: "Break down silos between departments and increase cross functional lines",
@@ -379,7 +379,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 
   return (
     <div>
-      {width > 500 && (
+      {width > 300 && (
     <div>
       {/* TOP PART OF PAGE */}
       <h2>
