@@ -477,6 +477,13 @@ font-weight: bold;
   background-color: hsl(28, 90%, 72%) !important;
 }
 
+.data-table tr:hover {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) !important;
+  color:black;
+  font-weight: bold;
+}
+
 .data-collected .upper-section, .data-visual .upper-section{
   margin-top: 20px;
   margin-left:40px;
