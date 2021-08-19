@@ -108,12 +108,12 @@ const FindSurvey = (props) => {
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <button 
+                  {/* <button 
                     className="existing-surveys-edit-icon" 
                     title="Map"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
-                    </button>
+                    </button> */}
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Chart"
