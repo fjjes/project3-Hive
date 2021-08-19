@@ -1,7 +1,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import "./index.css";
 import { useEffect, useRef } from "react";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 
 const loader = new Loader({
   apiKey: "AIzaSyAB9QM8hkaDZ82FGPoPzN6Cf1q28aN-nGU",
@@ -19,9 +19,9 @@ const mapOptions = {
 
 
 
-const Map =()=>{
+const Map =({surveyId})=>{
   const map = useRef(null);
-  let { surveyId } = useParams();
+  // let { surveyId } = useParams();
 
   useEffect(() => {
     fetch(`/api/maps?surveyId=${surveyId}`)
