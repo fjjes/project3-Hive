@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
+import Map from './Map'
 import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
 
-const ShowGraphs = ({question, qType,  answers, qNum, dataList}) => {
+const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
     console.log('datalist:', dataList)
     // console.log('qtype:', qType)
@@ -142,8 +143,7 @@ if(typeof answers === 'object'){
         <div>
             {qType === 'comment' &&
                 <h3>Please visit "Data-Collected" tab to view all the comments for this question</h3>} 
-            {qType === 'postal' &&
-                <h3>Please visit "Data-Collected" tab to view all the postalcodes for this question</h3>} 
+            {qType === 'postal' && <Map surveyId={surveyId}/>} 
             {(qType === 'radio' || qType === 'select' || qType === 'matrix1' || qType=== 'matrix2'|| qType=== 'slider'|| qType=== 'checkbox') &&<>
             <hr/>
             <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
