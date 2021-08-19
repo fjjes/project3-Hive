@@ -126,7 +126,7 @@ const ExportCSV = ({newDataList, fileName}) => {
     }
 
     return (
-        <button  className="export" onClick={(e) => exportToCSV(csvData,fileName)}>Export to Excel</button>
+        <button  className="export-btn" onClick={(e) => exportToCSV(csvData,fileName)}>Export to Excel</button>
     )
 
 }
