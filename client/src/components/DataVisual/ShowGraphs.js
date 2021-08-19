@@ -55,29 +55,33 @@ useEffect(()=>{
     // let optRadio =Object.keys(percentRadio).map(percent=>percent)
 
 // checkboxes ---------------------------
-// console.log("All answers: ", answers)
 let otherArray = []
 let otherArrayWithoutEmptyStrings = []
 let checkedOptionsArray = []
 let checkboxesOpt = []
 let checkboxesPercentArr = []
+
 if(typeof answers === 'object'){
     if (qType==='checkbox'){
         for (let i=0; i<answers.length; i++) {
-            // GRAB "OTHER" VALUE:
-            otherArray.push(answers[i].other.value)
-            otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
-            // GRAB OPTIONS THAT HAVE BEEN CHECKED
-            for (let x = 0; x < answers[i].options.length; x++) {
-                if (answers[i].options[x].checked === true) {
-                    checkedOptionsArray.push(answers[i].options[x].value)
+            if (answers[i]) {
+                // GRAB "OTHER" VALUE:
+                if (answers[i].other) {
+                    otherArray.push(answers[i].other.value)
+                    otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
+                }
+                // GRAB OPTIONS THAT HAVE BEEN CHECKED
+                for (let x = 0; x < answers[i].options.length; x++) {
+                    if (answers[i].options[x].checked === true) {
+                        checkedOptionsArray.push(answers[i].options[x].value)
+                    }
                 }
             }
         }
-        let checkboxAns=checkedOptionsArray?.sort()
-        const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
-        checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-        checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+    let checkboxAns=checkedOptionsArray?.sort()
+    const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
+    checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+    checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
     }
 }
 
@@ -104,7 +108,7 @@ if(typeof answers === 'object'){
         console.log("question: ", question)
         console.log("qNum: ", qNum)
         console.log("DataList: ", dataList)
-        console.log("answers[0]: ", answers[0])
+        console.log("dataList[0].answers[0] ", dataList[0].answers[0])
         for (let i=0; i<dataList.length; i++) {
             sliderPercentArr = dataList[i].answers[qNum]
             console.log("sliderPercentArr: ", sliderPercentArr)
@@ -118,10 +122,10 @@ if(typeof answers === 'object'){
             console.log("&&&&&&& dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
             console.log("&&&&&&& typeof dataList[0].survey.questions[0].answerOptions[0]: ", typeof dataList[0].survey.questions[0].answerOptions[0])
 
-            sliderLabels = [...sliderLabels, dataList[0].survey.questions[0].answerOptions[0]]
-            
-        //         for (let x=0; x<dataList[i].survey.questions[qNum].answerOptions.length; x++) {
-        //             sliderOptionsArray = [...sliderOptionsArray, dataList[i].survey.questions[qNum].answerOptions[x].text]
+            for (let x=0; x<dataList[i].survey.questions[qNum-1].answerOptions.length; x++) {
+                sliderLabels = [...sliderLabels, dataList[0].survey.questions[qNum-1].answerOptions[x]]
+            }
+            console.log("SLIDER LABELS: ", sliderLabels)
         }
 
         console.log("@@@@@@@sliderOptionsArry: ", sliderOptionsArray)
