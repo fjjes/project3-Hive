@@ -48,7 +48,7 @@ router.post('/', upload.single('image'), async(req, res) => {
 		company: data.company,
 		version: data.version,
 		heading: data.heading,
-		img: req.file.filename,
+		// img: req.file.filename,
 		narrative: data.narrative,
 		questions: data.questions
 	})
