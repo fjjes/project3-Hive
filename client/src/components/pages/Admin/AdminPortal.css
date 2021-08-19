@@ -432,11 +432,27 @@ font-weight: bold;
   margin-bottom: 70px;
 }
 
+.data-visual tr:hover {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) ;
+  color:black;
+  font-weight: bold;
+}
+
+.data-visual tr:focus {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) !important;
+  color:black;
+  font-weight: bolder;
+}
+
 .list-table th {
   background-color: grey;
   color: white;
   font-weight: bolder;
   padding: 2px 20px 2px 20px;
+  /* position: sticky;
+  top:0; */
 }
 
 .list-table th,
