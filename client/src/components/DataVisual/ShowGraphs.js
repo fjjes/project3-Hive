@@ -47,7 +47,7 @@ useEffect(()=>{
 //     let countArr = [...count.values()]
 
 
-//radio
+// radio --------------------------------
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     console.log ('percentRadio',percentRadio)
@@ -85,7 +85,7 @@ if(typeof answers === 'object'){
     }
 }
 
-    //matrix, select
+//matrix, select -----------------------
     let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
     console.log('optObj', optObj)
 
@@ -108,6 +108,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
 }
 
   console.log('valueLabel:',valueLabel )
+
 // slider -------------------------------
 let sliderOptionsArray = []
 let sliderPercentArr = []
