@@ -24,8 +24,8 @@ header {
 	margin-left: 10px;
 	padding: 19px 20px;
 	border-radius: 10px;
-	box-shadow: -3px -3px 10px #ffffff,
-							3px 3px 5px #bfbfc0;	
+	/* box-shadow: -3px -3px 10px #ffffff, */
+							/* 3px 3px 5px #bfbfc0;	 */
 	width: 37%;
 }
 
