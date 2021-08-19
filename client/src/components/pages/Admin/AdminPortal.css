@@ -10,6 +10,12 @@ html {
   z-index: 5;
 }
 
+/* Navbar styling */
+.cihkkG {
+  width: 100% !important;
+  padding: 10px 0px !important;
+}
+
 .admin-container,
 .navbar,
 .list-table {
