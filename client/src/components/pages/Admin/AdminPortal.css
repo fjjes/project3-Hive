@@ -10,6 +10,12 @@ html {
   z-index: 5;
 }
 
+/* Navbar styling */
+.cihkkG {
+  width: 100% !important;
+  padding: 10px 0px !important;
+}
+
 .admin-container,
 .navbar,
 .list-table {
@@ -84,12 +90,24 @@ h2 {
 }
 
 /* Buttons and Input */
+.side-border-line input {
+  border: 1px solid #444;
+}
+
 .admin-container input,
 .admin-container button {
   padding: 10px;
   margin: 5px;
   border-radius: 5px;
   width: 200px;
+}
+
+.admin-container .questionText input {
+  width: 80%;
+}
+
+.admin-container input::placeholder {
+  color: #666;
 }
 
 .admin-container button {
@@ -223,7 +241,8 @@ input[type=checkbox] {
   font-size: 1rem;
   background-color: #fff;
   /* box-shadow: inset -3px -3px 10px grey; */
-  box-shadow: inset -8px -8px 10px 0 rgb(0 0 0 / 25%), inset -8px -8px 10px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%);
+  /* box-shadow: inset -8px -8px 10px 0 rgb(0 0 0 / 25%), inset -8px -8px 10px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%); */
+  box-shadow: inset -4px -4px 5px 0 rgb(0 0 0 / 25%), inset -8px -8px 5px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%);
   color: black;
   width: 100px;
   height: 100px;
@@ -270,9 +289,10 @@ input[type=checkbox] {
 
 .admin-question-component textarea{
   outline: none;
-    padding: 7px;
+    padding: 10px !important;
     height: 60px !important;
-    width: 90% !important;
+    /* width: 90% !important; */
+    width: 80% !important;
     color: black !important;
     border: none;
     border-radius: 10px;
@@ -412,11 +432,26 @@ font-weight: bold;
   margin-bottom: 70px;
 }
 
+.data-visual tr:hover {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) ;
+  color:black;
+  font-weight: bold;
+}
+
+/* .data-visual tr:visited {
+  background-color: hsl(28, 90%, 72%) !important;
+  color:black;
+  font-weight: bolder;
+} */
+
 .list-table th {
   background-color: grey;
   color: white;
   font-weight: bolder;
   padding: 2px 20px 2px 20px;
+  /* position: sticky;
+  top:0; */
 }
 
 .list-table th,
@@ -455,6 +490,13 @@ font-weight: bold;
 .list-table tr:hover {
   /* background-color: #f59645 !important; */
   background-color: hsl(28, 90%, 72%) !important;
+}
+
+.data-table tr:hover {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) !important;
+  color:black;
+  font-weight: bold;
 }
 
 .data-collected .upper-section, .data-visual .upper-section{
@@ -565,7 +607,7 @@ font-weight: bold;
   padding: 0px 0px;
   margin: 10px 0px 5px 10px;
   text-align: left;
-  width: 105px;
+  width: 80px;
 }
 .edit-button .add-option{
   width: auto;
@@ -579,6 +621,7 @@ font-weight: bold;
   width: 100%;
   line-height: 1em;
   height: 40px;
+  margin: 5px 5px 5px 0;
 }
 
 .slider-admin-edit {
@@ -587,7 +630,14 @@ font-weight: bold;
 }
 
 .slider-admin-edit button {
-	margin-right: 60px;
+  margin-right: 60px;
+}
+
+.slider-admin-edit input {
+  width: 250px !important;
+  padding: 10px !important;
+  background-color: #fff !important;
+  border: 1px solid #444 !important;
 }
 
 .slider-admin p {
@@ -606,7 +656,7 @@ font-weight: bold;
 .slider-admin input {
   outline: none;
   background-color: rgb(244, 241, 241);
-  color: rgb(126, 126, 126);
+  color: #444;
   width: 4em;
   padding: 5px;
   border-radius: 5px;

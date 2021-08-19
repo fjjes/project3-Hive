@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SurveyQuestion from "../SurveyQuestion";
 import Progress from "../Progress";
 import logo from '../../images/hivetagline2.png'
+import useWindowSize from "../../utilities/useWindowSize"
 
 export const AnswerContext = React.createContext({
   setDisabled: () => {},
@@ -19,6 +20,7 @@ const SurveyQuestionPage = ({ survey, questionArray }) => {
   const [index, setIndex] = useState(0);
   const [progressBarDone, setProgressBarDone] = useState(0);
   const [endSurvey, setEndSurvey] = useState(false);
+  const {width} = useWindowSize();
 
 useEffect(()=>{
   if(survey){
@@ -91,6 +93,8 @@ useEffect(()=>{
   };
 
   return (
+    <div>
+      {width > 300 && (
 		<div className="survey-page">
 			<header>
 				<nav>
@@ -158,6 +162,8 @@ useEffect(()=>{
           <h2>Thank you for your participation!!</h2>
         </div>
       )}
+    </div>
+    )} 
     </div>
   );
 };

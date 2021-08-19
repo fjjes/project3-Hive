@@ -5,12 +5,14 @@ import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
 import * as GrIcons from "react-icons/gr";
 import * as AiIcons from "react-icons/ai";
+import useWindowSize from "../../../utilities/useWindowSize";
 
 const FindSurvey = (props) => {
   const history=useHistory();
   const [rows, setRows] = useState([]);
   const [searchInputCompany, setSearchInputCompany] = useState("");
   const [searchInputNumber, setSearchInputNumber] = useState("");
+  const {width} = useWindowSize();
 
   props.resetRowId();
   props.resetCopyOrOriginal();
@@ -48,6 +50,7 @@ const FindSurvey = (props) => {
   };
 
   return (
+    <div> {width >300 && (
     <div className="list-table">
       <h2>Find an Existing Survey</h2>
       {/* <button className="view-all-button">View all surveys</button>
@@ -105,12 +108,12 @@ const FindSurvey = (props) => {
                     }}>
                     <ImIcons.ImCopy />
                   </Link>
-                  <button 
+                  {/* <button 
                     className="existing-surveys-edit-icon" 
                     title="Map"
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
-                    </button>
+                    </button> */}
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Chart"
@@ -130,6 +133,7 @@ const FindSurvey = (props) => {
         </tbody>
       </table>
     </div>
+    )} </div>
   );
 };
 

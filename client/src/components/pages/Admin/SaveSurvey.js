@@ -9,6 +9,7 @@ import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import useWindowSize from "../../../utilities/useWindowSize"
 
 const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot }) => {
   const history = useHistory();
@@ -30,6 +31,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
   const value = { questions, setQuestions };
 	const [image, setImage] = useState({ preview: "", raw: "" });
   const [action, setAction] = useState("")
+  const {width} = useWindowSize();
 
 	const handleChangeImage = e => {
 		if (e.target.files.length) {
@@ -64,7 +66,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
-			setImage(data.img);
+			// setImage(data.img);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -167,7 +169,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           { text: "Provide better working comfort" },
           { text: "Stimulate creativity and collective performance" },
           {
-            text: "Fascilitate access to information and news from business lines and departments",
+            text: "Facilitate access to information and news from business lines and departments",
           },
           {
             text: "Break down silos between departments and increase cross functional lines",
@@ -390,6 +392,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 
   return (
     <div>
+      {width > 300 && (
+    <div>
       {/* TOP PART OF PAGE */}
       <h2>
         {!rowId
@@ -601,6 +605,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           Save Survey
         </button>
       </div>
+    </div>
+    )} 
     </div>
   );
 };
