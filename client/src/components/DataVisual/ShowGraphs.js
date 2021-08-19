@@ -96,7 +96,8 @@ if(typeof answers === 'object'){
 const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
     const optAnsForValLabel = optAnswers.filter((optAns)=>optAns.value === valueLabel[valIndex])
-    const percentageAnsweredForValLabel = optAnsForValLabel.length>0 ? ((optAnsForValLabel.length / optAnswers.length) * 100) : 0
+    // const percentageAnsweredForValLabel = optAnsForValLabel.length>0 ? ((optAnsForValLabel.length / optAnswers.length) * 100) : 0
+    const percentageAnsweredForValLabel = ((optAnsForValLabel.length / optAnswers.length) * 100) 
     console.log("optAnswersValLabel", optAnsForValLabel)
  return percentageAnsweredForValLabel
 }
@@ -108,24 +109,24 @@ let sliderPercentArr = []
 let sliderLabels = []
 if(typeof answers === 'object'){
     if (qType === 'slider') {
-        // console.log("******************")
-        // console.log("answers: ", answers)
-        // console.log("question: ", question)
-        // console.log("qNum: ", qNum)
-        // console.log("DataList: ", dataList)
+        console.log("******************")
+        console.log("answers: ", answers)
+        console.log("question: ", question)
+        console.log("qNum: ", qNum)
+        console.log("DataList: ", dataList)
         console.log("answers[0]: ", answers[0])
         for (let i=0; i<dataList.length; i++) {
             sliderPercentArr = dataList[i].answers[qNum]
             console.log("sliderPercentArr: ", sliderPercentArr)
             // survey[x]value[i] + survey[y]value[i] + survey[z]value[i]
             // survey[x]value[a] + survey[y]value[a] + survey[z]value[a]
-            // console.log("+++++++++")
-            // console.log("dataList[0].survey: ", dataList[0].survey)
-            // console.log("dataList[0].survey.questions[0]: ", dataList[0].survey.questions[0])
-            // console.log("dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
-            // console.log("dataList[0].survey.questions[0].answerOptions[0].text: ", dataList[0].survey.questions[0].answerOptions[0].text)
-            // console.log("&&&&&&& dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
-            // console.log("&&&&&&& typeof dataList[0].survey.questions[0].answerOptions[0]: ", typeof dataList[0].survey.questions[0].answerOptions[0])
+            console.log("+++++++++")
+            console.log("dataList[0].survey: ", dataList[0].survey)
+            console.log("dataList[0].survey.questions[0]: ", dataList[0].survey.questions[0])
+            console.log("dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
+            console.log("dataList[0].survey.questions[0].answerOptions[0].text: ", dataList[0].survey.questions[0].answerOptions[0].text)
+            console.log("&&&&&&& dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
+            console.log("&&&&&&& typeof dataList[0].survey.questions[0].answerOptions[0]: ", typeof dataList[0].survey.questions[0].answerOptions[0])
 
             sliderLabels = [...sliderLabels, dataList[0].survey.questions[0].answerOptions[0]]
             
@@ -291,24 +292,6 @@ if(typeof answers === 'object'){
 export default ShowGraphs; 
 
 
-//     //matrix, select
-//     // if(qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ){
-//         console.log('answers:', answers)
-//         let ansObj = answers?.map((an, i)=>an[0]?.value)
-//         console.log('ansObj', ansObj)// Rethinking workspaces in the company=>[3, 1, 1, 1, 4, 2, 4, 5, 1]
-//          const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
-//          console.log ('percentObj',percentObj)//{1: 44.4444,    2: 11.1111,  3: 11.11111,  4: 22.2222,  5: 11.11111 }
-//          let percentArrObj= Object.values(percentObj).map(percent=>percent)
-//          console.log('percentArrObj:', percentArrObj)//[44.4444, 11.1111, 11.11111, 22.2222, 11.11111]
-   
-   
-//     let optObj = dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op.text)
-//     console.log('optObj', optObj)
-   
-   
-//      let labelObj =Object.keys(percentArrObj).map(percent=>percent)
-//     console.log ('labelObj',labelObj)     
-// // }
 
 
 
