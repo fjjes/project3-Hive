@@ -9,6 +9,7 @@ import * as MdIcons from "react-icons/md";
 import * as IoIcons from "react-icons/io";
 import QuestionContext from "./QuestionContext";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import useWindowSize from "../../../utilities/useWindowSize"
 
 const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot }) => {
   const history = useHistory();
@@ -30,6 +31,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
   const value = { questions, setQuestions };
 	const [image, setImage] = useState({ preview: "", raw: "" });
   const [action, setAction] = useState("")
+  const {width} = useWindowSize();
 
 	const handleChangeImage = e => {
 		if (e.target.files.length) {
@@ -40,19 +42,19 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 		}
 	};
 
-	const handleUpload = async e => {
-		// e.preventDefault();
-		const formData = new FormData();
-		formData.append("image", image.raw);
+	// const handleUpload = async e => {
+	// 	// e.preventDefault();
+	// 	const formData = new FormData();
+	// 	formData.append("image", image.raw);
 
-		await fetch(`/api/survey/${rowId}`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "multipart/form-data"
-			},
-			body: formData
-		});
-	};
+	// 	await fetch(`/api/survey/${rowId}`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data"
+	// 		},
+	// 		body: formData
+	// 	});
+	// };
 
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
@@ -64,7 +66,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
-			setImage(data.image);
+			setImage(data.img);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -377,6 +379,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 
   return (
     <div>
+      {width > 500 && (
+    <div>
       {/* TOP PART OF PAGE */}
       <h2>
         {!rowId
@@ -510,8 +514,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 								)}
 							</label>
 							<input
-								name="image"
-								id="image"
+								// name="image"
+								// id="image"
 								// value={image}
 								// onChange={(e) => setImage(e.target.files.length)}
 								type="file"
@@ -588,6 +592,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           Save Survey
         </button>
       </div>
+    </div>
+    )} 
     </div>
   );
 };
