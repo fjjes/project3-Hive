@@ -447,6 +447,16 @@ font-weight: bold;
   margin-bottom: 30px;
   text-align: center;
 }
+
+.list-table a {
+  text-decoration: none;
+}
+
+.list-table tr:hover {
+  /* background-color: #f59645 !important; */
+  background-color: hsl(28, 90%, 72%) !important;
+}
+
 .data-collected .upper-section, .data-visual .upper-section{
   margin-top: 20px;
   margin-left:40px;
