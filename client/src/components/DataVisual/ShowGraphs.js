@@ -4,10 +4,6 @@ import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
-    console.log('datalist:', dataList)
-    // console.log('qtype:', qType)
-    console.log('qNum', qNum)
-    // console.log('answers line 8::', answers)
 
    let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","black", "#6D92A0", "#D4A66A"] // Hive colours
    let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
@@ -17,32 +13,26 @@ const getLabel=()=>{
     console.log("qType:", qType)
     if(qType==='select'){
         let num =1
-        console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
+        // console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
         for(let i=0; i<dataList[0].survey.questions[qNum-1]?.answerOptions.length;i++){
           labelArr.push(num++)
         }
         console.log('select label:', labelArr)
-       
     }else if(qType=== 'matrix1'){
          labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
-       
         console.log('matrix1 label:', labelArr)
-    
-      }else if(qType=== 'matrix2'){
+    }else if(qType=== 'matrix2'){
         labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-          
-          console.log('matrix2 label:', labelArr)
+        console.log('matrix2 label:', labelArr)
     
-      }
-      setValueLabel(labelArr)
+    }
+    setValueLabel(labelArr)
 }
 
 useEffect(()=>{
     getLabel()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-},[dataList, qNum])
-
-    
+},[dataList, qNum])  
 //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
 //     let countArr = [...count.values()]
 
@@ -50,7 +40,7 @@ useEffect(()=>{
 //radio
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
-    console.log ('percentRadio',percentRadio)
+    // console.log ('percentRadio',percentRadio)
     let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
     // let optRadio =Object.keys(percentRadio).map(percent=>percent)
 
@@ -83,27 +73,17 @@ if(typeof answers === 'object'){
 
     //matrix, select
     let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
-    console.log('optObj', optObj)
-
-
-//   const getPercentObj=(i)=>{
-//     let ansObj = answers?.map((an, ind)=>an[i]?.value)
-//     console.log('ansObj', ansObj)
-//     const percentObj = ansObj.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ansObj.length)}), {})
-//     console.log ('percentObj',percentObj)    
-//       return percentObj
-//   }
+    // console.log('optObj', optObj)
 
 const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
     const optAnsForValLabel = optAnswers.filter((optAns)=>optAns.value === valueLabel[valIndex])
     // const percentageAnsweredForValLabel = optAnsForValLabel.length>0 ? ((optAnsForValLabel.length / optAnswers.length) * 100) : 0
     const percentageAnsweredForValLabel = ((optAnsForValLabel.length / optAnswers.length) * 100) 
-    console.log("optAnswersValLabel", optAnsForValLabel)
+    // console.log("optAnswersValLabel", optAnsForValLabel)
  return percentageAnsweredForValLabel
 }
 
-  console.log('valueLabel:',valueLabel )
 // slider -------------------------------
 let sliderOptionsArray = []
 let sliderPercentArr = []
@@ -153,12 +133,9 @@ if(typeof answers === 'object'){
                 <div className="chart-container">
                     <Pie
                     data={{
-                        // labels: optRadio,
                         labels: dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op),
                         datasets:[{
-                            // data:countArr,
                             data:percentArrRadio,
-                            // backgroundColor:colors,
                             backgroundColor:checkboxesPercentArr.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
@@ -195,16 +172,7 @@ if(typeof answers === 'object'){
                         <Bar
                         data={{
                             labels: optObj,
-                            
-                            // {percentObj ?
                             datasets: valueLabel?.map((val, i)=>{
-
-                                // console.log('getPercentObj(i):', getPercentObj(i))
-                                // console.log('data:::', Object.values(getPercentObj(i)))
-                                // console.log('label:', Object.keys(getPercentObj(i))[i])
-                                console.log('valueLabel[i]:',valueLabel[i] )
-                                // console.log('data:',valueLabel[i] )
-                                console.log('label:',val )
                                 return(
                                     {
                                         label:val,
@@ -218,42 +186,9 @@ if(typeof answers === 'object'){
                                         }),
                                         backgroundColor:colors[i],
                                         barThickness:12,
-                                        
-                                        // hoverBackgroundColor:"black"
                                     }
                                 )
                             })
-                    //    :[]}
-                        }}
-                        options={{
-                            // maintainAspectRatio:false,
-                            // plugins:{
-                                barValueSpacing:20,
-                                tooltips:{
-                                    callbacks:{
-                                      label:function(toolTipItem){
-                                        return (toolTipItem.value +"%")
-                                      }
-                                    }},
-                                scales:{
-                                    x:
-                                        
-                                        {
-                                            gridLines:{color:'cyan'},
-                                            scaleLabel:{ labelString:'Sub-questions', display:true, fontColor:'blue', fontSize:20},
-                                            ticks:{fontColor:'green'}
-                                        }
-                                    ,
-                                    y:
-                                        {
-                                            gridLines:{color:'cyan'},
-                                            scaleLabel:{ labelString:'Percentage', display:true, fontColor:'blue', fontSize:20 },
-                                            ticks:{ beginAtZero:true, fontColor:'green'}
-                                        }
-                                    
-                                }
-                            // }
-                      
                         }}
                         >
                         </Bar>
