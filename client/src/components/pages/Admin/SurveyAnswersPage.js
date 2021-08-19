@@ -121,41 +121,34 @@ const SurveyAnswersPage =()=>{
                             {arr.map((num,i)=> <th key={i}>Q{num}</th>)} 
                         </tr>
                         {newDataList.map((row, index)=>{
+                               const answersArray= questionList.map((question, ind)=>{
+                                if(row.answers[ind+1]){
+                                    return row.answers[ind+1]
+                                }else{
+                                    return null
+                                }
+                            })
                             return(
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
-                                {/* {
-                                         let answersArray= questionList.map((question, ind)=>{
-                                            if(row.answers[ind+1]){
-                                                return row.answers[ind+1]
-                                            }else{
-                                                return null
-                                            }
-                                        })
-                                }                              */}
-                                {Object.values(row.answers).map((ans, i)=>{
-                                    // console.log("ans", row.answers)
+                                {answersArray.map((ans, i)=>{
                                     return (<>
-                                            {/* {ans ?
-                                            <> */}
-                                                {typeof ans !== 'object' ? 
-                                                    <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
-                                                :(
-                                                    questionList[i].questionType==='checkbox' ?
-                                                            <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
-                                                        :
-                                                        <td className="data-text" key={i}>
-                                                            <pre>
-                                                                <tr>
-                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
-                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
-                                                                </tr>
-                                                            </pre>
-                                                        </td> 
-                                                )}
-                                            {/* </>
-                                            :null} */}
+                                            {typeof ans !== 'object' ? 
+                                                <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
+                                            :(
+                                                questionList[i].questionType==='checkbox' ?
+                                                        <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
+                                                    :
+                                                    <td className="data-text" key={i}>
+                                                        <pre>
+                                                            <tr>
+                                                            <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
+                                                            <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
+                                                            </tr>
+                                                        </pre>
+                                                    </td> 
+                                            )}
                                             </>)   
                                 })}
                             </tr>
