@@ -32,9 +32,12 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get("/api/images/:id", (req, res) => {
-	console.log(req.params)
-	res.sendFile("/uploads/"+req.params.id)
+// app.get("/api/images/:id", (req, res) => {
+app.get("/api/survey/images/:name", (req, res) => {
+	console.log("find me here!", req.params)
+	// res.sendFile("/uploads/"+req.params.id)
+	console.log('file from backend', res);
+	res.sendFile(`/uploads/${req.params.name}`)
 })
 
 // error handler

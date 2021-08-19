@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import { Player } from "@lottiefiles/react-lottie-player";
 import SurveyQuestionPage from "../SurveyQuestionPage";
 import "./SurveyLandingPage.css";
+// import * as All from '../../../../server/uploads'
 //import { Link } from "react-router-dom";
 // import image from "../../../images/website.jpg";
+import Picture from './orange.png';
 
 export default function Logo({ flashcard }) {
   const { surveyId } = useParams();
@@ -39,6 +41,8 @@ export default function Logo({ flashcard }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
+
+
   return (
   <div className="card-container">
       {showQuestions === false ? (
@@ -62,7 +66,8 @@ export default function Logo({ flashcard }) {
           </div>
           <div className="theback">
             <h1>{heading}</h1>
-            {image && <img src={"/api/images/"+image} style={{height:100}} alt="start-img"/>}
+						{image && <img src={`/api/survey/images/${image}`} style={{height:100}} />}
+						{/* {image && <img src={`/server/uploads/${image}`} style={{height:100}} />} */}
             <p style={{ whiteSpace: "pre-wrap",}}>{narrative}</p>
             <button
               className="neu-button"

@@ -40,19 +40,19 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 		}
 	};
 
-	const handleUpload = async e => {
-		// e.preventDefault();
-		const formData = new FormData();
-		formData.append("image", image.raw);
+	// const handleUpload = async e => {
+	// 	// e.preventDefault();
+	// 	const formData = new FormData();
+	// 	formData.append("image", image.raw);
 
-		await fetch(`/api/survey/${rowId}`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "multipart/form-data"
-			},
-			body: formData
-		});
-	};
+	// 	await fetch(`/api/survey/${rowId}`, {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "multipart/form-data"
+	// 		},
+	// 		body: formData
+	// 	});
+	// };
 
 
   // If we click on a survey in the find surveys list (which sets rowId), we get that survey's data here:
@@ -64,7 +64,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
-			setImage(data.image);
+			setImage(data.img);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);
@@ -510,8 +510,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 								)}
 							</label>
 							<input
-								name="image"
-								id="image"
+								// name="image"
+								// id="image"
 								// value={image}
 								// onChange={(e) => setImage(e.target.files.length)}
 								type="file"
