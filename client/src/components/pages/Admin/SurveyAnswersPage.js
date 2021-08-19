@@ -121,20 +121,18 @@ const SurveyAnswersPage =()=>{
                             {arr.map((num,i)=> <th key={i}>Q{num}</th>)} 
                         </tr>
                         {newDataList.map((row, index)=>{
+                               const answersArray= questionList.map((question, ind)=>{
+                                if(row.answers[ind+1]){
+                                    return row.answers[ind+1]
+                                }else{
+                                    return null
+                                }
+                            })
                             return(
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
-                                {/* {
-                                         let answersArray= questionList.map((question, ind)=>{
-                                            if(row.answers[ind+1]){
-                                                return row.answers[ind+1]
-                                            }else{
-                                                return null
-                                            }
-                                        })
-                                }                              */}
-                                {Object.values(row.answers).map((ans, i)=>{
+                                {answersArray.map((ans, i)=>{
                                     // console.log("ans", row.answers)
                                     return (<>
                                             {/* {ans ?
