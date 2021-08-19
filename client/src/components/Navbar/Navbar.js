@@ -1,9 +1,14 @@
 import logo from "../../images/hiveicon.png";
 import {Nav, NavLink, Bars, NavMenu, NavBtnLink} from './NavbarElements';
 // import "./AdminPortal.css";
+import useWindowSize from "../../utilities/useWindowSize"
 
 const Navbar = () => {
+  const {width} = useWindowSize();
+
   return (
+    <div>
+      {width > 300 && (
     <div className="navbar">
       <Nav>
         <NavLink to='/'>
@@ -20,6 +25,8 @@ const Navbar = () => {
           <NavBtnLink to='/'>Logout</NavBtnLink>
         </NavMenu>
       </Nav>
+      </div>
+      )}
     </div>
   );
 };

@@ -37,41 +37,45 @@ useEffect(()=>{
 //     let countArr = [...count.values()]
 
 
-//radio
+// radio --------------------------------
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     // console.log ('percentRadio',percentRadio)
     let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
     // let optRadio =Object.keys(percentRadio).map(percent=>percent)
 
-// checkboxes ---------------------------
-// console.log("All answers: ", answers)
-let otherArray = []
-let otherArrayWithoutEmptyStrings = []
-let checkedOptionsArray = []
-let checkboxesOpt = []
-let checkboxesPercentArr = []
-if(typeof answers === 'object'){
-    if (qType==='checkbox'){
-        for (let i=0; i<answers.length; i++) {
-            // GRAB "OTHER" VALUE:
-            otherArray.push(answers[i].other.value)
-            otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
-            // GRAB OPTIONS THAT HAVE BEEN CHECKED
-            for (let x = 0; x < answers[i].options.length; x++) {
-                if (answers[i].options[x].checked === true) {
-                    checkedOptionsArray.push(answers[i].options[x].value)
+    // checkboxes ---------------------------
+    let otherArray = []
+    let otherArrayWithoutEmptyStrings = []
+    let checkedOptionsArray = []
+    let checkboxesOpt = []
+    let checkboxesPercentArr = []
+
+    if(typeof answers === 'object'){
+        if (qType==='checkbox'){
+            for (let i=0; i<answers.length; i++) {
+                if (answers[i]) {
+                    // GRAB "OTHER" VALUE:
+                    if (answers[i].other) {
+                        otherArray.push(answers[i].other.value)
+                        otherArrayWithoutEmptyStrings = otherArray.filter(element => {return element}).join("\n");
+                    }
+                    // GRAB OPTIONS THAT HAVE BEEN CHECKED
+                    for (let x = 0; x < answers[i].options.length; x++) {
+                        if (answers[i].options[x].checked === true) {
+                            checkedOptionsArray.push(answers[i].options[x].value)
+                        }
+                    }
                 }
             }
-        }
         let checkboxAns=checkedOptionsArray?.sort()
         const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
         checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
         checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
+        }
     }
-}
 
-    //matrix, select
+//matrix, select -----------------------
     let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
     // console.log('optObj', optObj)
 
@@ -84,41 +88,24 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
  return percentageAnsweredForValLabel
 }
 
-// slider -------------------------------
-let sliderOptionsArray = []
-let sliderPercentArr = []
-let sliderLabels = []
-if(typeof answers === 'object'){
-    if (qType === 'slider') {
-        console.log("******************")
-        console.log("answers: ", answers)
-        console.log("question: ", question)
-        console.log("qNum: ", qNum)
-        console.log("DataList: ", dataList)
-        console.log("answers[0]: ", answers[0])
-        for (let i=0; i<dataList.length; i++) {
-            sliderPercentArr = dataList[i].answers[qNum]
+//   console.log('valueLabel:',valueLabel )
+
+    // slider -------------------------------
+    let sliderPercentArr = []
+    let sliderPercentTotalsArray = []
+    let sliderAnswerOptions = dataList[0].survey.questions[qNum-1]?.answerOptions
+    console.log("** sliderAnswerOptions", sliderAnswerOptions)
+    if(typeof answers === 'object'){
+        if (qType === 'slider') {
+            for (let i=0; i<dataList.length; i++) {
+                sliderPercentArr = [...sliderPercentArr, dataList[i].answers[qNum]]
+            }
             console.log("sliderPercentArr: ", sliderPercentArr)
-            // survey[x]value[i] + survey[y]value[i] + survey[z]value[i]
-            // survey[x]value[a] + survey[y]value[a] + survey[z]value[a]
-            console.log("+++++++++")
-            console.log("dataList[0].survey: ", dataList[0].survey)
-            console.log("dataList[0].survey.questions[0]: ", dataList[0].survey.questions[0])
-            console.log("dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
-            console.log("dataList[0].survey.questions[0].answerOptions[0].text: ", dataList[0].survey.questions[0].answerOptions[0].text)
-            console.log("&&&&&&& dataList[0].survey.questions[0].answerOptions[0]: ", dataList[0].survey.questions[0].answerOptions[0])
-            console.log("&&&&&&& typeof dataList[0].survey.questions[0].answerOptions[0]: ", typeof dataList[0].survey.questions[0].answerOptions[0])
+            sliderPercentTotalsArray = sliderPercentArr.reduce((r, a) => a.map((b, i) => (r[i] || 0) + b), []);
+            console.log("sliderPercentTotalsArray: ", sliderPercentTotalsArray)
+        } 
+    }
 
-            sliderLabels = [...sliderLabels, dataList[0].survey.questions[0].answerOptions[0]]
-            
-        //         for (let x=0; x<dataList[i].survey.questions[qNum].answerOptions.length; x++) {
-        //             sliderOptionsArray = [...sliderOptionsArray, dataList[i].survey.questions[qNum].answerOptions[x].text]
-        }
-
-        // console.log("@@@@@@@sliderOptionsArry: ", sliderOptionsArray)
-        // console.log("dataList[0].survey.questions[1].answerOptions: ", dataList[0].survey.questions[1].answerOptions)
-    } 
-}
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
@@ -199,13 +186,9 @@ if(typeof answers === 'object'){
                     <div className="chart-container">
                         <Pie
                         data={{
-                            // labels: sliderOptionsArray,
-                            // labels: simpleAnswerOptions,
-                            labels: sliderLabels,
+                            labels: sliderAnswerOptions,
                             datasets:[{
-                                // data: sliderOptions,
-                                data: sliderPercentArr,
-                                // data: [1, 4, 21, 23, 2],
+                                data: sliderPercentTotalsArray,
                                 backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'
