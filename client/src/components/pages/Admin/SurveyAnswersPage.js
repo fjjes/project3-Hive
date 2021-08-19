@@ -1,12 +1,25 @@
 import { useEffect, useState } from 'react';
 import ExportCSV from './ExportCSV';
 import moment from "moment";
+import ShowGraphs from '../../DataVisual/ShowGraphs';
+import * as AiIcons from "react-icons/ai";
+import * as BiIcons from "react-icons/bi";
+import * as GrIcons from "react-icons/gr";
 import './AdminPortal.css'
 
 const SurveyAnswersPage =()=>{
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
     const [surveyId, setSurveyId]=useState(null)
+    const [showTable, setShowTable]= useState(false)
+    const [showChart, setShowChart] = useState(false)
+
+    const [options, setOptions]=useState([])
+    const [qType, setQType]=useState()
+    const [question, setQuestion]=useState()
+    const [answers, setAnswers]=useState([])
+    const [qNum, setQnum]=useState()
+
     const fileName = 'table1';
 
     const getSurveyList = async ()=>{
@@ -19,7 +32,7 @@ const SurveyAnswersPage =()=>{
         getSurveyList()
     },[])
 
-    useEffect(()=>{
+    // useEffect(()=>{
         const getAnswers = async ()=>{
             let response = await fetch("/api/answer")
             let data= await response.json();
@@ -27,6 +40,8 @@ const SurveyAnswersPage =()=>{
             const filteredData = data.filter(newData=>{return newData.survey?._id === surveyId})
             setNewDataList(filteredData)
         }
+        
+    useEffect(()=>{
         if(surveyId){
             getAnswers();
         }
@@ -40,6 +55,29 @@ const SurveyAnswersPage =()=>{
     }    
 
     let questionList =newDataList[0]?.survey?.questions
+
+    const getChartInfo = (question, index) =>{
+        let q= question?.question
+        let options = question?.answerOptions
+        let qType = question?.questionType
+        let answersForThatQuestion = newDataList.map((data)=> data.answers[index])
+        let qNum =index
+    //  console.log(answersForThatQuestion)
+    //  console.log('options:', options)
+    //  console.log('questionType:', qType)
+        setQuestion(q)
+        setOptions(options)
+        setQType(qType)
+        setAnswers(answersForThatQuestion)
+        setShowChart(true)
+        setQnum(qNum)
+        setShowTable(false)
+    }
+
+   useEffect(()=>{
+        getChartInfo()
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[surveyId])
 
     const getTextStringsFromAnswer=(ans, i)=>{
         if(ans){
@@ -77,6 +115,7 @@ const SurveyAnswersPage =()=>{
             return null
         } 
     }
+
    
     return(
         <div className='data-collected'>
@@ -87,9 +126,13 @@ const SurveyAnswersPage =()=>{
                         {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} --- {item.version} ---{item.surveyNumber}</option>)}
                     </select>
                 </div>
-              
+            <div className="second-row">
                 <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
+                <div className="button-row">
                     <ExportCSV newDataList={newDataList} fileName={fileName}/>
+                    <button className="table-btn" onClick={()=>{setShowTable(true); setShowChart(false)}}>Data table</button>
+                </div>
+            </div>
             </div>
             {surveyId && newDataList?.length>0 ? 
             <div>
@@ -97,71 +140,96 @@ const SurveyAnswersPage =()=>{
                 <table >
                     {arr.map((num, i)=>{
                         return(
-                        <tr key={i}>
+                        <tr key={i} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}>
                             <td>Q{num}</td>
                             <td className="data-text obj" >{newDataList[0]?.survey?.questions[i].question}</td>
                             {/* <td className="data-text obj"><b>{toUpper(newDataList[0]?.survey?.questions[i].questionType)}</b></td> */}
+                            {((newDataList[0]?.survey?.questions[i].questionType!=='comment') && (newDataList[0]?.survey?.questions[i].questionType!=='postal'))? 
+                            <td>
+                                <button className="existing-surveys-edit-icon"  title="Chart" style={{fontSize:'large'}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><AiIcons.AiOutlineAreaChart /> </button>
+                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+                            </td>
+                            :
+                            newDataList[0]?.survey?.questions[i].questionType ==='postal' ?
+                            <td>
+                                <button className="existing-surveys-edit-icon"  title="Chart" style={{fontSize:'large'}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><GrIcons.GrMap/></button>
+                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+                            </td>
+                            :
+                            <td>
+                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+                            </td>
+                            }
                         </tr>)
                     })}
                 </table>
             </div>
-					<div className="master-data-table">
-            <div className="data-table">
+            
+            {showTable?
+			<div className="master-data-table">
+                <div className="data-table">
                 
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Record</th>
-                            <th>Date Answered</th>
-                            <th colSpan="8">Answers</th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            {arr.map((num,i)=> <th key={i}>Q{num}</th>)} 
-                        </tr>
-                        {newDataList.map((row, index)=>{
-                               const answersArray= questionList.map((question, ind)=>{
-                                if(row.answers[ind+1]){
-                                    return row.answers[ind+1]
-                                }else{
-                                    return null
-                                }
-                            })
-                            return(
-                            <tr key={index}>
-                                <td>{index+1}</td>
-                                <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
-                                {answersArray.map((ans, i)=>{
-                                    return (<>
-                                            {typeof ans !== 'object' ? 
-                                                <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
-                                            :(
-                                                questionList[i].questionType==='checkbox' ?
-                                                        <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
-                                                    :
-                                                    <td className="data-text" key={i}>
-                                                        <pre>
-                                                            <tr>
-                                                            <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
-                                                            <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
-                                                            </tr>
-                                                        </pre>
-                                                    </td> 
-                                            )}
-                                            </>)   
-                                })}
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Record</th>
+                                <th>Date Answered</th>
+                                <th colSpan="8">Answers</th>
                             </tr>
-                            )
-                        })}      
-                    </tbody>
-                </table>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                {arr.map((num,i)=> <th key={i}>Q{num}</th>)} 
+                            </tr>
+                            {newDataList.map((row, index)=>{
+                                const answersArray= questionList.map((question, ind)=>{
+                                    if(row.answers[ind+1]){
+                                        return row.answers[ind+1]
+                                    }else{
+                                        return null
+                                    }
+                                })
+                                return(
+                                <tr key={index}>
+                                    <td>{index+1}</td>
+                                    <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
+                                    {answersArray.map((ans, i)=>{
+                                        return (<>
+                                                {typeof ans !== 'object' ? 
+                                                    <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
+                                                :(
+                                                    questionList[i].questionType==='checkbox' ?
+                                                            <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
+                                                        :
+                                                        <td className="data-text" key={i}>
+                                                            <pre>
+                                                                <tr>
+                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
+                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
+                                                                </tr>
+                                                            </pre>
+                                                        </td> 
+                                                )}
+                                                </>)   
+                                    })}
+                                </tr>
+                                )
+                            })}      
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
-          
+                :null} 
+                {showChart ? 
+                <div className="data-charts">
+                    <ShowGraphs options={options} qType={qType} answers={answers} question={question} qNum={qNum} dataList={newDataList} surveyId={surveyId}/>
+                </div>
+                :null}
 
-            </div>
-					</div>
-              :null}
+                </div>
+                // :<h2>"Selected survey do not have any records for now!"</h2>}
+               :null}
+            
         </div>
     )
 }

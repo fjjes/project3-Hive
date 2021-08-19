@@ -141,13 +141,11 @@ if(typeof answers === 'object'){
 }
     return (
         <div>
-            {qType === 'comment' &&
-                <h3>Please visit "Data-Collected" tab to view all the comments for this question</h3>} 
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
-            {(qType === 'radio' || qType === 'select' || qType === 'matrix1' || qType=== 'matrix2'|| qType=== 'slider'|| qType=== 'checkbox') &&<>
+            {/* {(qType === 'radio' || qType === 'select' || qType === 'matrix1' || qType=== 'matrix2'|| qType=== 'slider'|| qType=== 'checkbox') &&<>
             <hr/>
             <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
-            <hr/></>}
+            <hr/></>} */}
             
             <div className="graph-section" style={{width:'25%', height:'25%'}}>
             
