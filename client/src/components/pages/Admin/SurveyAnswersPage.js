@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import ExportCSV from './ExportCSV';
 import moment from "moment";
 import ShowGraphs from '../../DataVisual/ShowGraphs';
@@ -8,6 +9,8 @@ import * as GrIcons from "react-icons/gr";
 import './AdminPortal.css'
 
 const SurveyAnswersPage =()=>{
+    //     const {surveyId} = useParams();
+
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
     const [surveyId, setSurveyId]=useState(null)

@@ -114,12 +114,12 @@ const FindSurvey = (props) => {
                     onClick={()=>history.push(`/map/${row._id}`)}>
                     <GrIcons.GrMap/>
                     </button> */}
-                  {/* <button 
+                  <button 
                     className="existing-surveys-edit-icon" 
                     title="Chart"
-                    onClick={()=>history.push(`/data-visual/${row._id}`)}>
+                    onClick={()=>history.push(`/data-analysis/${row._id}`)}>
                     <AiIcons.AiOutlineAreaChart />
-                  </button> */}
+                  </button>
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Delete"

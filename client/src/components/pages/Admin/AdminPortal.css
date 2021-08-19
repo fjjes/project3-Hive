@@ -412,13 +412,9 @@ font-weight: bold;
   display:flex;
   justify-content: center;
   text-align: center;
-  height: 50px;
+  height: 140px;
   overflow: scroll;
   margin-bottom: 20px;;
-}
-
-.question-list tr{
-  overflow: scroll;
 }
 
 .data-collected tr:hover {

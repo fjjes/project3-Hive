@@ -53,7 +53,7 @@ function App() {
           {/* <Route path="/map/:surveyId">
             <Map/>
           </Route> */}
-          {/* <Route path="/data-visual/:surveyId">
+          {/* <Route path="/data-analysis/:surveyId">
             <DataVisualization/>
           </Route> */}
           <Route path="/data-analysis">
