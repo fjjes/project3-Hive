@@ -292,6 +292,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       questions,
       createdDate: currentDate,
     };
+		console.log("hooray", surveyToCreate)
     surveyToCreate.questions.forEach((question, index) => {
       question.questionNumber = index + 1;
       // delete question.id;
@@ -330,10 +331,22 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       try {
 				const formData = new FormData();
 				formData.append("image", image.raw);
-				formData.append("data", JSON.stringify(surveyToCreate))
-        let createSurvey = await fetch("/api/survey", {
+				console.log("THE image", image)
+				// formData.append("data", JSON.stringify(surveyToCreate))
+				for (const property in surveyToCreate) {
+					if (property == "questions") {
+						formData.append(property, JSON.stringify(surveyToCreate[property]))
+					}
+					else if (property !== "image") {
+						formData.append(property, surveyToCreate[property])
+					}
+				}
+
+        let createSurvey = await fetch("/api/survey/", {
           method: "POST",
-          // headers: { "Content-Type": "application/json" },
+				// 	headers: {
+				// "Content-Type": "multipart/form-data"
+				// },
           body: formData,
         });
         console.log("Creating a custom-built survey, yay!", surveyToCreate);

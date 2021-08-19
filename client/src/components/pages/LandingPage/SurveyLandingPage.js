@@ -26,7 +26,12 @@ export default function Logo({ flashcard }) {
       setSurvey(data);
       setNarrative(data.narrative);
       setHeading(data.heading)
-			setImage(data.img)
+			if (data.img != null) {
+				const imageResponse = await fetch(`/api/survey/image/${data.img}`)
+				console.log("mathieu", imageResponse)
+				setImage(imageResponse.url)
+				console.log("the image",image)
+			}
       setQuestionArray(data.questions);
       console.log("Survey questions:", data.questions);
     };
@@ -66,7 +71,7 @@ export default function Logo({ flashcard }) {
           </div>
           <div className="theback">
             <h1>{heading}</h1>
-						{image && <img src={`/api/survey/images/${image}`} style={{height:100}} />}
+						{image && <img src={image} style={{height:100}} />}
 						{/* {image && <img src={`/server/uploads/${image}`} style={{height:100}} />} */}
             <p style={{ whiteSpace: "pre-wrap",}}>{narrative}</p>
             <button
