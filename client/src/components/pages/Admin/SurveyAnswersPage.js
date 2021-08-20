@@ -23,6 +23,8 @@ const SurveyAnswersPage =()=>{
     const [answers, setAnswers]=useState([])
     const [qNum, setQnum]=useState()
 
+    // const [Active, setActive]=useState({activeObject:null, objects:null})
+
     const fileName = 'table1';
 
     const getSurveyList = async ()=>{
@@ -55,9 +57,22 @@ const SurveyAnswersPage =()=>{
     let questionNum = 1;
     for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
-    }    
+    } 
+    // setActive({...Active, objects:arr})   
 
     let questionList =newDataList[0]?.survey?.questions
+
+    // const toggleActive=(index)=>{
+    //     setActive({...Active, activeObject:Active.objects[index]})
+    // }
+
+    // const toggleStyle=(index)=>{
+    //     if(Active.objects[index]=== Active.activeObject){
+    //         return "itm active"
+    //     }else{
+    //         return "itm inactive"
+    //     }
+    // }
 
     const getChartInfo = (question, index) =>{
         let q= question?.question
@@ -65,9 +80,9 @@ const SurveyAnswersPage =()=>{
         let qType = question?.questionType
         let answersForThatQuestion = newDataList.map((data)=> data.answers[index])
         let qNum =index
-    //  console.log(answersForThatQuestion)
-    //  console.log('options:', options)
-    //  console.log('questionType:', qType)
+        
+        // toggleActive(index)
+   
         setQuestion(q)
         setOptions(options)
         setQType(qType)
@@ -133,7 +148,7 @@ const SurveyAnswersPage =()=>{
                 <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
                 <div className="button-row">
                     <ExportCSV newDataList={newDataList} fileName={fileName}/>
-                    <button className="table-btn" onClick={()=>{setShowTable(true); setShowChart(false)}}>Data table</button>
+                    <button className="table-btn" onClick={()=>{setShowTable(true); setShowChart(false);}}>Data table</button>
                 </div>
             </div>
             </div>
@@ -143,7 +158,14 @@ const SurveyAnswersPage =()=>{
                 <table >
                     {arr.map((num, i)=>{
                         return(
-                        <tr key={i} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}>
+                        <tr key={i} 
+                            // className={toggleStyle(i)} 
+                            onClick={()=>{
+                                getChartInfo(newDataList[0]?.survey?.questions[i], num); 
+                                // toggleActive(num);
+                            }}
+
+                            >
                             <td>Q{num}</td>
                             <td className="data-text obj" >{newDataList[0]?.survey?.questions[i].question}</td>
                             {/* <td className="data-text obj"><b>{toUpper(newDataList[0]?.survey?.questions[i].questionType)}</b></td> */}
