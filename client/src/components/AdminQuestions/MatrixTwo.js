@@ -28,7 +28,7 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       copyOptions([
         { text: "Provide better working comfort" },
         { text: "Stimulate creativity and collective performance" },
-        { text: "Fascilitate access to information and news from business lines and departments" },
+        { text: "Facilitate access to information and news from business lines and departments" },
         { text: "Break down silos between departments and increase cross functional lines" },
         { text: "Provide spaces for more tranquility to work and concentration" }
       ])

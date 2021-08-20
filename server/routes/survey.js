@@ -2,21 +2,37 @@ const express = require('express');
 const router = express.Router();
 const Survey = require('../models/Survey')
 const multer = require('multer')
+const path = require('path')
 
-const storage = multer.diskStorage({
-	destination: function (request, file, callback) {
-		callback(null, './uploads');
-	},
+const upload = multer({dest:"uploads"})
+// const storage = multer.diskStorage({
+// 	destination: function (request, file, callback) {
+// 		callback(null, '/uploads');
+// 	},
 
-	filename: function (request, file, callback) {
-		callback(null, Date.now() + file.originalname);
-	},
-});
+// 	filename: function (request, file, callback) {
+// 		callback(null, Date.now() + file.originalname);
+// 	},
+// });
 
-const upload = multer({
-	storage: storage,
+// const upload = multer({
+// 	storage: storage,
+// })
+
+
+router.get('/image/uploads/:filename', function(req, res) {
+	console.log(".", req.params)
+	const filename = req.params.filename;
+	console.log(filename)
+	console.log(__dirname)
+	try{
+		const myPath = path.join(__dirname, '../uploads', filename)
+		console.log("the right image", myPath)
+		res.sendFile(myPath)
+	} catch(error) {
+		console.log("****", error)
+	}
 })
-
 
 /* GET survey listing. */
 router.get('/', async (req, res) => {
@@ -42,17 +58,18 @@ router.get('/:id', async function(req, res) {
 router.post('/', upload.single('image'), async(req, res) => {
 	console.log("hello", req.file);
 	console.log("req.body", req.body)
-	const data = JSON.parse(req.body.data)
+	// console.log(req.files)
+	const data = req.body
 	let newSurvey = new Survey({
 		surveyNumber: data.surveyNumber,
-		company: data.company,
+		company: data.company, 
 		version: data.version,
 		heading: data.heading,
-		// img: req.file.filename,
+		img: req.file == null?null: req.file.path,
 		narrative: data.narrative,
-		questions: data.questions
+		questions: JSON.parse(data.questions)
 	})
-
+	console.log("this is new survey", newSurvey)
 	try {
 		newSurvey = await newSurvey.save()
 		console.log("Created a new survey record", newSurvey)
