@@ -23,6 +23,7 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
     question.question ||
       "Normally, during a regular workweek, what percentage of your time do you work in the following locations? The total of the answers must equal to the sum of 100%."
   );
+  const [sliderOption, setSliderOption] = useState("")
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
@@ -34,7 +35,7 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       ])
   );
 
-  const selectionOption = "";
+  // const selectionOption = "";
 
   const onEditClicked = () => {
     console.log("clicked edit");
@@ -67,11 +68,19 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
 
-  const onDelete = (e) => {
-    e.preventDefault();
-    questions.splice(questionNumber - 1, 1);
-    const deleteQuestion = [...questions];
-    setQuestions(deleteQuestion);
+  // const onDelete = (e) => {
+  //   e.preventDefault();
+  //   questions.splice(questionNumber - 1, 1);
+  //   const deleteQuestion = [...questions];
+  //   setQuestions(deleteQuestion);
+  // };
+
+  const onDelete = (qNumber) => {
+    const questionIndex= parseInt(qNumber)-1
+    const newQuestions =[...questions]
+    newQuestions.splice(questionIndex, 1);
+    // const deleteQuestion = [...questions];
+    setQuestions(newQuestions);
   };
 
   const deleteOptions = (index) => {
@@ -85,16 +94,25 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
 
   const onAddInput = () => {
     console.log("clicked add");
-    setAnswerOptions([...answerOptions, selectionOption]);
+    setAnswerOptions([...answerOptions, sliderOption]);
     console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
   };
 
+  // const onInputChange = (event, index) => {
+  //   setAnswerOptions((answer) => {
+  //     answer[index] = event.target.value;
+  //     return answer;
+  //   });
+  //   console.log(questions[questionNumber - 1].answerOptions[index]);
+  //   console.log("input changes here");
+  // };
+
   const onInputChange = (event, index) => {
-    setAnswerOptions((answer) => {
-      answer[index] = event.target.value;
-      return answer;
-    });
+    const newAnswerOptions=[...answerOptions]
+    newAnswerOptions [index]= event.target.value
+    setAnswerOptions (newAnswerOptions)
+
     console.log(questions[questionNumber - 1].answerOptions[index]);
     console.log("input changes here");
   };
@@ -125,7 +143,12 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
               <div key={row} className="slider-admin">
                 <div className="slider-admin-edit">
                   <input
-                    defaultValue={row}
+                  ref={(input) => {
+                    if (input) {
+                        input.focus();
+                    }
+                }}
+                    value={row}
                     onChange={(e) => onInputChange(e, index)}
                   />
                 </div>
@@ -181,7 +204,8 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
           ) : (
             <div className="edit-button">
               <EditButton onEditClicked={onEditClicked} />
-              <DeleteButton onDelete={onDelete} />
+              {/* <DeleteButton onDelete={onDelete} /> */}
+              <DeleteButton onDelete={()=>onDelete(questionNumber)} />
             </div>
           )}
         </div>

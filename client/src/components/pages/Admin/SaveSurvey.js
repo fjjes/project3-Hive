@@ -373,10 +373,13 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
     if (!result.destination) return;
 
     const items = Array.from(questions);
+    console.log("drop:ItemsAre",items)
     const [reorderedItem] = items.splice(result.source.index, 1);
+    console.log ("drop:SourceIndex", result.source.index)
     items.splice(result.destination.index, 0, reorderedItem);
-
+    console.log("drop:Destination",result.destination.index)
     setQuestions(items);
+    console.log("drop:ItemsAre",items)
   }
 
   useEffect(() => {
@@ -555,14 +558,18 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
                     ref={provided.innerRef}
                   >
                     {questions.map((questionBlock, index) => {
-                      // console.log(questionBlock);
+                      // console.log(questionBlock); check 565 ids
                       return (
                         <Draggable
-                          key={questionBlock.id}
-                          draggableId={questionBlock.id || questionBlock._id}
+                          key={questionBlock.id || questionBlock._id}
+                          draggableId={questionBlock.id || questionBlock._id} 
                           index={index}
                         >
-                          {(provided) => (
+                          {(provided) => {
+                            console.log("draggable:questionBlock.id",questionBlock.id)
+                            console.log("draggable:questionBlock._id",questionBlock._id)
+                            console.log("draggable:index",index)
+                            return (
                             <div>
                               <li
                                 {...provided.draggableProps}
@@ -579,6 +586,8 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
                               </li>
                             </div>
                           )}
+                            }
+                            
                         </Draggable>
                       );
                     })}

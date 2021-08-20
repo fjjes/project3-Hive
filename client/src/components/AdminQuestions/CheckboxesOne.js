@@ -18,7 +18,7 @@ const copyOptions = (originalOptions) =>
 function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const checkboxesOneOption = "";
+  const [checkboxesOneOption, setcheckboxesOneOption] = useState("")
   const [questionText, setQuestionText] = useState(
     question.question || "What spaces would you like to use that is not  currently offered by the company? You can select upto three spaces. If none of them interests you, please do not select anything."
   );
@@ -67,10 +67,12 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
 
-  const onDelete = () => {
-    questions.splice(questionNumber - 1, 1);
-    const deleteQuestion = [...questions];
-    setQuestions(deleteQuestion);
+  const onDelete = (qNumber) => {
+    const questionIndex= parseInt(qNumber)-1
+    const newQuestions =[...questions]
+    newQuestions.splice(questionIndex, 1);
+    // const deleteQuestion = [...questions];
+    setQuestions(newQuestions);
   };
 
   const deleteOptions = (index) => {
@@ -90,10 +92,14 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
   };
 
   const onInputChange = (event, index) => {
-    setAnswerOptions((answer) => {
-      answer[index] = event.target.value;
-      return answer;
-    });
+    // setAnswerOptions((answer) => {
+    //   answer[index] = event.target.value;
+    //   return answer;
+    // });
+    const newAnswerOptions=[...answerOptions]
+    newAnswerOptions [index]= event.target.value
+    setAnswerOptions (newAnswerOptions)
+
     console.log(questions[questionNumber - 1].answerOptions[index]);
     console.log("input changes here");
   };
@@ -126,7 +132,12 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
                   <div key={option}>
                     <input type="checkbox" id={option} name="option-group" />
                     <input
-                      defaultValue={option}
+                    ref={(input) => {
+                      if (input) {
+                          input.focus();
+                      }
+                  }}
+                      value={option}
                       onChange={(e) => onInputChange(e, index)}
                     />
                     <button
@@ -160,7 +171,7 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
           ) : (
             <div className="edit-button">
               <EditButton onEditClicked={onEditClicked} />
-              <DeleteButton onDelete={onDelete} />
+              <DeleteButton onDelete={()=>onDelete(questionNumber)} />
             </div>
           )}
         </div>
