@@ -451,12 +451,11 @@ font-weight: bold;
   margin-bottom: 20px;;
 }
 
-.data-collected tr:hover {
-  /* background-color: #f59645 !important; */
+/* .data-collected tr:hover {
   background-color: hsl(28, 90%, 72%) ;
   color:black;
   font-weight: bold;
-}
+} */
 
 .list-table th {
   background-color: grey;
@@ -474,6 +473,18 @@ font-weight: bold;
   padding: 10px 15px;
   /* text-align: center;   */
 }
+
+/* .data-collected .itm{
+transition: background-color 0.1s ease-in-out;
+}
+
+.data-collected .inactive{
+  background-color: violet !important;
+}
+
+.data-collected .active{
+  background-color:burlywood !important;
+} */
 
 .data-collected .obj{
   text-align: start;
