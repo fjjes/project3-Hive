@@ -118,7 +118,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
             <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
             <hr/></>} */}
             
-            <div className="graph-section" style={{width:'25%', height:'25%'}}>
+            <div className="graph-section" style={{maxWidth:'400px'}}>
             
                 {qType==='radio' ?
                 <div className="chart-container">
