@@ -18,10 +18,10 @@ const copyOptions = (originalOptions) =>
 function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   const { questions, setQuestions } = useContext(QuestionContext);
   const [inEditMode, setInEditMode] = useState({ status: false });
-  const radioOption = "";
   const [questionText, setQuestionText] = useState(
     question.question || "What is your department or team?"
   );
+  const [radioOption, setRadioOption] = useState("")
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
       copyOptions([
@@ -65,10 +65,12 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
     setAnswerOptions(questions[questionNumber - 1].answerOptions);
   };
 
-  const onDelete = () => {
-    questions.splice(questionNumber - 1, 1);
-    const deleteQuestion = [...questions];
-    setQuestions(deleteQuestion);
+  const onDelete = (qNumber) => {
+    const questionIndex= parseInt(qNumber)-1
+    const newQuestions =[...questions]
+    newQuestions.splice(questionIndex, 1);
+    // const deleteQuestion = [...questions];
+    setQuestions(newQuestions);
   };
 
   const deleteOptions = (index) => {
@@ -88,10 +90,14 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   };
 
   const onInputChange = (event, index) => {
-    setAnswerOptions((answer) => {
-      answer[index] = event.target.value;
-      return answer;
-    });
+    // setAnswerOptions((answer) => {
+    //   answer[index] = event.target.value;
+    //   return answer;
+    // });
+    const newAnswerOptions=[...answerOptions]
+    newAnswerOptions [index]= event.target.value
+    setAnswerOptions (newAnswerOptions)
+
     console.log(questions[questionNumber - 1].answerOptions[index]);
     console.log("input changes here");
   };
@@ -128,7 +134,12 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
                     color="primary"
                   />
                   <input
-                    defaultValue={option}
+                  ref={(input) => {
+                    if (input) {
+                        input.focus();
+                    }
+                }}
+                    value={option}
                     onChange={(e) => onInputChange(e, index)}
                   />
                   <button
@@ -164,7 +175,7 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
           ) : (
             <div className="edit-button">
               <EditButton onEditClicked={onEditClicked} />
-              <DeleteButton onDelete={onDelete} />
+              <DeleteButton onDelete={()=>onDelete(questionNumber)} />
             </div>
           )}
         </div>
