@@ -66,7 +66,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       console.log("data:", data);
       setQuestions(data.questions);
       setHeading(data.heading);
-			// setImage(data.img);
+			setImage(data.img);
       setNarrative(data.narrative);
       setCompany(data.company);
       setVersion(data.version);

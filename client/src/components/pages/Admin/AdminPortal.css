@@ -386,7 +386,7 @@ font-weight: bold;
   border-collapse: collapse;
   margin-bottom: 70px;
   /* display: grid; */
-	overflow: scroll;
+	/* overflow: scroll; */
 	height: 450px;
 }
 
@@ -490,6 +490,9 @@ font-weight: bold;
 .list-table tr:hover {
   /* background-color: #f59645 !important; */
   background-color: hsl(28, 90%, 72%) !important;
+	/* transform: scale(1.01); 
+	transition: 0.2s ease;
+	border: 1px solid white;  */
 }
 
 .data-table tr:hover {
