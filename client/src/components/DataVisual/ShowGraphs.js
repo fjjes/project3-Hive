@@ -58,8 +58,8 @@ useEffect(()=>{
     let otherArray = []
     let otherArrayWithoutEmptyStrings = []
     let checkedOptionsArray = []
-    let checkboxesOpt = []
     let checkboxesPercentArr = []
+    let checkboxesAnswerOptions = dataList[0].survey.questions[qNum-1]?.answerOptions
 
     if(typeof answers === 'object'){
         if (qType==='checkbox'){
@@ -76,14 +76,20 @@ useEffect(()=>{
                             checkedOptionsArray.push(answers[i].options[x].value)
                         }
                     }
-                }
-            }
-        let checkboxAns=checkedOptionsArray?.sort()
-        const checkboxesPercentages = checkboxAns.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (checkboxAns.length)}), {})
-        checkboxesPercentArr= Object.values(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-        checkboxesOpt =Object.keys(checkboxesPercentages).map(checkboxesPercent=>checkboxesPercent)
-        }
+                }}
+        const numberOfOptionsSelected = answers.reduce((totalOptionsSelected, answer) => {
+            return totalOptionsSelected + 
+             answer.options.reduce((totalOptionsSelectedForPerson, option) => {
+                return totalOptionsSelectedForPerson + (option.checked ? 1 : 0)
+            }, 0)
+        }, 0)
+        checkboxesPercentArr = checkboxesAnswerOptions?.map((option, optionIndex) => {
+            const peopleWhoSelected = answers.filter(answer => answer.options[optionIndex].checked)
+            const percentageSelected = peopleWhoSelected.length / numberOfOptionsSelected * 100
+            return percentageSelected
+        })
     }
+}
 
 //matrix, select -----------------------
     let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
@@ -109,19 +115,17 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
 
 //   console.log('valueLabel:',valueLabel )
 
-    // slider -------------------------------
+// slider -------------------------------
     let sliderPercentArr = []
     let sliderPercentTotalsArray = []
     let sliderAnswerOptions = dataList[0].survey.questions[qNum-1]?.answerOptions
-    console.log("** sliderAnswerOptions", sliderAnswerOptions)
     if(typeof answers === 'object'){
         if (qType === 'slider') {
             for (let i=0; i<dataList.length; i++) {
                 sliderPercentArr = [...sliderPercentArr, dataList[i].answers[qNum]]
             }
-            console.log("sliderPercentArr: ", sliderPercentArr)
-            sliderPercentTotalsArray = sliderPercentArr.reduce((r, a) => a.map((b, i) => (r[i] || 0) + b), []);
-            console.log("sliderPercentTotalsArray: ", sliderPercentTotalsArray)
+            let sliderPercentTotalsArrayTooBig = sliderPercentArr.reduce((acc, curr) => curr.map((val, i) => (acc[i] || 0) + val), []);
+            sliderPercentTotalsArray = sliderPercentTotalsArrayTooBig.map(item => (item / dataList.length))
         } 
     }
 
@@ -147,7 +151,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                             // data:countArr,
                             data:percentArrRadio,
                             // backgroundColor:colors,
-                            backgroundColor:checkboxesPercentArr.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
+                            backgroundColor:percentArrRadio.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
@@ -161,7 +165,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                 <div className="chart-container">
                     <Pie
                     data={{
-                        labels: checkboxesOpt,
+                        labels: checkboxesAnswerOptions,
                         datasets:[{
                             data: checkboxesPercentArr,
                             backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
