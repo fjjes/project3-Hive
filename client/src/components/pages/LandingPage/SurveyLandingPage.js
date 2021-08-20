@@ -6,7 +6,6 @@ import "./SurveyLandingPage.css";
 // import * as All from '../../../../server/uploads'
 //import { Link } from "react-router-dom";
 // import image from "../../../images/website.jpg";
-import Picture from './orange.png';
 import useWindowSize from "../../../utilities/useWindowSize"
 
 export default function Logo({ flashcard }) {
