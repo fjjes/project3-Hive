@@ -60,14 +60,36 @@ h2 {
 
 .admin-logo {
   height: 90px;
-  position: relative;
+  /* position: relative; */
 	right: 10%;
+}
+
+@media screen and (max-width: 768px) {
+  .admin-logo {
+    height: 40px;
+    padding: 0 0 0 10px;
+  }
+
+  .navbar h1 {
+    font-size: 1.1rem;
+    padding: 0;
+    width: 110px !important;
+  }
+
+  .admin-container-title-and-logo {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .admin-container-title-and-logo {
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+
+.admin-container-title-and-logo h1 {
+  color: white;
+  width: 200px;
 }
 
 .admin-container-top {
@@ -169,6 +191,18 @@ input[type=checkbox] {
 .company-and-survey-name-inputs .col{
   margin-right: 90px;
 }
+
+@media screen and (max-width: 768px) {
+  .company-and-survey-name-inputs input {
+    padding: 5px 5x;
+    min-width: 10% !important;
+  }
+  
+  .company-and-survey-name-inputs .col{
+    margin-right: 0px;
+  }
+}
+
 .search-input {
   display: inline;
 }
