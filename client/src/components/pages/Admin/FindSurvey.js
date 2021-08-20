@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as ImIcons from "react-icons/im";
-import * as GrIcons from "react-icons/gr";
+// import * as GrIcons from "react-icons/gr";
 import * as AiIcons from "react-icons/ai";
 import useWindowSize from "../../../utilities/useWindowSize";
 
@@ -117,7 +117,7 @@ const FindSurvey = (props) => {
                   <button 
                     className="existing-surveys-edit-icon" 
                     title="Chart"
-                    onClick={()=>history.push(`/data-visual/${row._id}`)}>
+                    onClick={()=>history.push(`/data-analysis/${row._id}`)}>
                     <AiIcons.AiOutlineAreaChart />
                   </button>
                   <button 
