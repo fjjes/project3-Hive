@@ -4,15 +4,14 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
     console.log(`${qType}:: xOptions`, xOptions)
     console.log(`${qType}:: data`, data)
     console.log(`${qType}:: question`, question)
-    console.log(`${qType}:: label`, label)
-    console.log('------------------------------')
+    // console.log(`${qType}:: label`, label)
+    // console.log('------------------------------')
 
-    //radio, select, checkbox
+    //slider, checkbox
     let obj = {}
     xOptions.forEach((item, i)=>obj[item] = data[i])
-    // console.log("obj::", obj)
-
-
+    console.log('obj;;;', obj)
+    
     const roundToTwo =(num) =>{    
         return +(Math.round(num + "e+2")  + "e-2");
     }
@@ -20,7 +19,21 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
     return (
         <table>
             <tbody>
-                {(qType==='matrix1' || qType==='matrix2' || qType==='select') ?
+                {qType === 'radio' &&
+                    Object.keys(data).map((itm, i)=>{
+                        return(
+                            <tr>
+                                <td style={{fontWeight:"bold"}}>{itm}</td>
+                                {data[itm] ? 
+                                    <td>{`${roundToTwo(data[itm])}%`}</td> 
+                                : 
+                                    <td>0%</td>
+                                }
+                            </tr>
+                        )
+                    })
+                }       
+                {(qType==='matrix1' || qType==='matrix2' || qType==='select') &&
                 <>
                 <tr>
                     <th></th>
@@ -39,20 +52,23 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                     )
                 })}
                 </>
-                :
-                Object.keys(obj).map((itm, i)=>{
-                    return(
-                        <tr>
-                            <td style={{fontWeight:"bold"}}>{itm}</td>
-                            {qType==='slider'?
-                                <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"small", marginLeft:"5px"}}>(avg.)</span></td>
-                            :   
-                                <td>{`${roundToTwo(obj[itm])}%`}</td>
-                            }
-                        </tr>
-                    )
-                })
                 }
+                {(qType=== 'slider' || qType === 'checkbox') && 
+                    Object.keys(obj).map((itm, i)=>{
+                        return(
+                            <tr>
+                                <td style={{fontWeight:"bold"}}>{itm}</td>
+                                {qType==='slider' ?
+                                    <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"small", marginLeft:"5px"}}>(avg.)</span></td>
+
+                                :
+                                    <td>{`${roundToTwo(obj[itm])}%`}</td>
+                                }
+                            </tr>
+                        )
+                    })
+                }
+                
                
             </tbody>
         </table>

@@ -6,42 +6,43 @@ import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
     const [objArr, setObjArr]=useState([])
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","black", "#6D92A0", "#D4A66A"] // Hive colours
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","maroon", "#6D92A0", "#D4A66A"] // Hive colours
    let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
 
-const getLabel=()=>{
-    let labelArr=[]
-    console.log("qType:", qType)
-    if(qType==='select'){
-        let num =1
-        // console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
-        for(let i=0; i<dataList[0].survey.questions[qNum-1]?.answerOptions.length;i++){
-          labelArr.push(num++)
+    const getLabel=()=>{
+        let labelArr=[]
+        console.log("qType:", qType)
+        if(qType==='select'){
+            let num =1
+            // console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
+            for(let i=0; i<dataList[0].survey.questions[qNum-1]?.answerOptions.length;i++){
+            labelArr.push(num++)
+            }
+            console.log('select label:', labelArr)
+        }else if(qType=== 'matrix1'){
+            labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
+            console.log('matrix1 label:', labelArr)
+        }else if(qType=== 'matrix2'){
+            labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+            console.log('matrix2 label:', labelArr)
+        
         }
-        console.log('select label:', labelArr)
-    }else if(qType=== 'matrix1'){
-         labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
-        console.log('matrix1 label:', labelArr)
-    }else if(qType=== 'matrix2'){
-        labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-        console.log('matrix2 label:', labelArr)
-    
+        setValueLabel(labelArr)
     }
-    setValueLabel(labelArr)
-}
 
-useEffect(()=>{
-    getLabel()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-},[dataList, qNum])  
-//    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
-//     let countArr = [...count.values()]
+    useEffect(()=>{
+        getLabel()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[dataList, qNum])  
+    //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
+    //     let countArr = [...count.values()]
 
 
-// radio --------------------------------
+    // radio --------------------------------
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     let percentArrRadio= Object.values(percentRadio)
+    console.log('percentRadio', percentRadio)
 
     // checkboxes ---------------------------
     let otherArray = []
@@ -65,48 +66,47 @@ useEffect(()=>{
                             checkedOptionsArray.push(answers[i].options[x].value)
                         }
                     }
-                }}
-        const numberOfOptionsSelected = answers.reduce((totalOptionsSelected, answer) => {
-            return totalOptionsSelected + 
-             answer.options.reduce((totalOptionsSelectedForPerson, option) => {
-                return totalOptionsSelectedForPerson + (option.checked ? 1 : 0)
+            }}
+            const numberOfOptionsSelected = answers.reduce((totalOptionsSelected, answer) => {
+                return totalOptionsSelected + 
+                answer.options.reduce((totalOptionsSelectedForPerson, option) => {
+                    return totalOptionsSelectedForPerson + (option.checked ? 1 : 0)
+                }, 0)
             }, 0)
-        }, 0)
-        checkboxesPercentArr = checkboxesAnswerOptions?.map((option, optionIndex) => {
-            const peopleWhoSelected = answers.filter(answer => answer.options[optionIndex].checked)
-            const percentageSelected = (peopleWhoSelected.length / numberOfOptionsSelected) * 100
-            return percentageSelected
-        })
+            checkboxesPercentArr = checkboxesAnswerOptions?.map((option, optionIndex) => {
+                const peopleWhoSelected = answers.filter(answer => answer.options[optionIndex].checked)
+                const percentageSelected = (peopleWhoSelected.length / numberOfOptionsSelected) * 100
+                return percentageSelected
+            })
+        }
     }
-}
 
-//matrix, select -----------------------
-    let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
+    //matrix, select -----------------------
+        let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
 
-const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
-    const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
-    const optAnsForValLabel = optAnswers.filter((optAns)=>optAns.value === valueLabel[valIndex])
-    // const percentageAnsweredForValLabel = optAnsForValLabel.length>0 ? ((optAnsForValLabel.length / optAnswers.length) * 100) : 0
-    const percentageAnsweredForValLabel = ((optAnsForValLabel.length / optAnswers.length) * 100) 
-    // console.log("optAnswersValLabel", optAnsForValLabel)
- return percentageAnsweredForValLabel
-}
+    const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
+        const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
+        const optAnsForValLabel = optAnswers.filter((optAns)=>optAns.value === valueLabel[valIndex])
+        const percentageAnsweredForValLabel = ((optAnsForValLabel.length / optAnswers.length) * 100) 
+    return percentageAnsweredForValLabel
+    }
 
 
-useEffect(()=>{
-    let arrObj=[]
-    valueLabel?.map((val, i)=>{
-        return(
-            arrObj.push(optObj.map((opt,j)=>getPercentageAnsweredValLabel(j, i)))
-        )
-    })
-    setObjArr(arrObj)
-    // console.log(arrObj)
-},[valueLabel])
+    useEffect(()=>{
+        let arrObj=[]
+        valueLabel?.map((val, i)=>{
+            return(
+                arrObj.push(optObj.map((opt,j)=>getPercentageAnsweredValLabel(j, i)))
+            )
+        })
+        setObjArr(arrObj)
+        // console.log(arrObj)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[valueLabel])
 
 
 
-// slider -------------------------------
+    // slider -------------------------------
     let sliderPercentArr = []
     let sliderPercentTotalsArray = []
     let sliderAnswerOptions = dataList[0].survey.questions[qNum-1]?.answerOptions
@@ -120,13 +120,6 @@ useEffect(()=>{
         } 
     }
 
-    // const options = {
-    //     legend: {
-    //       display: true,
-    //       position: "bottom"
-    //     }
-    //   };
-
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
@@ -135,7 +128,7 @@ useEffect(()=>{
                 {qType==='radio' ?
                 <div className='lower-sec'>
                 <div className="chart-table" >
-                    <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentArrRadio} question={question} qType={qType}/>
+                    <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentRadio} question={question} qType={qType}/>
                 </div>
                 <div className="chart-container">
                     <Pie
@@ -166,13 +159,12 @@ useEffect(()=>{
                             labels: checkboxesAnswerOptions,
                             datasets:[{
                                 data: checkboxesPercentArr,
-                                // : checkboxesPercentArr.length !== 6 ? colors : colors2, 
-                                backgroundColor:colors, 
+                                backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
+                                // backgroundColor:colors, 
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'
                             }]
                         }}
-                        // options={{options}}
                         >
                         </Pie>
                         <div className="checkboxes-other-responses">
@@ -223,7 +215,8 @@ useEffect(()=>{
                             labels: sliderAnswerOptions,
                             datasets:[{
                                 data: sliderPercentTotalsArray,
-                                backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
+                                // backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
+                                backgroundColor:colors,
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'
                             }]
