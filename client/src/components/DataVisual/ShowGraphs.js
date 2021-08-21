@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Map from './Map'
+import AnalysisTable from "./AnalysisTable"
 import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
@@ -40,9 +41,7 @@ useEffect(()=>{
 // radio --------------------------------
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
-    // console.log ('percentRadio',percentRadio)
-    let percentArrRadio= Object.values(percentRadio).map(percent=>percent)
-    // let optRadio =Object.keys(percentRadio).map(percent=>percent)
+    let percentArrRadio= Object.values(percentRadio)
 
     // checkboxes ---------------------------
     let otherArray = []
@@ -75,7 +74,7 @@ useEffect(()=>{
         }, 0)
         checkboxesPercentArr = checkboxesAnswerOptions?.map((option, optionIndex) => {
             const peopleWhoSelected = answers.filter(answer => answer.options[optionIndex].checked)
-            const percentageSelected = peopleWhoSelected.length / numberOfOptionsSelected * 100
+            const percentageSelected = (peopleWhoSelected.length / numberOfOptionsSelected) * 100
             return percentageSelected
         })
     }
@@ -113,18 +112,16 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
-            {/* {(qType === 'radio' || qType === 'select' || qType === 'matrix1' || qType=== 'matrix2'|| qType=== 'slider'|| qType=== 'checkbox') &&<>
-            <hr/>
-            <h4>{`Q${qNum} - ${question}`}<span style={{color:'blue'}}>{`(${qType}-type)`}</span></h4> 
-            <hr/></>} */}
-            
             <div className="graph-section" style={{width:'25%', height:'25%'}}>
-            
                 {qType==='radio' ?
+                <>
+                <div className="chart-table">
+                    <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentArrRadio} question={question} qType={qType}/>
+                </div>
                 <div className="chart-container">
                     <Pie
                     data={{
-                        labels: dataList[0].survey.questions[qNum-1]?.answerOptions.map(op=>op),
+                        labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
                         datasets:[{
                             data:percentArrRadio,
                             // backgroundColor:colors,
@@ -136,9 +133,14 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                     >
                     </Pie>
                 </div>
+                </>
                 :null}
                 
                 {qType==='checkbox' ?
+                 <>
+                 <div className="chart-table">
+                     <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
+                 </div>
                 <div className="chart-container">
                     <Pie
                     data={{
@@ -157,6 +159,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                         <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
                     </div>
                 </div>
+                </>
                 :null}
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?

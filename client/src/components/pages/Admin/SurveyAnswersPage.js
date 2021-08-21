@@ -9,7 +9,7 @@ import * as GrIcons from "react-icons/gr";
 import './AdminPortal.css'
 
 const SurveyAnswersPage =()=>{
-    //     const {surveyId} = useParams();
+    // const {surveyId} = useParams();
 
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])
