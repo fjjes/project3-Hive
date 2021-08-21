@@ -112,7 +112,8 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
-            <div className="graph-section" style={{width:'25%', height:'25%'}}>
+            <div className="graph-section" style={{maxWidth:'400px'}}>
+            
                 {qType==='radio' ?
                 <>
                 <div className="chart-table">

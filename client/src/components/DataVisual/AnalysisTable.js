@@ -21,7 +21,11 @@ const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
                     return(
                         <tr>
                             <td>{itm}</td>
-                            <td>{`${roundToTwo(obj[itm])}%`}</td>
+                            {qType==='slider'?
+                                <td>{`${roundToTwo(obj[itm])}% (avg.)`}</td>
+                            :   
+                                <td>{`${roundToTwo(obj[itm])}%`}</td>
+                            }
                         </tr>
                     )
                 })}  
