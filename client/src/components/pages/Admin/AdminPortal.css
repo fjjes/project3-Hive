@@ -611,6 +611,21 @@ color:#f59645;
   width:150%;
   }
 
+ .graph-section .lower-sec{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* gap:30px;
+  margin-top:50px;  */
+ }
+
+ .graph-section .chart-table{
+  display:flex;
+  align-items:center; 
+  justify-content: center;
+  margin-left: 240px;
+  width:50%;
+ }
+
 .question-and-buttons {
   display: flex;
   flex-direction: row;

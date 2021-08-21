@@ -5,7 +5,7 @@ import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
-
+    const [objArr, setObjArr]=useState([])
    let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","black", "#6D92A0", "#D4A66A"] // Hive colours
    let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
 
@@ -82,7 +82,6 @@ useEffect(()=>{
 
 //matrix, select -----------------------
     let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
-    // console.log('optObj', optObj)
 
 const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
@@ -92,6 +91,17 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
     // console.log("optAnswersValLabel", optAnsForValLabel)
  return percentageAnsweredForValLabel
 }
+
+// let arr=[]
+// const getData=()=>{
+//     valueLabel?.map((val, i)=>{
+//         return(
+//       arr = optObj.map((opt,j)=>getPercentageAnsweredValLabel(j, i))  
+//         ) 
+//     })
+//     return arr
+// }
+// console.log('....MatrixArrrrrr:', getData())
 
 //   console.log('valueLabel:',valueLabel )
 
@@ -109,14 +119,15 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
         } 
     }
 
+    
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
-            <div className="graph-section" style={{maxWidth:'400px'}}>
+            <div className="graph-section">
             
                 {qType==='radio' ?
-                <>
-                <div className="chart-table">
+                <div className='lower-sec'>
+                <div className="chart-table" >
                     <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentArrRadio} question={question} qType={qType}/>
                 </div>
                 <div className="chart-container">
@@ -134,11 +145,11 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                     >
                     </Pie>
                 </div>
-                </>
+                </div>
                 :null}
                 
                 {qType==='checkbox' ?
-                 <>
+                 <div className='lower-sec'>
                     <div className="chart-table">
                         <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                     </div>
@@ -161,15 +172,15 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                             <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
                         </div>
                     </div>
-                </>
+                </div>
                 :null}
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
-                 <>
+                 <div className='lower-sec'>
                     <div className="chart-table">
-                        {/* <AnalysisTable xOptions={} data={} question={question} qType={qType}/> */}
+                        {/* <AnalysisTable xOptions={optObj} data={} label={valueLabel} question={question} qType={qType}/> */}
                     </div>
-                    <div style={{width:"200%"}}>
+                    <div>
                         <Bar
                         data={{
                             labels: optObj,
@@ -177,13 +188,8 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                                 return(
                                     {
                                         label:val,
-                                        // label:Object.keys(getPercentObj(i))[i],
-                                        // data:Object.values(getPercentObj(i)),
                                         data:optObj.map((opt,j)=>{
-                                            // return valueLabel.map((vl, k)=>{
                                                 return getPercentageAnsweredValLabel(j, i)
-                                            // })
-                                            
                                         }),
                                         backgroundColor:colors[i],
                                         barThickness:12,
@@ -194,11 +200,11 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                         >
                         </Bar>
                 </div>
-                </>
+                </div>
                 :null}
 
                 {qType==='slider' ?
-                 <>
+                 <div className='lower-sec'>
                     <div className="chart-table">
                         <AnalysisTable xOptions={sliderAnswerOptions} data={sliderPercentTotalsArray} question={question} qType={qType}/>
                     </div>
@@ -216,7 +222,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                         >
                         </Pie>
                     </div>
-                    </>
+                    </div>
                     :null}
 
             </div>
