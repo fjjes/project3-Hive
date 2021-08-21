@@ -12,9 +12,6 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
     xOptions.forEach((item, i)=>obj[item] = data[i])
     // console.log("obj::", obj)
 
-    //matrix & select
-    let obj2={}
-    xOptions.forEach((item, i)=>obj2[item] = data[i])
 
     const roundToTwo =(num) =>{    
         return +(Math.round(num + "e+2")  + "e-2");
@@ -27,15 +24,15 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                 <>
                 <tr>
                     <th></th>
-                    {label.map((lbl,i)=><th>{lbl}</th>)}
+                    {label.map((lbl,i)=><th style={{fontSize:"small"}}>{lbl}</th>)}
                 </tr>
                 {xOptions.map((option,i)=>{
                     return(
                         <tr>
-                            <td>{option}</td>
+                            <td style={{fontWeight:"bold", fontSize:"small"}}>{option}</td>
                             {data.map((percent,j)=>{
                                 return(
-                                    <td>{percent[i]}</td>
+                                    <td>{`${roundToTwo(percent[i])}%`}</td>
                                 )
                             })}
                         </tr>
