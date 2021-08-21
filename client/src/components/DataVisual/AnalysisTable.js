@@ -20,9 +20,9 @@ const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
                 {Object.keys(obj).map((itm, i)=>{
                     return(
                         <tr>
-                            <td>{itm}</td>
+                            <td style={{fontWeight:"bold"}}>{itm}</td>
                             {qType==='slider'?
-                                <td>{`${roundToTwo(obj[itm])}% (avg.)`}</td>
+                                <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"small", marginLeft:"5px"}}>(avg.)</span></td>
                             :   
                                 <td>{`${roundToTwo(obj[itm])}%`}</td>
                             }
