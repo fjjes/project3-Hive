@@ -138,31 +138,36 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                 
                 {qType==='checkbox' ?
                  <>
-                 <div className="chart-table">
-                     <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
-                 </div>
-                <div className="chart-container">
-                    <Pie
-                    data={{
-                        labels: checkboxesAnswerOptions,
-                        datasets:[{
-                            data: checkboxesPercentArr,
-                            backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
-                            hoverBorderWidth:3,
-                            hoverBorderColor:'#000'
-                        }]
-                    }}
-                    >
-                    </Pie>
-                    <div className="checkboxes-other-responses">
-                        <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
-                        <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                    <div className="chart-table">
+                        <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                     </div>
-                </div>
+                    <div className="chart-container">
+                        <Pie
+                        data={{
+                            labels: checkboxesAnswerOptions,
+                            datasets:[{
+                                data: checkboxesPercentArr,
+                                // : checkboxesPercentArr.length !== 6 ? colors : colors2, 
+                                backgroundColor:colors, 
+                                hoverBorderWidth:3,
+                                hoverBorderColor:'#000'
+                            }]
+                        }}
+                        >
+                        </Pie>
+                        <div className="checkboxes-other-responses">
+                            <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                            <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                        </div>
+                    </div>
                 </>
                 :null}
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
+                 <>
+                    <div className="chart-table">
+                        {/* <AnalysisTable xOptions={} data={} question={question} qType={qType}/> */}
+                    </div>
                     <div style={{width:"200%"}}>
                         <Bar
                         data={{
@@ -188,9 +193,14 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                         >
                         </Bar>
                 </div>
+                </>
                 :null}
 
                 {qType==='slider' ?
+                 <>
+                    <div className="chart-table">
+                        <AnalysisTable xOptions={sliderAnswerOptions} data={sliderPercentTotalsArray} question={question} qType={qType}/>
+                    </div>
                     <div className="chart-container">
                         <Pie
                         data={{
@@ -205,6 +215,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                         >
                         </Pie>
                     </div>
+                    </>
                     :null}
 
             </div>

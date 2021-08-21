@@ -602,6 +602,15 @@ color:#f59645;
   content: attr(title);
 }
 
+.chart-table table, th, td {
+  border: 1px solid black;
+}
+
+.chart-table table{
+  border-collapse:collapse;
+  width:150%;
+  }
+
 .question-and-buttons {
   display: flex;
   flex-direction: row;

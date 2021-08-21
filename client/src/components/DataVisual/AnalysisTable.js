@@ -1,3 +1,5 @@
+import './index.css'
+
 const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
     console.log(`${qType}:: xOptions`, xOptions)
     console.log(`${qType}:: data`, data)
@@ -13,20 +15,18 @@ const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
     }
 
     return (
-        <div>
-            <table>
-                <tbody>
-                    {Object.keys(obj).map((itm, i)=>{
-                        return(
-                            <tr>
-                                <td>{itm}</td>
-                                <td>{`${roundToTwo(obj[itm])}%`}</td>
-                            </tr>
-                        )
-                    })}  
-                </tbody>
-            </table>
-        </div>
+        <table>
+            <tbody>
+                {Object.keys(obj).map((itm, i)=>{
+                    return(
+                        <tr>
+                            <td>{itm}</td>
+                            <td>{`${roundToTwo(obj[itm])}%`}</td>
+                        </tr>
+                    )
+                })}  
+            </tbody>
+        </table>
     );
 }
  
