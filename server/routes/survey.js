@@ -56,8 +56,8 @@ router.get('/:id', async function(req, res) {
 // Add GET/id/map (Prodyut)
 
 router.post('/', upload.single('image'), async(req, res) => {
-	console.log("hello", req.file);
-	console.log("req.body", req.body)
+	// console.log("hello", req.file);
+	// console.log("req.body", req.body)
 	// console.log(req.files)
 	const data = req.body
 	let newSurvey = new Survey({
@@ -69,7 +69,7 @@ router.post('/', upload.single('image'), async(req, res) => {
 		narrative: data.narrative,
 		questions: JSON.parse(data.questions)
 	})
-	console.log("this is new survey", newSurvey)
+	// console.log("this is new survey", newSurvey)
 	try {
 		newSurvey = await newSurvey.save()
 		console.log("Created a new survey record", newSurvey)
@@ -80,21 +80,6 @@ router.post('/', upload.single('image'), async(req, res) => {
 	}
 	
 })
-
-// router.post('/', async(req, res) => {
-// 	try {
-// 		let newSurvey = new Survey(req.body)
-// 		await newSurvey.save()
-// 				console.log("Created a new survey record", newSurvey)
-// 				res.send(newSurvey)  
-// 	}
-// 	catch (error) {
-//       console.log(error)
-//       res.sendStatus(500)
-// 	}
-// })
-
-
 
 router.put('/:id', async function(req, res) {
   let surveyToUpdate = req.body

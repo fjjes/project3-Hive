@@ -10,7 +10,7 @@ import * as FaIcons from "react-icons/fa";
 import './AdminPortal.css'
 
 const SurveyAnswersPage =()=>{
-    //     const {surveyId} = useParams();
+    // const {surveyId} = useParams();
 
     const [newDataList, setNewDataList]=useState([])
     const [surveyList, setSurveyList]=useState([])

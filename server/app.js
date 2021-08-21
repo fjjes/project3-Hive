@@ -24,7 +24,6 @@ app.use('/api/user', usersRouter);
 app.use('/api/answer', answersRouter);
 app.use('/api/survey', surveyRouter);
 // Create the maps endpoint
-
 app.use('/api/maps', mapsRouter);
 
 // catch 404 and forward to error handler

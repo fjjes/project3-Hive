@@ -744,6 +744,7 @@ color:#f59645;
   padding: 5px;
 }
 
+<<<<<<< HEAD
 .data-visual-table button{
 	background-color: rgb(241, 241, 241);
 	font-size: 1.3em;
@@ -763,3 +764,25 @@ color:#f59645;
 .data-text.obj {
 	font-size: 0.8em;
 }
+=======
+.chart-table table, th, td {
+  border: 1px solid black;
+}
+
+.chart-table table{
+  border-collapse:collapse;
+}
+
+.graph-section .lower-sec{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.graph-section .chart-table{
+  display:flex;
+  align-items:center; 
+  justify-content: center;
+  margin-left: 240px;
+  width:50%;
+}
+>>>>>>> cf21cb5cb7e55dc47863a422e58e55a671e64869
