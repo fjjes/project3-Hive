@@ -24,11 +24,7 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                         return(
                             <tr>
                                 <td style={{fontWeight:"bold"}}>{itm}</td>
-                                {data[itm] ? 
-                                    <td>{`${roundToTwo(data[itm])}%`}</td> 
-                                : 
-                                    <td>0%</td>
-                                }
+                                <td>{`${roundToTwo(data[itm])}%`}</td>   
                             </tr>
                         )
                     })
@@ -37,7 +33,9 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                 <>
                 <tr>
                     <th></th>
-                    {label.map((lbl,i)=><th style={{fontSize:"small"}}>{lbl}</th>)}
+                    {qType==='matrix1' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>{lbl}</th>))}
+                    {qType==='matrix2' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>Rated {lbl}</th>))}
+                    {qType==='select' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>Ranked {lbl}</th>))}
                 </tr>
                 {xOptions.map((option,i)=>{
                     return(
