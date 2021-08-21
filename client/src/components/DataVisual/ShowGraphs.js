@@ -92,18 +92,19 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
  return percentageAnsweredForValLabel
 }
 
-// let arr=[]
-// const getData=()=>{
-//     valueLabel?.map((val, i)=>{
-//         return(
-//       arr = optObj.map((opt,j)=>getPercentageAnsweredValLabel(j, i))  
-//         ) 
-//     })
-//     return arr
-// }
-// console.log('....MatrixArrrrrr:', getData())
 
-//   console.log('valueLabel:',valueLabel )
+useEffect(()=>{
+    let arrObj=[]
+    valueLabel?.map((val, i)=>{
+        return(
+            arrObj.push(optObj.map((opt,j)=>getPercentageAnsweredValLabel(j, i)))
+        )
+    })
+    setObjArr(arrObj)
+    // console.log(arrObj)
+},[valueLabel])
+
+
 
 // slider -------------------------------
     let sliderPercentArr = []
@@ -119,7 +120,13 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
         } 
     }
 
-    
+    // const options = {
+    //     legend: {
+    //       display: true,
+    //       position: "bottom"
+    //     }
+    //   };
+
     return (
         <div>
             {qType === 'postal' && <Map surveyId={surveyId}/>} 
@@ -149,7 +156,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                 :null}
                 
                 {qType==='checkbox' ?
-                 <div className='lower-sec'>
+                 <div className='lower-sec check'>
                     <div className="chart-table">
                         <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                     </div>
@@ -165,6 +172,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                                 hoverBorderColor:'#000'
                             }]
                         }}
+                        // options={{options}}
                         >
                         </Pie>
                         <div className="checkboxes-other-responses">
@@ -178,7 +186,7 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
                  <div className='lower-sec'>
                     <div className="chart-table">
-                        {/* <AnalysisTable xOptions={optObj} data={} label={valueLabel} question={question} qType={qType}/> */}
+                        <AnalysisTable xOptions={optObj} data={objArr} label={valueLabel} question={question} qType={qType}/>
                     </div>
                     <div>
                         <Bar
@@ -197,7 +205,8 @@ const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
                                 )
                             })
                         }}
-                        >
+                       
+                       >
                         </Bar>
                 </div>
                 </div>
