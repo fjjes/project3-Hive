@@ -602,30 +602,6 @@ color:#f59645;
   content: attr(title);
 }
 
-.chart-table table, th, td {
-  border: 1px solid black;
-}
-
-.chart-table table{
-  border-collapse:collapse;
-  width:150%;
-  }
-
- .graph-section .lower-sec{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* gap:30px;
-  margin-top:50px;  */
- }
-
- .graph-section .chart-table{
-  display:flex;
-  align-items:center; 
-  justify-content: center;
-  margin-left: 240px;
-  width:50%;
- }
-
 .question-and-buttons {
   display: flex;
   flex-direction: row;
@@ -766,4 +742,25 @@ color:#f59645;
 .checkboxes-other-responses p {
   font-size: 0.75rem;
   padding: 5px;
+}
+
+.chart-table table, th, td {
+  border: 1px solid black;
+}
+
+.chart-table table{
+  border-collapse:collapse;
+}
+
+.graph-section .lower-sec{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.graph-section .chart-table{
+  display:flex;
+  align-items:center; 
+  justify-content: center;
+  margin-left: 240px;
+  width:50%;
 }
