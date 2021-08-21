@@ -6,6 +6,7 @@ import ShowGraphs from '../../DataVisual/ShowGraphs';
 import * as AiIcons from "react-icons/ai";
 import * as BiIcons from "react-icons/bi";
 import * as GrIcons from "react-icons/gr";
+import * as FaIcons from "react-icons/fa";
 import './AdminPortal.css'
 
 const SurveyAnswersPage =()=>{
@@ -155,10 +156,10 @@ const SurveyAnswersPage =()=>{
             {surveyId && newDataList?.length>0 ? 
             <div>
             <div className="question-list">
-                <table >
+							<table className="data-visual-table">
                     {arr.map((num, i)=>{
                         return(
-                        <tr key={i} 
+                        <button key={i} 
                             // className={toggleStyle(i)} 
                             onClick={()=>{
                                 getChartInfo(newDataList[0]?.survey?.questions[i], num); 
@@ -167,25 +168,27 @@ const SurveyAnswersPage =()=>{
 
                             >
                             <td>Q{num}</td>
-                            <td className="data-text obj" >{newDataList[0]?.survey?.questions[i].question}</td>
+                            <td className="data-text obj" style={{width: "1000px"}} >{newDataList[0]?.survey?.questions[i].question}</td>
                             {/* <td className="data-text obj"><b>{toUpper(newDataList[0]?.survey?.questions[i].questionType)}</b></td> */}
                             {((newDataList[0]?.survey?.questions[i].questionType!=='comment') && (newDataList[0]?.survey?.questions[i].questionType!=='postal'))? 
-                            <td>
-                                <button className="existing-surveys-edit-icon"  title="Chart" style={{fontSize:'large'}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><AiIcons.AiOutlineAreaChart /> </button>
+														<td>
+																<button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><AiIcons.AiOutlineAreaChart /> </button>
                                 {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
                             </td>
                             :
                             newDataList[0]?.survey?.questions[i].questionType ==='postal' ?
                             <td>
-                                <button className="existing-surveys-edit-icon"  title="Chart" style={{fontSize:'large'}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><GrIcons.GrMap/></button>
+																	<button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><GrIcons.GrMap/></button>
                                 {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
                             </td>
                             :
                             <td>
+																	<button style={{ fontSize: 'medium', width: "30px", backgroundColor: "inherit" }}><FaIcons.FaCommentAlt/></button>
+															<br></br>
                                 {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
                             </td>
                             }
-                        </tr>)
+                        </button>)
                     })}
                 </table>
             </div>

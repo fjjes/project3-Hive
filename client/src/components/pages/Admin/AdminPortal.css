@@ -590,7 +590,7 @@ color:#f59645;
 
 .list-table .existing-surveys-edit-icon,
 .data-collected .existing-surveys-edit-icon {
-  font-size: medium;
+  font-size:x-large;
   border: none;
   background-color: inherit;
   margin: 0 7px;
@@ -742,4 +742,24 @@ color:#f59645;
 .checkboxes-other-responses p {
   font-size: 0.75rem;
   padding: 5px;
+}
+
+.data-visual-table button{
+	background-color: rgb(241, 241, 241);
+	font-size: 1.3em;
+	cursor: pointer;
+	border: none;	
+}
+
+.data-visual-table td {
+	border-radius: 2px;
+	border: 1.3px solid rgb(204, 204, 204);
+}
+
+.data-visual-table button:focus {
+	background-color: #3acacc;
+}
+
+.data-text.obj {
+	font-size: 0.8em;
 }
