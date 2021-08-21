@@ -1,23 +1,49 @@
 import './index.css'
 
-const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
+const AnalysisTable = ({xOptions, data, label, question, qType}) => {
     console.log(`${qType}:: xOptions`, xOptions)
     console.log(`${qType}:: data`, data)
     console.log(`${qType}:: question`, question)
+    console.log(`${qType}:: label`, label)
     console.log('------------------------------')
 
+    //radio, select, checkbox
     let obj = {}
     xOptions.forEach((item, i)=>obj[item] = data[i])
-    console.log("obj::", obj)
+    // console.log("obj::", obj)
 
-    function roundToTwo(num) {    
+    //matrix & select
+    let obj2={}
+    xOptions.forEach((item, i)=>obj2[item] = data[i])
+
+    const roundToTwo =(num) =>{    
         return +(Math.round(num + "e+2")  + "e-2");
     }
 
     return (
         <table>
             <tbody>
-                {Object.keys(obj).map((itm, i)=>{
+                {(qType==='matrix1' || qType==='matrix2' || qType==='select') ?
+                <>
+                <tr>
+                    <th></th>
+                    {label.map((lbl,i)=><th>{lbl}</th>)}
+                </tr>
+                {xOptions.map((option,i)=>{
+                    return(
+                        <tr>
+                            <td>{option}</td>
+                            {data.map((percent,j)=>{
+                                return(
+                                    <td>{percent[i]}</td>
+                                )
+                            })}
+                        </tr>
+                    )
+                })}
+                </>
+                :
+                Object.keys(obj).map((itm, i)=>{
                     return(
                         <tr>
                             <td style={{fontWeight:"bold"}}>{itm}</td>
@@ -28,7 +54,9 @@ const AnalysisTable = ({xOptions, data, labels, question, qType}) => {
                             }
                         </tr>
                     )
-                })}  
+                })
+                }
+               
             </tbody>
         </table>
     );
