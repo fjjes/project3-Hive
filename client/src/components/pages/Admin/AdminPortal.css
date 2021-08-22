@@ -555,8 +555,8 @@ transition: background-color 0.1s ease-in-out;
 
 .data-collected .upper-section{
   margin-top: 20px;
-  margin-left:40px;
-  padding: 10px 0px 0px 10px;
+  /* margin-left:40px; */
+  padding: 10px 0px 0px 0px;
   /* border: 1px solid black; */
   width:100%;
   display:flex;
@@ -568,9 +568,10 @@ transition: background-color 0.1s ease-in-out;
 .data-collected .record-num{
   margin-top: 20px;
   margin-bottom: 10px;
+	border-radius: 8px;
   background: #393F4B;
   color: white;
-  padding:5px 5px;  
+  padding:8px 8px;  
 }
 
 .data-collected .record-num span{
@@ -812,7 +813,6 @@ color:#f59645;
  display: grid;
  grid-template-columns: 1fr;
  justify-items: center;
- direction:inherit;
 }
 
 .graph-section .chart-table{
@@ -820,4 +820,15 @@ color:#f59645;
   align-items:center; 
   justify-content: center;
   width:100%;
+}
+
+.select-survey select{
+	outline: none;
+	font-size: 1em;
+    padding: 8px 8px;
+		background-color: rgb(247, 245, 245);
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255);
 }
