@@ -815,13 +815,6 @@ color:#f59645;
  justify-items: center;
 }
 
-.graph-section .chart-table{
-  display:flex;
-  align-items:center; 
-  justify-content: center;
-  width:100%;
-}
-
 .select-survey select{
 	outline: none;
 	font-size: 1em;
@@ -832,3 +825,25 @@ color:#f59645;
     border-radius: 10px;
     box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255);
 }
+
+.graph-section .chart-table{
+  display:flex;
+  align-items:center; 
+  justify-content: center;
+  width:100%;
+  /* remove everything below this, if pie charts table need to be below the charts */
+  margin-top:20px;  
+  margin-bottom: 40px;
+}
+
+.graph-section .pie{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+ }
+
+ .graph-section .ptable{
+  width: 200%;
+  margin-left:80px;
+ }
+ 
