@@ -89,6 +89,7 @@ function Checkboxes({ questionNumber, question, texts }) {
                   index === options.length - 1 ? (
                     <input
                       autoFocus
+                      style={{paddingLeft: "5px"}}
                       value={other.value}
                       onChange={handleOther}
                       placeholder="Enter comment"
