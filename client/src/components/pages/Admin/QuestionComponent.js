@@ -9,8 +9,9 @@ import SliderOne from "../../AdminQuestions/SliderOne";
 
 const QuestionComponent = ({ question, questionNumber, wholeSurveyInEditModeOrNot, setWholeSurveyInEditModeOrNot }) => {
   let questionType = question?.questionType;
-  // let answerOptions= question?.answerOptions;
-console.log('question component:', question)
+  // console.log('question component:', question)
+
+
   return (
     <div>
       {questionType === "checkbox" && <CheckboxesOne questionNumber={questionNumber} question={question} wholeSurveyInEditModeOrNot={wholeSurveyInEditModeOrNot} setWholeSurveyInEditModeOrNot={setWholeSurveyInEditModeOrNot} />}

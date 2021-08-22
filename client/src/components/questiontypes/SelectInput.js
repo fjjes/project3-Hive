@@ -36,7 +36,7 @@ const SelectInput = (props) => {
     if (allHaveValues) {
       setIsNextButtonDisabled(false);
       setValidationErrorMessage("")
-      console.log("setDisabled");
+      // console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
       setValidationErrorMessage("Please select one option from each row.")

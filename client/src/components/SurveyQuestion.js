@@ -10,7 +10,7 @@ import PostalCode from "./questiontypes/PostalCode"
 import './Form.css'
 
 const SurveyQuestion = ({questionBlock}) => {
-    const question= questionBlock?.question //if questionBlock is defined, set question to be questionBlock.question, otherwise set it as undefined
+    const question= questionBlock?.question 
     const texts = questionBlock?.answerOptions
     const questionNumber=questionBlock?.questionNumber
     const questionType= questionBlock?.questionType

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Map from './Map'
 import AnalysisTable from "./AnalysisTable"
-import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
+import { Bar, Pie} from "react-chartjs-2" //Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut 
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
@@ -11,21 +11,16 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
 
     const getLabel=()=>{
         let labelArr=[]
-        console.log("qType:", qType)
+        // console.log("qType:", qType)
         if(qType==='select'){
             let num =1
-            // console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
             for(let i=0; i<dataList[0].survey.questions[qNum-1]?.answerOptions.length;i++){
             labelArr.push(num++)
             }
-            console.log('select label:', labelArr)
         }else if(qType=== 'matrix1'){
             labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
-            console.log('matrix1 label:', labelArr)
         }else if(qType=== 'matrix2'){
             labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-            console.log('matrix2 label:', labelArr)
-        
         }
         setValueLabel(labelArr)
     }
@@ -34,6 +29,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
         getLabel()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dataList, qNum])  
+    
     //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
     //     let countArr = [...count.values()]
 
@@ -42,7 +38,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     let ans=answers?.sort()
     const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
     let percentArrRadio= Object.values(percentRadio)
-    console.log('percentRadio', percentRadio)
+    // console.log('percentRadio', percentRadio)
 
     // checkboxes ---------------------------
     let otherArray = []
@@ -82,7 +78,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     }
 
     //matrix, select -----------------------
-        let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
+    let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
 
     const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
         const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
@@ -100,7 +96,6 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
             )
         })
         setObjArr(arrObj)
-        // console.log(arrObj)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[valueLabel])
 

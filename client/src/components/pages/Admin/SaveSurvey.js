@@ -143,23 +143,13 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
         answerOptions = [
           { text: "Ability to concentrate" },
           { text: "Ability to conduct telephone conversations" },
-          {
-            text: "Ability to find a meeting room within a reasonable timeframe",
-          },
-          {
-            text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-          },
+          { text: "Ability to find a meeting room within a reasonable timeframe"},
+          { text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
           { text: "Ability to conduct confidential conversations" },
-          {
-            text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-          },
+          { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
           { text: "Ability to work in the office with remote contacts" },
-          {
-            text: "Ability to easily switch between face-to-face work and work at home",
-          },
-          {
-            text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-          },
+          { text: "Ability to easily switch between face-to-face work and work at home"},
+          { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
         ];
         question =
           "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
@@ -168,15 +158,9 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
         answerOptions = [
           { text: "Provide better working comfort" },
           { text: "Stimulate creativity and collective performance" },
-          {
-            text: "Facilitate access to information and news from business lines and departments",
-          },
-          {
-            text: "Break down silos between departments and increase cross functional lines",
-          },
-          {
-            text: "Provide spaces for more tranquility to work and concentration",
-          },
+          { text: "Facilitate access to information and news from business lines and departments"},
+          { text: "Break down silos between departments and increase cross functional lines"},
+          { text: "Provide spaces for more tranquility to work and concentration"},
         ];
         question = "Please rate the importance of the following from 1 to 10:";
         break;
@@ -231,6 +215,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       window.scrollTo(0, document.body.scrollHeight);
       setAction("")
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions]);
 
   const findSurvey = async () => {
@@ -336,7 +321,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 				console.log("THE image", image)
 				// formData.append("data", JSON.stringify(surveyToCreate))
 				for (const property in surveyToCreate) {
-					if (property == "questions") {
+					if (property === "questions") {
 						formData.append(property, JSON.stringify(surveyToCreate[property]))
 					}
 					else if (property !== "image") {
@@ -464,23 +449,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
             </span>
             Checkbox
           </button>
-          <button value="comment" onClick={addAQuestion}>
+          <button value="postal" onClick={addAQuestion}>
             <span className="icons">
-              <FaIcons.FaRegCommentDots />
+              <MdIcons.MdLocalPostOffice />
             </span>
-            Comment
-          </button>
-          <button value="matrix1" onClick={addAQuestion}>
-            <span className="icons">
-              <FaIcons.FaListUl />
-            </span>
-            Matrix
-          </button>
-          <button value="matrix2" onClick={addAQuestion}>
-            <span className="icons">
-              <FaIcons.FaListOl />
-            </span>
-            Matrix - Number
+            Postal Code
           </button>
           <button value="radio" onClick={addAQuestion}>
             <span className="icons">
@@ -488,11 +461,23 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
             </span>
             Radio Buttons
           </button>
-          <button value="postal" onClick={addAQuestion}>
+          <button value="slider" onClick={addAQuestion}>
             <span className="icons">
-              <MdIcons.MdLocalPostOffice />
+              <FaIcons.FaSlidersH />
             </span>
-            Postal Code
+            Slider
+          </button>
+          <button value="matrix2" onClick={addAQuestion}>
+            <span className="icons">
+              <FaIcons.FaListOl />
+            </span>
+            Matrix - Number
+          </button>
+          <button value="matrix1" onClick={addAQuestion}>
+            <span className="icons">
+              <FaIcons.FaListUl />
+            </span>
+            Matrix
           </button>
           <button value="select" onClick={addAQuestion}>
             <span className="icons">
@@ -500,11 +485,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
             </span>
             Select
           </button>
-          <button value="slider" onClick={addAQuestion}>
+          <button value="comment" onClick={addAQuestion}>
             <span className="icons">
-              <FaIcons.FaSlidersH />
+              <FaIcons.FaRegCommentDots />
             </span>
-            Slider
+            Comment
           </button>
         </div>
 
@@ -522,7 +507,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
 						<div className="upload-image admin-question-component">
 							<label htmlFor="upload-button">
 								{image?.preview ? (
-									<img src={image.preview} width="200px" height="200px" />
+									<img alt="" src={image.preview} width="200px" height="200px" />
 								) : (
 									<>
 										<h5>Upload your photo</h5>

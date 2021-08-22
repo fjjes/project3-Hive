@@ -37,6 +37,7 @@ export default function Logo({ flashcard }) {
       console.log("Survey questions:", data.questions);
     };
     getSurveyQuestions();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [surveyId]);
 
   useEffect(()=>{
@@ -47,12 +48,10 @@ export default function Logo({ flashcard }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
-
-
   return (
     <div>
       {width > 300 && (
-  <div className="card-container">
+      <div className="card-container">
       {showQuestions === false ? (
 				<div
           className={`card ${flip ? "flip" : ""}`}
@@ -74,7 +73,7 @@ export default function Logo({ flashcard }) {
           </div>
           <div className="theback">
             <h1>{heading}</h1>
-						{image && <img src={image} style={{height:100}} />}
+						{image && <img alt="" src={image} style={{height:100}} />}
 						{/* {image && <img src={`/server/uploads/${image}`} style={{height:100}} />} */}
             <p style={{ whiteSpace: "pre-wrap",}}>{narrative}</p>
             <button

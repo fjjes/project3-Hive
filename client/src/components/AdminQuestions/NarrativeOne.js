@@ -18,20 +18,18 @@ function NarrativeOne(props) {
   };
 
   const onEditClicked = () => {
-    console.log("clicked edit");
     setInEditMode({ status: true });
     props.setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
     props.updateNarrative(tempNarrative);
-    console.log("clicked save");
+    // console.log("clicked save");
     setInEditMode({ status: false });
     props.setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
     setTempNarrative(props.narrative);
     setInEditMode({ status: false });
     props.setWholeSurveyInEditModeOrNot(false);

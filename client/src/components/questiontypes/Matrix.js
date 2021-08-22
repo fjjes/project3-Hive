@@ -85,11 +85,7 @@ const Matrix = (props) => {
                         name={row.text}
                         value={col}
                         onChange={(e) => handleChange(e, i)}
-                        checked={
-                          answers[props.questionNumber]
-                            ? answers[props.questionNumber][i].value === col
-                            : false
-                        }
+                        checked={ answers[props.questionNumber] ? answers[props.questionNumber][i].value === col: false}
                       />
                     </td>
                   );

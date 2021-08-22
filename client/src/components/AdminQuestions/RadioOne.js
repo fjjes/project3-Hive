@@ -34,14 +34,14 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   );
 
   const onEditClicked = () => {
-    console.log("clicked edit");
+    // console.log("clicked edit");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
-  console.log("questions in radio", questions);
+  // console.log("questions in radio", questions);
 
   const onSave = () => {
-    console.log("save!!!");
+    // console.log("save!!!");
     setQuestions((questions) => {
       const updatedQuestions = [...questions];
       updatedQuestions[questionNumber - 1] = {
@@ -49,16 +49,16 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
         question: questionText,
         answerOptions: copyOptions(answerOptions),
       };
-      console.log("answerOption", answerOptions);
+      // console.log("answerOption", answerOptions);
       return [...updatedQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
+    // console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
@@ -74,7 +74,7 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   };
 
   const deleteOptions = (index) => {
-    console.log(index, "index", answerOptions);
+    // console.log(index, "index", answerOptions);
     let updatedAnswerOptions = answerOptions.filter(
       (answer, answerIndex) => index !== answerIndex
     );
@@ -83,9 +83,9 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
   };
 
   const onAddInput = () => {
-    console.log("clicked add");
+    // console.log("clicked add");
     setAnswerOptions([...answerOptions, radioOption]);
-    console.log("answer", answerOptions);
+    // console.log("answer", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -95,11 +95,11 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
     //   return answer;
     // });
     const newAnswerOptions=[...answerOptions]
-    newAnswerOptions [index]= event.target.value
+    newAnswerOptions[index]= event.target.value
     setAnswerOptions (newAnswerOptions)
 
-    console.log(questions[questionNumber - 1].answerOptions[index]);
-    console.log("input changes here");
+    // console.log(questions[questionNumber - 1].answerOptions[index]);
+    // console.log("input changes here");
   };
 
   useEffect(() => {

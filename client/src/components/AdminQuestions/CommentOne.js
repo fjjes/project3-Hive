@@ -10,12 +10,12 @@ function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot })
   );
 
   const onEditClicked = () => {
-    console.log("clicked edit");
+    // console.log("clicked edit");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
   const onSave = () => {
-    console.log("save!!!");
+    // console.log("save!!!");
     setQuestions((questions) => {
       const previousQuestions = [...questions];
       previousQuestions[questionNumber - 1] = {
@@ -24,13 +24,13 @@ function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot })
       };
       return [...previousQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
+    // console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);

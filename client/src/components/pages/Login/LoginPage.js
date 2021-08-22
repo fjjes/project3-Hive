@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useHistory } from 'react-router-dom'
-// import Navbar from "../../Navbar/Navbar";
 import SaveSurvey from "../Admin/SaveSurvey"
 import LoginForm from './LoginForm'
 import logo from '../../../images/hivelogo.png'
@@ -14,7 +13,6 @@ const LoginPage = ()=>{
             password:"admin"
         }
     
-
     const [user, setUser]=useState({ username:""})
     const [error, setError]=useState("");
 

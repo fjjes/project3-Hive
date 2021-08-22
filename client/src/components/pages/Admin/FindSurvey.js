@@ -10,19 +10,19 @@ import useWindowSize from "../../../utilities/useWindowSize";
 const FindSurvey = (props) => {
   const history=useHistory();
   const [rows, setRows] = useState([]);
-  const [searchInputCompany, setSearchInputCompany] = useState("");
-  const [searchInputNumber, setSearchInputNumber] = useState("");
+  // const [searchInputCompany, setSearchInputCompany] = useState("");
+  // const [searchInputNumber, setSearchInputNumber] = useState("");
   const {width} = useWindowSize();
 
   props.resetRowId();
   props.resetCopyOrOriginal();
 
-  function onSearchInputChange(event, setFunction) {
-    console.log(
-      `Changing input of "${event.target.id}" to be: ${event.target.value}`
-    );
-    setFunction(event.target.value);
-  }
+  // function onSearchInputChange(event, setFunction) {
+  //   console.log(
+  //     `Changing input of "${event.target.id}" to be: ${event.target.value}`
+  //   );
+  //   setFunction(event.target.value);
+  // }
 
   const getSurveyList = async () => {
     let response = await fetch("/api/survey");
