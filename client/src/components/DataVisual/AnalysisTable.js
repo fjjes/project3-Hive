@@ -33,14 +33,14 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                 <>
                 <tr>
                     <th></th>
-                    {qType==='matrix1' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>{lbl}</th>))}
-                    {qType==='matrix2' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>Rated {lbl}</th>))}
-                    {qType==='select' && (label.map((lbl,i)=><th style={{fontSize:"small"}}>Ranked {lbl}</th>))}
+                    {qType==='matrix1' && (label.map((lbl,i)=><th style={{fontSize:"smaller"}}>{lbl}</th>))}
+                    {qType==='matrix2' && (label.map((lbl,i)=><th style={{fontSize:"smaller"}}>Rated {lbl}</th>))}
+                    {qType==='select' && (label.map((lbl,i)=><th style={{fontSize:"smaller"}}>Ranked {lbl}</th>))}
                 </tr>
                 {xOptions.map((option,i)=>{
                     return(
                         <tr>
-                            <td style={{fontWeight:"bold", fontSize:"small"}}>{option}</td>
+                            <td style={{fontWeight:"bold"}}>{option}</td>
                             {data.map((percent,j)=>{
                                 return(
                                     <td>{`${roundToTwo(percent[i])}%`}</td>
@@ -55,9 +55,9 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                     Object.keys(obj).map((itm, i)=>{
                         return(
                             <tr>
-                                <td style={{fontWeight:"bold"}}>{itm}</td>
+                                <td style={{fontWeight:"bold", fontSize:"smaller"}}>{itm}</td>
                                 {qType==='slider' ?
-                                    <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"small", marginLeft:"5px"}}>(avg.)</span></td>
+                                    <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"smaller", marginLeft:"5px"}}>(avg.)</span></td>
 
                                 :
                                     <td>{`${roundToTwo(obj[itm])}%`}</td>

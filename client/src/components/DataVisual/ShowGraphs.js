@@ -120,7 +120,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
             
                 {qType==='radio' ?
                 <div className='lower-sec'>
-                <div className="chart-container">
+                <div className="chart-container pie">
                     <Pie
                     data={{
                         // labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
@@ -135,7 +135,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                     }}
                     >
                     </Pie>
-                    <div className="chart-table" >
+                    <div className="chart-table ptable" >
                         <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentRadio} question={question} qType={qType}/>
                     </div>
                 </div>
@@ -143,8 +143,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 :null}
                 
                 {qType==='checkbox' ?
-                 <div className='lower-sec check'>
-                    <div className="chart-container">
+                 <div className='lower-sec'>
+                    <div className="chart-container pie">
                         <Pie
                         data={{
                             labels: checkboxesAnswerOptions,
@@ -158,7 +158,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                         }}
                         >
                         </Pie>
-                        <div className="chart-table">
+                        <div className="chart-table ptable">
                                 <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                         </div>
                         <div className="checkboxes-other-responses">
@@ -171,7 +171,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
                  <div className='lower-sec'>
-                    <div>
+                    <div style={{width:'80%'}}>
                         <Bar
                         data={{
                             labels: optObj,
@@ -200,7 +200,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
 
                 {qType==='slider' ?
                  <div className='lower-sec'>
-                    <div className="chart-container">
+                    <div className="chart-container pie">
                         <Pie
                         data={{
                             labels: sliderAnswerOptions,
@@ -214,7 +214,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                         }}
                         >
                         </Pie>
-                        <div className="chart-table">
+                        <div className="chart-table ptable">
                                 <AnalysisTable xOptions={sliderAnswerOptions} data={sliderPercentTotalsArray} question={question} qType={qType}/>
                         </div>
                     </div>
