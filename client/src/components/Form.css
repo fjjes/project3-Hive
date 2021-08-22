@@ -221,10 +221,12 @@ table {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: left;
 }
 
-
+.comment.question-component textarea {
+  width: auto;
+}
 
 .checkbox.question-component input {
 	padding-left: 40px;
