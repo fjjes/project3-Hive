@@ -23,7 +23,7 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                     Object.keys(data).map((itm, i)=>{
                         return(
                             <tr>
-                                <td style={{fontWeight:"bold"}}>{itm}</td>
+                                <td className='text'>{itm}</td>
                                 <td>{`${roundToTwo(data[itm])}%`}</td>   
                             </tr>
                         )
@@ -40,7 +40,7 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                 {xOptions.map((option,i)=>{
                     return(
                         <tr>
-                            <td style={{fontWeight:"bold"}}>{option}</td>
+                            <td className='text'>{option}</td>
                             {data.map((percent,j)=>{
                                 return(
                                     <td>{`${roundToTwo(percent[i])}%`}</td>
@@ -55,7 +55,7 @@ const AnalysisTable = ({xOptions, data, label, question, qType}) => {
                     Object.keys(obj).map((itm, i)=>{
                         return(
                             <tr>
-                                <td style={{fontWeight:"bold", fontSize:"smaller"}}>{itm}</td>
+                                <td className='text'>{itm}</td>
                                 {qType==='slider' ?
                                     <td>{`${roundToTwo(obj[itm])}%`}<span style={{fontSize:"smaller", marginLeft:"5px"}}>(avg.)</span></td>
 
