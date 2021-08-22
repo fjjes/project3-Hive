@@ -745,7 +745,7 @@ color:#f59645;
 }
 
 .data-visual-table button{
-	background-color: rgb(241, 241, 241);
+	background-color: rgb(247, 245, 245);
 	font-size: 1.3em;
 	cursor: pointer;
 	border: none;	
@@ -757,14 +757,15 @@ color:#f59645;
 }
 
 .data-visual-table button:focus {
-	background-color: #3acacc;
+	background-color: #77cdf5;
 }
 
 .data-text.obj {
 	font-size: 0.8em;
 }
 .chart-table table, th, td {
-  border: 1px solid black;
+  border: 1.5px solid rgb(175, 175, 175);
+	padding: 3px;
 }
 
 .chart-table table{
@@ -772,14 +773,15 @@ color:#f59645;
 }
 
 .graph-section .lower-sec{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+ display: grid;
+ grid-template-columns: 1fr;
+ justify-items: center;
+ direction:inherit;
 }
 
 .graph-section .chart-table{
   display:flex;
   align-items:center; 
   justify-content: center;
-  margin-left: 240px;
-  width:50%;
+  width:100%;
 }
