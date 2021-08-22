@@ -48,38 +48,43 @@ const Map =({surveyId})=>{
         const geocoder = new google.maps.Geocoder();
         // console.log("postalCodes", postalCodes)
 
-        // postalCodeA && 
-        // geocoder
-        //     .geocode({ address: postalCodeA, region: "CA" })
-        //     .then(({ results }) => {
-        //       new google.maps.Marker({
-        //         map: googleMap,
-        //         position: results[0].geometry.location,
-        //         icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-        //         label: "Office A"
-        //       });
-        //       bounds.extend(results[0].geometry.location);
-        //       googleMap.fitBounds(bounds);
-        //     })
-        //     .catch((err) =>
-        //       alert("Geocode was not successful for the following reason: " + err)
-        //     );
-        // postalCodeB && 
-        // geocoder
-        //     .geocode({ address: postalCodeB, region: "CA" })
-        //     .then(({ results }) => {
-        //       new google.maps.Marker({
-        //         map: googleMap,
-        //         position: results[0].geometry.location,
-        //         icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-        //         label: "Office B"
-        //       });
-        //       bounds.extend(results[0].geometry.location);
-        //       googleMap.fitBounds(bounds);
-        //     })
-        //     .catch((err) =>
-        //       alert("Geocode was not successful for the following reason: " + err)
-        //     );
+        // Add the locations of potential offices (taken from postal code input fields) onto the map:
+        postalCodeA && 
+        geocoder
+            .geocode({ address: postalCodeA, region: "CA" })
+            .then(({ results }) => {
+              new google.maps.Marker({
+                map: googleMap,
+                position: results[0].geometry.location,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                label: "Office A",
+                animation: google.maps.Animation.DROP,
+                zIndex: 5
+              });
+              bounds.extend(results[0].geometry.location);
+              googleMap.fitBounds(bounds);
+            })
+            .catch((err) =>
+              alert("Geocode was not successful for the following reason: " + err)
+            );
+        postalCodeB && 
+        geocoder
+            .geocode({ address: postalCodeB, region: "CA" })
+            .then(({ results }) => {
+              new google.maps.Marker({
+                map: googleMap,
+                position: results[0].geometry.location,
+                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                label: "Office B",
+                animation: google.maps.Animation.DROP,
+                zIndex: 5
+              });
+              bounds.extend(results[0].geometry.location);
+              googleMap.fitBounds(bounds);
+            })
+            .catch((err) =>
+              alert("Geocode was not successful for the following reason: " + err)
+            );
 
         for (var i = 0; i < postalCodes.length; ++i) {
           console.log("postalCodes[i]", i, postalCodes[i])
@@ -109,68 +114,64 @@ const Map =({surveyId})=>{
       // An error or `reject` from any of the above `.then()` blocks will end up here.
       console.log(err);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postalCodeA, postalCodeB]);
 
   // POSTAL CODE INPUT
-  // let possibleCodeA;
-  // const handleChangeA = (e) => {
-  //   possibleCodeA = e.target.value;
-  //   console.log("possibleCodeA: ", possibleCodeA);
-  //   if (
-  //     (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(possibleCodeA) ||
-  //     /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCodeA)) &&
-  //     possibleCodeA.trim().length > 0
-  //     ) {
-  //       console.log("Valid :)")
-  //       setPostalCodeA(possibleCodeA);
-  //   } else {
-  //     console.log("Not valid")
-  //     setPostalCodeValidationError("Please enter a valid postal code.")
-  //   }
-  // }
-  // let possibleCodeB;
-  // const handleChangeB = (e) => {
-  //   possibleCodeB = e.target.value;
-  //   console.log("possibleCodeB: ", possibleCodeB);
-  //   if (
-  //     (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(possibleCodeB) ||
-  //     /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCodeB)) &&
-  //     possibleCodeB.trim().length > 0
-  //     ) {
-  //       console.log("Valid :)")
-  //       setPostalCodeB(possibleCodeB);
-  //   } else {
-  //     console.log("Not valid")
-  //     setPostalCodeValidationError("Please enter a valid postal code.")
-  //   }
-  // };
+  let possibleCodeA;
+  const handleChangeA = (e) => {
+    possibleCodeA = e.target.value;
+    if (
+      (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(possibleCodeA) ||
+      /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCodeA)) &&
+      possibleCodeA.trim().length > 0
+      ) {
+        setPostalCodeA(possibleCodeA);
+        setPostalCodeValidationError("")
+    } else {
+      setPostalCodeValidationError("Please enter a valid postal code.")
+    }
+  }
+  let possibleCodeB;
+  const handleChangeB = (e) => {
+    possibleCodeB = e.target.value;
+    if (
+      (/^[abceghjklmnprstvxy][0-9][abceghjklmnprstvwxyz]\s?[0-9][abceghjklmnprstvwxyz][0-9]$/i.test(possibleCodeB) ||
+      /^[0-9]{5}(?:-[0-9]{4})?$/.test(possibleCodeB)) &&
+      possibleCodeB.trim().length > 0
+      ) {
+        setPostalCodeB(possibleCodeB);
+        setPostalCodeValidationError("")
+    } else {
+      setPostalCodeValidationError("Please enter a valid postal code.")
+    }
+  };
 
   return (
-    // <div className="App map-and-postal-code-input">
-    //   <div className="map-input-container">
-    //     <div className="map-input-individual">
-    //       <label>Enter postal code of Office A:</label>
-    //       <input 
-    //         type="text" 
-    //         placeholder="Postal code A" 
-    //         value={possibleCodeA}
-    //         onChange={handleChangeA}
-    //         />
-    //     </div>
-    //     <div className="map-input-individual">
-    //       <label>Enter postal code of Office B:</label>
-    //       <input 
-    //         type="text" 
-    //         placeholder="Postal code B" 
-    //         value={possibleCodeB}
-    //         onChange={handleChangeB}
-    //       />
-    //     </div>
-    //   </div>
-    //   <div style={{color: "red", height: "20px", paddingBottom: "20px"}}>{postalCodeValidationError}</div>
+    <div className="App map-and-postal-code-input">
+      <div className="map-input-container">
+        <div className="map-input-individual">
+          <label>Enter postal code for Office A:</label>
+          <input 
+            type="text" 
+            placeholder="Postal code A" 
+            value={possibleCodeA}
+            onChange={handleChangeA}
+            />
+        </div>
+        <div className="map-input-individual">
+          <label>Enter postal code for Office B:</label>
+          <input 
+            type="text" 
+            placeholder="Postal code B" 
+            value={possibleCodeB}
+            onChange={handleChangeB}
+          />
+        </div>
+      </div>
+      <div style={{color: "red", height: "20px", paddingBottom: "20px"}}>{postalCodeValidationError}</div>
       <div ref={map} className="map"></div>
-    // </div>
+    </div>
   );
 }
 
