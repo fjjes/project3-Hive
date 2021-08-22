@@ -280,6 +280,10 @@ input[type=checkbox] {
   color: black;
   width: 100px;
   height: 100px;
+  /* NEW - Colour, no shading: */
+  background-color: #2dd9bc;
+  box-shadow: none;
+  margin: 3px;
 }
 
 .survey-selection-sidebar .icons{
@@ -289,6 +293,24 @@ input[type=checkbox] {
   font-size: 2rem;
   /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
+}
+
+@media screen and (max-width: 768px) {
+  .survey-selection-sidebar {
+    grid-template-columns: 1fr;
+  }
+  
+  .survey-selection-sidebar button {
+    padding: 3px;
+    width: 75px;
+    height: 75px;
+    /* background-color: red; */
+    font-size: 0.85rem;
+  }
+
+  .survey-selection-sidebar .icons {
+    font-size: 1.25rem;
+  }
 }
 
 .survey-selection-sidebar button:hover {
