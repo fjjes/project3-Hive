@@ -446,6 +446,10 @@ font-weight: bold;
 	height: 450px;
 }
 
+.list-table .survey-link {
+  overflow-wrap: anywhere;
+}
+
 .data-table table{
     /* margin: 0 auto; */
     margin-top: 20px;
