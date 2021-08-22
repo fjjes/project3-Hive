@@ -73,6 +73,7 @@ const Map =({surveyId})=>{
       // An error or `reject` from any of the above `.then()` blocks will end up here.
       console.log(err);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
