@@ -159,12 +159,12 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                         }}
                         >
                         </Pie>
-														<div className="chart-table">
-																<AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
-														</div>
                         <div className="checkboxes-other-responses">
-                            <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                            <p style={{fontWeight: "bold"}}>Other responses recorded: </p>
                             <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                        </div>
+                        <div className="chart-table">
+                                <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                         </div>
                     </div>
                 </div>
