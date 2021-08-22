@@ -45,6 +45,10 @@ h1 {
   text-align: center;
 }
 
+table {
+  border-spacing: 0;
+}
+
 .question-component {
 	height: 350px;
 	width: 800px;
@@ -473,4 +477,28 @@ td {
 .user input[type="checkbox"],
 .user input[type="radio"] {
   filter:hue-rotate(172deg) brightness(1.4);
+}
+
+/* MAP */
+.map-and-postal-code-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.map-and-postal-code-input input { 
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.map-input-individual {
+  display: flex;
+  padding-top: 10px;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.map-input-container {
+  display: flex;
+  padding-bottom: 20px;
 }
