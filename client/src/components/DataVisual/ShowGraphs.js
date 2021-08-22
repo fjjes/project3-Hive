@@ -30,15 +30,13 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dataList, qNum])  
     
-    //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
-    //     let countArr = [...count.values()]
-
 
     // radio --------------------------------
-    let ans=answers?.sort()
-    const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
+    console.log('ans"', answers)
+    // let ans=answers?.sort()
+    const percentRadio = answers.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (answers.length)}), {})
     let percentArrRadio= Object.values(percentRadio)
-    // console.log('percentRadio', percentRadio)
+    console.log('percentRadio', percentArrRadio)
 
     // checkboxes ---------------------------
     let otherArray = []
@@ -125,11 +123,12 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 <div className="chart-container">
                     <Pie
                     data={{
-                        labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
+                        // labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
+                        labels: Object.keys(percentRadio),
                         datasets:[{
                             data:percentArrRadio,
-                            // backgroundColor:colors,
-                            backgroundColor:percentArrRadio.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
+                            backgroundColor:colors,
+                            // backgroundColor:percentArrRadio.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
@@ -151,8 +150,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                             labels: checkboxesAnswerOptions,
                             datasets:[{
                                 data: checkboxesPercentArr,
-                                backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
-                                // backgroundColor:colors, 
+                                // backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
+                                backgroundColor:colors, 
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'
                             }]
