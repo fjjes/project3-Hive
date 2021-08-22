@@ -18,7 +18,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
   const [version, setVersion] = useState("");
   const [heading, setHeading] = useState("");
   const [narrative, setNarrative] = useState(
-    "This past year has challenged and has had both positive and negative impacts on our working methods and ways of doing things within our office. (Temporarily removed the remaining placeholder narrative text to make the component easier to work with...)"
+`This past year has challenged us and has had both positive and negative impacts on our working methods and ways of doing things within our office. It has allowed us to observe, experiment and ask key questions about how we want to future proof our organization. Should we implement a hybrid working model, how do we manage this, and what are the potential impacts on working environment and employees.
+  
+To define an efficient work organization that suits the vast majority as best as possible, we have chosen to probe the ground and imagine the rest together. Through this participatory approach, xxx wishes to allow you to express your needs and preferences as well as your concerns.
+    
+In this context, we suggest that you answer an online questionnaire, a task that should only take about fifteen minutes of your time. If necessary, you can save your responses and complete the survey later. Your input is essential for us to understand how the organization of your work environment can influence your ability to perform your tasks and help you be more efficient while taking your daily reality into account as much as possible. The work environment here refers to both the physical space, the working methods (teamwork, face-to-face and remote, work of concentration, creative exchanges, project modes, etc..), the technologies, and the services  available to you to perform your duties.`
   );
   const [error, setError] = useState();
   const [validationErrorDuplicate, setValidationErrorDuplicate] = useState("");
@@ -133,11 +137,11 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           "A room of silence to concentrate",
           "A project space or open creative space",
           "A nap room",
-          "A work Station in a co-working place located outside the company",
+          "A work station in a co-working place located outside the company",
           "Other",
         ];
         question =
-          "What spaces would you like to use that is not  currently offered by the company? You can select upto three spaces. If none of them interests you, please do not select anything.";
+          "What spaces would you like to use that are not currently offered by the company? You can select up to three spaces. If none of them interests you, please do not select anything.";
         break;
       case "matrix1":
         answerOptions = [
@@ -149,7 +153,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
           { text: "Ability to work in the office with remote contacts" },
           { text: "Ability to easily switch between face-to-face work and work at home"},
-          { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
+          { text: "Quality of the environment near my workplace (neighbourhood, shops, services, restaurants, etc.)"},
         ];
         question =
           "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:";
@@ -159,7 +163,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
           { text: "Provide better working comfort" },
           { text: "Stimulate creativity and collective performance" },
           { text: "Facilitate access to information and news from business lines and departments"},
-          { text: "Break down silos between departments and increase cross functional lines"},
+          { text: "Break down silos between departments and increase cross-functional lines"},
           { text: "Provide spaces for more tranquility to work and concentration"},
         ];
         question = "Please rate the importance of the following from 1 to 10:";
@@ -171,13 +175,13 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
       case "select":
         answerOptions = [
           { text: "Rethinking workspaces in the company" },
-          { text: "Review the organization of meetings Rethinking moments" },
+          { text: "Review the organization of meetings" },
           { text: "Spaces of conviviality" },
           { text: "Do not change anything" },
           { text: "Other" },
         ];
         question =
-          "In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many Answers are possible.\nPlease rank the following in order of interest:";
+          "In your opinion, what are the necessary and complementary organizational points for teleworking that should be implemented within the company? Many answers are possible.\nPlease rank the following in order of interest:";
         break;
       case "postal":
         answerOptions = "";
@@ -409,7 +413,7 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
               name="version"
               id="survey-version"
               className="survey-info"
-              placeholder="Survey version"
+              placeholder="Survey version (e.g., executive)"
               value={version}
               required
               onChange={(e) => handleInputChange(e)}
@@ -496,34 +500,36 @@ const SaveSurvey = ({ rowId, copyOrOriginal, wholeSurveyInEditModeOrNot, setWhol
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
-            <div className="intro-heading admin-question-component">
-              <input
-                type="text"
-                placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
-                value={heading}
-                onChange={(e) => setHeading(e.target.value)}
-              />
+            <div className="heading-and-image">
+              <div className="intro-heading admin-question-component">
+                <textarea
+                  type="text"
+                  placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
+                  value={heading}
+                  onChange={(e) => setHeading(e.target.value)}
+                />
+              </div>
+              <div className="upload-image admin-question-component">
+                <label htmlFor="upload-button">
+                  {image?.preview ? (
+                    <img alt="" src={image.preview} width="200px" height="200px" />
+                  ) : (
+                    <>
+                      Upload an image
+                    </>
+                  )}
+                </label>
+                <input
+                  // name="image"
+                  // id="image"
+                  // value={image}
+                  // onChange={(e) => setImage(e.target.files.length)}
+                  type="file"
+                  onChange={handleChangeImage}
+                />
+                  {/* <button onClick={handleUpload}>Upload</button> */}
+              </div>
             </div>
-						<div className="upload-image admin-question-component">
-							<label htmlFor="upload-button">
-								{image?.preview ? (
-									<img alt="" src={image.preview} width="200px" height="200px" />
-								) : (
-									<>
-										<h5>Upload your photo</h5>
-									</>
-								)}
-							</label>
-							<input
-								// name="image"
-								// id="image"
-								// value={image}
-								// onChange={(e) => setImage(e.target.files.length)}
-								type="file"
-								onChange={handleChangeImage}
-							/>
-								{/* <button onClick={handleUpload}>Upload</button> */}
-						</div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}

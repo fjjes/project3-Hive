@@ -6,8 +6,7 @@ import { Bar, Pie} from "react-chartjs-2" //Bar, Line, Pie, Bubble, Radar, Scatt
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
     const [objArr, setObjArr]=useState([])
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","maroon", "#6D92A0", "#D4A66A"] // Hive colours
-   let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","maroon", "#6D92A0", "#D4A66A"]
 
     const getLabel=()=>{
         let labelArr=[]
@@ -128,7 +127,6 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                         datasets:[{
                             data:percentArrRadio,
                             backgroundColor:colors,
-                            // backgroundColor:percentArrRadio.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
                             hoverBorderWidth:3,
                             hoverBorderColor:'#000'
                         }]
@@ -150,7 +148,6 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                             labels: checkboxesAnswerOptions,
                             datasets:[{
                                 data: checkboxesPercentArr,
-                                // backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
                                 backgroundColor:colors, 
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'
@@ -162,7 +159,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                                 <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                         </div>
                         <div className="checkboxes-other-responses">
-                            <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                            <p style={{fontWeight: "bold"}}>Other responses recorded: </p>
                             <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
                         </div>
                     </div>
@@ -206,7 +203,6 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                             labels: sliderAnswerOptions,
                             datasets:[{
                                 data: sliderPercentTotalsArray,
-                                // backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
                                 backgroundColor:colors,
                                 hoverBorderWidth:3,
                                 hoverBorderColor:'#000'

@@ -5,12 +5,13 @@ import LoginForm from './LoginForm'
 import logo from '../../../images/hivelogo.png'
 import './Login.css'
 
+
 const LoginPage = ()=>{
     let history = useHistory()
     const AdminUser = 
         { 
-            username:"admin123",
-            password:"admin"
+            username: process.env.REACT_APP_USERNAME,
+            password: process.env.REACT_APP_PASSWORD
         }
     
     const [user, setUser]=useState({ username:""})
