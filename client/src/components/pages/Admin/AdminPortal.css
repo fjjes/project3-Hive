@@ -731,6 +731,15 @@ color:#f59645;
   margin: auto;
 }
 
+.heading-and-image {
+  display: flex;
+}
+
+.intro-heading,
+.upload-image {
+  width: 100% !important;
+}
+
 .upload-image {
 	display: grid;
 	justify-items: center;

@@ -500,34 +500,36 @@ In this context, we suggest that you answer an online questionnaire, a task that
         {/* RIGHT PART OF PAGE */}
         <div className="survey-selected-components">
           <div className="survey-selected-components-background">
-            <div className="intro-heading admin-question-component">
-              <input
-                type="text"
-                placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
-                value={heading}
-                onChange={(e) => setHeading(e.target.value)}
-              />
+            <div className="heading-and-image">
+              <div className="intro-heading admin-question-component">
+                <textarea
+                  type="text"
+                  placeholder="Include a heading (e.g., Hello ABCD executive team!!)"
+                  value={heading}
+                  onChange={(e) => setHeading(e.target.value)}
+                />
+              </div>
+              <div className="upload-image admin-question-component">
+                <label htmlFor="upload-button">
+                  {image?.preview ? (
+                    <img alt="" src={image.preview} width="200px" height="200px" />
+                  ) : (
+                    <>
+                      Upload an image
+                    </>
+                  )}
+                </label>
+                <input
+                  // name="image"
+                  // id="image"
+                  // value={image}
+                  // onChange={(e) => setImage(e.target.files.length)}
+                  type="file"
+                  onChange={handleChangeImage}
+                />
+                  {/* <button onClick={handleUpload}>Upload</button> */}
+              </div>
             </div>
-						<div className="upload-image admin-question-component">
-							<label htmlFor="upload-button">
-								{image?.preview ? (
-									<img alt="" src={image.preview} width="200px" height="200px" />
-								) : (
-									<>
-										<h5>Upload your photo</h5>
-									</>
-								)}
-							</label>
-							<input
-								// name="image"
-								// id="image"
-								// value={image}
-								// onChange={(e) => setImage(e.target.files.length)}
-								type="file"
-								onChange={handleChangeImage}
-							/>
-								{/* <button onClick={handleUpload}>Upload</button> */}
-						</div>
             {/* Displays the question components that have been selected, and the narrative (not optional) */}
             <NarrativeOne
               narrative={narrative}
