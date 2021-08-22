@@ -17,7 +17,6 @@ const Navbar = () => {
           <NavLink to='/create-new' activeStyle={{color:"#f59645"}}>Create New</NavLink>
           <NavLink to='/existing-surveys' activeStyle={{color:"#f59645"}}>Existing Surveys</NavLink>
           <NavLink to='/data-analysis' activeStyle={{color:"#f59645"}}>Data Analysis</NavLink>
-          {/* <NavLink to='/data-visual' activeStyle={{color:"#f59645"}}>Data Visualization</NavLink> */}
           <NavBtnLink to='/'>Logout</NavBtnLink>
         </NavMenu>
       </Nav>

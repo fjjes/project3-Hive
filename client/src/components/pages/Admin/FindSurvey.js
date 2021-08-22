@@ -10,19 +10,19 @@ import useWindowSize from "../../../utilities/useWindowSize";
 const FindSurvey = (props) => {
   const history=useHistory();
   const [rows, setRows] = useState([]);
-  const [searchInputCompany, setSearchInputCompany] = useState("");
-  const [searchInputNumber, setSearchInputNumber] = useState("");
+  // const [searchInputCompany, setSearchInputCompany] = useState("");
+  // const [searchInputNumber, setSearchInputNumber] = useState("");
   const {width} = useWindowSize();
 
   props.resetRowId();
   props.resetCopyOrOriginal();
 
-  function onSearchInputChange(event, setFunction) {
-    console.log(
-      `Changing input of "${event.target.id}" to be: ${event.target.value}`
-    );
-    setFunction(event.target.value);
-  }
+  // function onSearchInputChange(event, setFunction) {
+  //   console.log(
+  //     `Changing input of "${event.target.id}" to be: ${event.target.value}`
+  //   );
+  //   setFunction(event.target.value);
+  // }
 
   const getSurveyList = async () => {
     let response = await fetch("/api/survey");
@@ -85,7 +85,7 @@ const FindSurvey = (props) => {
                 <td>{row.version}</td>
                 <td>{row.surveyNumber}</td>
                 <td>
-                  <Link to={`/survey/${row._id}`}>{`http://localhost:4444/survey/${row._id}`}</Link>
+                  <Link to={`/survey/${row._id}`}><div className="survey-link">{`http://localhost:4444/survey/${row._id}`}</div></Link>
                 </td>
                 <td className="existing-surveys-edit-column">
                   <Link 

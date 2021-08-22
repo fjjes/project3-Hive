@@ -11,10 +11,9 @@ const useStyles = makeStyles({
 });
 
 export default function InputSlider({ questionNumber, question, texts }) {
-  console.log(texts);
+  // console.log(texts);
   const classes = useStyles();
-  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } =
-    useContext(AnswerContext);
+  const { answers, setAnswers, setIsNextButtonDisabled, setValidationErrorMessage } = useContext(AnswerContext);
   const [totalCount, setTotalCount] = useState(0);
   const [values, setValues] = useState(answers[questionNumber] || new Array(texts.length).fill(0));
 
@@ -22,7 +21,7 @@ export default function InputSlider({ questionNumber, question, texts }) {
     if (totalCount === 100) {
       setIsNextButtonDisabled(false);
       setValidationErrorMessage("")
-      console.log("setDisabled");
+      // console.log("setDisabled");
     } else {
       setIsNextButtonDisabled(true);
       setValidationErrorMessage("Please select values that total to 100.");
@@ -44,9 +43,9 @@ export default function InputSlider({ questionNumber, question, texts }) {
         updateAnswers[questionNumber] = values;
         return updateAnswers;
       });
-      console.log("reduce", values)
+      // console.log("reduce", values)
       setTotalCount(values.reduce((a, b) => a + Number(b)));
-      console.log(totalCount);
+      // console.log(totalCount);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);

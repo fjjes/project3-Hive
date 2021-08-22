@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import ExportCSV from './ExportCSV';
 import moment from "moment";
 import ShowGraphs from '../../DataVisual/ShowGraphs';
 import * as AiIcons from "react-icons/ai";
-import * as BiIcons from "react-icons/bi";
 import * as GrIcons from "react-icons/gr";
 import * as FaIcons from "react-icons/fa";
 import './AdminPortal.css'
@@ -59,21 +58,8 @@ const SurveyAnswersPage =()=>{
     for (let i = 0; i < newDataList[0]?.survey?.questions.length; i++) {
       arr.push(questionNum++);
     } 
-    // setActive({...Active, objects:arr})   
 
     let questionList =newDataList[0]?.survey?.questions
-
-    // const toggleActive=(index)=>{
-    //     setActive({...Active, activeObject:Active.objects[index]})
-    // }
-
-    // const toggleStyle=(index)=>{
-    //     if(Active.objects[index]=== Active.activeObject){
-    //         return "itm active"
-    //     }else{
-    //         return "itm inactive"
-    //     }
-    // }
 
     const getChartInfo = (question, index) =>{
         let q= question?.question
@@ -81,7 +67,6 @@ const SurveyAnswersPage =()=>{
         let qType = question?.questionType
         let answersForThatQuestion = newDataList.map((data)=> data.answers[index])
         let qNum =index
-        
         // toggleActive(index)
    
         setQuestion(q)
@@ -169,23 +154,19 @@ const SurveyAnswersPage =()=>{
                             >
                             <td>Q{num}</td>
                             <td className="data-text obj" style={{width: "1000px"}} >{newDataList[0]?.survey?.questions[i].question}</td>
-                            {/* <td className="data-text obj"><b>{toUpper(newDataList[0]?.survey?.questions[i].questionType)}</b></td> */}
                             {((newDataList[0]?.survey?.questions[i].questionType!=='comment') && (newDataList[0]?.survey?.questions[i].questionType!=='postal'))? 
-														<td>
-																<button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><AiIcons.AiOutlineAreaChart /> </button>
-                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+                            <td>
+                                <button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><AiIcons.AiOutlineAreaChart /> </button>
                             </td>
                             :
                             newDataList[0]?.survey?.questions[i].questionType ==='postal' ?
                             <td>
-																	<button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><GrIcons.GrMap/></button>
-                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+                                <button className="existing-surveys-edit-icon" title="Chart" style={{ width: "20px"}} onClick={()=>getChartInfo(newDataList[0]?.survey?.questions[i], num)}><GrIcons.GrMap/></button>
                             </td>
                             :
                             <td>
-																	<button style={{ fontSize: 'medium', width: "30px", backgroundColor: "inherit" }}><FaIcons.FaCommentAlt/></button>
-															<br></br>
-                                {/* <button className="existing-surveys-edit-icon"  title="Table" onClick={()=>{setShowTable(true); setShowChart(false)}}><BiIcons.BiTable/></button> */}
+								<button style={{ fontSize: 'medium', width: "30px", backgroundColor: "inherit" }}><FaIcons.FaCommentAlt/></button>
+								<br></br>
                             </td>
                             }
                         </button>)
@@ -222,23 +203,24 @@ const SurveyAnswersPage =()=>{
                                     <td>{index+1}</td>
                                     <td className="data-text">{moment(row.answeredDate).format("MM/DD/yyyy")}</td>  
                                     {answersArray.map((ans, i)=>{
-                                        return (<>
-                                                {typeof ans !== 'object' ? 
-                                                    <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
-                                                :(
-                                                    questionList[i].questionType==='checkbox' ?
-                                                            <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
-                                                        :
-                                                        <td className="data-text" key={i}>
-                                                            <pre>
-                                                                <tr>
-                                                                <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
-                                                                <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
-                                                                </tr>
-                                                            </pre>
-                                                        </td> 
-                                                )}
-                                                </>)   
+                                        return (
+                                        <>
+                                            {typeof ans !== 'object' ? 
+                                                <td className="data-text" key={i}><pre>{ans?.toString()}</pre></td>
+                                            :(
+                                                questionList[i].questionType==='checkbox' ?
+                                                        <td className="data-text" key={i}><pre>{getTextStringsFromAnswer(ans, i)}</pre></td>
+                                                    :
+                                                    <td className="data-text" key={i}>
+                                                        <pre>
+                                                            <tr>
+                                                            <td className="data-text obj">{getTextStringsFromAnswer(ans, i)}</td>
+                                                            <td className="data-text obj">{getValueStringsFromAnswer(ans, i)}</td>
+                                                            </tr>
+                                                        </pre>
+                                                    </td> 
+                                            )}
+                                        </>)   
                                     })}
                                 </tr>
                                 )
@@ -255,7 +237,6 @@ const SurveyAnswersPage =()=>{
                 :null}
 
                 </div>
-                // :<h2>"Selected survey do not have any records for now!"</h2>}
                :null}
             
         </div>

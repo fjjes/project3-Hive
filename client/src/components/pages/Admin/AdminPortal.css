@@ -280,6 +280,10 @@ input[type=checkbox] {
   color: black;
   width: 100px;
   height: 100px;
+  /* NEW - Colour, no shading: */
+  background-color: #2dd9bc;
+  box-shadow: none;
+  margin: 3px;
 }
 
 .survey-selection-sidebar .icons{
@@ -289,6 +293,24 @@ input[type=checkbox] {
   font-size: 2rem;
   /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
+}
+
+@media screen and (max-width: 768px) {
+  .survey-selection-sidebar {
+    grid-template-columns: 1fr;
+  }
+  
+  .survey-selection-sidebar button {
+    padding: 3px;
+    width: 75px;
+    height: 75px;
+    /* background-color: red; */
+    font-size: 0.85rem;
+  }
+
+  .survey-selection-sidebar .icons {
+    font-size: 1.25rem;
+  }
 }
 
 .survey-selection-sidebar button:hover {
@@ -422,6 +444,10 @@ font-weight: bold;
   /* display: grid; */
 	/* overflow: scroll; */
 	height: 450px;
+}
+
+.list-table .survey-link {
+  overflow-wrap: anywhere;
 }
 
 .data-table table{
@@ -708,6 +734,15 @@ color:#f59645;
   box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff;
   height: fit-content;
   margin: auto;
+}
+
+.heading-and-image {
+  display: flex;
+}
+
+.intro-heading,
+.upload-image {
+  width: 100% !important;
 }
 
 .upload-image {

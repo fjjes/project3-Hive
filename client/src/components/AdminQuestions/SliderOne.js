@@ -35,10 +35,7 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       ])
   );
 
-  // const selectionOption = "";
-
   const onEditClicked = () => {
-    console.log("clicked edit");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
@@ -51,16 +48,15 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
         question: questionText,
         answerOptions: copyOptions(answerOptions),
       };
-      console.log("answerOption", answerOptions);
+      // console.log("answerOption", answerOptions);
       return [...updatedQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     console.log(questions, answerOptions);
@@ -110,7 +106,7 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
 
   const onInputChange = (event, index) => {
     const newAnswerOptions=[...answerOptions]
-    newAnswerOptions [index]= event.target.value
+    newAnswerOptions[index]= event.target.value
     setAnswerOptions (newAnswerOptions)
 
     console.log(questions[questionNumber - 1].answerOptions[index]);
@@ -204,7 +200,6 @@ const SliderOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
           ) : (
             <div className="edit-button">
               <EditButton onEditClicked={onEditClicked} />
-              {/* <DeleteButton onDelete={onDelete} /> */}
               <DeleteButton onDelete={()=>onDelete(questionNumber)} />
             </div>
           )}

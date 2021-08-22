@@ -59,7 +59,7 @@ function RadioButtons({ questionNumber, question, texts }) {
                 answers[questionNumber]
                   ? answers[questionNumber] === option
                   : false
-              } //
+              } 
               color="primary"
             />
             <label htmlFor={option}>{option}</label>

@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react"
 import Map from './Map'
 import AnalysisTable from "./AnalysisTable"
-import { Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut  } from "react-chartjs-2"
+import { Bar, Pie} from "react-chartjs-2" //Bar, Line, Pie, Bubble, Radar, Scatter, Doughnut 
 
 const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     const [valueLabel, setValueLabel]=useState([])
     const [objArr, setObjArr]=useState([])
-   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","maroon", "#6D92A0", "#D4A66A"] // Hive colours
-   let colors2=["#197e9c","#35c0c2","#f59645","#bce6f8"] // Hive colours (to use when we have 6 options in a chart, so that the same colour isn't repeated back-to-back)
+   let colors=["#197e9c","#35c0c2","#f59645","#bce6f8", "#575759", "#805F42", "#52577C","maroon", "#6D92A0", "#D4A66A"]
 
     const getLabel=()=>{
         let labelArr=[]
-        console.log("qType:", qType)
+        // console.log("qType:", qType)
         if(qType==='select'){
             let num =1
-            // console.log('length:::',dataList[0].survey.questions[qNum-1]?.answerOptions.length )//5 for select
             for(let i=0; i<dataList[0].survey.questions[qNum-1]?.answerOptions.length;i++){
             labelArr.push(num++)
             }
-            console.log('select label:', labelArr)
         }else if(qType=== 'matrix1'){
-            labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
-            console.log('matrix1 label:', labelArr)
+            labelArr = ['Very Satisfied', 'Satisfied', 'Neither Satisfied nor Dissatisfied', 'Dissatisfied', 'Very Dissatisfied']
         }else if(qType=== 'matrix2'){
             labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-            console.log('matrix2 label:', labelArr)
-        
         }
         setValueLabel(labelArr)
     }
@@ -34,15 +28,14 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
         getLabel()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[dataList, qNum])  
-    //    let count = ans.reduce((acc, e)=>acc.set(e, (acc.get(e) || 0 )+ 1), new Map())
-    //     let countArr = [...count.values()]
-
+    
 
     // radio --------------------------------
-    let ans=answers?.sort()
-    const percentRadio = ans.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (ans.length)}), {})
+    console.log('ans"', answers)
+    // let ans=answers?.sort()
+    const percentRadio = answers.reduce((pcts, x) => ({...pcts, [x]: (pcts[x] || 0) + 100 / (answers.length)}), {})
     let percentArrRadio= Object.values(percentRadio)
-    console.log('percentRadio', percentRadio)
+    console.log('percentRadio', percentArrRadio)
 
     // checkboxes ---------------------------
     let otherArray = []
@@ -82,7 +75,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
     }
 
     //matrix, select -----------------------
-        let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
+    let optObj = dataList[0].survey?.questions[qNum-1]?.answerOptions.map(op=>op.text)
 
     const getPercentageAnsweredValLabel=(optIndex, valIndex)=>{
         const optAnswers = answers.map((ans, ansIndex)=>{return ans[optIndex]})
@@ -100,7 +93,6 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
             )
         })
         setObjArr(arrObj)
-        // console.log(arrObj)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[valueLabel])
 
@@ -130,20 +122,20 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 <div className="chart-container">
                     <Pie
                     data={{
-											labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
-											datasets:[{
-												data:percentArrRadio,
-												// backgroundColor:colors,
-												backgroundColor:percentArrRadio.length !== 6 ? colors : colors2, // Since our default has 5 colours specified, this code stops the same colour from repeating back-to-back if we have 6 options.
-												hoverBorderWidth:3,
-												hoverBorderColor:'#000'
+                        // labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
+                        labels: Object.keys(percentRadio),
+                        datasets:[{
+                            data:percentArrRadio,
+                            backgroundColor:colors,
+                            hoverBorderWidth:3,
+                            hoverBorderColor:'#000'
                         }]
                     }}
                     >
                     </Pie>
-												<div className="chart-table" >
-														<AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentRadio} question={question} qType={qType}/>
-												</div>
+                    <div className="chart-table" >
+                        <AnalysisTable xOptions={dataList[0].survey.questions[qNum-1]?.answerOptions} data={percentRadio} question={question} qType={qType}/>
+                    </div>
                 </div>
                 </div>
                 :null}
@@ -153,23 +145,22 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                     <div className="chart-container">
                         <Pie
                         data={{
-													labels: checkboxesAnswerOptions,
-													datasets:[{
-														data: checkboxesPercentArr,
-														backgroundColor: checkboxesPercentArr.length !== 6 ? colors : colors2, 
-														// backgroundColor:colors, 
-														hoverBorderWidth:3,
-														hoverBorderColor:'#000'
+                            labels: checkboxesAnswerOptions,
+                            datasets:[{
+                                data: checkboxesPercentArr,
+                                backgroundColor:colors, 
+                                hoverBorderWidth:3,
+                                hoverBorderColor:'#000'
                             }]
                         }}
                         >
                         </Pie>
-														<div className="chart-table">
-																<AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
-														</div>
                         <div className="checkboxes-other-responses">
-                            <p style={{fontWeight: "bold"}}>Other responses reorded: </p>
+                            <p style={{fontWeight: "bold"}}>Other responses recorded: </p>
                             <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                        </div>
+                        <div className="chart-table">
+                                <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                         </div>
                     </div>
                 </div>
@@ -180,16 +171,16 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                     <div>
                         <Bar
                         data={{
-													labels: optObj,
-													datasets: valueLabel?.map((val, i)=>{
+                            labels: optObj,
+                            datasets: valueLabel?.map((val, i)=>{
                                 return(
                                     {
-																			label:val,
-																			data:optObj.map((opt,j)=>{
-																				return getPercentageAnsweredValLabel(j, i)
-																			}),
-																			backgroundColor:colors[i],
-																			barThickness:12,
+                                    label:val,
+                                    data:optObj.map((opt,j)=>{
+                                        return getPercentageAnsweredValLabel(j, i)
+                                    }),
+                                    backgroundColor:colors[i],
+                                    barThickness:12,
                                     }
                                 )
                             })
@@ -197,9 +188,9 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                        
                        >
                         </Bar>
-																		<div className="chart-table">
-																				<AnalysisTable xOptions={optObj} data={objArr} label={valueLabel} question={question} qType={qType}/>
-																		</div>
+                        <div className="chart-table">
+                                <AnalysisTable xOptions={optObj} data={objArr} label={valueLabel} question={question} qType={qType}/>
+                        </div>
                 </div>
                 </div>
                 :null}
@@ -209,26 +200,23 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                     <div className="chart-container">
                         <Pie
                         data={{
-													labels: sliderAnswerOptions,
-													datasets:[{
-														data: sliderPercentTotalsArray,
-														// backgroundColor: percentRadio.length !== 6 ? colors : colors2, 
-														backgroundColor:colors,
-														hoverBorderWidth:3,
-														hoverBorderColor:'#000'
+                            labels: sliderAnswerOptions,
+                            datasets:[{
+                                data: sliderPercentTotalsArray,
+                                backgroundColor:colors,
+                                hoverBorderWidth:3,
+                                hoverBorderColor:'#000'
                             }]
                         }}
                         >
                         </Pie>
-														<div className="chart-table">
-																<AnalysisTable xOptions={sliderAnswerOptions} data={sliderPercentTotalsArray} question={question} qType={qType}/>
-														</div>
+                        <div className="chart-table">
+                                <AnalysisTable xOptions={sliderAnswerOptions} data={sliderPercentTotalsArray} question={question} qType={qType}/>
+                        </div>
                     </div>
                     </div>
                     :null}
-
-            </div>
-           
+            </div> 
         </div>
     );
 }

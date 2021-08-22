@@ -20,8 +20,7 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixTwoOption = {};
   const [questionText, setQuestionText] = useState(
-    question.question ||
-      "Please rate the importance of the following from 1 to 10:"
+    question.question || "Please rate the importance of the following from 1 to 10:"
   );
   const [answerOptions, setAnswerOptions] = useState(
     copyOptions(question.answerOptions) ||
@@ -34,26 +33,16 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       ])
   );
 
-  const [columns, setColumns] = useState([
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-  ]);
+  const [columns, setColumns] = useState(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]);
+
   const onEditClicked = () => {
-    console.log("clicked matrixbox");
+    // console.log("clicked matrixbox");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
-    console.log("save!!!");
+    // console.log("save!!!");
     setQuestions((questions) => {
       const updatedQuestions = [...questions];
       updatedQuestions[questionNumber - 1] = {
@@ -61,16 +50,16 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
         question: questionText,
         answerOptions: copyOptions(answerOptions),
       };
-      console.log("answerOption", answerOptions);
+      // console.log("answerOption", answerOptions);
       return [...updatedQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
+    // console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     setQuestionText(questions[questionNumber - 1].question);
@@ -85,7 +74,7 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const deleteOptions = (index) => {
-    console.log(index, "index", answerOptions);
+    // console.log(index, "index", answerOptions);
     let updatedAnswerOptions = answerOptions.filter(
       (answer, answerIndex) => index !== answerIndex
     );
@@ -94,9 +83,9 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const onAddInput = () => {
-    console.log("clicked add");
+    // console.log("clicked add");
     setAnswerOptions([...answerOptions, matrixTwoOption]);
-    console.log("add input", answerOptions);
+    // console.log("add input", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -106,7 +95,7 @@ const MatrixTwo = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       return answer;
     });
     console.log(questions[questionNumber - 1].answerOptions[index]);
-    console.log("input changes here");
+    // console.log("input changes here");
   };
 
   useEffect(() => {

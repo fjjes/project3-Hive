@@ -1,16 +1,16 @@
 import './index.css'
 
 const AnalysisTable = ({xOptions, data, label, question, qType}) => {
-    console.log(`${qType}:: xOptions`, xOptions)
-    console.log(`${qType}:: data`, data)
-    console.log(`${qType}:: question`, question)
+    // console.log(`${qType}:: xOptions`, xOptions)
+    // console.log(`${qType}:: data`, data)
+    // console.log(`${qType}:: question`, question)
     // console.log(`${qType}:: label`, label)
     // console.log('------------------------------')
 
     //slider, checkbox
     let obj = {}
     xOptions.forEach((item, i)=>obj[item] = data[i])
-    console.log('obj;;;', obj)
+    // console.log('obj;;;', obj)
     
     const roundToTwo =(num) =>{    
         return +(Math.round(num + "e+2")  + "e-2");

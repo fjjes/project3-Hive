@@ -40,13 +40,11 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   }
 
   const onEditClicked = () => {
-    console.log("clicked edit");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
-    console.log("save!!!");
     setQuestions((questions) => {
       const updatedQuestions = [...questions];
       updatedQuestions[questionNumber - 1] = {
@@ -54,18 +52,18 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
         question: questionText,
         answerOptions: copyOptions(answerOptions),
       };
-      console.log("answerOption", answerOptions);
+      // console.log("answerOption", answerOptions);
       return [...updatedQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
-  console.log("questions: ", questions);
+  // console.log("questions: ", questions);
 
   const onCancel = () => {
-    console.log("clicked cancel");
+    // console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     console.log(questions, answerOptions);
@@ -81,7 +79,7 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const deleteOptions = (index) => {
-    console.log(index, "index", answerOptions);
+    // console.log(index, "index", answerOptions);
     let updatedAnswerOptions = answerOptions.filter(
       (answer, answerIndex) => index !== answerIndex
     );
@@ -90,9 +88,8 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const onAddInput = () => {
-    console.log("clicked add");
     setAnswerOptions([...answerOptions, selectionOption]);
-    console.log("answerOptions", answerOptions);
+    // console.log("answerOptions", answerOptions);
     setInEditMode({ status: true });
   };
   const onInputChange = (event, index) => {
@@ -101,7 +98,7 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       return answer;
     });
     console.log(questions[questionNumber - 1].answerOptions[index]);
-    console.log("input changes here");
+    // console.log("input changes here");
   };
 
   useEffect(() => {

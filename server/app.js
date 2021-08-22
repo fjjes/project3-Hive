@@ -4,11 +4,8 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let path = require('path')
 
-//let indexRouter = require('./routes/index');
-// let usersRouter = require('./routes/users');
 let answersRouter = require('./routes/answer');
 let surveyRouter = require('./routes/survey');
-
 let mapsRouter = require('./routes/maps');
 // Import maps route
 
@@ -19,11 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//app.use('/', indexRouter);
-// app.use('/api/user', usersRouter);
 app.use('/api/answer', answersRouter);
 app.use('/api/survey', surveyRouter);
-// Create the maps endpoint
 app.use('/api/maps', mapsRouter);
 
 // catch 404 and forward to error handler

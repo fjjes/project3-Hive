@@ -19,9 +19,6 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   const [inEditMode, setInEditMode] = useState({ status: false });
   const matrixOneOption = {};
 
-  console.log("question", question);
-  console.log("questionNumber", questionNumber);
-  console.log("questions", questions);
   const [questionText, setQuestionText] = useState(
     question.question ||
       "Please indicate for each of the factors below their importance to you in the performance of your work, then your level of satisfaction with these factors in your current work environment:"
@@ -31,41 +28,29 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       copyOptions([
         { text: "Ability to concentrate" },
         { text: "Ability to conduct telephone conversations" },
-        {
-          text: "Ability to find a meeting room within a reasonable timeframe",
-        },
-        {
-          text: "Ability to access collaborative spaces for informal exchanges with my colleagues",
-        },
+        { text: "Ability to find a meeting room within a reasonable timeframe"},
+        { text: "Ability to access collaborative spaces for informal exchanges with my colleagues"},
         { text: "Ability to conduct confidential conversations" },
-        {
-          text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)",
-        },
+        { text: "Quality of IT and telephone tools (excluding workstations) made available (connection tools and screens in meeting rooms, etc.)"},
         { text: "Ability to work in the office with remote contacts" },
-        {
-          text: "Ability to easily switch between face-to-face work and work at home",
-        },
-        {
-          text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)",
-        },
+        { text: "Ability to easily switch between face-to-face work and work at home"},
+        { text: "Quality of the environment near my workplace (neighborhood, shops, services, restaurants, etc.)"},
       ])
   );
   const [columns, setColumns] = useState([
     "Very Satisfied",
     "Satisfied",
-    "Neither satisfied nor dissatisfied",
+    "Neither Satisfied nor Dissatisfied",
     "Dissatisfied",
-    "Very dissatisfied",
+    "Very Dissatisfied",
   ]);
 
   const onEditClicked = () => {
-    console.log("clicked matrixbox");
     setInEditMode({ status: true });
     setWholeSurveyInEditModeOrNot(true);
   };
 
   const onSave = () => {
-    console.log("save!!!");
     setQuestions((questions) => {
       const updatedQuestions = [...questions];
       updatedQuestions[questionNumber - 1] = {
@@ -73,16 +58,16 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
         question: questionText,
         answerOptions: copyOptions(answerOptions),
       };
-      console.log("answerOption", answerOptions);
+      // console.log("answerOption", answerOptions);
       return [...updatedQuestions];
     });
-    console.log("clicked save", questions);
+    // console.log("clicked save", questions);
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
   };
 
   const onCancel = () => {
-    console.log("clicked cancel");
+    // console.log("clicked cancel");
     setInEditMode({ status: false });
     setWholeSurveyInEditModeOrNot(false);
     console.log(questions, answerOptions);
@@ -98,7 +83,7 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const deleteOptions = (index) => {
-    console.log(index, "index", answerOptions);
+    // console.log(index, "index", answerOptions);
     let updatedAnswerOptions = answerOptions.filter(
       (answer, answerIndex) => index !== answerIndex
     );
@@ -107,9 +92,9 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   };
 
   const onAddInput = () => {
-    console.log("clicked add");
+    // console.log("clicked add");
     setAnswerOptions([...answerOptions, matrixOneOption]);
-    console.log("add input", answerOptions);
+    // console.log("add input", answerOptions);
     setInEditMode({ status: true });
   };
 
@@ -118,8 +103,8 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
       answer[index].text = event.target.value;
       return answer;
     });
-    console.log(questions[questionNumber - 1].answerOptions[index]);
-    console.log("input changes here");
+    // console.log(questions[questionNumber - 1].answerOptions[index]);
+    // console.log("input changes here");
   };
 
   useEffect(() => {
@@ -129,12 +114,9 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
 
   return (
     <div className="question-component admin-question-component matrix">
-
-     
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
           <p className="question-intro">Question {questionNumber}</p>
-
           {inEditMode.status ? (
               <textarea
               type="text"
@@ -146,7 +128,6 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
           ) : (
             <p className="question-intro">{questionText}</p>
           )}
-
           <table>
             <tbody>
               <tr>

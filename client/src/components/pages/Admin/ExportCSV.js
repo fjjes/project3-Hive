@@ -85,7 +85,6 @@ const ExportCSV = ({newDataList, fileName}) => {
                         }else{
                             questionList[index].answerOptions.forEach((option)=>{
                                 item.forEach((itm)=>{
-                                    console.log('itm:', itm)//this doesn't show up
                                     csvRow[`Q${(index+1)}-${option?.text}`]=itm
                                 })
                             })
@@ -111,13 +110,11 @@ const ExportCSV = ({newDataList, fileName}) => {
         //     { s: { r: 0, c: 1 }, e: { r: 2, c: 1 }},
         // ]
         // ws["!merges"] = merge;
-       
 
     //     const range =[
     //         { s: { r: 0, c: 0 }, e: { r: 0, c: arr.length +1 }}
     //     ]
     //    range.s={ font:{bold:true}}
-     
 
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
