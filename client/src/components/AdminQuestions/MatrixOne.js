@@ -116,18 +116,20 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
     <div className="question-component admin-question-component matrix">
       <div className="question-and-buttons">
         <div className="question-and-options side-border-line">
-          <p className="question-intro">Question {questionNumber}</p>
-          {inEditMode.status ? (
-              <textarea
-              type="text"
-              className="question-intro"
-              value={questionText}
-              style={{ height: "100px", width: "90%" }}
-              onChange={(e) => setQuestionText(e.target.value)}
-            />
-          ) : (
-            <p className="question-intro">{questionText}</p>
-          )}
+          <div className="question-intro-container">
+            <p className="question-intro">Question {questionNumber}</p>
+            {inEditMode.status ? (
+                <textarea
+                type="text"
+                className="question-intro"
+                value={questionText}
+                style={{ height: "100px", width: "90%" }}
+                onChange={(e) => setQuestionText(e.target.value)}
+              />
+            ) : (
+              <p className="question-intro">{questionText}</p>
+            )}
+          </div>
           <table>
             <tbody>
               <tr>

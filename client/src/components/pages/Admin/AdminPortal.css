@@ -662,6 +662,14 @@ color:#f59645;
   overflow-x: hidden;
 }
 
+.matrix .side-border-line {
+  overflow-x: auto;
+}
+
+.question-intro-container {
+  height: fit-content;
+}
+
 .delete-option-button {
   width: 65px !important;
 }
