@@ -175,22 +175,24 @@ input[type=checkbox] {
   /* margin: 10px auto 0px auto; */
   /* margin: 10px auto 10px 210px; */
   margin: 20px auto;
-  /* width: 70%; */
+  width: auto;
 }
 
 .company-and-survey-name-inputs input {
   font-size: 1rem;
   padding: 10px 10px;
+  margin: 0 10px;
   border: 1px solid #ddd;
   box-sizing: border-box;
   display:block;
-  min-width: 130%;
   border-radius: 10px;
   /* box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255); */
+  width: 250px;
+  box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255);
 }
 
 .company-and-survey-name-inputs .col{
-  margin-right: 90px;
+  justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -626,7 +628,7 @@ color:#f59645;
 
 .list-table .existing-surveys-edit-icon,
 .data-collected .existing-surveys-edit-icon {
-  font-size:x-large;
+  font-size:large;
   border: none;
   background-color: inherit;
   margin: 0 7px;
@@ -829,13 +831,6 @@ color:#f59645;
  justify-items: center;
 }
 
-.graph-section .chart-table{
-  display:flex;
-  align-items:center; 
-  justify-content: center;
-  width:100%;
-}
-
 .select-survey select{
 	outline: none;
 	font-size: 1em;
@@ -847,3 +842,33 @@ color:#f59645;
     border-radius: 10px;
     /* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
 }
+  
+.graph-section .chart-table td{
+  font-size: smaller;
+}
+
+.graph-section .chart-table .text{
+  font-weight: bold;
+}
+
+.graph-section .chart-table{
+  display:flex;
+  align-items:center; 
+  justify-content: center;
+  width:100%;
+  /* remove everything below this, if pie charts table need to be below the charts */
+  margin-top:20px;  
+  margin-bottom: 40px;
+}
+
+.graph-section .pie{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+ }
+
+ .graph-section .ptable{
+  width: 200%;
+  margin-left:80px;
+ }
+ 

@@ -47,13 +47,13 @@ html {
 } */
 
 p {
-  font-size: 10px;
+  font-size: 1rem;
   padding: 2rem;
   text-align: justify;
 }
 
 body {
-  font-size: 15px;
+  font-size: 1rem;
   background-color: #f3f3f3;
   /* margin: 20px, 10px, 10px, 20px; */
   /* display: flex;
