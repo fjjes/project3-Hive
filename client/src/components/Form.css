@@ -326,6 +326,12 @@ table {
   padding-bottom: 10px;
 }
 
+.matrix td,
+.matrix th,
+.matrix tbody {
+  border: none !important;
+}
+
 .matrix th,
 td {
   padding-left: 5px;
