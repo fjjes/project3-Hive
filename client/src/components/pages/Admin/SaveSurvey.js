@@ -399,7 +399,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
               name="company"
               id="company-name"
               className="survey-info"
-              placeholder="Company name"
+              placeholder="Company Name"
               value={company}
               required
               onChange={(e) => handleInputChange(e)}
@@ -413,7 +413,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
               name="version"
               id="survey-version"
               className="survey-info"
-              placeholder="Survey version (e.g., executive)"
+              placeholder="Survey Version (e.g., executive)"
               value={version}
               required
               onChange={(e) => handleInputChange(e)}
@@ -427,7 +427,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
               name="surveyNumber"
               id="survey-number"
               className="survey-info"
-              placeholder="Survey number"
+              placeholder="Survey Number"
               value={surveyNumber}
               required
               onChange={(e) => handleInputChange(e)}

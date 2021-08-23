@@ -22,6 +22,7 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  /* color: #444; */
 }
 
 
@@ -29,6 +30,7 @@ html {
   box-sizing: border-box;
   margin-right: 10px;
   margin-left: 10px;
+  color: #444;
 }
 /* ............................... */
 /* Page In General */
@@ -110,6 +112,7 @@ h2 {
   margin: 0px;
   border-radius: 0 0 5px 5px;
   min-height: 100vh;
+  color: #444;
 }
 
 /* Buttons and Input */
@@ -135,7 +138,8 @@ h2 {
 
 .admin-container button {
   border: 0;
-  background-color: #197e9c;
+  /* background-color: #197e9c; */
+  background-color: #393F4B;
   color: white;
   font-size: 1rem;
 }
@@ -155,7 +159,9 @@ h2 {
 
 .main-admin-buttons button:hover,
 .save-survey-button:hover {
-  background-color: #35c0c2;
+  /* background-color: #2DD9BC; */
+  /* color:#2DD9BC; */
+  color:#f59645;
 }
 
 input[type=radio],
@@ -188,7 +194,6 @@ input[type=checkbox] {
   border-radius: 10px;
   /* box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255); */
   width: 250px;
-  box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255);
 }
 
 .company-and-survey-name-inputs .col{
@@ -281,14 +286,16 @@ input[type=checkbox] {
   /* box-shadow: inset -8px -8px 10px 0 rgb(0 0 0 / 25%), inset -8px -8px 10px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%); */
   /* box-shadow: inset -4px -4px 5px 0 rgb(0 0 0 / 25%), inset -8px -8px 5px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%); */
 	 /* box-shadow: 
-		inset 2px 2px 4px 0 rgba(255, 255, 255),
-    inset -2px -2px 6px 0 rgb(0, 0, 0, 0.25); */
+          inset 2px 2px 4px 0 rgba(255, 255, 255),
+        inset -2px -2px 6px 0 rgb(0, 0, 0, 0.25); */
   color: black;
   width: 100px;
   height: 100px;
   /* NEW - Colour, no shading: */
   background-color: #f59645;
-  /* box-shadow: none; */
+  /* background-color: #393F4B; 
+  color: white; */
+  box-shadow: none;
   margin: 3px;
 }
 
@@ -297,6 +304,8 @@ input[type=checkbox] {
   /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
   display: block;
   font-size: 2rem;
+  /* color:white; */
+  font-weight: bold;
   /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
 }
@@ -321,6 +330,7 @@ input[type=checkbox] {
 
 .survey-selection-sidebar button:hover {
   transform: translate(1px, 1px);
+  /* box-shadow: 5px 3px 11px 0px rgba(50, 50, 54, 0.91); */
 		 box-shadow: 
 		inset 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
     inset -3px -3px 10px 0 rgb(255, 255, 255);
@@ -450,6 +460,7 @@ font-weight: bold;
   text-align: center;
   border-collapse: collapse;
   margin-bottom: 70px;
+  color: #444;
   /* display: grid; */
 	/* overflow: scroll; */
 	height: 450px;
@@ -457,6 +468,8 @@ font-weight: bold;
 
 .list-table .survey-link {
   overflow-wrap: anywhere;
+  color: #444;
+  font-weight: bold;
 }
 
 .data-table table{
@@ -483,7 +496,7 @@ font-weight: bold;
   text-align: center;
   height: 140px;
   overflow: scroll;
-  margin-bottom: 20px;;
+  margin-bottom: 20px;
 }
 
 /* .data-collected tr:hover {
@@ -494,7 +507,7 @@ font-weight: bold;
 
 .list-table th {
   background-color: grey;
-  color: white;
+  color:black !important;
   font-weight: bolder;
   padding: 2px 20px 2px 20px;
   /* position: sticky;
@@ -506,6 +519,7 @@ font-weight: bold;
 .question-list td {
   border: 1px solid #17171a;
   padding: 10px 15px;
+  color: #444;
   /* text-align: center;   */
 }
 
@@ -631,6 +645,7 @@ color:#f59645;
 .data-collected .existing-surveys-edit-icon {
   font-size:large;
   border: none;
+  color:black;
   background-color: inherit;
   margin: 0 7px;
   cursor: pointer;
@@ -843,6 +858,7 @@ color:#f59645;
 .select-survey select{
 	outline: none;
 	font-size: 1em;
+  color: #444;
     padding: 8px 8px;
 		width: auto;
 		background-color: rgb(247, 245, 245);
