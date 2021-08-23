@@ -17,7 +17,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
             labelArr.push(num++)
             }
         }else if(qType=== 'matrix1'){
-            labelArr = ['Very Satisfied', 'Satisfied', 'Neither Satisfied nor Dissatisfied', 'Dissatisfied', 'Very Dissatisfied']
+            labelArr = ['Very Satisfied', 'Satisfied', 'Neither satisfied nor dissatisfied', 'Dissatisfied', 'Very dissatisfied']
         }else if(qType=== 'matrix2'){
             labelArr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
         }

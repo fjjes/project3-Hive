@@ -40,9 +40,9 @@ const MatrixOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
   const [columns, setColumns] = useState([
     "Very Satisfied",
     "Satisfied",
-    "Neither Satisfied nor Dissatisfied",
+    "Neither satisfied nor dissatisfied",
     "Dissatisfied",
-    "Very Dissatisfied",
+    "Very dissatisfied",
   ]);
 
   const onEditClicked = () => {
