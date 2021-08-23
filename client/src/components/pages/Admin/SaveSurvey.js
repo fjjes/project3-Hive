@@ -253,13 +253,13 @@ In this context, we suggest that you answer an online questionnaire, a task that
     if (validationErrorSurveyNumber || validationErrorDuplicate || !surveyNumber || !company || !version) {
       window.scrollTo(0, 0);
       if (!company) {
-        setValidationErrorCompany("Company name is required.");
+        setValidationErrorCompany("Company Name is required.");
       }
       if (!version) {
-        setValidationErrorVersion("Survey version is required.");
+        setValidationErrorVersion("Survey Version is required.");
       }
       if (!surveyNumber) {
-        setValidationErrorSurveyNumber("Survey number is required.");
+        setValidationErrorSurveyNumber("Survey Number is required.");
       }
     } else if (wholeSurveyInEditModeOrNot) {
         setStillInEditModeError("Please save all edits before submitting.")

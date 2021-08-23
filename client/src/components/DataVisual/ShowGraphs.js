@@ -168,7 +168,8 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 
                 {qType === 'matrix1' || qType=== 'matrix2' || qType === 'select' ?
                  <div className='lower-sec'>
-                    <div style={{width:'80%'}}>
+                    <div>
+                        <div style={{width:'80%'}}>
                         <Bar
                         data={{
                             labels: optObj,
@@ -188,6 +189,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                        
                        >
                         </Bar>
+                        </div>
                         <div className="chart-table">
                                 <AnalysisTable xOptions={optObj} data={objArr} label={valueLabel} question={question} qType={qType}/>
                         </div>
