@@ -583,7 +583,7 @@ transition: background-color 0.1s ease-in-out;
 }
 
 .data-collected .upper-section{
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* margin-left:40px; */
   padding: 10px 0px 0px 0px;
   /* border: 1px solid black; */
@@ -592,6 +592,7 @@ transition: background-color 0.1s ease-in-out;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+	margin-bottom: 10px;
 }
 
 .data-collected .record-num{
@@ -613,6 +614,11 @@ display: flex;
 justify-content: center;
 }
 
+.top-buttons {
+	display: flex;
+  align-items: flex-end;
+}
+
 .data-collected .export-btn, .data-collected .table-btn{
   border: 0;
   background-color:  #393F4B;
@@ -621,7 +627,8 @@ justify-content: center;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bolder;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+  margin-left: 20px;
 	/* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
 }
 

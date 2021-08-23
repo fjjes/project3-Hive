@@ -124,19 +124,20 @@ const SurveyAnswersPage =()=>{
     return(
         <div className='data-collected'>
             <div className='upper-section'>
+            <div className="second-row">
+							<div className="top-buttons">
+								<h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3><ExportCSV newDataList={newDataList} fileName={fileName} />
+								<button className="table-btn" onClick={() => { setShowTable(true); setShowChart(false); }}>Data table</button>
+              </div>
+								<div className="button-row">
+                </div>
+            </div>
                 <div className="select-survey">
                     <select name="_id"  onChange={(e)=>setSurveyId(e.target.value)}>
                         <option>--Select a Survey--</option>
                         {surveyList.map((item, i)=><option key={i} value={item._id}>{item.company} --- {item.version} ---{item.surveyNumber}</option>)}
                     </select>
                 </div>
-            <div className="second-row">
-                <h3 className="record-num">Number of answer records for this Survey:<span className="count">{newDataList?.length}</span></h3>
-                <div className="button-row">
-                    <ExportCSV newDataList={newDataList} fileName={fileName}/>
-                    <button className="table-btn" onClick={()=>{setShowTable(true); setShowChart(false);}}>Data table</button>
-                </div>
-            </div>
             </div>
             {surveyId && newDataList?.length>0 ? 
             <div>
