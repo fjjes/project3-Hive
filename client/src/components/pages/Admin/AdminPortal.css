@@ -301,7 +301,7 @@ input[type=checkbox] {
   /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
   display: block;
   font-size: 2rem;
-  color:white;
+  /* color:white; */
   font-weight: bold;
   /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
