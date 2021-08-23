@@ -119,7 +119,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
             
                 {qType==='radio' ?
                 <div className='lower-sec'>
-                <div className="chart-container pie">
+							<div className="chart-container pie" style={{ marginRight: "200px" }}>
                     <Pie
                     data={{
                         // labels: dataList[0].survey.questions[qNum-1]?.answerOptions,
@@ -142,7 +142,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                 
                 {qType==='checkbox' ?
                  <div className='lower-sec'>
-                    <div className="chart-container pie">
+							<div className="chart-container pie" style={{ marginRight: "200px" }}>
                         <Pie
                         data={{
                             labels: checkboxesAnswerOptions,
@@ -199,7 +199,7 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
 
                 {qType==='slider' ?
                  <div className='lower-sec'>
-                    <div className="chart-container pie">
+                    <div className="chart-container pie" style={{marginRight: "200px"}}>
                         <Pie
                         data={{
                             labels: sliderAnswerOptions,

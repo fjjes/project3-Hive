@@ -16,6 +16,7 @@ html {
   padding: 10px 0px !important;
 }
 
+
 .admin-container,
 .navbar,
 .list-table {
@@ -494,7 +495,7 @@ font-weight: bold;
   display:flex;
   justify-content: center;
   text-align: center;
-  height: 140px;
+  height: 200px;
   overflow: scroll;
   margin-bottom: 20px;
 }
@@ -533,6 +534,10 @@ transition: background-color 0.1s ease-in-out;
 
 .data-collected .active{
   background-color:burlywood !important;
+} */
+
+/* .data-collected {
+	background-color: red;
 } */
 
 .data-collected .obj{
@@ -816,7 +821,7 @@ color:#f59645;
 }
 
 .data-visual-table button{
-	background-color: rgb(247, 245, 245);
+	background-color: rgb(255, 255, 255);
 	font-size: 1.3em;
 	cursor: pointer;
 	border: none;	
@@ -853,6 +858,7 @@ color:#f59645;
  display: grid;
  grid-template-columns: 1fr;
  justify-items: center;
+ margin-right: 200px;
 }
 
 .select-survey select{
@@ -861,8 +867,8 @@ color:#f59645;
   color: #444;
     padding: 8px 8px;
 		width: auto;
-		background-color: rgb(247, 245, 245);
-    border: 1px solid #ddd;
+		background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(214, 214, 214);
     box-sizing: border-box;
     border-radius: 10px;
     /* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
