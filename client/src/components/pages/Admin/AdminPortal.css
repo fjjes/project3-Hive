@@ -289,23 +289,32 @@ input[type=checkbox] {
 	 /* box-shadow: 
           inset 2px 2px 4px 0 rgba(255, 255, 255),
         inset -2px -2px 6px 0 rgb(0, 0, 0, 0.25); */
-  color: black;
-  width: 100px;
-  height: 100px;
+  /* color: black; */
+  width: 90px;
+  height: 90px;
   /* NEW - Colour, no shading: */
-  background-color: #f59645;
+  /* background-color: #f59645; */
   background-color: #393F4B; 
   color: white;
   box-shadow: none;
   margin: 3px;
 }
 
+.survey-selection-sidebar button:hover {
+  /* transform: translate(1px, 1px); */
+  color: #f59645;
+  /* box-shadow: 5px 3px 11px 0px rgba(50, 50, 54, 0.91); */
+		 /* box-shadow: 
+		inset 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
+    inset -3px -3px 10px 0 rgb(255, 255, 255); */
+}
+
 .survey-selection-sidebar .icons{
   /* padding-right: 20px; */
   /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
   display: block;
-  font-size: 2rem;
-  color:white;
+  font-size: 1.75rem;
+  /* color:white; */
   font-weight: bold;
   /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
@@ -327,15 +336,6 @@ input[type=checkbox] {
   .survey-selection-sidebar .icons {
     font-size: 1.25rem;
   }
-}
-
-.survey-selection-sidebar button:hover {
-  transform: translate(1px, 1px);
-  color: #f59645;
-  /* box-shadow: 5px 3px 11px 0px rgba(50, 50, 54, 0.91); */
-		 /* box-shadow: 
-		inset 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
-    inset -3px -3px 10px 0 rgb(255, 255, 255); */
 }
 
 /* Right Custom Part */
