@@ -126,12 +126,16 @@ const SelectOne = ({ question, questionNumber, setWholeSurveyInEditModeOrNot }) 
           {inEditMode.status
             ? answerOptions.map((row, i) => {
                 return (
-                  <ul key={row.text}>
-                    <li style={{ listStyleType: "none", textAlign: "left" }}>
+                  <ul key={row.text} 
+                    style={{ display: "flex" }}
+                  >
+                    <li style={{ listStyleType: "none", textAlign: "left", width: "100%" }}>
                       <input
                         id={row.text}
                         defaultValue={row.text}
-                        style={{ width: row.text && row.text.length + "ch" }}
+                        // style={{ width: row.text && row.text.length + "ch" }}
+                        style={{ width: "70%" }}
+
                         onChange={(e) => onInputChange(e, i)}
                       />
                       :&nbsp;
