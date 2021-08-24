@@ -641,13 +641,13 @@ justify-content: center;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bolder;
-  margin-bottom: 17px;
-  margin-left: 20px;
+  margin-bottom: 7px;
+  margin-left: 5px;
 	/* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
 }
 
 .data-collected .export-btn{
-  margin-right: 5px;
+  /* margin-right: 5px; */
 }
 
 .data-collected .table-btn{
