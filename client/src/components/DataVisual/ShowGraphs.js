@@ -158,10 +158,12 @@ const ShowGraphs = ({question, qType,  answers, qNum, dataList, surveyId}) => {
                         <div className="chart-table ptable">
                                 <AnalysisTable xOptions={checkboxesAnswerOptions} data={checkboxesPercentArr} question={question} qType={qType}/>
                         </div>
-                        <div className="checkboxes-other-responses">
-                            <p style={{fontWeight: "bold"}}>Other responses recorded: </p>
-                            <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
-                        </div>
+                        {otherArrayWithoutEmptyStrings && 
+                            <div className="checkboxes-other-responses">
+                                <p style={{fontWeight: "bold"}}>Other responses recorded: </p>
+                                <p style={{whiteSpace: "pre-wrap"}}>{otherArrayWithoutEmptyStrings}</p>
+                            </div>
+                        }
                     </div>
                 </div>
                 :null}
