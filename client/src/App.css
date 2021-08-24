@@ -5,29 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 * {
-  /* font-family: 'Lato', sans-serif; */
-  /* font-family: 'Noto Sans JP', sans-serif; */
   font-family: 'Nunito', sans-serif;
-  /* color: #444; */
-  /* font-family: 'Poppins', sans-serif; */
 }
-
-/* END OF FONT OPTIONS */
-
-
-
-/*......... Added with Navbar........ */
-/* @import url('https://fonts.googleapis.com/css2?family=Sora&display=swap');
-
-* {
-  font-family: 'Sora', sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
-/* ............................... */
-
-/* Start Page */
 
 /* LOGO COLOURS
 color: #197e9c; MAIN BLUE
@@ -40,12 +19,6 @@ html {
   height: fit-content;
 }
 
-/* .start h2 {
-  font-size: 4em;
-  font-family: Poppins, sans-serif;
-  text-align: center;
-} */
-
 p {
   font-size: 1rem;
   padding: 2rem;
@@ -55,37 +28,8 @@ p {
 body {
   font-size: 1rem;
   background-color: #f3f3f3;
-  /* margin: 20px, 10px, 10px, 20px; */
-  /* display: flex;
-	flex-direction: column;
-	align-items: center; */
-  /* height: 100vh; */
   place-items: center;
 }
-
-/* Style below by Nikita with the button. Did not removed it incase needed in the future */
-
-/* .start-button {
-  width: 165px;
-  height: 72px;
-  margin-left: 50%;
-  font-family: "Poppins", sans-serif;
-  font-size: 2.5em;
-  background-color: #35c0c2;
-  border: solid white;
-  color: white;
-  transition: 0.5s;
-  border-radius: 5px;
-}
-
-.start-button:hover {
-  background: #f59645 url(./images/pixel.png);
-  background-color: #f59645;
-  transition-delay: 0.3s;
-  background-size: 190px;
-  animation: animate 0.8s steps(10) forwards;
-  border: none;
-} */
 
 @keyframes animate {
   0% {
