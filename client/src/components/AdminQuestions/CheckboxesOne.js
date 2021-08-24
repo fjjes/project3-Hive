@@ -119,7 +119,6 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
               type="text"
               className="question-intro"
               value={questionText}
-              style={{ height: "100px", width: "90%" }}
               onChange={(e) => setQuestionText(e.target.value)}
             />
           ) : (
@@ -129,7 +128,7 @@ function CheckboxesOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
             <div className="questionText">
               {answerOptions.map((option, index) => {
                 return inEditMode.status ? (
-                  <div key={option}>
+                  <div className="checkbox-editable" key={option}>
                     <input type="checkbox" id={option} name="option-group" />
                     <input
                     ref={(input) => {

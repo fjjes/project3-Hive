@@ -126,7 +126,7 @@ function RadioOne({ question, questionNumber, setWholeSurveyInEditModeOrNot }) {
           <div className="questionText">
             {answerOptions.map((option, index) => {
               return inEditMode.status ? (
-                <div key={option}>
+                <div key={option} className="radio-editable">
                   <input
                     type="radio"
                     id={option}
