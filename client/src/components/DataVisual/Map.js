@@ -150,23 +150,24 @@ const Map =({surveyId})=>{
   return (
     <div className="App map-and-postal-code-input">
       <div className="map-input-container">
-        <div className="map-input-individual">
-          <label>Enter postal code for Office A:</label>
-          <input 
-            type="text" 
-            placeholder="Postal code A" 
-            value={possibleCodeA}
-            onChange={handleChangeA}
+        <label>Enter postal codes to add office locations to the map:</label>
+        <div className="map-input-individual-container">
+          <div className="map-input-individual">
+            <input 
+              type="text" 
+              placeholder="Postal code A" 
+              value={possibleCodeA}
+              onChange={handleChangeA}
+              />
+          </div>
+          <div className="map-input-individual">
+            <input 
+              type="text" 
+              placeholder="Postal code B" 
+              value={possibleCodeB}
+              onChange={handleChangeB}
             />
-        </div>
-        <div className="map-input-individual">
-          <label>Enter postal code for Office B:</label>
-          <input 
-            type="text" 
-            placeholder="Postal code B" 
-            value={possibleCodeB}
-            onChange={handleChangeB}
-          />
+          </div>
         </div>
       </div>
       <div style={{color: "red", height: "20px", paddingBottom: "20px"}}>{postalCodeValidationError}</div>
