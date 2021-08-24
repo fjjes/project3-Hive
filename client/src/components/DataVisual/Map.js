@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 // import { useParams } from "react-router";
 
 const loader = new Loader({
-  apiKey: "AIzaSyAB9QM8hkaDZ82FGPoPzN6Cf1q28aN-nGU",
+  apiKey: process.env.REACT_APP_API_KEY_GOOGLE_MAPS,
   version: "weekly",
   libraries: ["places"],
 });
