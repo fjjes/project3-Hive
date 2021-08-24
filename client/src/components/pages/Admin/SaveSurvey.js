@@ -141,7 +141,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
           "Other",
         ];
         question =
-          "What spaces would you like to use that are not currently offered by the company? You can select up to three spaces. If none of them interests you, please do not select anything.";
+          "What spaces would you like to use that are not currently offered by the company? You can select up to three spaces. If none of them interests you, please do not select anything and move on to the next question.";
         break;
       case "matrix1":
         answerOptions = [
@@ -170,7 +170,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
         break;
       case "comment":
         answerOptions = "";
-        question = "Enter a comment:";
+        question = "Enter a comment (Optional):";
         break;
       case "select":
         answerOptions = [
