@@ -26,7 +26,7 @@ const LoginPage = ()=>{
             history.push('/create-new')
         }else{
             console.log("details do not match")
-            setError("Please Enter a valid username &  a password!")
+            setError("Please enter a valid username and password!")
         }
     }
 

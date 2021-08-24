@@ -510,7 +510,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
                 />
               </div>
               <div className="upload-image admin-question-component">
-                <label htmlFor="upload-button">
+                <label htmlFor="upload-button" style={{paddingTop: "8px"}}>
                   {image?.preview ? (
                     <img alt="" src={image.preview} width="200px" height="200px" />
                   ) : (
@@ -520,6 +520,7 @@ In this context, we suggest that you answer an online questionnaire, a task that
                   )}
                 </label>
                 <input
+                  style={{paddingTop: "5px"}}
                   // name="image"
                   // id="image"
                   // value={image}

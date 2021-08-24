@@ -54,7 +54,7 @@ function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot })
         <div className="side-border-line">
 
       <p className="question-intro">Question {questionNumber}</p>
-        <div className="questionText">
+        <div className="questionText question-intro">
           {inEditMode.status ? (
             <textarea
             type="text"
@@ -67,7 +67,7 @@ function CommentOne({ question, questionNumber, setWholeSurveyInEditModeOrNot })
               <p> {questionText}</p>
               )}
           <div>
-            <textarea disabled cols="50" label="comment" placeholder="Input" />
+            <textarea className="disabled-textarea" disabled label="comment" placeholder="Input" />
           </div>
         </div>
               </div>

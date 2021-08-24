@@ -48,19 +48,20 @@ In this context, we suggest that you answer an online questionnaire, a task that
       <div className="side-border-line">
         <p style={{ fontWeight: "bold", textAlign: "left", whiteSpace: "pre-wrap",}}>Narrative</p>
         <div className="question-and-buttons">
-          <div className="narrative-text-area">
             {inEditMode.status ? (
+              <div className="narrative-text-area editable">
               <textarea
                 className="narrative-text-area-input"
-                rows="10"
                 type="text"
                 value={tempNarrative}
                 onChange={handleNarrativeChange}
               />
+            </div>
             ) : (
+            <div className="narrative-text-area">
               <p style={{ whiteSpace: "pre-wrap",}}>{props.narrative} </p>
+            </div>
             )}
-          </div>
         </div>
       </div>
 

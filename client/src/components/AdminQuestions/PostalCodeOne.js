@@ -71,7 +71,7 @@ function PostalCodeOne({ question, questionNumber, setWholeSurveyInEditModeOrNot
             ) : (
               <p>{questionText}</p>
             )}
-            <input disabled />
+            <textarea disabled className="disabled-textarea" />
           </div>
         </div>
 
