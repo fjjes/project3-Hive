@@ -23,7 +23,6 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* color: #444; */
 }
 
 
@@ -39,24 +38,14 @@ html {
   font-size:x-small;
 }
 
-/* h1 {
-  width: 200px;
-} */
-
-
 h2 {
   text-align: center;
-  /* margin-left: 215px; */
 }
 
 .admin-container {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  /* box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2); */
-  /* padding: 20px; */
-  /* width: 80vw; */
-  /* height: 100%; */
   height: 100%;
 }
 
@@ -64,7 +53,6 @@ h2 {
 
 .admin-logo {
   height: 90px;
-  /* position: relative; */
 	right: 10%;
 }
 
@@ -106,10 +94,7 @@ h2 {
 /* Page Bottom */
 .admin-container-bottom {
   padding: 20px;
-  /* background-color:#bce6f8; */
-  /* background-color: rgba(0, 0, 0, 0.05); */
   background-color: #e4e4e4;
-  /* background-color:rgb(217, 233, 238); */
   margin: 0px;
   border-radius: 0 0 5px 5px;
   min-height: 100vh;
@@ -145,7 +130,6 @@ h2 {
 
 .admin-container button {
   border: 0;
-  /* background-color: #197e9c; */
   background-color: #393F4B;
   color: white;
   font-size: 1rem;
@@ -166,8 +150,6 @@ h2 {
 
 .main-admin-buttons button:hover,
 .save-survey-button:hover {
-  /* background-color: #2DD9BC; */
-  /* color:#2DD9BC; */
   color:#f59645;
 }
 
@@ -185,8 +167,6 @@ input[type=checkbox] {
 /* *************************** FIND SURVEY *************************** */
 .company-and-survey-name-inputs {
   display: flex;
-  /* margin: 10px auto 0px auto; */
-  /* margin: 10px auto 10px 210px; */
   margin: 20px auto;
   width: auto;
 }
@@ -199,7 +179,6 @@ input[type=checkbox] {
   box-sizing: border-box;
   display:block;
   border-radius: 10px;
-  /* box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255); */
   width: 250px;
 }
 
@@ -247,19 +226,10 @@ input[type=checkbox] {
 /* Left and Right Parts */
 .survey-selection-container {
   display: flex;
-  /* background-color:#bce6f8; */
-  /* background-color: rgb(217, 233, 238); */
 }
 
 /* Left Sidebar */
 .survey-selection-sidebar {
-  /* width: 15%;
-  padding: 10px 20px;
-  margin-left: -20px;
-  position: sticky;
-  top: 0;
-  height: 100%; */
-  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (1 of 3) */
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-content: flex-start;
@@ -270,59 +240,27 @@ input[type=checkbox] {
 }
 
 .survey-selection-sidebar button {
-  /* margin: 0;
-  margin-left: -20px;
-  border-radius: 0 10px 10px 0px;
-  border: 1px #bce6f8 solid;
-  border-left: 0;
-  font-size: 1rem;
-  background-color: #fff;
-  box-shadow: inset -3px -3px 10px grey;
-  color: black;
-  display: flex; */
-  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (2 of 3) */
-  margin: 0;
   padding: 5px;
+  margin: 3px;
   border-radius: 10px;
-  /* border: 1px #bce6f8 solid; */
-  /* border: 1px black solid; */
-  /* border: 1px black solid; */
   font-size: 1rem;
   background-color: #fff;
-  /* box-shadow: inset -3px -3px 10px grey; */
-  /* box-shadow: inset -8px -8px 10px 0 rgb(0 0 0 / 25%), inset -8px -8px 10px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%); */
-  /* box-shadow: inset -4px -4px 5px 0 rgb(0 0 0 / 25%), inset -8px -8px 5px 0 rgb(255 255 255), inset 1px 1px 4px 0 rgb(0 0 0 / 25%); */
-	 /* box-shadow: 
-          inset 2px 2px 4px 0 rgba(255, 255, 255),
-        inset -2px -2px 6px 0 rgb(0, 0, 0, 0.25); */
-  /* color: black; */
   width: 90px;
   height: 90px;
-  /* NEW - Colour, no shading: */
-  /* background-color: #f59645; */
   background-color: #393F4B; 
   color: white;
   box-shadow: none;
-  margin: 3px;
 }
 
 .survey-selection-sidebar button:hover {
-  /* transform: translate(1px, 1px); */
   color: #f59645;
-  /* box-shadow: 5px 3px 11px 0px rgba(50, 50, 54, 0.91); */
-		 /* box-shadow: 
-		inset 5px 5px 10px 0 rgba(0, 0, 0, 0.25),
-    inset -3px -3px 10px 0 rgb(255, 255, 255); */
 }
 
 .survey-selection-sidebar .icons{
-  /* padding-right: 20px; */
-  /*** Replace the code above with the following if we want 2 rows of square buttons instead. (3 of 3) */
   display: block;
   font-size: 1.75rem;
-  /* color:white; */
   font-weight: bold;
-  /*** Keep the following line of code uncommented always. When this line is removed, if we click on the icon, the button doesn't work. */
+  /*** If the following line is removed, if we click on the icon, the button doesn't work. */
   pointer-events: none; 
 }
 
@@ -335,7 +273,6 @@ input[type=checkbox] {
     padding: 3px;
     width: 75px;
     height: 75px;
-    /* background-color: red; */
     font-size: 0.85rem;
   }
 
@@ -346,14 +283,12 @@ input[type=checkbox] {
 
 /* Right Custom Part */
 .admin-question-component {
-  /* border: 1px black solid; */
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: white;
   padding: 5px;
   margin: 15px;
   display: flex;
-  /* box-shadow: 12px 12px 16px 0 rgb(0 0 0 / 25%), -8px -8px 12px 0 rgb(255 255 255); */
   overflow: none;
 }
 
@@ -378,7 +313,6 @@ input[type=checkbox] {
     color: black !important;
     border: none;
     border-radius: 10px;
-    /* background-color: rgb(238, 237, 237); */
     box-shadow: none !important;
 }
 
@@ -426,21 +360,17 @@ textarea.disabled-textarea {
 }
 
 .survey-selected-components-background {
-  /* padding: 10px; */
   padding-top: 0;
   height: 100%;
 }
 
 .survey-selected-components .intro-heading{
   padding: 0px;
-  /* margin: 15px; */
-  /* width: 100%; */
 }
 .survey-selected-components .intro-heading input{
   width:98%;
   padding: 10px 10px;
   margin: 10px 0;
-  /* border: 1px solid #ddd; */
   border: none;
   box-sizing: border-box;
   display:block;
@@ -448,7 +378,6 @@ textarea.disabled-textarea {
 }
 .survey-selected-components .intro-heading label{
 font-weight: bold;  
-/* margin-left:3px; */
 }
 .survey-selected-components .intro-heading input::placeholder{
   align-items: center;
@@ -469,7 +398,6 @@ font-weight: bold;
 }
 
 .list-table table{
-  /* margin: 0 auto; */
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -477,8 +405,6 @@ font-weight: bold;
   border-collapse: collapse;
   margin-bottom: 70px;
   color: #444;
-  /* display: grid; */
-	/* overflow: scroll; */
 	height: 450px;
 }
 
@@ -489,7 +415,6 @@ font-weight: bold;
 }
 
 .data-table table{
-    /* margin: 0 auto; */
     margin-top: 20px;
     text-align: center;
     border-collapse: collapse;
@@ -515,19 +440,11 @@ font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* .data-collected tr:hover {
-  background-color: hsl(28, 90%, 72%) ;
-  color:black;
-  font-weight: bold;
-} */
-
 .list-table th {
   background-color: grey;
   color:black !important;
   font-weight: bolder;
   padding: 2px 20px 2px 20px;
-  /* position: sticky;
-  top:0; */
 }
 
 .list-table th,
@@ -536,24 +453,7 @@ font-weight: bold;
   border: 1px solid #17171a;
   padding: 10px 15px;
   color: #444;
-  /* text-align: center;   */
 }
-
-/* .data-collected .itm{
-transition: background-color 0.1s ease-in-out;
-}
-
-.data-collected .inactive{
-  background-color: violet !important;
-}
-
-.data-collected .active{
-  background-color:burlywood !important;
-} */
-
-/* .data-collected {
-	background-color: red;
-} */
 
 .data-collected .obj{
   text-align: start;
@@ -563,6 +463,7 @@ transition: background-color 0.1s ease-in-out;
   border: 1px solid #cecfd5;
   padding:2px 10px;
 }
+
 .data-table th{
   background-color: grey;
   color: white;
@@ -582,25 +483,17 @@ transition: background-color 0.1s ease-in-out;
 }
 
 .list-table tr:hover {
-  /* background-color: #f59645 !important; */
   background-color: hsl(28, 90%, 72%) !important;
-	/* transform: scale(1.01); 
-	transition: 0.2s ease;
-	border: 1px solid white;  */
 }
 
 .data-table tr:hover {
-  /* background-color: #f59645 !important; */
   background-color: hsl(28, 90%, 72%) !important;
   color:black;
   font-weight: bold;
 }
 
 .data-collected .upper-section{
-  /* margin-top: 20px; */
-  /* margin-left:40px; */
   padding: 10px 0px 0px 0px;
-  /* border: 1px solid black; */
   width:100%;
   display:flex;
   flex-direction: column;
@@ -616,13 +509,13 @@ transition: background-color 0.1s ease-in-out;
   background: #393F4B;
   color: white;
   padding:8px 8px;  
-	/* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
 }
 
 .data-collected .record-num span{
   margin-left:10px;
   color:#f59645;
 }
+
 .data-collected .button-row{
 display: flex;
 justify-content: center;
@@ -643,11 +536,6 @@ justify-content: center;
   font-weight: bolder;
   margin-bottom: 7px;
   margin-left: 5px;
-	/* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
-}
-
-.data-collected .export-btn{
-  /* margin-right: 5px; */
 }
 
 .data-collected .table-btn{
@@ -803,7 +691,6 @@ color:#f59645;
   padding: 5px;
   border-radius: 5px;
   border: none;
-  /* box-shadow: inset 2px 2px 4px #cbced1, inset -8px -8px 8px #ffffff; */
   height: fit-content;
   margin: auto;
 }
@@ -835,10 +722,6 @@ color:#f59645;
 	border-radius: 10px;
 	padding: auto;
 }
-/* 
-.upload-image input{
-	background-color: rgb(197, 0, 0);
-} */
 
 /* CHARTS */
 .chart-container {
@@ -862,8 +745,6 @@ color:#f59645;
 .data-visual-table td {
 	border-radius: 2px;
 	border: 1.3px solid rgb(235, 235, 235);
-	/* box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.25),
-		-3px -3px 5px 0 rgb(255, 255, 255); */
 }
 
 .data-visual-table button:focus {
@@ -882,8 +763,6 @@ color:#f59645;
   border-collapse:collapse;
 	margin-bottom: 10px;
 	border-radius: 8px;
-		/* box-shadow: 5px 5px 6px 0 rgba(0, 0, 0, 0.25),
-		-3px -3px 5px 0 rgb(255, 255, 255); */
 }
 
 .graph-section .lower-sec{
@@ -903,7 +782,6 @@ color:#f59645;
     border: 1px solid rgb(214, 214, 214);
     box-sizing: border-box;
     border-radius: 10px;
-    /* box-shadow: 3px 3px 7px 0 rgb(0 0 0 / 25%), -3px -3px 6px 0 rgb(255 255 255); */
 }
   
 .graph-section .chart-table td{
