@@ -9,6 +9,7 @@ This project also leverages a cloud-based instance of MongoDB for storing and re
 In a command shell, run the commands:
 
 npm install
+
 npm start
 
 Your browser should open to http://localhost:4444. The React development system is running on port 4444.
