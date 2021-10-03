@@ -1,4 +1,13 @@
-# Survey Management Project
+# Survey Management Project (June to August 2021)
+
+## Table of Contents
+
+- [Description](#description)
+- [About the Project](#about-the-project)
+- [Application Features](#application-features)
+- [Running the App](#running-the-app)
+- [Key Learnings](#key-learnings)
+- [Screenshots](#screenshots)
 
 ## Description
 
